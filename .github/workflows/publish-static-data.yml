@@ -1,6 +1,10 @@
 name: Publish Goal Scanner data
 
 on:
+  push:
+    branches: [feature/android-goal-scanner-pro]
+    paths-ignore:
+      - "docs/data/**"
   schedule:
     - cron: "17 */4 * * *"
   workflow_dispatch:
