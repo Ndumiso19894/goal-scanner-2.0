@@ -1,9 +1,9 @@
 name: CI
 on:
   push:
-    branches: [main]
+    branches: [main, research/statsbomb-noncommercial-sandbox]
   pull_request:
-    branches: [main]
+    branches: [main, feature/all-competitions-lineup-engine]
 jobs:
   test:
     runs-on: ubuntu-latest
