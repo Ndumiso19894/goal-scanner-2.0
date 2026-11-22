@@ -1,40 +1,37 @@
-# Goal Scanner 2.0
+# Goal Scanner Pro
 
-Independent, evidence-led football analysis engine. It does not modify, import or depend on the legacy scanner.
+Independent, evidence-led football analysis engine with an Android application.
 
-## Included in this initial implementation
-- Restricted market registry and explicit exclusion of Under markets, match Over 1.5, team Over 0.5/1.5 and BTTS No.
-- Transparent independent-Poisson baseline for match Over 2.5, BTTS Yes and 1X2.
-- Evidence records with source URL, publication/retrieval timestamps, verification and confidence.
-- Quality gate excluding rumours and unknown claims from confirmed evidence.
-- Odds margin removal, expected value and APPROVED / REJECTED / INSUFFICIENT_DATA decisions.
-- Accumulator safety gate (2–3 legs; joint dependence must be reviewed).
-- Hashed prediction snapshots at T-24h, team-news and official-lineup stages.
-- Chronological backtest checks, Brier score, log loss and flat-stake ROI.
-- CLI, optional FastAPI endpoint, tests and GitHub Actions CI.
+## Android app
+The Android client is a native Kotlin + Jetpack Compose app with adaptive light/dark mode, blue accent styling, Home, Fixtures, Scanner, Analysis, Results and Settings screens. It includes both Recommended and Full Scanner views, configurable market filters, a locally stored prediction history and a configurable connection to this repository's FastAPI service.
 
-## Install
+Build locally with Android Studio or run the **Android APK** GitHub Actions workflow. The debug APK is uploaded as a workflow artifact. The API URL is configured in the app; no public backend URL is assumed or bundled. Until a reachable API is configured and a fixture-level recommendation service is available, the app clearly shows connection/data status rather than inventing fixtures or predictions.
+
+## Backend install
 ```bash
 python -m venv .venv
 . .venv/bin/activate
 pip install -e ".[dev,api]"
 pytest -q
-goal-scanner --home-lambda 1.55 --away-lambda 1.10
-uvicorn goal_scanner.api:app --reload
+uvicorn goal_scanner.api:app --host 0.0.0.0 --port 8000
 ```
 Windows PowerShell: `.venv\\Scripts\\Activate.ps1`.
 
-## Allowed markets
-Match Over 2.5; BTTS Yes; home/draw/away; team corners Over; match total corners Over; match bookings Over; team bookings Over. All Under markets, match Over 1.5, team Over 0.5/1.5 and BTTS No are excluded.
+## Goal markets
+The independent-Poisson baseline exposes probabilities for home/away team Over 0.5 and Over 1.5, match Over 1.5 and Over 2.5, 1X2, double chance (1X/X2/12) and BTTS Yes. The estimator requires positive home and away goal expectations. It does not yet provide a trained fixture-level lambda estimator or calibrated recommendations. Do not present its output as a validated betting edge.
 
-## Important limitations
-The goal model is a transparent independent-Poisson baseline, not yet a trained league/team model or a validated betting edge. The corner and booking market identifiers are reserved, but their market-specific calibrated models and event-data adapters are not implemented yet. Do not treat the generic count helper as validated corner/card predictions. Contextual features must not affect probabilities until chronological out-of-sample validation and ablation demonstrate improvement.
-
-No free data provider is guaranteed to supply all injuries, suspensions, player stats, referees, odds and event data for every competition. Show coverage and freshness; missing or stale data blocks or downgrades decisions. No forced bets. Accumulators target combined odds 2.00–3.00, usually two legs, maximum three; never multiply correlated same-fixture probabilities as independent. No staking rule is claimed optimal.
-
-This is decision-support software, not a guarantee of profit. **NO BET is a valid result.**
-
+Corner and booking market identifiers remain reserved; their market-specific calibrated models and event-data adapters are not implemented. Contextual features must not affect probabilities until chronological out-of-sample validation and ablation demonstrate improvement.
 
 ## Data providers
+The four read-only Mr2Odds-compatible sources are integrated in `goal_scanner/providers.py`:
+- LiveScore: fixtures, scores, incidents and published statistics.
+- Football-Data.co.uk: historical results and team-level data.
+- SportyBet ZA: odds only, strictly after model probabilities.
+- Transfermarkt: squad context only, not a probability input.
 
-The four Mr2Odds sources have read-only adapters in goal_scanner/providers.py. See docs/data-sources.md for usage, provenance, freshness and modelling boundaries. No API keys are required by the currently configured public endpoints. SportyBet odds are strictly for price/value comparison; Transfermarkt squad metrics are context-only.
+See `docs/data-sources.md` for provenance, freshness and modelling boundaries. Providers are unofficial public feeds, may change or fail, and do not guarantee complete competition coverage. Missing data remains missing; no fabricated lineups, injuries, xG or odds.
+
+## Safety and evaluation
+Predictions should be saved as immutable timestamped snapshots. Live scanner performance must be measured separately from manually recorded bets and historical backtests. Settlement must use verified final scores, with a manual correction path. Track accuracy, Brier score, log loss and ROI only where the necessary outcomes and odds were recorded.
+
+This is decision-support software, not a guarantee of profit. **NO BET is a valid result.**
