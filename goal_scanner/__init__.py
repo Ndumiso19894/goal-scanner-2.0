@@ -1,0 +1,1 @@
+"""Goal Scanner 2.0: evidence-led football analysis."""\n__version__ = "2.0.0"\n
