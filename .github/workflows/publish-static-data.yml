@@ -64,5 +64,7 @@ jobs:
             echo "Published feeds have not changed."
           else
             git commit -m "chore: refresh Goal Scanner public data"
+            git fetch origin feature/android-goal-scanner-pro
+            git rebase origin/feature/android-goal-scanner-pro
             git push origin HEAD:feature/android-goal-scanner-pro
           fi
