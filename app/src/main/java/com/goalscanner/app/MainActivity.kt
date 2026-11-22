@@ -204,8 +204,7 @@ private fun HomeScreen(backendStatus: String, onScan: () -> Unit, onIntel: () ->
         Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
             Column {
                 Eyebrow("Your matchday workspace")
-                Text("See the game
-beyond the odds.", fontSize = 27.sp, lineHeight = 32.sp, fontWeight = FontWeight.ExtraBold)
+                Text("See the game\nbeyond the odds.", fontSize = 27.sp, lineHeight = 32.sp, fontWeight = FontWeight.ExtraBold)
             }
             Box(Modifier.size(52.dp).clip(CircleShape).background(Color(0xFF172B20)), contentAlignment = Alignment.Center) {
                 Icon(Icons.Filled.Bolt, null, tint = Lime, modifier = Modifier.size(28.dp))
@@ -223,8 +222,7 @@ beyond the odds.", fontSize = 27.sp, lineHeight = 32.sp, fontWeight = FontWeight
                         Spacer(Modifier.width(7.dp))
                         Eyebrow("Evidence before predictions")
                     }
-                    Text("Smarter analysis.
-No forced selections.", fontSize = 22.sp, lineHeight = 27.sp, fontWeight = FontWeight.Bold)
+                    Text("Smarter analysis.\nNo forced selections.", fontSize = 22.sp, lineHeight = 27.sp, fontWeight = FontWeight.Bold)
                     Text("Every market must pass data-quality, probability and value checks. No invented fixtures or guaranteed wins.", color = Color(0xFFC1D0DF), fontSize = 12.sp, lineHeight = 18.sp)
                     Button(
                         onClick = onScan,
