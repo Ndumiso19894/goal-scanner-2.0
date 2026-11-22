@@ -3,7 +3,7 @@
 Independent, evidence-led football analysis engine with an Android application.
 
 ## Android app
-The Android client is a native Kotlin + Jetpack Compose app with adaptive light/dark mode, blue accent styling, Home, Fixtures, Scanner, Analysis, Results and Settings screens. It includes both Recommended and Full Scanner views, configurable market filters, a locally stored prediction history and a configurable connection to this repository's FastAPI service.
+The Android client is a native Kotlin + Jetpack Compose app with adaptive light/dark mode, blue accent styling, Home, Fixtures, Scanner, Analysis, Results and Settings screens. It includes both Recommended and Full Scanner views, configurable market filters, server-backed prediction history and a configurable connection to this repository's FastAPI service.
 
 Build locally with Android Studio or run the **Android APK** GitHub Actions workflow. The debug APK is uploaded as a workflow artifact. The API URL is configured in the app; no public backend URL is assumed or bundled. Until a reachable API is configured and a fixture-level recommendation service is available, the app clearly shows connection/data status rather than inventing fixtures or predictions.
 
@@ -26,7 +26,7 @@ Corner and booking market identifiers remain reserved; their market-specific cal
 
 The Android Scanner now calls `POST /scanner/run`. The backend derives expected goals from completed historical results using home/away venue splits, applies the selected nine market families and saves only displayed recommendations as timestamped prediction records. The initial minimum estimated probability is 60%; Recommended mode ranks the top ten using probability, sample quality and available price value.
 
-`GET /predictions` exposes prediction history, `GET /results` exposes settled performance, and `POST /results/refresh` settles pending records only when LiveScore returns a recognised full-time status and both scores. See [docs/SCANNER_API.md](docs/SCANNER_API.md) for request fields and model boundaries.
+`GET /predictions` exposes prediction history, `GET /results` exposes settled performance, and `POST /results/refresh` settles pending records only when LiveScore returns a recognised full-time status and both scores. See [docs/SCANNER_API.md](docs/SCANNER_API.md) for request fields and model boundaries, and [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md) for secure server deployment and persistent storage.
 
 The initial fixture model is an uncalibrated historical-rate baseline. It requires at least four home matches for the home team, four away matches for the away team and twelve prior completed league matches. It excludes same-day and future results. Insufficient samples produce no recommendation. Probabilities are not guarantees or evidence of a validated betting edge.
 
