@@ -12,5 +12,5 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "GoalScanner"
+rootProject.name = "GoalScannerPro"
 include(":app")
