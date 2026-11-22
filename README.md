@@ -33,3 +33,8 @@ The goal model is a transparent independent-Poisson baseline, not yet a trained 
 No free data provider is guaranteed to supply all injuries, suspensions, player stats, referees, odds and event data for every competition. Show coverage and freshness; missing or stale data blocks or downgrades decisions. No forced bets. Accumulators target combined odds 2.00–3.00, usually two legs, maximum three; never multiply correlated same-fixture probabilities as independent. No staking rule is claimed optimal.
 
 This is decision-support software, not a guarantee of profit. **NO BET is a valid result.**
+
+
+## Data providers
+
+The four Mr2Odds sources have read-only adapters in goal_scanner/providers.py. See docs/data-sources.md for usage, provenance, freshness and modelling boundaries. No API keys are required by the currently configured public endpoints. SportyBet odds are strictly for price/value comparison; Transfermarkt squad metrics are context-only.
