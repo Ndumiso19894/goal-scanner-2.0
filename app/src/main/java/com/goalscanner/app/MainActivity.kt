@@ -38,6 +38,7 @@ import java.time.LocalDate
 
 private val Blue = Color(0xFF1976D2)
 private val Navy = Color(0xFF101C32)
+private const val DEFAULT_DATA_URL = "https://raw.githubusercontent.com/Ndumiso19894/goal-scanner-2.0/feature/android-goal-scanner-pro"
 private val MarketIds = listOf("home_over_0_5","away_over_0_5","home_over_1_5","away_over_1_5","match_over_1_5","match_over_2_5","match_winner","double_chance","btts_yes")
 private val MarketNames = listOf("Home team over 0.5 goals","Away team over 0.5 goals","Home team over 1.5 goals","Away team over 1.5 goals","Total over 1.5 goals","Total over 2.5 goals","Match winner (1X2)","Double chance","Both teams to score")
 
@@ -70,10 +71,10 @@ private data class NavItem(val label: String, val icon: ImageVector)
 private fun GoalScannerApp(prefs: android.content.SharedPreferences) {
     var tab by rememberSaveable { mutableStateOf("Home") }
     var settings by rememberSaveable { mutableStateOf(false) }
-    var apiUrl by rememberSaveable { mutableStateOf(prefs.getString("api_url","") ?: "") }
+    var apiUrl by rememberSaveable { mutableStateOf((prefs.getString("api_url",DEFAULT_DATA_URL) ?: DEFAULT_DATA_URL).ifBlank { DEFAULT_DATA_URL }) }
     var apiToken by rememberSaveable { mutableStateOf(prefs.getString("api_token","") ?: "") }
-    var season by rememberSaveable { mutableStateOf(prefs.getString("season","") ?: "") }
-    var division by rememberSaveable { mutableStateOf(prefs.getString("division","") ?: "") }
+    var season by rememberSaveable { mutableStateOf(prefs.getString("season","2627") ?: "2627") }
+    var division by rememberSaveable { mutableStateOf(prefs.getString("division","E0") ?: "E0") }
     var connection by rememberSaveable { mutableStateOf("Not configured") }
     var providers by rememberSaveable { mutableStateOf("Not checked") }
     var fixtureSummary by rememberSaveable { mutableStateOf("No fixtures collected yet") }
@@ -123,13 +124,12 @@ private fun GoalScannerApp(prefs: android.content.SharedPreferences) {
                 },
                 onTest={
                     scope.launch {
-                        busy=true; connection="Checking backend…"
+                        busy=true; connection="Checking published data…"
                         try {
-                            val health=apiRequest(apiUrl,"health",token=apiToken)
-                            connection="Connected · version "+health.optString("version","available")
-                            val manifest=apiRequest(apiUrl,"sources/manifest",token=apiToken)
-                            providers=if(manifest.length()>0) "Provider manifest received" else "Manifest unavailable"
-                            message="Backend health check passed."
+                            val feed=apiRequest(apiUrl,"docs/data/latest.json?ts=" + System.currentTimeMillis())
+                            connection="Connected · data updated "+feed.optString("updated_at","unknown")
+                            providers="Published feed · "+feed.optInt("recommendation_count")+" selections"
+                            message="GitHub data feed is reachable."
                         } catch(e:Exception) {
                             connection="Connection failed"; message=e.message ?: "Could not reach the backend."
                         } finally { busy=false }
@@ -145,10 +145,7 @@ private fun GoalScannerApp(prefs: android.content.SharedPreferences) {
                 scope.launch {
                     busy=true; message=""
                     try {
-                        val body=JSONObject().put("match_date",LocalDate.now().toString())
-                            .put("season",season.trim()).put("division",division.trim())
-                            .put("hours_ahead",48).put("include_squads",true)
-                        val result=apiRequest(apiUrl,"sources/collect","POST",body,apiToken)
+                        val result=apiRequest(apiUrl,"docs/data/fixtures.json?ts=" + System.currentTimeMillis())
                         val array=result.optJSONArray("fixtures")
                         fixtureRows=if(array==null) emptyList() else (0 until array.length()).mapNotNull { i ->
                             array.optJSONObject(i)?.let { fx ->
@@ -156,9 +153,9 @@ private fun GoalScannerApp(prefs: android.content.SharedPreferences) {
                                 if(home.isBlank()||away.isBlank()) null else "$home vs $away · "+fx.optString("kickoff","Kickoff unavailable")
                             }
                         }
-                        fixtureSummary="${fixtureRows.size} fixtures · "+result.optString("overall_status","unknown")
-                        providers="Collection status: "+result.optString("overall_status","unknown")
-                        message="Collection completed. Check source coverage before relying on match data."
+                        fixtureSummary="${fixtureRows.size} fixtures · updated "+result.optString("updated_at","unknown")
+                        providers="Published fixtures feed"
+                        message="Latest scheduled fixture data loaded."
                     } catch(e:Exception) { message=e.message ?: "Fixture collection failed." }
                     finally { busy=false }
                 }
@@ -185,12 +182,25 @@ private fun GoalScannerApp(prefs: android.content.SharedPreferences) {
                             body.put("markets",marketArray)
                             if(minOdds!=null) body.put("min_odds",minOdds)
                             if(maxOdds!=null) body.put("max_odds",maxOdds)
-                            val response=apiRequest(apiUrl,"scanner/run","POST",body,apiToken)
+                            val response=apiRequest(apiUrl,"docs/data/latest.json?ts=" + System.currentTimeMillis())
                             val array=response.optJSONArray("recommendations")
-                            recommendations=if(array==null) emptyList() else
-                                (0 until array.length()).mapNotNull { i -> array.optJSONObject(i) }
-                            scanSummary="${response.optString("status","unknown")} · ${response.optInt("fixture_count")} fixtures · ${response.optInt("recommendation_count")} recommendations"
-                            message=if(recommendations.isEmpty()) "No qualifying recommendations. Check source coverage and skipped fixture reasons." else "Scan complete. Select a match to inspect its summary."
+                            val allRows=if(array==null) emptyList() else (0 until array.length()).mapNotNull { i -> array.optJSONObject(i) }
+                            val today=LocalDate.now()
+                            recommendations=allRows.filter { item ->
+                                val kickoffDay=runCatching { LocalDate.parse(item.optString("kickoff").take(10)) }.getOrNull()
+                                val dateOk=when(dateChoice) {
+                                    "Tomorrow" -> kickoffDay==today.plusDays(1)
+                                    "7 days" -> kickoffDay!=null && !kickoffDay.isBefore(today) && !kickoffDay.isAfter(today.plusDays(7))
+                                    else -> kickoffDay==today
+                                }
+                                val competitionOk=competitionQuery.isBlank() || item.optString("competition").contains(competitionQuery,true)
+                                val teamOk=teamQuery.isBlank() || (item.optString("home")+" "+item.optString("away")).contains(teamQuery,true)
+                                val odds=if(item.isNull("odds")) null else item.optDouble("odds")
+                                val oddsOk=(minOdds==null || (odds!=null && odds>=minOdds)) && (maxOdds==null || (odds!=null && odds<=maxOdds))
+                                dateOk && competitionOk && teamOk && oddsOk && item.optDouble("estimated_probability")>=minimum/100.0 && item.optString("market") in markets
+                            }.let { if(scannerView=="Recommended") it.take(10) else it }
+                            scanSummary="${response.optString("status","unknown")} · ${response.optInt("fixture_count")} fixtures · ${allRows.size} published selections · updated ${response.optString("updated_at","unknown")}"
+                            message=if(recommendations.isEmpty()) "No published selections match these filters. The next scheduled scan will refresh the feed." else "Latest published selections loaded. Select a match to inspect its summary."
                         } catch(e:Exception) { scanSummary="Scan failed"; message=e.message ?: "Scanner request failed." }
                         finally { busy=false }
                     }
@@ -201,8 +211,7 @@ private fun GoalScannerApp(prefs: android.content.SharedPreferences) {
                 scope.launch {
                     busy=true
                     try {
-                        apiRequest(apiUrl,"results/refresh","POST",token=apiToken)
-                        val response=apiRequest(apiUrl,"results",token=apiToken)
+                        val response=apiRequest(apiUrl,"docs/data/results.json?ts=" + System.currentTimeMillis())
                         resultSummary=response.optJSONObject("summary") ?: JSONObject()
                         val array=response.optJSONArray("recent")
                         resultRows=if(array==null) emptyList() else (0 until array.length()).mapNotNull { i -> array.optJSONObject(i) }
@@ -219,7 +228,7 @@ private suspend fun apiRequest(baseUrl:String,path:String,method:String="GET",bo
     withContext(Dispatchers.IO) {
         val base=baseUrl.trim().trimEnd('/')
         require(base.startsWith("https://")||base.startsWith("http://")) {
-            "Enter your backend URL in Settings. No public backend has been deployed yet."
+            "Enter the published Goal Scanner data URL in Settings."
         }
         val conn=(URL("$base/$path").openConnection() as HttpURLConnection).apply {
             requestMethod=method; connectTimeout=12000; readTimeout=30000
@@ -270,7 +279,7 @@ private fun HomeScreen(modifier:Modifier,connection:String,providers:String,fixt
                 Button(onClick=onScanner,colors=ButtonDefaults.buttonColors(containerColor=Blue)) { Text("Open Goal Scanner") }
             }
         }
-        Heading("System overview","Live information appears after the backend is connected")
+        Heading("System overview","Latest scheduled football data published through GitHub")
         Row(horizontalArrangement=Arrangement.spacedBy(9.dp)) {
             Box(Modifier.weight(1f)) { Metric("Fixtures","—",fixtures) }
             Box(Modifier.weight(1f)) { Metric("API",if(connection.startsWith("Connected")) "Online" else "Offline",connection) }
@@ -296,12 +305,12 @@ private fun HomeScreen(modifier:Modifier,connection:String,providers:String,fixt
 private fun FixturesScreen(modifier:Modifier,apiUrl:String,season:String,division:String,summary:String,
     fixtures:List<String>,busy:Boolean,message:String,onCollect:()->Unit) {
     ScreenColumn(modifier) {
-        Heading("Fixtures","Retrieve today's fixtures and provider data.")
+        Heading("Fixtures","Latest fixtures published by the scheduled scanner.")'s fixtures and provider data.")
         Card { Column(Modifier.padding(15.dp)) { Text("Latest collection",fontWeight=FontWeight.Bold); Text(summary,color=MaterialTheme.colorScheme.onSurfaceVariant) } }
         Button(onClick=onCollect,enabled=!busy&&apiUrl.isNotBlank()&&season.isNotBlank()&&division.isNotBlank(),modifier=Modifier.fillMaxWidth()) {
             Text(if(busy) "Collecting…" else "Collect today's fixtures")
         }
-        if(apiUrl.isBlank()) Notice("Backend not configured","Enter the address of your running Goal Scanner API in Settings.")
+        if(apiUrl.isBlank()) Notice("Data feed not configured","Enter the published GitHub data URL in Settings.")
         if(season.isBlank()||division.isBlank()) Notice("Competition settings required","Set the Football-Data season and division codes in Settings.")
         if(message.isNotBlank()) Text(message,style=MaterialTheme.typography.bodySmall)
         if(fixtures.isNotEmpty()) {
@@ -352,7 +361,7 @@ private fun ScannerScreen(
                 OutlinedTextField(minOdds,{minOdds=it},label={Text("Minimum odds (optional)")},modifier=Modifier.weight(1f),singleLine=true)
                 OutlinedTextField(maxOdds,{maxOdds=it},label={Text("Maximum odds (optional)")},modifier=Modifier.weight(1f),singleLine=true)
             }
-            Text("These filters are applied by the backend before the historical model is run.",
+            Text("Filters are applied to the latest published scan on this device.",
                 style=MaterialTheme.typography.bodySmall,color=MaterialTheme.colorScheme.onSurfaceVariant)
         }
         Card { Column(Modifier.padding(16.dp),verticalArrangement=Arrangement.spacedBy(7.dp)) {
@@ -488,15 +497,13 @@ private fun SettingsScreen(modifier:Modifier,apiUrl:String,onApiUrl:(String)->Un
             TextButton(onClick=onBack) { Text("Back") }
             Text("Settings",style=MaterialTheme.typography.titleLarge,fontWeight=FontWeight.Bold)
         }
-        Heading("Backend connection","Connect to a deployed Goal Scanner FastAPI service.")
-        OutlinedTextField(apiUrl,onApiUrl,modifier=Modifier.fillMaxWidth(),label={Text("API base URL")},
-            placeholder={Text("https://your-server.example")},singleLine=true)
-        OutlinedTextField(apiToken,onApiToken,modifier=Modifier.fillMaxWidth(),label={Text("API access token (optional)")},
-            visualTransformation=PasswordVisualTransformation(),singleLine=true)
-        Text("A physical phone needs a server address reachable over the internet or local network. Use HTTPS outside a trusted local development network.",
+        Heading("GitHub data feed","The app reads public JSON files. No separate API server or access token is required.")
+        OutlinedTextField(apiUrl,onApiUrl,modifier=Modifier.fillMaxWidth(),label={Text("Published data base URL")},
+            placeholder={Text("https://raw.githubusercontent.com/Ndumiso19894/goal-scanner-2.0/feature/android-goal-scanner-pro")},singleLine=true)
+        Text("GitHub Actions refreshes fixtures, predictions and results on a schedule. The app downloads the latest published snapshot when you refresh.",
             style=MaterialTheme.typography.bodySmall,color=MaterialTheme.colorScheme.onSurfaceVariant)
-        OutlinedTextField(season,onSeason,modifier=Modifier.fillMaxWidth(),label={Text("Football-Data season code")},placeholder={Text("2627")},singleLine=true)
-        OutlinedTextField(division,onDivision,modifier=Modifier.fillMaxWidth(),label={Text("Competition division code")},placeholder={Text("E0")},singleLine=true)
+        Text("The first scheduled scan covers supported competitions automatically. The app no longer needs per-user API settings.",
+            style=MaterialTheme.typography.bodySmall,color=MaterialTheme.colorScheme.onSurfaceVariant)
         Card { Column(Modifier.padding(14.dp),verticalArrangement=Arrangement.spacedBy(5.dp)) {
             Text("Connection",fontWeight=FontWeight.Bold)
             Text(connection,color=MaterialTheme.colorScheme.primary)
