@@ -1,14 +1,2544 @@
 {
   "schema_version": 1,
-  "status": "not_run",
-  "updated_at": null,
+  "updated_at": "2026-11-22T18:44:50.654982+00:00",
   "season": "2627",
-  "recommendation_count": 0,
-  "fixture_count": 0,
-  "recommendations": [],
-  "sources": {},
+  "status": "ok",
+  "recommendation_count": 71,
+  "fixture_count": 835,
+  "recommendations": [
+    {
+      "away": "Elche",
+      "away_lambda": 2.3812,
+      "calibration": "uncalibrated_baseline",
+      "competition": "LaLiga",
+      "data_quality": 0.719,
+      "estimated_probability": 0.90756,
+      "expected_value": 0.188904,
+      "fixture_id": "1810741",
+      "history_cutoff": "2026-11-23",
+      "home": "Levante",
+      "home_lambda": 1.6648,
+      "kickoff": "2026-11-23T22:00:00+02:00",
+      "market": "away_over_0_5",
+      "model_version": "venue-poisson-baseline-1",
+      "odds": 1.31,
+      "odds_status": "available",
+      "rank_score": 0.85931,
+      "reasons": [
+        "Historical home/away sample: 5/6 matches",
+        "Bookmaker odds are used only for value comparison, not to calculate probability"
+      ],
+      "sample": {
+        "away_away_matches": 6,
+        "historical_matches": 119,
+        "home_home_matches": 5
+      },
+      "selection": "over",
+      "prediction_id": "c0df76b1cb494118832cf3ba81e09b12",
+      "status": "PENDING"
+    },
+    {
+      "away": "Elche",
+      "away_lambda": 2.3812,
+      "calibration": "uncalibrated_baseline",
+      "competition": "LaLiga",
+      "data_quality": 0.719,
+      "estimated_probability": 0.911734,
+      "expected_value": 0.112316,
+      "fixture_id": "1810741",
+      "history_cutoff": "2026-11-23",
+      "home": "Levante",
+      "home_lambda": 1.6648,
+      "kickoff": "2026-11-23T22:00:00+02:00",
+      "market": "match_over_1_5",
+      "model_version": "venue-poisson-baseline-1",
+      "odds": 1.22,
+      "odds_status": "available",
+      "rank_score": 0.823312,
+      "reasons": [
+        "Historical home/away sample: 5/6 matches",
+        "Bookmaker odds are used only for value comparison, not to calculate probability"
+      ],
+      "sample": {
+        "away_away_matches": 6,
+        "historical_matches": 119,
+        "home_home_matches": 5
+      },
+      "selection": "over",
+      "prediction_id": "7b5a408a75334f82b92f67211431a067",
+      "status": "PENDING"
+    },
+    {
+      "away": "Dundee FC",
+      "away_lambda": 1.5115,
+      "calibration": "uncalibrated_baseline",
+      "competition": "Premiership",
+      "data_quality": 0.797,
+      "estimated_probability": 0.754921,
+      "expected_value": 0.585334,
+      "fixture_id": "1792833",
+      "history_cutoff": "2026-11-24",
+      "home": "Hibernian",
+      "home_lambda": 0.9796,
+      "kickoff": "2026-11-24T21:45:00+02:00",
+      "market": "double_chance",
+      "model_version": "venue-poisson-baseline-1",
+      "odds": 2.1,
+      "odds_status": "available",
+      "rank_score": 0.804307,
+      "reasons": [
+        "Historical home/away sample: 6/6 matches",
+        "Bookmaker odds are used only for value comparison, not to calculate probability"
+      ],
+      "sample": {
+        "away_away_matches": 6,
+        "historical_matches": 75,
+        "home_home_matches": 6
+      },
+      "selection": "X2",
+      "prediction_id": "7f0bd409d6584355bc8d22df4a52feff",
+      "status": "PENDING"
+    },
+    {
+      "away": "Hoffenheim W",
+      "away_lambda": 1.101,
+      "calibration": "uncalibrated_baseline",
+      "competition": "Frauen-Bundesliga",
+      "data_quality": 0.625,
+      "estimated_probability": 0.979667,
+      "expected_value": null,
+      "fixture_id": "1834796",
+      "history_cutoff": "2026-11-23",
+      "home": "Bayern Munich W",
+      "home_lambda": 3.8955,
+      "kickoff": "2026-11-23T19:00:00+02:00",
+      "market": "home_over_0_5",
+      "model_version": "venue-poisson-baseline-1",
+      "odds": null,
+      "odds_status": "unavailable",
+      "rank_score": 0.801317,
+      "reasons": [
+        "Historical home/away sample: 4/4 matches",
+        "No matched bookmaker price; probability estimate shown without value claim"
+      ],
+      "sample": {
+        "away_away_matches": 4,
+        "historical_matches": 81,
+        "home_home_matches": 4
+      },
+      "selection": "over",
+      "prediction_id": "af24a0befd8149b9b19f0cc771551b41",
+      "status": "PENDING"
+    },
+    {
+      "away": "Fiorentina",
+      "away_lambda": 2.0347,
+      "calibration": "uncalibrated_baseline",
+      "competition": "Serie A",
+      "data_quality": 0.719,
+      "estimated_probability": 0.928017,
+      "expected_value": null,
+      "fixture_id": "1785426",
+      "history_cutoff": "2026-11-23",
+      "home": "Monza",
+      "home_lambda": 2.2641,
+      "kickoff": "2026-11-23T21:45:00+02:00",
+      "market": "match_over_1_5",
+      "model_version": "venue-poisson-baseline-1",
+      "odds": null,
+      "odds_status": "unavailable",
+      "rank_score": 0.801109,
+      "reasons": [
+        "Historical home/away sample: 5/5 matches",
+        "No matched bookmaker price; probability estimate shown without value claim"
+      ],
+      "sample": {
+        "away_away_matches": 5,
+        "historical_matches": 110,
+        "home_home_matches": 5
+      },
+      "selection": "over",
+      "prediction_id": "9efd363b552641ebb34b96d64276c516",
+      "status": "PENDING"
+    },
+    {
+      "away": "Everton",
+      "away_lambda": 0.6531,
+      "calibration": "uncalibrated_baseline",
+      "competition": "Premier League",
+      "data_quality": 0.719,
+      "estimated_probability": 0.829726,
+      "expected_value": 0.153319,
+      "fixture_id": "1793635",
+      "history_cutoff": "2026-11-23",
+      "home": "Brentford",
+      "home_lambda": 1.4289,
+      "kickoff": "2026-11-23T22:00:00+02:00",
+      "market": "double_chance",
+      "model_version": "venue-poisson-baseline-1",
+      "odds": 1.39,
+      "odds_status": "available",
+      "rank_score": 0.798709,
+      "reasons": [
+        "Historical home/away sample: 5/5 matches",
+        "Bookmaker odds are used only for value comparison, not to calculate probability"
+      ],
+      "sample": {
+        "away_away_matches": 5,
+        "historical_matches": 100,
+        "home_home_matches": 5
+      },
+      "selection": "1X",
+      "prediction_id": "18e6a656a7974dbea8f4827a4a9656a5",
+      "status": "PENDING"
+    },
+    {
+      "away": "Le Mans",
+      "away_lambda": 1.268,
+      "calibration": "uncalibrated_baseline",
+      "competition": "Ligue 1",
+      "data_quality": 0.719,
+      "estimated_probability": 0.922028,
+      "expected_value": null,
+      "fixture_id": "1794769",
+      "history_cutoff": "2026-11-22",
+      "home": "Marseille",
+      "home_lambda": 2.5514,
+      "kickoff": "2026-11-22T21:45:00+02:00",
+      "market": "home_over_0_5",
+      "model_version": "venue-poisson-baseline-1",
+      "odds": null,
+      "odds_status": "unavailable",
+      "rank_score": 0.797815,
+      "reasons": [
+        "Historical home/away sample: 5/5 matches",
+        "No matched bookmaker price; probability estimate shown without value claim"
+      ],
+      "sample": {
+        "away_away_matches": 5,
+        "historical_matches": 90,
+        "home_home_matches": 5
+      },
+      "selection": "over",
+      "prediction_id": "048f525dec6945779813bc7724f11237",
+      "status": "PENDING"
+    },
+    {
+      "away": "Elche",
+      "away_lambda": 2.3812,
+      "calibration": "uncalibrated_baseline",
+      "competition": "LaLiga",
+      "data_quality": 0.719,
+      "estimated_probability": 0.76856,
+      "expected_value": 0.306551,
+      "fixture_id": "1810741",
+      "history_cutoff": "2026-11-23",
+      "home": "Levante",
+      "home_lambda": 1.6648,
+      "kickoff": "2026-11-23T22:00:00+02:00",
+      "market": "match_over_2_5",
+      "model_version": "venue-poisson-baseline-1",
+      "odds": 1.7,
+      "odds_status": "available",
+      "rank_score": 0.788408,
+      "reasons": [
+        "Historical home/away sample: 5/6 matches",
+        "Bookmaker odds are used only for value comparison, not to calculate probability"
+      ],
+      "sample": {
+        "away_away_matches": 6,
+        "historical_matches": 119,
+        "home_home_matches": 5
+      },
+      "selection": "over",
+      "prediction_id": "100e904e01104d6681613ae48b0fea14",
+      "status": "PENDING"
+    },
+    {
+      "away": "Fiorentina",
+      "away_lambda": 2.0347,
+      "calibration": "uncalibrated_baseline",
+      "competition": "Serie A",
+      "data_quality": 0.719,
+      "estimated_probability": 0.896076,
+      "expected_value": null,
+      "fixture_id": "1785426",
+      "history_cutoff": "2026-11-23",
+      "home": "Monza",
+      "home_lambda": 2.2641,
+      "kickoff": "2026-11-23T21:45:00+02:00",
+      "market": "home_over_0_5",
+      "model_version": "venue-poisson-baseline-1",
+      "odds": null,
+      "odds_status": "unavailable",
+      "rank_score": 0.783542,
+      "reasons": [
+        "Historical home/away sample: 5/5 matches",
+        "No matched bookmaker price; probability estimate shown without value claim"
+      ],
+      "sample": {
+        "away_away_matches": 5,
+        "historical_matches": 110,
+        "home_home_matches": 5
+      },
+      "selection": "over",
+      "prediction_id": "5e242bba67b749da88271c6a992a9998",
+      "status": "PENDING"
+    },
+    {
+      "away": "Le Mans",
+      "away_lambda": 1.268,
+      "calibration": "uncalibrated_baseline",
+      "competition": "Ligue 1",
+      "data_quality": 0.719,
+      "estimated_probability": 0.894258,
+      "expected_value": null,
+      "fixture_id": "1794769",
+      "history_cutoff": "2026-11-22",
+      "home": "Marseille",
+      "home_lambda": 2.5514,
+      "kickoff": "2026-11-22T21:45:00+02:00",
+      "market": "match_over_1_5",
+      "model_version": "venue-poisson-baseline-1",
+      "odds": null,
+      "odds_status": "unavailable",
+      "rank_score": 0.782542,
+      "reasons": [
+        "Historical home/away sample: 5/5 matches",
+        "No matched bookmaker price; probability estimate shown without value claim"
+      ],
+      "sample": {
+        "away_away_matches": 5,
+        "historical_matches": 90,
+        "home_home_matches": 5
+      },
+      "selection": "over",
+      "prediction_id": "269b06eb56bb41d1aaa35ac24c3666a3",
+      "status": "PENDING"
+    },
+    {
+      "away": "Dundee FC",
+      "away_lambda": 1.5115,
+      "calibration": "uncalibrated_baseline",
+      "competition": "Premiership",
+      "data_quality": 0.797,
+      "estimated_probability": 0.779421,
+      "expected_value": 0.122366,
+      "fixture_id": "1792833",
+      "history_cutoff": "2026-11-24",
+      "home": "Hibernian",
+      "home_lambda": 0.9796,
+      "kickoff": "2026-11-24T21:45:00+02:00",
+      "market": "away_over_0_5",
+      "model_version": "venue-poisson-baseline-1",
+      "odds": 1.44,
+      "odds_status": "available",
+      "rank_score": 0.778965,
+      "reasons": [
+        "Historical home/away sample: 6/6 matches",
+        "Bookmaker odds are used only for value comparison, not to calculate probability"
+      ],
+      "sample": {
+        "away_away_matches": 6,
+        "historical_matches": 75,
+        "home_home_matches": 6
+      },
+      "selection": "over",
+      "prediction_id": "0c13dcbedf974b4885c96853f050615b",
+      "status": "PENDING"
+    },
+    {
+      "away": "Wrexham",
+      "away_lambda": 1.0518,
+      "calibration": "uncalibrated_baseline",
+      "competition": "Championship",
+      "data_quality": 0.906,
+      "estimated_probability": 0.732009,
+      "expected_value": 0.090693,
+      "fixture_id": "1802526",
+      "history_cutoff": "2026-11-24",
+      "home": "Bristol City",
+      "home_lambda": 0.7862,
+      "kickoff": "2026-11-24T21:45:00+02:00",
+      "market": "double_chance",
+      "model_version": "venue-poisson-baseline-1",
+      "odds": 1.49,
+      "odds_status": "available",
+      "rank_score": 0.769751,
+      "reasons": [
+        "Historical home/away sample: 8/7 matches",
+        "Bookmaker odds are used only for value comparison, not to calculate probability"
+      ],
+      "sample": {
+        "away_away_matches": 7,
+        "historical_matches": 180,
+        "home_home_matches": 8
+      },
+      "selection": "X2",
+      "prediction_id": "ceb007bb083b40f5b46369f38986b010",
+      "status": "PENDING"
+    },
+    {
+      "away": "Fiorentina",
+      "away_lambda": 2.0347,
+      "calibration": "uncalibrated_baseline",
+      "competition": "Serie A",
+      "data_quality": 0.719,
+      "estimated_probability": 0.86928,
+      "expected_value": null,
+      "fixture_id": "1785426",
+      "history_cutoff": "2026-11-23",
+      "home": "Monza",
+      "home_lambda": 2.2641,
+      "kickoff": "2026-11-23T21:45:00+02:00",
+      "market": "away_over_0_5",
+      "model_version": "venue-poisson-baseline-1",
+      "odds": null,
+      "odds_status": "unavailable",
+      "rank_score": 0.768804,
+      "reasons": [
+        "Historical home/away sample: 5/5 matches",
+        "No matched bookmaker price; probability estimate shown without value claim"
+      ],
+      "sample": {
+        "away_away_matches": 5,
+        "historical_matches": 110,
+        "home_home_matches": 5
+      },
+      "selection": "over",
+      "prediction_id": "b79f71b6dfa04313bab2a45a5cf849a8",
+      "status": "PENDING"
+    },
+    {
+      "away": "Elche",
+      "away_lambda": 2.3812,
+      "calibration": "uncalibrated_baseline",
+      "competition": "LaLiga",
+      "data_quality": 0.719,
+      "estimated_probability": 0.732562,
+      "expected_value": 0.194076,
+      "fixture_id": "1810741",
+      "history_cutoff": "2026-11-23",
+      "home": "Levante",
+      "home_lambda": 1.6648,
+      "kickoff": "2026-11-23T22:00:00+02:00",
+      "market": "double_chance",
+      "model_version": "venue-poisson-baseline-1",
+      "odds": 1.63,
+      "odds_status": "available",
+      "rank_score": 0.765647,
+      "reasons": [
+        "Historical home/away sample: 5/6 matches",
+        "Bookmaker odds are used only for value comparison, not to calculate probability"
+      ],
+      "sample": {
+        "away_away_matches": 6,
+        "historical_matches": 119,
+        "home_home_matches": 5
+      },
+      "selection": "X2",
+      "prediction_id": "6eb26a9eb892485d8e65b2c43b1b26ba",
+      "status": "PENDING"
+    },
+    {
+      "away": "Aberdeen",
+      "away_lambda": 0.9008,
+      "calibration": "uncalibrated_baseline",
+      "competition": "Premiership",
+      "data_quality": 0.703,
+      "estimated_probability": 0.871123,
+      "expected_value": null,
+      "fixture_id": "1792830",
+      "history_cutoff": "2026-11-24",
+      "home": "Rangers",
+      "home_lambda": 2.0489,
+      "kickoff": "2026-11-24T22:00:00+02:00",
+      "market": "home_over_0_5",
+      "model_version": "venue-poisson-baseline-1",
+      "odds": null,
+      "odds_status": "unavailable",
+      "rank_score": 0.765018,
+      "reasons": [
+        "Historical home/away sample: 5/5 matches",
+        "No matched bookmaker price; probability estimate shown without value claim"
+      ],
+      "sample": {
+        "away_away_matches": 5,
+        "historical_matches": 75,
+        "home_home_matches": 5
+      },
+      "selection": "over",
+      "prediction_id": "55780aacfc014b339db2cda069de785a",
+      "status": "PENDING"
+    },
+    {
+      "away": "Hoffenheim W",
+      "away_lambda": 1.101,
+      "calibration": "uncalibrated_baseline",
+      "competition": "Frauen-Bundesliga",
+      "data_quality": 0.625,
+      "estimated_probability": 0.959454,
+      "expected_value": -0.002168,
+      "fixture_id": "1834796",
+      "history_cutoff": "2026-11-23",
+      "home": "Bayern Munich W",
+      "home_lambda": 3.8955,
+      "kickoff": "2026-11-23T19:00:00+02:00",
+      "market": "match_over_1_5",
+      "model_version": "venue-poisson-baseline-1",
+      "odds": 1.04,
+      "odds_status": "available",
+      "rank_score": 0.764116,
+      "reasons": [
+        "Historical home/away sample: 4/4 matches",
+        "Bookmaker odds are used only for value comparison, not to calculate probability"
+      ],
+      "sample": {
+        "away_away_matches": 4,
+        "historical_matches": 81,
+        "home_home_matches": 4
+      },
+      "selection": "over",
+      "prediction_id": "b951c89594a642b995ee31614a8382ec",
+      "status": "PENDING"
+    },
+    {
+      "away": "Inter",
+      "away_lambda": 1.9331,
+      "calibration": "uncalibrated_baseline",
+      "competition": "Serie A",
+      "data_quality": 0.719,
+      "estimated_probability": 0.855301,
+      "expected_value": null,
+      "fixture_id": "1785416",
+      "history_cutoff": "2026-11-22",
+      "home": "Atalanta",
+      "home_lambda": 1.4812,
+      "kickoff": "2026-11-22T21:45:00+02:00",
+      "market": "away_over_0_5",
+      "model_version": "venue-poisson-baseline-1",
+      "odds": null,
+      "odds_status": "unavailable",
+      "rank_score": 0.761116,
+      "reasons": [
+        "Historical home/away sample: 6/5 matches",
+        "No matched bookmaker price; probability estimate shown without value claim"
+      ],
+      "sample": {
+        "away_away_matches": 5,
+        "historical_matches": 110,
+        "home_home_matches": 6
+      },
+      "selection": "over",
+      "prediction_id": "bb34c88b238b4276aaaf9d9e7d1d864d",
+      "status": "PENDING"
+    },
+    {
+      "away": "Inter",
+      "away_lambda": 1.9331,
+      "calibration": "uncalibrated_baseline",
+      "competition": "Serie A",
+      "data_quality": 0.719,
+      "estimated_probability": 0.854772,
+      "expected_value": null,
+      "fixture_id": "1785416",
+      "history_cutoff": "2026-11-22",
+      "home": "Atalanta",
+      "home_lambda": 1.4812,
+      "kickoff": "2026-11-22T21:45:00+02:00",
+      "market": "match_over_1_5",
+      "model_version": "venue-poisson-baseline-1",
+      "odds": null,
+      "odds_status": "unavailable",
+      "rank_score": 0.760825,
+      "reasons": [
+        "Historical home/away sample: 6/5 matches",
+        "No matched bookmaker price; probability estimate shown without value claim"
+      ],
+      "sample": {
+        "away_away_matches": 5,
+        "historical_matches": 110,
+        "home_home_matches": 6
+      },
+      "selection": "over",
+      "prediction_id": "8a216905d44a4d7d80408543cf8ab009",
+      "status": "PENDING"
+    },
+    {
+      "away": "Hoffenheim W",
+      "away_lambda": 1.101,
+      "calibration": "uncalibrated_baseline",
+      "competition": "Frauen-Bundesliga",
+      "data_quality": 0.625,
+      "estimated_probability": 0.900459,
+      "expected_value": null,
+      "fixture_id": "1834796",
+      "history_cutoff": "2026-11-23",
+      "home": "Bayern Munich W",
+      "home_lambda": 3.8955,
+      "kickoff": "2026-11-23T19:00:00+02:00",
+      "market": "home_over_1_5",
+      "model_version": "venue-poisson-baseline-1",
+      "odds": null,
+      "odds_status": "unavailable",
+      "rank_score": 0.757752,
+      "reasons": [
+        "Historical home/away sample: 4/4 matches",
+        "No matched bookmaker price; probability estimate shown without value claim"
+      ],
+      "sample": {
+        "away_away_matches": 4,
+        "historical_matches": 81,
+        "home_home_matches": 4
+      },
+      "selection": "over",
+      "prediction_id": "ccebf2ed245d43068d43d9d758734838",
+      "status": "PENDING"
+    },
+    {
+      "away": "Elche",
+      "away_lambda": 2.3812,
+      "calibration": "uncalibrated_baseline",
+      "competition": "LaLiga",
+      "data_quality": 0.719,
+      "estimated_probability": 0.735824,
+      "expected_value": 0.16996,
+      "fixture_id": "1810741",
+      "history_cutoff": "2026-11-23",
+      "home": "Levante",
+      "home_lambda": 1.6648,
+      "kickoff": "2026-11-23T22:00:00+02:00",
+      "market": "btts_yes",
+      "model_version": "venue-poisson-baseline-1",
+      "odds": 1.59,
+      "odds_status": "available",
+      "rank_score": 0.755383,
+      "reasons": [
+        "Historical home/away sample: 5/6 matches",
+        "Bookmaker odds are used only for value comparison, not to calculate probability"
+      ],
+      "sample": {
+        "away_away_matches": 6,
+        "historical_matches": 119,
+        "home_home_matches": 5
+      },
+      "selection": "yes",
+      "prediction_id": "398587658f7444bba14d6bfd23374edd",
+      "status": "PENDING"
+    },
+    {
+      "away": "Aberdeen",
+      "away_lambda": 0.9008,
+      "calibration": "uncalibrated_baseline",
+      "competition": "Premiership",
+      "data_quality": 0.703,
+      "estimated_probability": 0.843555,
+      "expected_value": null,
+      "fixture_id": "1792830",
+      "history_cutoff": "2026-11-24",
+      "home": "Rangers",
+      "home_lambda": 2.0489,
+      "kickoff": "2026-11-24T22:00:00+02:00",
+      "market": "double_chance",
+      "model_version": "venue-poisson-baseline-1",
+      "odds": null,
+      "odds_status": "unavailable",
+      "rank_score": 0.749855,
+      "reasons": [
+        "Historical home/away sample: 5/5 matches",
+        "No matched bookmaker price; probability estimate shown without value claim"
+      ],
+      "sample": {
+        "away_away_matches": 5,
+        "historical_matches": 75,
+        "home_home_matches": 5
+      },
+      "selection": "1X",
+      "prediction_id": "f048b575e5344dc898cb494d72824ed5",
+      "status": "PENDING"
+    },
+    {
+      "away": "Le Mans",
+      "away_lambda": 1.268,
+      "calibration": "uncalibrated_baseline",
+      "competition": "Ligue 1",
+      "data_quality": 0.719,
+      "estimated_probability": 0.827477,
+      "expected_value": null,
+      "fixture_id": "1794769",
+      "history_cutoff": "2026-11-22",
+      "home": "Marseille",
+      "home_lambda": 2.5514,
+      "kickoff": "2026-11-22T21:45:00+02:00",
+      "market": "double_chance",
+      "model_version": "venue-poisson-baseline-1",
+      "odds": null,
+      "odds_status": "unavailable",
+      "rank_score": 0.745812,
+      "reasons": [
+        "Historical home/away sample: 5/5 matches",
+        "No matched bookmaker price; probability estimate shown without value claim"
+      ],
+      "sample": {
+        "away_away_matches": 5,
+        "historical_matches": 90,
+        "home_home_matches": 5
+      },
+      "selection": "1X",
+      "prediction_id": "02ddf3ac40ec4a169f11d498f2e848f6",
+      "status": "PENDING"
+    },
+    {
+      "away": "Le Mans",
+      "away_lambda": 1.268,
+      "calibration": "uncalibrated_baseline",
+      "competition": "Ligue 1",
+      "data_quality": 0.719,
+      "estimated_probability": 0.824264,
+      "expected_value": null,
+      "fixture_id": "1794769",
+      "history_cutoff": "2026-11-22",
+      "home": "Marseille",
+      "home_lambda": 2.5514,
+      "kickoff": "2026-11-22T21:45:00+02:00",
+      "market": "double_chance",
+      "model_version": "venue-poisson-baseline-1",
+      "odds": null,
+      "odds_status": "unavailable",
+      "rank_score": 0.744045,
+      "reasons": [
+        "Historical home/away sample: 5/5 matches",
+        "No matched bookmaker price; probability estimate shown without value claim"
+      ],
+      "sample": {
+        "away_away_matches": 5,
+        "historical_matches": 90,
+        "home_home_matches": 5
+      },
+      "selection": "12",
+      "prediction_id": "a416a9997e8e402eab42e4cfbf13dd04",
+      "status": "PENDING"
+    },
+    {
+      "away": "Elche",
+      "away_lambda": 2.3812,
+      "calibration": "uncalibrated_baseline",
+      "competition": "LaLiga",
+      "data_quality": 0.719,
+      "estimated_probability": 0.687443,
+      "expected_value": 0.649864,
+      "fixture_id": "1810741",
+      "history_cutoff": "2026-11-23",
+      "home": "Levante",
+      "home_lambda": 1.6648,
+      "kickoff": "2026-11-23T22:00:00+02:00",
+      "market": "away_over_1_5",
+      "model_version": "venue-poisson-baseline-1",
+      "odds": 2.4,
+      "odds_status": "available",
+      "rank_score": 0.743794,
+      "reasons": [
+        "Historical home/away sample: 5/6 matches",
+        "Bookmaker odds are used only for value comparison, not to calculate probability"
+      ],
+      "sample": {
+        "away_away_matches": 6,
+        "historical_matches": 119,
+        "home_home_matches": 5
+      },
+      "selection": "over",
+      "prediction_id": "96816fdf9e5b48f6b34bfecdb9815aa4",
+      "status": "PENDING"
+    },
+    {
+      "away": "Elche",
+      "away_lambda": 2.3812,
+      "calibration": "uncalibrated_baseline",
+      "competition": "LaLiga",
+      "data_quality": 0.719,
+      "estimated_probability": 0.80534,
+      "expected_value": 0.054996,
+      "fixture_id": "1810741",
+      "history_cutoff": "2026-11-23",
+      "home": "Levante",
+      "home_lambda": 1.6648,
+      "kickoff": "2026-11-23T22:00:00+02:00",
+      "market": "double_chance",
+      "model_version": "venue-poisson-baseline-1",
+      "odds": 1.31,
+      "odds_status": "available",
+      "rank_score": 0.736135,
+      "reasons": [
+        "Historical home/away sample: 5/6 matches",
+        "Bookmaker odds are used only for value comparison, not to calculate probability"
+      ],
+      "sample": {
+        "away_away_matches": 6,
+        "historical_matches": 119,
+        "home_home_matches": 5
+      },
+      "selection": "12",
+      "prediction_id": "e52a2636f4f4487ea926312d9729457d",
+      "status": "PENDING"
+    },
+    {
+      "away": "Fiorentina",
+      "away_lambda": 2.0347,
+      "calibration": "uncalibrated_baseline",
+      "competition": "Serie A",
+      "data_quality": 0.719,
+      "estimated_probability": 0.802495,
+      "expected_value": null,
+      "fixture_id": "1785426",
+      "history_cutoff": "2026-11-23",
+      "home": "Monza",
+      "home_lambda": 2.2641,
+      "kickoff": "2026-11-23T21:45:00+02:00",
+      "market": "match_over_2_5",
+      "model_version": "venue-poisson-baseline-1",
+      "odds": null,
+      "odds_status": "unavailable",
+      "rank_score": 0.732072,
+      "reasons": [
+        "Historical home/away sample: 5/5 matches",
+        "No matched bookmaker price; probability estimate shown without value claim"
+      ],
+      "sample": {
+        "away_away_matches": 5,
+        "historical_matches": 110,
+        "home_home_matches": 5
+      },
+      "selection": "over",
+      "prediction_id": "009220e353a04a828ad7d66568b2a2ab",
+      "status": "PENDING"
+    },
+    {
+      "away": "Fiorentina",
+      "away_lambda": 2.0347,
+      "calibration": "uncalibrated_baseline",
+      "competition": "Serie A",
+      "data_quality": 0.719,
+      "estimated_probability": 0.802009,
+      "expected_value": null,
+      "fixture_id": "1785426",
+      "history_cutoff": "2026-11-23",
+      "home": "Monza",
+      "home_lambda": 2.2641,
+      "kickoff": "2026-11-23T21:45:00+02:00",
+      "market": "double_chance",
+      "model_version": "venue-poisson-baseline-1",
+      "odds": null,
+      "odds_status": "unavailable",
+      "rank_score": 0.731805,
+      "reasons": [
+        "Historical home/away sample: 5/5 matches",
+        "No matched bookmaker price; probability estimate shown without value claim"
+      ],
+      "sample": {
+        "away_away_matches": 5,
+        "historical_matches": 110,
+        "home_home_matches": 5
+      },
+      "selection": "12",
+      "prediction_id": "5e48d0790dbc46a482acd545b107015d",
+      "status": "PENDING"
+    },
+    {
+      "away": "Hoffenheim W",
+      "away_lambda": 1.101,
+      "calibration": "uncalibrated_baseline",
+      "competition": "Frauen-Bundesliga",
+      "data_quality": 0.625,
+      "estimated_probability": 0.940766,
+      "expected_value": -0.049827,
+      "fixture_id": "1834796",
+      "history_cutoff": "2026-11-23",
+      "home": "Bayern Munich W",
+      "home_lambda": 3.8955,
+      "kickoff": "2026-11-23T19:00:00+02:00",
+      "market": "double_chance",
+      "model_version": "venue-poisson-baseline-1",
+      "odds": 1.01,
+      "odds_status": "available",
+      "rank_score": 0.730008,
+      "reasons": [
+        "Historical home/away sample: 4/4 matches",
+        "Bookmaker odds are used only for value comparison, not to calculate probability"
+      ],
+      "sample": {
+        "away_away_matches": 4,
+        "historical_matches": 81,
+        "home_home_matches": 4
+      },
+      "selection": "1X",
+      "prediction_id": "c2845d54cf764c6f9d1c73715853685c",
+      "status": "PENDING"
+    },
+    {
+      "away": "Hoffenheim W",
+      "away_lambda": 1.101,
+      "calibration": "uncalibrated_baseline",
+      "competition": "Frauen-Bundesliga",
+      "data_quality": 0.625,
+      "estimated_probability": 0.875053,
+      "expected_value": 0.015061,
+      "fixture_id": "1834796",
+      "history_cutoff": "2026-11-23",
+      "home": "Bayern Munich W",
+      "home_lambda": 3.8955,
+      "kickoff": "2026-11-23T19:00:00+02:00",
+      "market": "match_over_2_5",
+      "model_version": "venue-poisson-baseline-1",
+      "odds": 1.16,
+      "odds_status": "available",
+      "rank_score": 0.72631,
+      "reasons": [
+        "Historical home/away sample: 4/4 matches",
+        "Bookmaker odds are used only for value comparison, not to calculate probability"
+      ],
+      "sample": {
+        "away_away_matches": 4,
+        "historical_matches": 81,
+        "home_home_matches": 4
+      },
+      "selection": "over",
+      "prediction_id": "bc10beedbe0e4993af9e2dd5f1679f4a",
+      "status": "PENDING"
+    },
+    {
+      "away": "Aberdeen",
+      "away_lambda": 0.9008,
+      "calibration": "uncalibrated_baseline",
+      "competition": "Premiership",
+      "data_quality": 0.703,
+      "estimated_probability": 0.796149,
+      "expected_value": null,
+      "fixture_id": "1792830",
+      "history_cutoff": "2026-11-24",
+      "home": "Rangers",
+      "home_lambda": 2.0489,
+      "kickoff": "2026-11-24T22:00:00+02:00",
+      "market": "double_chance",
+      "model_version": "venue-poisson-baseline-1",
+      "odds": null,
+      "odds_status": "unavailable",
+      "rank_score": 0.723782,
+      "reasons": [
+        "Historical home/away sample: 5/5 matches",
+        "No matched bookmaker price; probability estimate shown without value claim"
+      ],
+      "sample": {
+        "away_away_matches": 5,
+        "historical_matches": 75,
+        "home_home_matches": 5
+      },
+      "selection": "12",
+      "prediction_id": "d91b5de3559149ffa2aa898ced65a76a",
+      "status": "PENDING"
+    },
+    {
+      "away": "Aberdeen",
+      "away_lambda": 0.9008,
+      "calibration": "uncalibrated_baseline",
+      "competition": "Premiership",
+      "data_quality": 0.703,
+      "estimated_probability": 0.793212,
+      "expected_value": null,
+      "fixture_id": "1792830",
+      "history_cutoff": "2026-11-24",
+      "home": "Rangers",
+      "home_lambda": 2.0489,
+      "kickoff": "2026-11-24T22:00:00+02:00",
+      "market": "match_over_1_5",
+      "model_version": "venue-poisson-baseline-1",
+      "odds": null,
+      "odds_status": "unavailable",
+      "rank_score": 0.722167,
+      "reasons": [
+        "Historical home/away sample: 5/5 matches",
+        "No matched bookmaker price; probability estimate shown without value claim"
+      ],
+      "sample": {
+        "away_away_matches": 5,
+        "historical_matches": 75,
+        "home_home_matches": 5
+      },
+      "selection": "over",
+      "prediction_id": "22cba4e956df4c16afd1d08691f3373f",
+      "status": "PENDING"
+    },
+    {
+      "away": "Inter",
+      "away_lambda": 1.9331,
+      "calibration": "uncalibrated_baseline",
+      "competition": "Serie A",
+      "data_quality": 0.719,
+      "estimated_probability": 0.779699,
+      "expected_value": null,
+      "fixture_id": "1785416",
+      "history_cutoff": "2026-11-22",
+      "home": "Atalanta",
+      "home_lambda": 1.4812,
+      "kickoff": "2026-11-22T21:45:00+02:00",
+      "market": "double_chance",
+      "model_version": "venue-poisson-baseline-1",
+      "odds": null,
+      "odds_status": "unavailable",
+      "rank_score": 0.719534,
+      "reasons": [
+        "Historical home/away sample: 6/5 matches",
+        "No matched bookmaker price; probability estimate shown without value claim"
+      ],
+      "sample": {
+        "away_away_matches": 5,
+        "historical_matches": 110,
+        "home_home_matches": 6
+      },
+      "selection": "12",
+      "prediction_id": "ef9eb9aaee9a430cb1fd2f4126627124",
+      "status": "PENDING"
+    },
+    {
+      "away": "Fiorentina",
+      "away_lambda": 2.0347,
+      "calibration": "uncalibrated_baseline",
+      "competition": "Serie A",
+      "data_quality": 0.719,
+      "estimated_probability": 0.778942,
+      "expected_value": null,
+      "fixture_id": "1785426",
+      "history_cutoff": "2026-11-23",
+      "home": "Monza",
+      "home_lambda": 2.2641,
+      "kickoff": "2026-11-23T21:45:00+02:00",
+      "market": "btts_yes",
+      "model_version": "venue-poisson-baseline-1",
+      "odds": null,
+      "odds_status": "unavailable",
+      "rank_score": 0.719118,
+      "reasons": [
+        "Historical home/away sample: 5/5 matches",
+        "No matched bookmaker price; probability estimate shown without value claim"
+      ],
+      "sample": {
+        "away_away_matches": 5,
+        "historical_matches": 110,
+        "home_home_matches": 5
+      },
+      "selection": "yes",
+      "prediction_id": "4550d7c27c2e4b67bfe7420eadd2b676",
+      "status": "PENDING"
+    },
+    {
+      "away": "Inter",
+      "away_lambda": 1.9331,
+      "calibration": "uncalibrated_baseline",
+      "competition": "Serie A",
+      "data_quality": 0.719,
+      "estimated_probability": 0.772635,
+      "expected_value": null,
+      "fixture_id": "1785416",
+      "history_cutoff": "2026-11-22",
+      "home": "Atalanta",
+      "home_lambda": 1.4812,
+      "kickoff": "2026-11-22T21:45:00+02:00",
+      "market": "home_over_0_5",
+      "model_version": "venue-poisson-baseline-1",
+      "odds": null,
+      "odds_status": "unavailable",
+      "rank_score": 0.715649,
+      "reasons": [
+        "Historical home/away sample: 6/5 matches",
+        "No matched bookmaker price; probability estimate shown without value claim"
+      ],
+      "sample": {
+        "away_away_matches": 5,
+        "historical_matches": 110,
+        "home_home_matches": 6
+      },
+      "selection": "over",
+      "prediction_id": "0418e1f1cce4428e9a9815d707722032",
+      "status": "PENDING"
+    },
+    {
+      "away": "Hoffenheim W",
+      "away_lambda": 1.101,
+      "calibration": "uncalibrated_baseline",
+      "competition": "Frauen-Bundesliga",
+      "data_quality": 0.625,
+      "estimated_probability": 0.913583,
+      "expected_value": -0.068145,
+      "fixture_id": "1834796",
+      "history_cutoff": "2026-11-23",
+      "home": "Bayern Munich W",
+      "home_lambda": 3.8955,
+      "kickoff": "2026-11-23T19:00:00+02:00",
+      "market": "double_chance",
+      "model_version": "venue-poisson-baseline-1",
+      "odds": 1.02,
+      "odds_status": "available",
+      "rank_score": 0.705898,
+      "reasons": [
+        "Historical home/away sample: 4/4 matches",
+        "Bookmaker odds are used only for value comparison, not to calculate probability"
+      ],
+      "sample": {
+        "away_away_matches": 4,
+        "historical_matches": 81,
+        "home_home_matches": 4
+      },
+      "selection": "12",
+      "prediction_id": "73f715e57e1045e785ac4285b469c286",
+      "status": "PENDING"
+    },
+    {
+      "away": "Elche",
+      "away_lambda": 2.3812,
+      "calibration": "uncalibrated_baseline",
+      "competition": "LaLiga",
+      "data_quality": 0.719,
+      "estimated_probability": 0.810772,
+      "expected_value": -0.018966,
+      "fixture_id": "1810741",
+      "history_cutoff": "2026-11-23",
+      "home": "Levante",
+      "home_lambda": 1.6648,
+      "kickoff": "2026-11-23T22:00:00+02:00",
+      "market": "home_over_0_5",
+      "model_version": "venue-poisson-baseline-1",
+      "odds": 1.21,
+      "odds_status": "available",
+      "rank_score": 0.702142,
+      "reasons": [
+        "Historical home/away sample: 5/6 matches",
+        "Bookmaker odds are used only for value comparison, not to calculate probability"
+      ],
+      "sample": {
+        "away_away_matches": 6,
+        "historical_matches": 119,
+        "home_home_matches": 5
+      },
+      "selection": "over",
+      "prediction_id": "565e4c71e89a40a8ada27d46f573625e",
+      "status": "PENDING"
+    },
+    {
+      "away": "Southampton",
+      "away_lambda": 0.9833,
+      "calibration": "uncalibrated_baseline",
+      "competition": "Championship",
+      "data_quality": 0.906,
+      "estimated_probability": 0.689696,
+      "expected_value": 5.9e-05,
+      "fixture_id": "1802532",
+      "history_cutoff": "2026-11-24",
+      "home": "Sheffield United",
+      "home_lambda": 1.1478,
+      "kickoff": "2026-11-24T21:45:00+02:00",
+      "market": "double_chance",
+      "model_version": "venue-poisson-baseline-1",
+      "odds": 1.45,
+      "odds_status": "available",
+      "rank_score": 0.701162,
+      "reasons": [
+        "Historical home/away sample: 7/8 matches",
+        "Bookmaker odds are used only for value comparison, not to calculate probability"
+      ],
+      "sample": {
+        "away_away_matches": 8,
+        "historical_matches": 180,
+        "home_home_matches": 7
+      },
+      "selection": "1X",
+      "prediction_id": "7763b2f33cfb4f6fb7a0be89b6f46c5d",
+      "status": "PENDING"
+    },
+    {
+      "away": "Le Mans",
+      "away_lambda": 1.268,
+      "calibration": "uncalibrated_baseline",
+      "competition": "Ligue 1",
+      "data_quality": 0.719,
+      "estimated_probability": 0.734222,
+      "expected_value": null,
+      "fixture_id": "1794769",
+      "history_cutoff": "2026-11-22",
+      "home": "Marseille",
+      "home_lambda": 2.5514,
+      "kickoff": "2026-11-22T21:45:00+02:00",
+      "market": "match_over_2_5",
+      "model_version": "venue-poisson-baseline-1",
+      "odds": null,
+      "odds_status": "unavailable",
+      "rank_score": 0.694522,
+      "reasons": [
+        "Historical home/away sample: 5/5 matches",
+        "No matched bookmaker price; probability estimate shown without value claim"
+      ],
+      "sample": {
+        "away_away_matches": 5,
+        "historical_matches": 90,
+        "home_home_matches": 5
+      },
+      "selection": "over",
+      "prediction_id": "a378b4bd89484ce48187f9a918a16e07",
+      "status": "PENDING"
+    },
+    {
+      "away": "Le Mans",
+      "away_lambda": 1.268,
+      "calibration": "uncalibrated_baseline",
+      "competition": "Ligue 1",
+      "data_quality": 0.719,
+      "estimated_probability": 0.723089,
+      "expected_value": null,
+      "fixture_id": "1794769",
+      "history_cutoff": "2026-11-22",
+      "home": "Marseille",
+      "home_lambda": 2.5514,
+      "kickoff": "2026-11-22T21:45:00+02:00",
+      "market": "home_over_1_5",
+      "model_version": "venue-poisson-baseline-1",
+      "odds": null,
+      "odds_status": "unavailable",
+      "rank_score": 0.688399,
+      "reasons": [
+        "Historical home/away sample: 5/5 matches",
+        "No matched bookmaker price; probability estimate shown without value claim"
+      ],
+      "sample": {
+        "away_away_matches": 5,
+        "historical_matches": 90,
+        "home_home_matches": 5
+      },
+      "selection": "over",
+      "prediction_id": "e2b5a78c024f45278b3107e88f95a858",
+      "status": "PENDING"
+    },
+    {
+      "away": "Aris",
+      "away_lambda": 0.9959,
+      "calibration": "uncalibrated_baseline",
+      "competition": "Super League",
+      "data_quality": 0.684,
+      "estimated_probability": 0.739304,
+      "expected_value": null,
+      "fixture_id": "1836632",
+      "history_cutoff": "2026-11-23",
+      "home": "Asteras Tripolis",
+      "home_lambda": 1.3444,
+      "kickoff": "2026-11-23T17:00:00+02:00",
+      "market": "home_over_0_5",
+      "model_version": "venue-poisson-baseline-1",
+      "odds": null,
+      "odds_status": "unavailable",
+      "rank_score": 0.686817,
+      "reasons": [
+        "Historical home/away sample: 6/5 matches",
+        "No matched bookmaker price; probability estimate shown without value claim"
+      ],
+      "sample": {
+        "away_away_matches": 5,
+        "historical_matches": 69,
+        "home_home_matches": 6
+      },
+      "selection": "over",
+      "prediction_id": "4a71698491c4464dabf14c97cbb354da",
+      "status": "PENDING"
+    },
+    {
+      "away": "Le Mans",
+      "away_lambda": 1.268,
+      "calibration": "uncalibrated_baseline",
+      "competition": "Ligue 1",
+      "data_quality": 0.719,
+      "estimated_probability": 0.718606,
+      "expected_value": null,
+      "fixture_id": "1794769",
+      "history_cutoff": "2026-11-22",
+      "home": "Marseille",
+      "home_lambda": 2.5514,
+      "kickoff": "2026-11-22T21:45:00+02:00",
+      "market": "away_over_0_5",
+      "model_version": "venue-poisson-baseline-1",
+      "odds": null,
+      "odds_status": "unavailable",
+      "rank_score": 0.685933,
+      "reasons": [
+        "Historical home/away sample: 5/5 matches",
+        "No matched bookmaker price; probability estimate shown without value claim"
+      ],
+      "sample": {
+        "away_away_matches": 5,
+        "historical_matches": 90,
+        "home_home_matches": 5
+      },
+      "selection": "over",
+      "prediction_id": "54480bc5090e4aeb8adde2cd72b98322",
+      "status": "PENDING"
+    },
+    {
+      "away": "Aris",
+      "away_lambda": 0.9959,
+      "calibration": "uncalibrated_baseline",
+      "competition": "Super League",
+      "data_quality": 0.684,
+      "estimated_probability": 0.724624,
+      "expected_value": null,
+      "fixture_id": "1836632",
+      "history_cutoff": "2026-11-23",
+      "home": "Asteras Tripolis",
+      "home_lambda": 1.3444,
+      "kickoff": "2026-11-23T17:00:00+02:00",
+      "market": "double_chance",
+      "model_version": "venue-poisson-baseline-1",
+      "odds": null,
+      "odds_status": "unavailable",
+      "rank_score": 0.678743,
+      "reasons": [
+        "Historical home/away sample: 6/5 matches",
+        "No matched bookmaker price; probability estimate shown without value claim"
+      ],
+      "sample": {
+        "away_away_matches": 5,
+        "historical_matches": 69,
+        "home_home_matches": 6
+      },
+      "selection": "12",
+      "prediction_id": "e5aa5dde65414aeb806e7f23708f132d",
+      "status": "PENDING"
+    },
+    {
+      "away": "Aris",
+      "away_lambda": 0.9959,
+      "calibration": "uncalibrated_baseline",
+      "competition": "Super League",
+      "data_quality": 0.684,
+      "estimated_probability": 0.722667,
+      "expected_value": null,
+      "fixture_id": "1836632",
+      "history_cutoff": "2026-11-23",
+      "home": "Asteras Tripolis",
+      "home_lambda": 1.3444,
+      "kickoff": "2026-11-23T17:00:00+02:00",
+      "market": "double_chance",
+      "model_version": "venue-poisson-baseline-1",
+      "odds": null,
+      "odds_status": "unavailable",
+      "rank_score": 0.677667,
+      "reasons": [
+        "Historical home/away sample: 6/5 matches",
+        "No matched bookmaker price; probability estimate shown without value claim"
+      ],
+      "sample": {
+        "away_away_matches": 5,
+        "historical_matches": 69,
+        "home_home_matches": 6
+      },
+      "selection": "1X",
+      "prediction_id": "a72aa9fe4f9a48149ff3b6bbf19ecc4c",
+      "status": "PENDING"
+    },
+    {
+      "away": "Inter",
+      "away_lambda": 1.9331,
+      "calibration": "uncalibrated_baseline",
+      "competition": "Serie A",
+      "data_quality": 0.719,
+      "estimated_probability": 0.703208,
+      "expected_value": null,
+      "fixture_id": "1785416",
+      "history_cutoff": "2026-11-22",
+      "home": "Atalanta",
+      "home_lambda": 1.4812,
+      "kickoff": "2026-11-22T21:45:00+02:00",
+      "market": "double_chance",
+      "model_version": "venue-poisson-baseline-1",
+      "odds": null,
+      "odds_status": "unavailable",
+      "rank_score": 0.677464,
+      "reasons": [
+        "Historical home/away sample: 6/5 matches",
+        "No matched bookmaker price; probability estimate shown without value claim"
+      ],
+      "sample": {
+        "away_away_matches": 5,
+        "historical_matches": 110,
+        "home_home_matches": 6
+      },
+      "selection": "X2",
+      "prediction_id": "fbabaab7af2b44c5a4e92c783585f226",
+      "status": "PENDING"
+    },
+    {
+      "away": "Southampton",
+      "away_lambda": 0.9833,
+      "calibration": "uncalibrated_baseline",
+      "competition": "Championship",
+      "data_quality": 0.906,
+      "estimated_probability": 0.704424,
+      "expected_value": -0.091293,
+      "fixture_id": "1802532",
+      "history_cutoff": "2026-11-24",
+      "home": "Sheffield United",
+      "home_lambda": 1.1478,
+      "kickoff": "2026-11-24T21:45:00+02:00",
+      "market": "double_chance",
+      "model_version": "venue-poisson-baseline-1",
+      "odds": 1.29,
+      "odds_status": "available",
+      "rank_score": 0.663587,
+      "reasons": [
+        "Historical home/away sample: 7/8 matches",
+        "Bookmaker odds are used only for value comparison, not to calculate probability"
+      ],
+      "sample": {
+        "away_away_matches": 8,
+        "historical_matches": 180,
+        "home_home_matches": 7
+      },
+      "selection": "12",
+      "prediction_id": "af56481aa0264f239bccd1c587841e46",
+      "status": "PENDING"
+    },
+    {
+      "away": "Everton",
+      "away_lambda": 0.6531,
+      "calibration": "uncalibrated_baseline",
+      "competition": "Premier League",
+      "data_quality": 0.719,
+      "estimated_probability": 0.760428,
+      "expected_value": -0.049465,
+      "fixture_id": "1793635",
+      "history_cutoff": "2026-11-23",
+      "home": "Brentford",
+      "home_lambda": 1.4289,
+      "kickoff": "2026-11-23T22:00:00+02:00",
+      "market": "home_over_0_5",
+      "model_version": "venue-poisson-baseline-1",
+      "odds": 1.25,
+      "odds_status": "available",
+      "rank_score": 0.659203,
+      "reasons": [
+        "Historical home/away sample: 5/5 matches",
+        "Bookmaker odds are used only for value comparison, not to calculate probability"
+      ],
+      "sample": {
+        "away_away_matches": 5,
+        "historical_matches": 100,
+        "home_home_matches": 5
+      },
+      "selection": "over",
+      "prediction_id": "96e82cc3756b4acc8c0d140f16901c35",
+      "status": "PENDING"
+    },
+    {
+      "away": "Hoffenheim W",
+      "away_lambda": 1.101,
+      "calibration": "uncalibrated_baseline",
+      "competition": "Frauen-Bundesliga",
+      "data_quality": 0.625,
+      "estimated_probability": 0.854349,
+      "expected_value": -0.111477,
+      "fixture_id": "1834796",
+      "history_cutoff": "2026-11-23",
+      "home": "Bayern Munich W",
+      "home_lambda": 3.8955,
+      "kickoff": "2026-11-23T19:00:00+02:00",
+      "market": "match_winner",
+      "model_version": "venue-poisson-baseline-1",
+      "odds": 1.04,
+      "odds_status": "available",
+      "rank_score": 0.657392,
+      "reasons": [
+        "Historical home/away sample: 4/4 matches",
+        "Bookmaker odds are used only for value comparison, not to calculate probability"
+      ],
+      "sample": {
+        "away_away_matches": 4,
+        "historical_matches": 81,
+        "home_home_matches": 4
+      },
+      "selection": "home",
+      "prediction_id": "bab363aa546b477f8eaa178ffe32f1d5",
+      "status": "PENDING"
+    },
+    {
+      "away": "Inter",
+      "away_lambda": 1.9331,
+      "calibration": "uncalibrated_baseline",
+      "competition": "Serie A",
+      "data_quality": 0.719,
+      "estimated_probability": 0.66301,
+      "expected_value": null,
+      "fixture_id": "1785416",
+      "history_cutoff": "2026-11-22",
+      "home": "Atalanta",
+      "home_lambda": 1.4812,
+      "kickoff": "2026-11-22T21:45:00+02:00",
+      "market": "match_over_2_5",
+      "model_version": "venue-poisson-baseline-1",
+      "odds": null,
+      "odds_status": "unavailable",
+      "rank_score": 0.655355,
+      "reasons": [
+        "Historical home/away sample: 6/5 matches",
+        "No matched bookmaker price; probability estimate shown without value claim"
+      ],
+      "sample": {
+        "away_away_matches": 5,
+        "historical_matches": 110,
+        "home_home_matches": 6
+      },
+      "selection": "over",
+      "prediction_id": "bad59ad6005f489c9273657bb239beb6",
+      "status": "PENDING"
+    },
+    {
+      "away": "Le Mans",
+      "away_lambda": 1.268,
+      "calibration": "uncalibrated_baseline",
+      "competition": "Ligue 1",
+      "data_quality": 0.719,
+      "estimated_probability": 0.662575,
+      "expected_value": null,
+      "fixture_id": "1794769",
+      "history_cutoff": "2026-11-22",
+      "home": "Marseille",
+      "home_lambda": 2.5514,
+      "kickoff": "2026-11-22T21:45:00+02:00",
+      "market": "btts_yes",
+      "model_version": "venue-poisson-baseline-1",
+      "odds": null,
+      "odds_status": "unavailable",
+      "rank_score": 0.655116,
+      "reasons": [
+        "Historical home/away sample: 5/5 matches",
+        "No matched bookmaker price; probability estimate shown without value claim"
+      ],
+      "sample": {
+        "away_away_matches": 5,
+        "historical_matches": 90,
+        "home_home_matches": 5
+      },
+      "selection": "yes",
+      "prediction_id": "a8803a93bb0c4d9a9209804214a42355",
+      "status": "PENDING"
+    },
+    {
+      "away": "Inter",
+      "away_lambda": 1.9331,
+      "calibration": "uncalibrated_baseline",
+      "competition": "Serie A",
+      "data_quality": 0.719,
+      "estimated_probability": 0.660836,
+      "expected_value": null,
+      "fixture_id": "1785416",
+      "history_cutoff": "2026-11-22",
+      "home": "Atalanta",
+      "home_lambda": 1.4812,
+      "kickoff": "2026-11-22T21:45:00+02:00",
+      "market": "btts_yes",
+      "model_version": "venue-poisson-baseline-1",
+      "odds": null,
+      "odds_status": "unavailable",
+      "rank_score": 0.65416,
+      "reasons": [
+        "Historical home/away sample: 6/5 matches",
+        "No matched bookmaker price; probability estimate shown without value claim"
+      ],
+      "sample": {
+        "away_away_matches": 5,
+        "historical_matches": 110,
+        "home_home_matches": 6
+      },
+      "selection": "yes",
+      "prediction_id": "7025e3e388024714b25c0e6f44013666",
+      "status": "PENDING"
+    },
+    {
+      "away": "Fiorentina",
+      "away_lambda": 2.0347,
+      "calibration": "uncalibrated_baseline",
+      "competition": "Serie A",
+      "data_quality": 0.719,
+      "estimated_probability": 0.660783,
+      "expected_value": null,
+      "fixture_id": "1785426",
+      "history_cutoff": "2026-11-23",
+      "home": "Monza",
+      "home_lambda": 2.2641,
+      "kickoff": "2026-11-23T21:45:00+02:00",
+      "market": "home_over_1_5",
+      "model_version": "venue-poisson-baseline-1",
+      "odds": null,
+      "odds_status": "unavailable",
+      "rank_score": 0.654131,
+      "reasons": [
+        "Historical home/away sample: 5/5 matches",
+        "No matched bookmaker price; probability estimate shown without value claim"
+      ],
+      "sample": {
+        "away_away_matches": 5,
+        "historical_matches": 110,
+        "home_home_matches": 5
+      },
+      "selection": "over",
+      "prediction_id": "a9b4682cbf434a6b8f523e6075c829f9",
+      "status": "PENDING"
+    },
+    {
+      "away": "Aris",
+      "away_lambda": 0.9959,
+      "calibration": "uncalibrated_baseline",
+      "competition": "Super League",
+      "data_quality": 0.684,
+      "estimated_probability": 0.678333,
+      "expected_value": null,
+      "fixture_id": "1836632",
+      "history_cutoff": "2026-11-23",
+      "home": "Asteras Tripolis",
+      "home_lambda": 1.3444,
+      "kickoff": "2026-11-23T17:00:00+02:00",
+      "market": "match_over_1_5",
+      "model_version": "venue-poisson-baseline-1",
+      "odds": null,
+      "odds_status": "unavailable",
+      "rank_score": 0.653283,
+      "reasons": [
+        "Historical home/away sample: 6/5 matches",
+        "No matched bookmaker price; probability estimate shown without value claim"
+      ],
+      "sample": {
+        "away_away_matches": 5,
+        "historical_matches": 69,
+        "home_home_matches": 6
+      },
+      "selection": "over",
+      "prediction_id": "10112e33ff164d15b4da30cb55e88525",
+      "status": "PENDING"
+    },
+    {
+      "away": "Le Mans",
+      "away_lambda": 1.268,
+      "calibration": "uncalibrated_baseline",
+      "competition": "Ligue 1",
+      "data_quality": 0.719,
+      "estimated_probability": 0.651741,
+      "expected_value": null,
+      "fixture_id": "1794769",
+      "history_cutoff": "2026-11-22",
+      "home": "Marseille",
+      "home_lambda": 2.5514,
+      "kickoff": "2026-11-22T21:45:00+02:00",
+      "market": "match_winner",
+      "model_version": "venue-poisson-baseline-1",
+      "odds": null,
+      "odds_status": "unavailable",
+      "rank_score": 0.649158,
+      "reasons": [
+        "Historical home/away sample: 5/5 matches",
+        "No matched bookmaker price; probability estimate shown without value claim"
+      ],
+      "sample": {
+        "away_away_matches": 5,
+        "historical_matches": 90,
+        "home_home_matches": 5
+      },
+      "selection": "home",
+      "prediction_id": "bbcb6277752d45fda9718295b951f6cd",
+      "status": "PENDING"
+    },
+    {
+      "away": "Dundee FC",
+      "away_lambda": 1.5115,
+      "calibration": "uncalibrated_baseline",
+      "competition": "Premiership",
+      "data_quality": 0.797,
+      "estimated_probability": 0.74096,
+      "expected_value": -0.096029,
+      "fixture_id": "1792833",
+      "history_cutoff": "2026-11-24",
+      "home": "Hibernian",
+      "home_lambda": 0.9796,
+      "kickoff": "2026-11-24T21:45:00+02:00",
+      "market": "double_chance",
+      "model_version": "venue-poisson-baseline-1",
+      "odds": 1.22,
+      "odds_status": "available",
+      "rank_score": 0.648613,
+      "reasons": [
+        "Historical home/away sample: 6/6 matches",
+        "Bookmaker odds are used only for value comparison, not to calculate probability"
+      ],
+      "sample": {
+        "away_away_matches": 6,
+        "historical_matches": 75,
+        "home_home_matches": 6
+      },
+      "selection": "12",
+      "prediction_id": "d4119647ddca4847b9dc6412dd3c91c1",
+      "status": "PENDING"
+    },
+    {
+      "away": "Everton",
+      "away_lambda": 0.6531,
+      "calibration": "uncalibrated_baseline",
+      "competition": "Premier League",
+      "data_quality": 0.719,
+      "estimated_probability": 0.728835,
+      "expected_value": -0.037938,
+      "fixture_id": "1793635",
+      "history_cutoff": "2026-11-23",
+      "home": "Brentford",
+      "home_lambda": 1.4289,
+      "kickoff": "2026-11-23T22:00:00+02:00",
+      "market": "double_chance",
+      "model_version": "venue-poisson-baseline-1",
+      "odds": 1.32,
+      "odds_status": "available",
+      "rank_score": 0.64759,
+      "reasons": [
+        "Historical home/away sample: 5/5 matches",
+        "Bookmaker odds are used only for value comparison, not to calculate probability"
+      ],
+      "sample": {
+        "away_away_matches": 5,
+        "historical_matches": 100,
+        "home_home_matches": 5
+      },
+      "selection": "12",
+      "prediction_id": "8fc372f3a30f431a93c2d931593f8b47",
+      "status": "PENDING"
+    },
+    {
+      "away": "Southampton",
+      "away_lambda": 0.9833,
+      "calibration": "uncalibrated_baseline",
+      "competition": "Championship",
+      "data_quality": 0.906,
+      "estimated_probability": 0.682666,
+      "expected_value": -0.153494,
+      "fixture_id": "1802532",
+      "history_cutoff": "2026-11-24",
+      "home": "Sheffield United",
+      "home_lambda": 1.1478,
+      "kickoff": "2026-11-24T21:45:00+02:00",
+      "market": "home_over_0_5",
+      "model_version": "venue-poisson-baseline-1",
+      "odds": 1.24,
+      "odds_status": "available",
+      "rank_score": 0.647266,
+      "reasons": [
+        "Historical home/away sample: 7/8 matches",
+        "Bookmaker odds are used only for value comparison, not to calculate probability"
+      ],
+      "sample": {
+        "away_away_matches": 8,
+        "historical_matches": 180,
+        "home_home_matches": 7
+      },
+      "selection": "over",
+      "prediction_id": "ce962472dd5e4dfc8f819e9f4485cf22",
+      "status": "PENDING"
+    },
+    {
+      "away": "Wrexham",
+      "away_lambda": 1.0518,
+      "calibration": "uncalibrated_baseline",
+      "competition": "Championship",
+      "data_quality": 0.906,
+      "estimated_probability": 0.679434,
+      "expected_value": -0.103147,
+      "fixture_id": "1802526",
+      "history_cutoff": "2026-11-24",
+      "home": "Bristol City",
+      "home_lambda": 0.7862,
+      "kickoff": "2026-11-24T21:45:00+02:00",
+      "market": "double_chance",
+      "model_version": "venue-poisson-baseline-1",
+      "odds": 1.32,
+      "odds_status": "available",
+      "rank_score": 0.645489,
+      "reasons": [
+        "Historical home/away sample: 8/7 matches",
+        "Bookmaker odds are used only for value comparison, not to calculate probability"
+      ],
+      "sample": {
+        "away_away_matches": 7,
+        "historical_matches": 180,
+        "home_home_matches": 8
+      },
+      "selection": "12",
+      "prediction_id": "5e5ec2172a1a434c87b64e9459d9ebfc",
+      "status": "PENDING"
+    },
+    {
+      "away": "Fiorentina",
+      "away_lambda": 2.0347,
+      "calibration": "uncalibrated_baseline",
+      "competition": "Serie A",
+      "data_quality": 0.719,
+      "estimated_probability": 0.641715,
+      "expected_value": null,
+      "fixture_id": "1785426",
+      "history_cutoff": "2026-11-23",
+      "home": "Monza",
+      "home_lambda": 2.2641,
+      "kickoff": "2026-11-23T21:45:00+02:00",
+      "market": "double_chance",
+      "model_version": "venue-poisson-baseline-1",
+      "odds": null,
+      "odds_status": "unavailable",
+      "rank_score": 0.643643,
+      "reasons": [
+        "Historical home/away sample: 5/5 matches",
+        "No matched bookmaker price; probability estimate shown without value claim"
+      ],
+      "sample": {
+        "away_away_matches": 5,
+        "historical_matches": 110,
+        "home_home_matches": 5
+      },
+      "selection": "1X",
+      "prediction_id": "ad4a88a6bbe64864a1d065aadb4eb171",
+      "status": "PENDING"
+    },
+    {
+      "away": "Aberdeen",
+      "away_lambda": 0.9008,
+      "calibration": "uncalibrated_baseline",
+      "competition": "Premiership",
+      "data_quality": 0.703,
+      "estimated_probability": 0.639703,
+      "expected_value": null,
+      "fixture_id": "1792830",
+      "history_cutoff": "2026-11-24",
+      "home": "Rangers",
+      "home_lambda": 2.0489,
+      "kickoff": "2026-11-24T22:00:00+02:00",
+      "market": "match_winner",
+      "model_version": "venue-poisson-baseline-1",
+      "odds": null,
+      "odds_status": "unavailable",
+      "rank_score": 0.637737,
+      "reasons": [
+        "Historical home/away sample: 5/5 matches",
+        "No matched bookmaker price; probability estimate shown without value claim"
+      ],
+      "sample": {
+        "away_away_matches": 5,
+        "historical_matches": 75,
+        "home_home_matches": 5
+      },
+      "selection": "home",
+      "prediction_id": "a60f7b7efe7b4da3927399c9d3e1e3f2",
+      "status": "PENDING"
+    },
+    {
+      "away": "Dundee FC",
+      "away_lambda": 1.5115,
+      "calibration": "uncalibrated_baseline",
+      "competition": "Premiership",
+      "data_quality": 0.797,
+      "estimated_probability": 0.710871,
+      "expected_value": -0.161172,
+      "fixture_id": "1792833",
+      "history_cutoff": "2026-11-24",
+      "home": "Hibernian",
+      "home_lambda": 0.9796,
+      "kickoff": "2026-11-24T21:45:00+02:00",
+      "market": "match_over_1_5",
+      "model_version": "venue-poisson-baseline-1",
+      "odds": 1.18,
+      "odds_status": "available",
+      "rank_score": 0.630079,
+      "reasons": [
+        "Historical home/away sample: 6/6 matches",
+        "Bookmaker odds are used only for value comparison, not to calculate probability"
+      ],
+      "sample": {
+        "away_away_matches": 6,
+        "historical_matches": 75,
+        "home_home_matches": 6
+      },
+      "selection": "over",
+      "prediction_id": "758e8ca8f766446aba72d476dfb0265b",
+      "status": "PENDING"
+    },
+    {
+      "away": "Wrexham",
+      "away_lambda": 1.0518,
+      "calibration": "uncalibrated_baseline",
+      "competition": "Championship",
+      "data_quality": 0.906,
+      "estimated_probability": 0.650692,
+      "expected_value": -0.115059,
+      "fixture_id": "1802526",
+      "history_cutoff": "2026-11-24",
+      "home": "Bristol City",
+      "home_lambda": 0.7862,
+      "kickoff": "2026-11-24T21:45:00+02:00",
+      "market": "away_over_0_5",
+      "model_version": "venue-poisson-baseline-1",
+      "odds": 1.36,
+      "odds_status": "available",
+      "rank_score": 0.629681,
+      "reasons": [
+        "Historical home/away sample: 8/7 matches",
+        "Bookmaker odds are used only for value comparison, not to calculate probability"
+      ],
+      "sample": {
+        "away_away_matches": 7,
+        "historical_matches": 180,
+        "home_home_matches": 8
+      },
+      "selection": "over",
+      "prediction_id": "a6af1bf21bc44d50b3585b496d701d52",
+      "status": "PENDING"
+    },
+    {
+      "away": "Hoffenheim W",
+      "away_lambda": 1.101,
+      "calibration": "uncalibrated_baseline",
+      "competition": "Frauen-Bundesliga",
+      "data_quality": 0.625,
+      "estimated_probability": 0.667462,
+      "expected_value": null,
+      "fixture_id": "1834796",
+      "history_cutoff": "2026-11-23",
+      "home": "Bayern Munich W",
+      "home_lambda": 3.8955,
+      "kickoff": "2026-11-23T19:00:00+02:00",
+      "market": "away_over_0_5",
+      "model_version": "venue-poisson-baseline-1",
+      "odds": null,
+      "odds_status": "unavailable",
+      "rank_score": 0.629604,
+      "reasons": [
+        "Historical home/away sample: 4/4 matches",
+        "No matched bookmaker price; probability estimate shown without value claim"
+      ],
+      "sample": {
+        "away_away_matches": 4,
+        "historical_matches": 81,
+        "home_home_matches": 4
+      },
+      "selection": "over",
+      "prediction_id": "ed98101f33e1461ab67c018891595710",
+      "status": "PENDING"
+    },
+    {
+      "away": "Aris",
+      "away_lambda": 0.9959,
+      "calibration": "uncalibrated_baseline",
+      "competition": "Super League",
+      "data_quality": 0.684,
+      "estimated_probability": 0.630609,
+      "expected_value": null,
+      "fixture_id": "1836632",
+      "history_cutoff": "2026-11-23",
+      "home": "Asteras Tripolis",
+      "home_lambda": 1.3444,
+      "kickoff": "2026-11-23T17:00:00+02:00",
+      "market": "away_over_0_5",
+      "model_version": "venue-poisson-baseline-1",
+      "odds": null,
+      "odds_status": "unavailable",
+      "rank_score": 0.627035,
+      "reasons": [
+        "Historical home/away sample: 6/5 matches",
+        "No matched bookmaker price; probability estimate shown without value claim"
+      ],
+      "sample": {
+        "away_away_matches": 5,
+        "historical_matches": 69,
+        "home_home_matches": 6
+      },
+      "selection": "over",
+      "prediction_id": "475356614a694d6582b710c50560cf23",
+      "status": "PENDING"
+    },
+    {
+      "away": "Fiorentina",
+      "away_lambda": 2.0347,
+      "calibration": "uncalibrated_baseline",
+      "competition": "Serie A",
+      "data_quality": 0.719,
+      "estimated_probability": 0.603305,
+      "expected_value": null,
+      "fixture_id": "1785426",
+      "history_cutoff": "2026-11-23",
+      "home": "Monza",
+      "home_lambda": 2.2641,
+      "kickoff": "2026-11-23T21:45:00+02:00",
+      "market": "away_over_1_5",
+      "model_version": "venue-poisson-baseline-1",
+      "odds": null,
+      "odds_status": "unavailable",
+      "rank_score": 0.622518,
+      "reasons": [
+        "Historical home/away sample: 5/5 matches",
+        "No matched bookmaker price; probability estimate shown without value claim"
+      ],
+      "sample": {
+        "away_away_matches": 5,
+        "historical_matches": 110,
+        "home_home_matches": 5
+      },
+      "selection": "over",
+      "prediction_id": "bb48f2d207dc4a3aaa81fb75a11c53c3",
+      "status": "PENDING"
+    },
+    {
+      "away": "Hoffenheim W",
+      "away_lambda": 1.101,
+      "calibration": "uncalibrated_baseline",
+      "competition": "Frauen-Bundesliga",
+      "data_quality": 0.625,
+      "estimated_probability": 0.65389,
+      "expected_value": null,
+      "fixture_id": "1834796",
+      "history_cutoff": "2026-11-23",
+      "home": "Bayern Munich W",
+      "home_lambda": 3.8955,
+      "kickoff": "2026-11-23T19:00:00+02:00",
+      "market": "btts_yes",
+      "model_version": "venue-poisson-baseline-1",
+      "odds": null,
+      "odds_status": "unavailable",
+      "rank_score": 0.622139,
+      "reasons": [
+        "Historical home/away sample: 4/4 matches",
+        "No matched bookmaker price; probability estimate shown without value claim"
+      ],
+      "sample": {
+        "away_away_matches": 4,
+        "historical_matches": 81,
+        "home_home_matches": 4
+      },
+      "selection": "yes",
+      "prediction_id": "9914a181b12e417991d18b28a7d89741",
+      "status": "PENDING"
+    },
+    {
+      "away": "Aberdeen",
+      "away_lambda": 0.9008,
+      "calibration": "uncalibrated_baseline",
+      "competition": "Premiership",
+      "data_quality": 0.703,
+      "estimated_probability": 0.607068,
+      "expected_value": null,
+      "fixture_id": "1792830",
+      "history_cutoff": "2026-11-24",
+      "home": "Rangers",
+      "home_lambda": 2.0489,
+      "kickoff": "2026-11-24T22:00:00+02:00",
+      "market": "home_over_1_5",
+      "model_version": "venue-poisson-baseline-1",
+      "odds": null,
+      "odds_status": "unavailable",
+      "rank_score": 0.619787,
+      "reasons": [
+        "Historical home/away sample: 5/5 matches",
+        "No matched bookmaker price; probability estimate shown without value claim"
+      ],
+      "sample": {
+        "away_away_matches": 5,
+        "historical_matches": 75,
+        "home_home_matches": 5
+      },
+      "selection": "over",
+      "prediction_id": "b3dcab82e0b547b79cf0794f32dbd024",
+      "status": "PENDING"
+    },
+    {
+      "away": "Southampton",
+      "away_lambda": 0.9833,
+      "calibration": "uncalibrated_baseline",
+      "competition": "Championship",
+      "data_quality": 0.906,
+      "estimated_probability": 0.628318,
+      "expected_value": -0.233452,
+      "fixture_id": "1802532",
+      "history_cutoff": "2026-11-24",
+      "home": "Sheffield United",
+      "home_lambda": 1.1478,
+      "kickoff": "2026-11-24T21:45:00+02:00",
+      "market": "match_over_1_5",
+      "model_version": "venue-poisson-baseline-1",
+      "odds": 1.22,
+      "odds_status": "available",
+      "rank_score": 0.617375,
+      "reasons": [
+        "Historical home/away sample: 7/8 matches",
+        "Bookmaker odds are used only for value comparison, not to calculate probability"
+      ],
+      "sample": {
+        "away_away_matches": 8,
+        "historical_matches": 180,
+        "home_home_matches": 7
+      },
+      "selection": "over",
+      "prediction_id": "33e96a75c00e414ead910e6c6ed090d3",
+      "status": "PENDING"
+    },
+    {
+      "away": "Southampton",
+      "away_lambda": 0.9833,
+      "calibration": "uncalibrated_baseline",
+      "competition": "Championship",
+      "data_quality": 0.906,
+      "estimated_probability": 0.625925,
+      "expected_value": -0.217593,
+      "fixture_id": "1802532",
+      "history_cutoff": "2026-11-24",
+      "home": "Sheffield United",
+      "home_lambda": 1.1478,
+      "kickoff": "2026-11-24T21:45:00+02:00",
+      "market": "away_over_0_5",
+      "model_version": "venue-poisson-baseline-1",
+      "odds": 1.25,
+      "odds_status": "available",
+      "rank_score": 0.616059,
+      "reasons": [
+        "Historical home/away sample: 7/8 matches",
+        "Bookmaker odds are used only for value comparison, not to calculate probability"
+      ],
+      "sample": {
+        "away_away_matches": 8,
+        "historical_matches": 180,
+        "home_home_matches": 7
+      },
+      "selection": "over",
+      "prediction_id": "62b11e2b3cf345eaaac54d9b161e20fd",
+      "status": "PENDING"
+    },
+    {
+      "away": "Southampton",
+      "away_lambda": 0.9833,
+      "calibration": "uncalibrated_baseline",
+      "competition": "Championship",
+      "data_quality": 0.906,
+      "estimated_probability": 0.60588,
+      "expected_value": -0.103297,
+      "fixture_id": "1802532",
+      "history_cutoff": "2026-11-24",
+      "home": "Sheffield United",
+      "home_lambda": 1.1478,
+      "kickoff": "2026-11-24T21:45:00+02:00",
+      "market": "double_chance",
+      "model_version": "venue-poisson-baseline-1",
+      "odds": 1.48,
+      "odds_status": "available",
+      "rank_score": 0.605034,
+      "reasons": [
+        "Historical home/away sample: 7/8 matches",
+        "Bookmaker odds are used only for value comparison, not to calculate probability"
+      ],
+      "sample": {
+        "away_away_matches": 8,
+        "historical_matches": 180,
+        "home_home_matches": 7
+      },
+      "selection": "X2",
+      "prediction_id": "cdc57bc2069341279e078626303bc9a2",
+      "status": "PENDING"
+    },
+    {
+      "away": "Dundee FC",
+      "away_lambda": 1.5115,
+      "calibration": "uncalibrated_baseline",
+      "competition": "Premiership",
+      "data_quality": 0.797,
+      "estimated_probability": 0.624539,
+      "expected_value": -0.306762,
+      "fixture_id": "1792833",
+      "history_cutoff": "2026-11-24",
+      "home": "Hibernian",
+      "home_lambda": 0.9796,
+      "kickoff": "2026-11-24T21:45:00+02:00",
+      "market": "home_over_0_5",
+      "model_version": "venue-poisson-baseline-1",
+      "odds": 1.11,
+      "odds_status": "available",
+      "rank_score": 0.582596,
+      "reasons": [
+        "Historical home/away sample: 6/6 matches",
+        "Bookmaker odds are used only for value comparison, not to calculate probability"
+      ],
+      "sample": {
+        "away_away_matches": 6,
+        "historical_matches": 75,
+        "home_home_matches": 6
+      },
+      "selection": "over",
+      "prediction_id": "994ac048492e4f868159f791bcbe3c65",
+      "status": "PENDING"
+    },
+    {
+      "away": "Everton",
+      "away_lambda": 0.6531,
+      "calibration": "uncalibrated_baseline",
+      "competition": "Premier League",
+      "data_quality": 0.719,
+      "estimated_probability": 0.615734,
+      "expected_value": -0.218017,
+      "fixture_id": "1793635",
+      "history_cutoff": "2026-11-23",
+      "home": "Brentford",
+      "home_lambda": 1.4289,
+      "kickoff": "2026-11-23T22:00:00+02:00",
+      "market": "match_over_1_5",
+      "model_version": "venue-poisson-baseline-1",
+      "odds": 1.27,
+      "odds_status": "available",
+      "rank_score": 0.554354,
+      "reasons": [
+        "Historical home/away sample: 5/5 matches",
+        "Bookmaker odds are used only for value comparison, not to calculate probability"
+      ],
+      "sample": {
+        "away_away_matches": 5,
+        "historical_matches": 100,
+        "home_home_matches": 5
+      },
+      "selection": "over",
+      "prediction_id": "d5213da77b38464999fdfc7a89cd7497",
+      "status": "PENDING"
+    }
+  ],
+  "sources": {
+    "livescore_and_odds": "Collected during each league scan; bookmaker odds are comparison-only.",
+    "historical_results": "Football-Data.co.uk completed results, filtered to matches before each fixture.",
+    "league_runs": [
+      {
+        "division": "E0",
+        "competition": "Premier League",
+        "status": "ok",
+        "fixtures": 43,
+        "recommendations": 4,
+        "sources": {
+          "livescore": {
+            "status": "ok",
+            "records": 966
+          },
+          "football_data": {
+            "status": "ok",
+            "records": 100,
+            "completed_matches": 100
+          },
+          "sportybet": {
+            "status": "ok",
+            "events": 293,
+            "role": "odds_only"
+          }
+        }
+      },
+      {
+        "division": "E1",
+        "competition": "Championship",
+        "status": "ok",
+        "fixtures": 9,
+        "recommendations": 9,
+        "sources": {
+          "livescore": {
+            "status": "ok",
+            "records": 966
+          },
+          "football_data": {
+            "status": "ok",
+            "records": 180,
+            "completed_matches": 180
+          },
+          "sportybet": {
+            "status": "ok",
+            "events": 293,
+            "role": "odds_only"
+          }
+        }
+      },
+      {
+        "division": "E2",
+        "competition": "League One",
+        "status": "no_qualifying_recommendations",
+        "fixtures": 0,
+        "recommendations": 0,
+        "sources": {
+          "livescore": {
+            "status": "ok",
+            "records": 966
+          },
+          "football_data": {
+            "status": "ok",
+            "records": 163,
+            "completed_matches": 163
+          },
+          "sportybet": {
+            "status": "ok",
+            "events": 293,
+            "role": "odds_only"
+          }
+        }
+      },
+      {
+        "division": "E3",
+        "competition": "League Two",
+        "status": "no_qualifying_recommendations",
+        "fixtures": 10,
+        "recommendations": 0,
+        "sources": {
+          "livescore": {
+            "status": "ok",
+            "records": 966
+          },
+          "football_data": {
+            "status": "ok",
+            "records": 174,
+            "completed_matches": 174
+          },
+          "sportybet": {
+            "status": "ok",
+            "events": 293,
+            "role": "odds_only"
+          }
+        }
+      },
+      {
+        "division": "SC0",
+        "competition": "Premiership",
+        "status": "ok",
+        "fixtures": 4,
+        "recommendations": 11,
+        "sources": {
+          "livescore": {
+            "status": "ok",
+            "records": 966
+          },
+          "football_data": {
+            "status": "ok",
+            "records": 75,
+            "completed_matches": 75
+          },
+          "sportybet": {
+            "status": "ok",
+            "events": 293,
+            "role": "odds_only"
+          }
+        }
+      },
+      {
+        "division": "D1",
+        "competition": "Bundesliga",
+        "status": "ok",
+        "fixtures": 1,
+        "recommendations": 9,
+        "sources": {
+          "livescore": {
+            "status": "ok",
+            "records": 966
+          },
+          "football_data": {
+            "status": "ok",
+            "records": 81,
+            "completed_matches": 81
+          },
+          "sportybet": {
+            "status": "ok",
+            "events": 293,
+            "role": "odds_only"
+          }
+        }
+      },
+      {
+        "division": "I1",
+        "competition": "Serie A",
+        "status": "ok",
+        "fixtures": 14,
+        "recommendations": 16,
+        "sources": {
+          "livescore": {
+            "status": "ok",
+            "records": 966
+          },
+          "football_data": {
+            "status": "ok",
+            "records": 110,
+            "completed_matches": 110
+          },
+          "sportybet": {
+            "status": "ok",
+            "events": 293,
+            "role": "odds_only"
+          }
+        }
+      },
+      {
+        "division": "SP1",
+        "competition": "LaLiga",
+        "status": "ok",
+        "fixtures": 4,
+        "recommendations": 8,
+        "sources": {
+          "livescore": {
+            "status": "ok",
+            "records": 966
+          },
+          "football_data": {
+            "status": "ok",
+            "records": 119,
+            "completed_matches": 119
+          },
+          "sportybet": {
+            "status": "ok",
+            "events": 293,
+            "role": "odds_only"
+          }
+        }
+      },
+      {
+        "division": "F1",
+        "competition": "Ligue 1",
+        "status": "ok",
+        "fixtures": 4,
+        "recommendations": 9,
+        "sources": {
+          "livescore": {
+            "status": "ok",
+            "records": 966
+          },
+          "football_data": {
+            "status": "ok",
+            "records": 90,
+            "completed_matches": 90
+          },
+          "sportybet": {
+            "status": "ok",
+            "events": 293,
+            "role": "odds_only"
+          }
+        }
+      },
+      {
+        "division": "N1",
+        "competition": "Eredivisie",
+        "status": "no_qualifying_recommendations",
+        "fixtures": 0,
+        "recommendations": 0,
+        "sources": {
+          "livescore": {
+            "status": "ok",
+            "records": 966
+          },
+          "football_data": {
+            "status": "ok",
+            "records": 108,
+            "completed_matches": 108
+          },
+          "sportybet": {
+            "status": "ok",
+            "events": 293,
+            "role": "odds_only"
+          }
+        }
+      },
+      {
+        "division": "B1",
+        "competition": "Pro League",
+        "status": "no_qualifying_recommendations",
+        "fixtures": 0,
+        "recommendations": 0,
+        "sources": {
+          "livescore": {
+            "status": "ok",
+            "records": 966
+          },
+          "football_data": {
+            "status": "ok",
+            "records": 99,
+            "completed_matches": 99
+          },
+          "sportybet": {
+            "status": "ok",
+            "events": 293,
+            "role": "odds_only"
+          }
+        }
+      },
+      {
+        "division": "P1",
+        "competition": "Liga Portugal",
+        "status": "no_qualifying_recommendations",
+        "fixtures": 0,
+        "recommendations": 0,
+        "sources": {
+          "livescore": {
+            "status": "ok",
+            "records": 966
+          },
+          "football_data": {
+            "status": "ok",
+            "records": 98,
+            "completed_matches": 98
+          },
+          "sportybet": {
+            "status": "ok",
+            "events": 293,
+            "role": "odds_only"
+          }
+        }
+      },
+      {
+        "division": "T1",
+        "competition": "Süper Lig",
+        "status": "no_qualifying_recommendations",
+        "fixtures": 1,
+        "recommendations": 0,
+        "sources": {
+          "livescore": {
+            "status": "ok",
+            "records": 966
+          },
+          "football_data": {
+            "status": "ok",
+            "records": 99,
+            "completed_matches": 99
+          },
+          "sportybet": {
+            "status": "ok",
+            "events": 293,
+            "role": "odds_only"
+          }
+        }
+      },
+      {
+        "division": "G1",
+        "competition": "Super League",
+        "status": "ok",
+        "fixtures": 4,
+        "recommendations": 5,
+        "sources": {
+          "livescore": {
+            "status": "ok",
+            "records": 966
+          },
+          "football_data": {
+            "status": "ok",
+            "records": 69,
+            "completed_matches": 69
+          },
+          "sportybet": {
+            "status": "ok",
+            "events": 293,
+            "role": "odds_only"
+          }
+        }
+      }
+    ]
+  },
   "notes": [
-    "The first GitHub Actions scan has not run yet.",
-    "Estimates will be published only when source data and historical samples are available."
+    "Probabilities are uncalibrated historical-rate estimates, not guaranteed outcomes.",
+    "Bookmaker odds are attached after model probabilities and are not model inputs.",
+    "Only fixtures with sufficient prior home/away history are eligible."
   ]
 }
