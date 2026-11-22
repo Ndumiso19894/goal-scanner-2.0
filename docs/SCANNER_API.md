@@ -6,7 +6,7 @@ The Android client uses these endpoints. Install the optional API dependencies w
 GOAL_SCANNER_DB=data/goal_scanner.sqlite3 uvicorn goal_scanner.api:app --host 0.0.0.0 --port 8000
 ```
 
-Use a reachable HTTPS reverse proxy for remote/mobile access. Do not expose an unauthenticated development server directly to the public internet.
+Use a reachable HTTPS reverse proxy for remote/mobile access. Set `GOAL_SCANNER_API_TOKEN` on hosted deployments; all endpoints except `/health` then require a Bearer token. See [DEPLOYMENT.md](DEPLOYMENT.md).
 
 ## Run the scanner
 
