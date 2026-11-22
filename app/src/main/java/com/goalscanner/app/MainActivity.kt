@@ -81,6 +81,11 @@ private fun GoalScannerApp(prefs: android.content.SharedPreferences) {
     var scannerView by rememberSaveable { mutableStateOf("Recommended") }
     var minimum by rememberSaveable { mutableFloatStateOf(prefs.getFloat("minimum",60f)) }
     var markets by remember { mutableStateOf(prefs.getStringSet("markets",MarketIds.toSet())?.toSet() ?: MarketIds.toSet()) }
+    var recommendations by remember { mutableStateOf(emptyList<JSONObject>()) }
+    var scanSummary by rememberSaveable { mutableStateOf("No scan has been run yet.") }
+    var selectedRecommendation by remember { mutableStateOf<JSONObject?>(null) }
+    var resultSummary by remember { mutableStateOf(JSONObject()) }
+    var resultRows by remember { mutableStateOf(emptyList<JSONObject>()) }
     val scope = rememberCoroutineScope()
 
     Scaffold(
@@ -160,9 +165,46 @@ private fun GoalScannerApp(prefs: android.content.SharedPreferences) {
                 minimum,{minimum=it},markets,{markets=it},{
                     prefs.edit().putFloat("minimum",minimum).putStringSet("markets",markets).apply()
                     message="Scanner preferences saved."
-                },message)
-            "Analysis" -> AnalysisScreen(Modifier.padding(padding))
-            else -> ResultsScreen(Modifier.padding(padding))
+                },message,apiUrl,season,division,recommendations,scanSummary,busy,
+                onRun={minOdds,maxOdds ->
+                    scope.launch {
+                        busy=true; message=""
+                        try {
+                            val body=JSONObject().put("season",season.trim()).put("division",division.trim())
+                                .put("match_date",LocalDate.now().toString()).put("hours_ahead",48)
+                                .put("minimum_probability",minimum/100.0)
+                                .put("mode",if(scannerView=="Recommended") "recommended" else "full")
+                            val marketArray=org.json.JSONArray()
+                            markets.sorted().forEach { marketArray.put(it) }
+                            body.put("markets",marketArray)
+                            if(minOdds!=null) body.put("min_odds",minOdds)
+                            if(maxOdds!=null) body.put("max_odds",maxOdds)
+                            val response=apiRequest(apiUrl,"scanner/run","POST",body)
+                            val array=response.optJSONArray("recommendations")
+                            recommendations=if(array==null) emptyList() else
+                                (0 until array.length()).mapNotNull { i -> array.optJSONObject(i) }
+                            scanSummary="${response.optString("status","unknown")} · ${response.optInt("fixture_count")} fixtures · ${response.optInt("recommendation_count")} recommendations"
+                            message=if(recommendations.isEmpty()) "No qualifying recommendations. Check source coverage and skipped fixture reasons." else "Scan complete. Select a match to inspect its summary."
+                        } catch(e:Exception) { scanSummary="Scan failed"; message=e.message ?: "Scanner request failed." }
+                        finally { busy=false }
+                    }
+                },
+                onSelect={candidate -> selectedRecommendation=candidate; tab="Analysis"})
+            "Analysis" -> AnalysisScreen(Modifier.padding(padding),selectedRecommendation)
+            else -> ResultsScreen(Modifier.padding(padding),resultSummary,resultRows,busy) {
+                scope.launch {
+                    busy=true
+                    try {
+                        apiRequest(apiUrl,"results/refresh","POST")
+                        val response=apiRequest(apiUrl,"results")
+                        resultSummary=response.optJSONObject("summary") ?: JSONObject()
+                        val array=response.optJSONArray("recent")
+                        resultRows=if(array==null) emptyList() else (0 until array.length()).mapNotNull { i -> array.optJSONObject(i) }
+                        message="Scores and prediction history refreshed."
+                    } catch(e:Exception) { message=e.message ?: "Could not refresh results." }
+                    finally { busy=false }
+                }
+            }
         }
     }
 }
@@ -262,12 +304,16 @@ private fun FixturesScreen(modifier:Modifier,apiUrl:String,season:String,divisio
     }
 }
 @Composable
-private fun ScannerScreen(modifier:Modifier,view:String,onView:(String)->Unit,minimum:Float,onMinimum:(Float)->Unit,
-    selected:Set<String>,onSelected:(Set<String>)->Unit,onSave:()->Unit,message:String) {
+private fun ScannerScreen(
+    modifier:Modifier,view:String,onView:(String)->Unit,minimum:Float,onMinimum:(Float)->Unit,
+    selected:Set<String>,onSelected:(Set<String>)->Unit,onSave:()->Unit,message:String,
+    apiUrl:String,season:String,division:String,recommendations:List<JSONObject>,scanSummary:String,
+    busy:Boolean,onRun:(Double?,Double?)->Unit,onSelect:(JSONObject)->Unit
+) {
     var date by rememberSaveable { mutableStateOf("Today") }
     var competition by rememberSaveable { mutableStateOf("") }
     var team by rememberSaveable { mutableStateOf("") }
-    var minOdds by rememberSaveable { mutableStateOf("1.10") }
+    var minOdds by rememberSaveable { mutableStateOf("") }
     var maxOdds by rememberSaveable { mutableStateOf("") }
     ScreenColumn(modifier) {
         Heading("Goal Scanner","Balanced recommendations and detailed statistical search.")
@@ -282,28 +328,30 @@ private fun ScannerScreen(modifier:Modifier,view:String,onView:(String)->Unit,mi
         if(view=="Recommended") Card {
             Column(Modifier.padding(16.dp),verticalArrangement=Arrangement.spacedBy(8.dp)) {
                 Text("Balanced quality",fontWeight=FontWeight.Bold)
-                Text("Rank using probability, statistical consistency, data completeness and available bookmaker value.")
+                Text("Rank by estimated probability, historical sample quality and available bookmaker value.")
                 Text("Initial minimum estimated probability: ${minimum.toInt()}%",color=MaterialTheme.colorScheme.primary,fontWeight=FontWeight.Bold)
-                Text("Insufficient-data matches are excluded. No threshold is a guarantee.",style=MaterialTheme.typography.bodySmall)
+                Text("Only fixtures with sufficient prior home/away history qualify. Estimates are not calibrated guarantees.",style=MaterialTheme.typography.bodySmall)
             }
         } else {
-            Heading("Quick filters")
+            Heading("Full scanner filters")
             Row(horizontalArrangement=Arrangement.spacedBy(7.dp)) {
                 listOf("Today","Tomorrow","7 days").forEach { item ->
                     FilterChip(selected=date==item,onClick={date=item},label={Text(item)})
                 }
             }
-            OutlinedTextField(competition,{competition=it},label={Text("Competition contains")},modifier=Modifier.fillMaxWidth(),singleLine=true)
-            OutlinedTextField(team,{team=it},label={Text("Search team")},modifier=Modifier.fillMaxWidth(),singleLine=true)
+            OutlinedTextField(competition,{competition=it},label={Text("Competition contains · display filter")},modifier=Modifier.fillMaxWidth(),singleLine=true)
+            OutlinedTextField(team,{team=it},label={Text("Search team · display filter")},modifier=Modifier.fillMaxWidth(),singleLine=true)
             Row(horizontalArrangement=Arrangement.spacedBy(8.dp)) {
-                OutlinedTextField(minOdds,{minOdds=it},label={Text("Minimum odds")},modifier=Modifier.weight(1f),singleLine=true)
-                OutlinedTextField(maxOdds,{maxOdds=it},label={Text("Maximum odds")},modifier=Modifier.weight(1f),singleLine=true)
+                OutlinedTextField(minOdds,{minOdds=it},label={Text("Minimum odds (optional)")},modifier=Modifier.weight(1f),singleLine=true)
+                OutlinedTextField(maxOdds,{maxOdds=it},label={Text("Maximum odds (optional)")},modifier=Modifier.weight(1f),singleLine=true)
             }
+            Text("Competition and team text filters are visual placeholders in this build; the backend currently scans the configured competition and 48-hour window.",
+                style=MaterialTheme.typography.bodySmall,color=MaterialTheme.colorScheme.onSurfaceVariant)
         }
         Card { Column(Modifier.padding(16.dp),verticalArrangement=Arrangement.spacedBy(7.dp)) {
             Text("Minimum estimated probability · ${minimum.toInt()}%",fontWeight=FontWeight.Bold)
             Slider(value=minimum,onValueChange=onMinimum,valueRange=50f..95f)
-            Text("Adjustable filter. Calibration must be measured against recorded outcomes.",style=MaterialTheme.typography.bodySmall)
+            Text("Your selected initial threshold is 60%.",style=MaterialTheme.typography.bodySmall)
         } }
         Heading("Selected markets","${selected.size} of 9 enabled")
         MarketIds.indices.forEach { index ->
@@ -318,45 +366,110 @@ private fun ScannerScreen(modifier:Modifier,view:String,onView:(String)->Unit,mi
                 }
             }
         }
-        Button(onClick=onSave,modifier=Modifier.fillMaxWidth()) { Text("Save scanner preferences") }
+        Button(onClick={onRun(minOdds.toDoubleOrNull(),maxOdds.toDoubleOrNull())},
+            enabled=!busy&&apiUrl.isNotBlank()&&season.isNotBlank()&&division.isNotBlank()&&selected.isNotEmpty(),
+            modifier=Modifier.fillMaxWidth()) {
+            Text(if(busy) "Scanning fixtures…" else "Run scanner")
+        }
+        OutlinedButton(onClick=onSave,modifier=Modifier.fillMaxWidth()) { Text("Save scanner preferences") }
+        Text(scanSummary,style=MaterialTheme.typography.bodySmall,color=MaterialTheme.colorScheme.primary)
         if(message.isNotBlank()) Text(message,style=MaterialTheme.typography.bodySmall)
-        Notice("Fixture-level recommendations are not active yet","The backend calculates probabilities when valid home and away goal expectations are supplied. It does not yet generate a trained fixture-level shortlist. No matches or estimates will be invented.")
+        if(apiUrl.isBlank()) Notice("Backend not connected","Enter the deployed API address in Settings before running the scanner.")
+        if(recommendations.isNotEmpty()) {
+            Heading(if(view=="Recommended") "Balanced shortlist" else "All qualifying selections",
+                "${recommendations.size} recorded candidates · tap one for match analysis")
+            recommendations.forEach { item ->
+                Card(Modifier.fillMaxWidth().clickable { onSelect(item) },shape=RoundedCornerShape(16.dp)) {
+                    Column(Modifier.padding(14.dp),verticalArrangement=Arrangement.spacedBy(5.dp)) {
+                        Text("${item.optString("home")} vs ${item.optString("away")}",fontWeight=FontWeight.Bold)
+                        Text("${item.optString("market").replace("_"," ").uppercase()} · ${item.optString("selection").uppercase()}",
+                            style=MaterialTheme.typography.labelMedium,color=MaterialTheme.colorScheme.primary)
+                        Row(horizontalArrangement=Arrangement.spacedBy(12.dp)) {
+                            Text("Estimate ${(item.optDouble("estimated_probability")*100).toInt()}%",fontWeight=FontWeight.Bold)
+                            Text(if(item.isNull("odds")) "Odds unavailable" else "Odds ${item.optDouble("odds")}",
+                                color=MaterialTheme.colorScheme.onSurfaceVariant)
+                        }
+                        Text("Data quality ${(item.optDouble("data_quality")*100).toInt()}% · rank ${(item.optDouble("rank_score")*100).toInt()}",
+                            style=MaterialTheme.typography.bodySmall,color=MaterialTheme.colorScheme.onSurfaceVariant)
+                    }
+                }
+            }
+        } else Notice("No recommendations displayed","Run the scanner to retrieve real fixtures. Matches with insufficient prior home/away records are excluded.")
     }
 }
 @Composable
-private fun AnalysisScreen(modifier:Modifier) {
+private fun AnalysisScreen(modifier:Modifier,candidate:JSONObject?) {
     ScreenColumn(modifier) {
         Heading("Match analysis","Summary first, supporting evidence below.")
-        Card(shape=RoundedCornerShape(20.dp)) {
-            Column(Modifier.padding(18.dp),verticalArrangement=Arrangement.spacedBy(10.dp)) {
-                Text("HOME TEAM     VS     AWAY TEAM",fontWeight=FontWeight.Bold)
-                Text("Select a fixture to begin.",color=MaterialTheme.colorScheme.onSurfaceVariant)
-                HorizontalDivider()
-                Text("Main prediction",fontWeight=FontWeight.Bold)
-                Text("Not available",style=MaterialTheme.typography.headlineSmall,color=MaterialTheme.colorScheme.primary)
-                Text("No fixture-level prediction has been generated. No probability is displayed without supported match data.")
+        if(candidate==null) {
+            Notice("No match selected","Choose a recommendation from the Scanner to view its match summary.")
+        } else {
+            Card(shape=RoundedCornerShape(20.dp)) {
+                Column(Modifier.padding(18.dp),verticalArrangement=Arrangement.spacedBy(10.dp)) {
+                    Text(candidate.optString("competition","Competition unavailable"),style=MaterialTheme.typography.labelSmall,
+                        color=MaterialTheme.colorScheme.onSurfaceVariant)
+                    Text("${candidate.optString("home")} vs ${candidate.optString("away")}",
+                        style=MaterialTheme.typography.titleLarge,fontWeight=FontWeight.Bold)
+                    Text(candidate.optString("kickoff"),style=MaterialTheme.typography.bodySmall)
+                    HorizontalDivider()
+                    Text("Main selection",fontWeight=FontWeight.Bold)
+                    Text("${candidate.optString("market").replace("_"," ").uppercase()} · ${candidate.optString("selection").uppercase()}",
+                        color=MaterialTheme.colorScheme.primary,fontWeight=FontWeight.SemiBold)
+                    Text("${(candidate.optDouble("estimated_probability")*100).toInt()}% estimated probability",
+                        style=MaterialTheme.typography.headlineSmall,fontWeight=FontWeight.Bold)
+                    Text(if(candidate.isNull("odds")) "Bookmaker odds unavailable" else "Bookmaker odds: ${candidate.optDouble("odds")}")
+                    Text("Expected goals: ${candidate.optDouble("home_lambda")} home · ${candidate.optDouble("away_lambda")} away")
+                    Text("Historical sample: ${candidate.optJSONObject("sample")?.optInt("home_home_matches")} home matches / ${candidate.optJSONObject("sample")?.optInt("away_away_matches")} away matches")
+                    Text("Data quality: ${(candidate.optDouble("data_quality")*100).toInt()}%")
+                    Text("Model: ${candidate.optString("model_version")} · ${candidate.optString("calibration")}",
+                        style=MaterialTheme.typography.bodySmall,color=MaterialTheme.colorScheme.onSurfaceVariant)
+                }
+            }
+            Heading("Why this estimate")
+            (candidate.optJSONArray("reasons")?.let { arr -> (0 until arr.length()).map { arr.optString(it) } } ?: emptyList()).forEach {
+                Card { Text(it,Modifier.fillMaxWidth().padding(14.dp)) }
             }
         }
-        Heading("Detailed analysis")
-        listOf("Team form and home/away performance","Goals scored and conceded","Expected goals, where available",
-            "Head-to-head with sample-size warnings","Predicted lineups only when player evidence is sufficient",
-            "Model probabilities and bookmaker odds shown separately").forEach { Card { Text(it,Modifier.fillMaxWidth().padding(14.dp)) } }
+        Heading("Model limitations")
+        Notice("Baseline, not a guarantee","Goal expectations are derived from prior completed home/away results. This initial model is uncalibrated and does not yet use verified player availability, lineups or xG in its probability calculation.")
     }
 }
 @Composable
-private fun ResultsScreen(modifier:Modifier) {
+private fun ResultsScreen(
+    modifier:Modifier,summary:JSONObject,rows:List<JSONObject>,busy:Boolean,onRefresh:()->Unit
+) {
+    val settled=summary.optInt("settled",0)
+    val accuracy=if(summary.isNull("accuracy")) "—" else "${(summary.optDouble("accuracy")*100).toInt()}%"
     ScreenColumn(modifier) {
-        Heading("Results & performance","Scanner predictions and manually recorded bets remain separate.")
+        Heading("Results & performance","Recorded scanner predictions, settled only against verified full-time scores.")
         Row(horizontalArrangement=Arrangement.spacedBy(9.dp)) {
-            Box(Modifier.weight(1f)) { Metric("Predictions","0","No recorded recommendations") }
-            Box(Modifier.weight(1f)) { Metric("Accuracy","—","Needs settled outcomes") }
+            Box(Modifier.weight(1f)) { Metric("Predictions",summary.optInt("predictions").toString(),"${summary.optInt("pending")} pending") }
+            Box(Modifier.weight(1f)) { Metric("Accuracy",accuracy,"${summary.optInt("wins")} wins · ${summary.optInt("losses")} losses") }
         }
-        Card { Column(Modifier.padding(16.dp),verticalArrangement=Arrangement.spacedBy(8.dp)) {
-            Text("Automatic prediction history",fontWeight=FontWeight.Bold)
-            Text("Each qualifying recommendation is intended to retain its match, market, probability, odds snapshot, timestamp and model version.")
-            Text("Verified final scores will settle predictions automatically, with a manual correction path. The current backend does not yet emit fixture-level recommendations or a settlement feed.")
-        } }
-        Notice("No settled predictions yet","Accuracy, calibration, Brier score and profit/loss remain blank until genuine predictions and verified outcomes are recorded.")
+        Row(horizontalArrangement=Arrangement.spacedBy(9.dp)) {
+            Box(Modifier.weight(1f)) { Metric("Brier score",if(summary.isNull("brier_score")) "—" else String.format("%.3f",summary.optDouble("brier_score")),"Lower is better") }
+            Box(Modifier.weight(1f)) { Metric("Profit / loss",if(summary.isNull("profit_units")) "—" else String.format("%.2f u",summary.optDouble("profit_units")),"${summary.optInt("priced_settled")} priced results") }
+        }
+        Button(onClick=onRefresh,enabled=!busy,modifier=Modifier.fillMaxWidth()) {
+            Text(if(busy) "Refreshing…" else "Refresh verified scores")
+        }
+        if(rows.isEmpty()) Notice("No prediction history yet","Run the scanner to save prediction snapshots. Final scores are matched to the original fixture IDs.")
+        else {
+            Heading("Prediction history","${rows.size} recent records")
+            rows.forEach { item ->
+                Card {
+                    Column(Modifier.padding(13.dp),verticalArrangement=Arrangement.spacedBy(4.dp)) {
+                        Text("${item.optString("home")} vs ${item.optString("away")}",fontWeight=FontWeight.Bold)
+                        Text("${item.optString("market").replace("_"," ").uppercase()} · ${item.optString("selection").uppercase()}")
+                        Text("${(item.optDouble("probability")*100).toInt()}% estimate · ${if(item.isNull("odds")) "odds unavailable" else "odds "+item.optDouble("odds")}")
+                        Text("${item.optString("status")} ${if(item.isNull("final_home_goals")) "" else "· score ${item.optInt("final_home_goals")}-${item.optInt("final_away_goals")}"}",
+                            color=MaterialTheme.colorScheme.primary,fontWeight=FontWeight.SemiBold)
+                    }
+                }
+            }
+        }
+        Text("ROI is calculated only for settled records with captured odds. Each selection is counted as one flat unit; overlapping markets may be correlated.",
+            style=MaterialTheme.typography.bodySmall,color=MaterialTheme.colorScheme.onSurfaceVariant)
     }
 }
 @Composable
