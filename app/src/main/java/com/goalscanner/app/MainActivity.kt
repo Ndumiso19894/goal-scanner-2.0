@@ -25,6 +25,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.Dispatchers
@@ -70,6 +71,7 @@ private fun GoalScannerApp(prefs: android.content.SharedPreferences) {
     var tab by rememberSaveable { mutableStateOf("Home") }
     var settings by rememberSaveable { mutableStateOf(false) }
     var apiUrl by rememberSaveable { mutableStateOf(prefs.getString("api_url","") ?: "") }
+    var apiToken by rememberSaveable { mutableStateOf(prefs.getString("api_token","") ?: "") }
     var season by rememberSaveable { mutableStateOf(prefs.getString("season","") ?: "") }
     var division by rememberSaveable { mutableStateOf(prefs.getString("division","") ?: "") }
     var connection by rememberSaveable { mutableStateOf("Not configured") }
@@ -111,11 +113,11 @@ private fun GoalScannerApp(prefs: android.content.SharedPreferences) {
         }
     ) { padding ->
         if (settings) {
-            SettingsScreen(Modifier.padding(padding),apiUrl,{apiUrl=it},season,{season=it},division,{division=it},
+            SettingsScreen(Modifier.padding(padding),apiUrl,{apiUrl=it},apiToken,{apiToken=it},season,{season=it},division,{division=it},
                 connection,providers,busy,message,
                 onSave={
                     prefs.edit().putString("api_url",apiUrl.trim().trimEnd('/'))
-                        .putString("season",season.trim()).putString("division",division.trim())
+                        .putString("api_token",apiToken.trim()).putString("season",season.trim()).putString("division",division.trim())
                         .putFloat("minimum",minimum).putStringSet("markets",markets).apply()
                     message="Settings saved on this device."
                 },
@@ -123,9 +125,9 @@ private fun GoalScannerApp(prefs: android.content.SharedPreferences) {
                     scope.launch {
                         busy=true; connection="Checking backend…"
                         try {
-                            val health=apiRequest(apiUrl,"health")
+                            val health=apiRequest(apiUrl,"health",token=apiToken)
                             connection="Connected · version "+health.optString("version","available")
-                            val manifest=apiRequest(apiUrl,"sources/manifest")
+                            val manifest=apiRequest(apiUrl,"sources/manifest",token=apiToken)
                             providers=if(manifest.length()>0) "Provider manifest received" else "Manifest unavailable"
                             message="Backend health check passed."
                         } catch(e:Exception) {
@@ -146,7 +148,7 @@ private fun GoalScannerApp(prefs: android.content.SharedPreferences) {
                         val body=JSONObject().put("match_date",LocalDate.now().toString())
                             .put("season",season.trim()).put("division",division.trim())
                             .put("hours_ahead",48).put("include_squads",true)
-                        val result=apiRequest(apiUrl,"sources/collect","POST",body)
+                        val result=apiRequest(apiUrl,"sources/collect","POST",body,apiToken)
                         val array=result.optJSONArray("fixtures")
                         fixtureRows=if(array==null) emptyList() else (0 until array.length()).mapNotNull { i ->
                             array.optJSONObject(i)?.let { fx ->
@@ -183,7 +185,7 @@ private fun GoalScannerApp(prefs: android.content.SharedPreferences) {
                             body.put("markets",marketArray)
                             if(minOdds!=null) body.put("min_odds",minOdds)
                             if(maxOdds!=null) body.put("max_odds",maxOdds)
-                            val response=apiRequest(apiUrl,"scanner/run","POST",body)
+                            val response=apiRequest(apiUrl,"scanner/run","POST",body,apiToken)
                             val array=response.optJSONArray("recommendations")
                             recommendations=if(array==null) emptyList() else
                                 (0 until array.length()).mapNotNull { i -> array.optJSONObject(i) }
@@ -199,8 +201,8 @@ private fun GoalScannerApp(prefs: android.content.SharedPreferences) {
                 scope.launch {
                     busy=true
                     try {
-                        apiRequest(apiUrl,"results/refresh","POST")
-                        val response=apiRequest(apiUrl,"results")
+                        apiRequest(apiUrl,"results/refresh","POST",token=apiToken)
+                        val response=apiRequest(apiUrl,"results",token=apiToken)
                         resultSummary=response.optJSONObject("summary") ?: JSONObject()
                         val array=response.optJSONArray("recent")
                         resultRows=if(array==null) emptyList() else (0 until array.length()).mapNotNull { i -> array.optJSONObject(i) }
@@ -213,7 +215,7 @@ private fun GoalScannerApp(prefs: android.content.SharedPreferences) {
     }
 }
 
-private suspend fun apiRequest(baseUrl:String,path:String,method:String="GET",body:JSONObject?=null):JSONObject =
+private suspend fun apiRequest(baseUrl:String,path:String,method:String="GET",body:JSONObject?=null,token:String?=null):JSONObject =
     withContext(Dispatchers.IO) {
         val base=baseUrl.trim().trimEnd('/')
         require(base.startsWith("https://")||base.startsWith("http://")) {
@@ -222,6 +224,7 @@ private suspend fun apiRequest(baseUrl:String,path:String,method:String="GET",bo
         val conn=(URL("$base/$path").openConnection() as HttpURLConnection).apply {
             requestMethod=method; connectTimeout=12000; readTimeout=30000
             setRequestProperty("Accept","application/json")
+            if(!token.isNullOrBlank()) setRequestProperty("Authorization","Bearer ${token.trim()}")
             if(body!=null) { doOutput=true; setRequestProperty("Content-Type","application/json") }
         }
         try {
@@ -488,6 +491,8 @@ private fun SettingsScreen(modifier:Modifier,apiUrl:String,onApiUrl:(String)->Un
         Heading("Backend connection","Connect to a deployed Goal Scanner FastAPI service.")
         OutlinedTextField(apiUrl,onApiUrl,modifier=Modifier.fillMaxWidth(),label={Text("API base URL")},
             placeholder={Text("https://your-server.example")},singleLine=true)
+        OutlinedTextField(apiToken,onApiToken,modifier=Modifier.fillMaxWidth(),label={Text("API access token (optional)")},
+            visualTransformation=PasswordVisualTransformation(),singleLine=true)
         Text("A physical phone needs a server address reachable over the internet or local network. Use HTTPS outside a trusted local development network.",
             style=MaterialTheme.typography.bodySmall,color=MaterialTheme.colorScheme.onSurfaceVariant)
         OutlinedTextField(season,onSeason,modifier=Modifier.fillMaxWidth(),label={Text("Football-Data season code")},placeholder={Text("2627")},singleLine=true)
