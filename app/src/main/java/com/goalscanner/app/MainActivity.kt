@@ -332,7 +332,7 @@ private fun HomeScreen(modifier:Modifier,connection:String,providers:String,fixt
 private fun FixturesScreen(modifier:Modifier,apiUrl:String,season:String,division:String,summary:String,
     fixtures:List<String>,busy:Boolean,message:String,onCollect:()->Unit) {
     ScreenColumn(modifier) {
-        Heading("Fixtures","Latest fixtures published by the scheduled scanner.")'s fixtures and provider data.")
+        Heading("Fixtures","Latest fixtures published by the scheduled scanner.")
         Card { Column(Modifier.padding(15.dp)) { Text("Latest collection",fontWeight=FontWeight.Bold); Text(summary,color=MaterialTheme.colorScheme.onSurfaceVariant) } }
         Button(onClick=onCollect,enabled=!busy&&apiUrl.isNotBlank()&&season.isNotBlank()&&division.isNotBlank(),modifier=Modifier.fillMaxWidth()) {
             Text(if(busy) "Collecting…" else "Collect today's fixtures")
