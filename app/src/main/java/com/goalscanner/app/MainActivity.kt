@@ -75,9 +75,9 @@ private fun GoalScannerApp(prefs: android.content.SharedPreferences) {
     var apiToken by rememberSaveable { mutableStateOf(prefs.getString("api_token","") ?: "") }
     var season by rememberSaveable { mutableStateOf(prefs.getString("season","2627") ?: "2627") }
     var division by rememberSaveable { mutableStateOf(prefs.getString("division","E0") ?: "E0") }
-    var connection by rememberSaveable { mutableStateOf("Not configured") }
-    var providers by rememberSaveable { mutableStateOf("Not checked") }
-    var fixtureSummary by rememberSaveable { mutableStateOf("No fixtures collected yet") }
+    var connection by rememberSaveable { mutableStateOf("Connecting to GitHub feed…") }
+    var providers by rememberSaveable { mutableStateOf("Waiting for published data") }
+    var fixtureSummary by rememberSaveable { mutableStateOf("Loading published fixtures…") }
     var fixtureRows by remember { mutableStateOf(emptyList<String>()) }
     var message by rememberSaveable { mutableStateOf("") }
     var busy by remember { mutableStateOf(false) }
@@ -90,6 +90,33 @@ private fun GoalScannerApp(prefs: android.content.SharedPreferences) {
     var resultSummary by remember { mutableStateOf(JSONObject()) }
     var resultRows by remember { mutableStateOf(emptyList<JSONObject>()) }
     val scope = rememberCoroutineScope()
+
+    LaunchedEffect(apiUrl) {
+        if (apiUrl.isNotBlank()) {
+            try {
+                val stamp = System.currentTimeMillis()
+                val feed = apiRequest(apiUrl, "docs/data/latest.json?ts=$stamp")
+                connection = "Connected · data updated " + feed.optString("updated_at", "not run yet")
+                providers = "GitHub feed · " + feed.optInt("recommendation_count") + " selections"
+                scanSummary = "${feed.optString("status", "unknown")} · ${feed.optInt("fixture_count")} fixtures · ${feed.optInt("recommendation_count")} selections"
+                val picks = feed.optJSONArray("recommendations")
+                recommendations = if (picks == null) emptyList() else (0 until picks.length()).mapNotNull { picks.optJSONObject(it) }
+                val fixtureFeed = apiRequest(apiUrl, "docs/data/fixtures.json?ts=$stamp")
+                val fixtureArray = fixtureFeed.optJSONArray("fixtures")
+                fixtureRows = if (fixtureArray == null) emptyList() else (0 until fixtureArray.length()).mapNotNull { i ->
+                    fixtureArray.optJSONObject(i)?.let { fx -> "${fx.optString("home")} vs ${fx.optString("away")} · ${fx.optString("kickoff")}" }
+                }
+                fixtureSummary = "${fixtureRows.size} fixtures · updated " + fixtureFeed.optString("updated_at", "not run yet")
+                val resultFeed = apiRequest(apiUrl, "docs/data/results.json?ts=$stamp")
+                resultSummary = resultFeed.optJSONObject("summary") ?: JSONObject()
+                val recent = resultFeed.optJSONArray("recent")
+                resultRows = if (recent == null) emptyList() else (0 until recent.length()).mapNotNull { recent.optJSONObject(it) }
+            } catch (e: Exception) {
+                connection = "Feed unavailable"
+                message = e.message ?: "Could not load published Goal Scanner data."
+            }
+        }
+    }
 
     Scaffold(
         topBar = {
@@ -410,7 +437,7 @@ private fun ScannerScreen(
                     }
                 }
             }
-        } else Notice("No recommendations displayed","Run the scanner to retrieve real fixtures. Matches with insufficient prior home/away records are excluded.")
+        } else Notice("No recommendations displayed","No published selections match this view. The scheduled GitHub scan will refresh the feed automatically.")
     }
 }
 @Composable
