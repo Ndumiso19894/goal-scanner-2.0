@@ -2,7 +2,7 @@
 try:
     from datetime import date
     from typing import Any
-    from fastapi import FastAPI, HTTPException
+    from fastapi import FastAPI, HTTPException, Query
     from pydantic import BaseModel, Field
 except ImportError as exc:
     raise RuntimeError("Install optional dependencies: pip install -e '.[api]'") from exc
@@ -29,7 +29,7 @@ class SourceCollectionInput(BaseModel):
 class LineupPredictionInput(BaseModel):
     as_of: date
     players: list[dict[str, Any]]
-    recent_formations: list[str] = []
+    recent_formations: list[str] = Field(default_factory=list)
     minimum_players: int = Field(default=14, ge=11, le=40)
     minimum_appearance_samples: int = Field(default=3, ge=1, le=20)
 
@@ -57,7 +57,7 @@ def sources_collect(data: SourceCollectionInput):
         raise HTTPException(status_code=502, detail=str(exc)) from exc
 
 @app.get("/lineups/coverage")
-def lineups_coverage(season: int = Field(ge=2000, le=2100)):
+def lineups_coverage(season: int = Query(..., ge=2000, le=2100)):
     """List competitions and season-specific player/lineup/injury coverage."""
     try:
         return {"season":season,"competitions":ApiFootballProvider().fetch_league_coverage(season)}
