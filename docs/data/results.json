@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "updated_at": null,
+  "summary": {
+    "predictions": 0,
+    "pending": 0,
+    "settled": 0,
+    "wins": 0,
+    "losses": 0,
+    "accuracy": null,
+    "brier_score": null,
+    "priced_settled": 0,
+    "profit_units": null,
+    "roi": null
+  },
+  "recent": []
+}
