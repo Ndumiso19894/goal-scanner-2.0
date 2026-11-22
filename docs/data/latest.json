@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "status": "not_run",
+  "updated_at": null,
+  "season": "2627",
+  "recommendation_count": 0,
+  "fixture_count": 0,
+  "recommendations": [],
+  "sources": {},
+  "notes": [
+    "The first GitHub Actions scan has not run yet.",
+    "Estimates will be published only when source data and historical samples are available."
+  ]
+}
