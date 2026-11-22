@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "updated_at": null,
+  "count": 0,
+  "fixtures": [],
+  "errors": [
+    "The first scheduled data collection has not run yet."
+  ]
+}
