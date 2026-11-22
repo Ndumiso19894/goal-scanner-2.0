@@ -1,1 +1,9 @@
-__pycache__/\n.pytest_cache/\n.ruff_cache/\n.venv/\nvenv/\n.env\n*.py[cod]\ndata/raw/\ndata/private/\n
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+.venv/
+venv/
+.env
+*.py[cod]
+data/raw/
+data/private/
