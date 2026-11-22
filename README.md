@@ -22,6 +22,14 @@ The independent-Poisson baseline exposes probabilities for home/away team Over 0
 
 Corner and booking market identifiers remain reserved; their market-specific calibrated models and event-data adapters are not implemented. Contextual features must not affect probabilities until chronological out-of-sample validation and ablation demonstrate improvement.
 
+## Fixture-level scanner and results
+
+The Android Scanner now calls `POST /scanner/run`. The backend derives expected goals from completed historical results using home/away venue splits, applies the selected nine market families and saves only displayed recommendations as timestamped prediction records. The initial minimum estimated probability is 60%; Recommended mode ranks the top ten using probability, sample quality and available price value.
+
+`GET /predictions` exposes prediction history, `GET /results` exposes settled performance, and `POST /results/refresh` settles pending records only when LiveScore returns a recognised full-time status and both scores. See [docs/SCANNER_API.md](docs/SCANNER_API.md) for request fields and model boundaries.
+
+The initial fixture model is an uncalibrated historical-rate baseline. It requires at least four home matches for the home team, four away matches for the away team and twelve prior completed league matches. It excludes same-day and future results. Insufficient samples produce no recommendation. Probabilities are not guarantees or evidence of a validated betting edge.
+
 ## Data providers
 The four read-only Mr2Odds-compatible sources are integrated in `goal_scanner/providers.py`:
 - LiveScore: fixtures, scores, incidents and published statistics.
