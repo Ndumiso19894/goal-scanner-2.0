@@ -89,6 +89,47 @@ class ApiFootballProvider:
                 "paging":payload.get("paging") or {},
                 "results":payload.get("results",0)}
 
+    def fetch_team_recent_appearances(self, *, team_id: int, league_id: int,
+                                      season: int, last_matches: int = 10) -> dict[str, Any]:
+        """Assemble match-by-match minutes/starts for a team.
+
+        This makes one fixtures request plus up to last_matches fixture-player requests.
+        Use only after the league coverage check and cache the result to respect API quotas.
+        """
+        if last_matches < 3 or last_matches > 20:
+            raise ValueError("last_matches must be between 3 and 20")
+        fixtures = self._get("fixtures", {"team":team_id,"league":league_id,
+                                         "season":season,"last":last_matches}).get("response", [])
+        players: dict[str, dict[str, Any]] = {}
+        for fixture in fixtures:
+            fixture_id = (fixture.get("fixture") or {}).get("id")
+            fixture_date = str((fixture.get("fixture") or {}).get("date") or "")[:10]
+            if not fixture_id or len(fixture_date) != 10:
+                continue
+            rows = self._get("fixtures/players", {"fixture":fixture_id}).get("response", [])
+            for team_row in rows:
+                if (team_row.get("team") or {}).get("id") != team_id:
+                    continue
+                for entry in team_row.get("players") or []:
+                    player = entry.get("player") or {}
+                    stats = (entry.get("statistics") or [{}])[0]
+                    games = stats.get("games") or {}
+                    player_id = player.get("id")
+                    if player_id is None:
+                        continue
+                    record = players.setdefault(str(player_id), {
+                        "player_id":str(player_id),"name":player.get("name") or "",
+                        "position":games.get("position") or "",
+                        "appearances":[]})
+                    record["appearances"].append({
+                        "match_date":fixture_date,
+                        "started":(games.get("substitute") is False),
+                        "minutes":int(games.get("minutes") or 0),
+                        "position":games.get("position") or record["position"],
+                    })
+        return {"team_id":team_id,"league_id":league_id,"season":season,
+                "fixtures_checked":len(fixtures),"players":list(players.values())}
+
     def fetch_fixture_injuries(self, fixture_id: int) -> list[dict[str, Any]]:
         """Provider injury status is fixture-specific and may be unknown/incomplete."""
         return self._get("injuries", {"fixture":fixture_id}).get("response", [])
