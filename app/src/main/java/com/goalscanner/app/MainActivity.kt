@@ -480,7 +480,7 @@ private fun ResultsScreen(
     }
 }
 @Composable
-private fun SettingsScreen(modifier:Modifier,apiUrl:String,onApiUrl:(String)->Unit,season:String,onSeason:(String)->Unit,
+private fun SettingsScreen(modifier:Modifier,apiUrl:String,onApiUrl:(String)->Unit,apiToken:String,onApiToken:(String)->Unit,season:String,onSeason:(String)->Unit,
     division:String,onDivision:(String)->Unit,connection:String,providers:String,busy:Boolean,message:String,
     onSave:()->Unit,onTest:()->Unit,onBack:()->Unit) {
     ScreenColumn(modifier) {
