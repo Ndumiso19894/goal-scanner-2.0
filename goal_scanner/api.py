@@ -54,6 +54,8 @@ class ScannerRunInput(BaseModel):
     mode: Literal["recommended", "full"] = "recommended"
     min_odds: float | None = Field(default=None, gt=1)
     max_odds: float | None = Field(default=None, gt=1)
+    competition_query: str | None = Field(default=None, max_length=80)
+    team_query: str | None = Field(default=None, max_length=80)
 
 
 def _window(data: ScannerRunInput) -> tuple[datetime, datetime, list[date]]:
@@ -150,6 +152,13 @@ def scanner_run(data: ScannerRunInput):
                 upcoming.append(fixture)
         except (TypeError, ValueError):
             continue
+    if data.competition_query:
+        needle = data.competition_query.casefold().strip()
+        upcoming = [row for row in upcoming if needle in str(row.get("competition") or "").casefold()]
+    if data.team_query:
+        needle = data.team_query.casefold().strip()
+        upcoming = [row for row in upcoming if needle in
+                    (str(row.get("home") or "") + " " + str(row.get("away") or "")).casefold()]
     upcoming.sort(key=lambda row: row["kickoff"])
 
     try:
@@ -176,7 +185,7 @@ def scanner_run(data: ScannerRunInput):
             "recommendations": [], "skipped": [{"reason": "No historical results available; fixture probabilities were not generated."}],
         }
 
-    all_candidates = []
+    raw_candidates = []
     skipped = []
     for fixture in upcoming:
         STORE.save_fixture(fixture)
@@ -191,18 +200,21 @@ def scanner_run(data: ScannerRunInput):
             })
             continue
         for candidate in result["candidates"]:
-            prediction_id = STORE.save_prediction(candidate)
-            all_candidates.append({**candidate, "prediction_id": prediction_id, "status": "PENDING"})
+            raw_candidates.append(candidate)
 
-    all_candidates.sort(key=lambda item: (item["rank_score"], item["estimated_probability"]), reverse=True)
-    recommendations = all_candidates[:10] if data.mode == "recommended" else all_candidates
+    raw_candidates.sort(key=lambda item: (item["rank_score"], item["estimated_probability"]), reverse=True)
+    selected_candidates = raw_candidates[:10] if data.mode == "recommended" else raw_candidates
+    recommendations = []
+    for candidate in selected_candidates:
+        prediction_id = STORE.save_prediction(candidate)
+        recommendations.append({**candidate, "prediction_id": prediction_id, "status": "PENDING"})
     return {
         "status": "ok" if recommendations else "no_qualifying_recommendations",
         "mode": data.mode, "strategy": "balanced" if data.mode == "recommended" else "full_statistical_scan",
         "retrieved_at": datetime.now(timezone.utc).isoformat(),
         "window": {"start": start.isoformat(), "end": end.isoformat()},
         "sources": source_status, "fixture_count": len(upcoming),
-        "recommendation_count": len(recommendations), "saved_prediction_count": len(all_candidates),
+        "recommendation_count": len(recommendations), "saved_prediction_count": len(recommendations),
         "recommendations": recommendations, "skipped": skipped,
         "notes": [
             "Probabilities are uncalibrated historical-rate baseline estimates, not guaranteed outcomes.",
