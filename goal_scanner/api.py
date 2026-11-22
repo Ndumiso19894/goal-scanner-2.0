@@ -1,13 +1,15 @@
 """FastAPI service for goal markets, fixture scanning and prediction settlement."""
 from __future__ import annotations
 
+import hmac
 import os
 from datetime import date, datetime, time, timedelta, timezone
 from typing import Literal
 from zoneinfo import ZoneInfo
 
 try:
-    from fastapi import FastAPI, HTTPException
+    from fastapi import FastAPI, HTTPException, Request
+    from fastapi.responses import JSONResponse
     from pydantic import BaseModel, Field
 except ImportError as exc:
     raise RuntimeError("Install optional dependencies: pip install -e '.[api]'") from exc
@@ -23,6 +25,17 @@ from .scanner import build_fixture_candidates, is_finished_status
 from .storage import Store
 
 app = FastAPI(title="Goal Scanner Pro API", version="2.1.0")
+
+@app.middleware("http")
+async def api_token_guard(request: Request, call_next):
+    """Protect mobile/API routes when a deployment token is configured."""
+    expected = os.getenv("GOAL_SCANNER_API_TOKEN", "").strip()
+    if expected and request.url.path != "/health":
+        supplied = request.headers.get("Authorization", "")
+        if not hmac.compare_digest(supplied, f"Bearer {expected}"):
+            return JSONResponse(status_code=401, content={"detail": "A valid Bearer token is required"})
+    return await call_next(request)
+
 STORE = Store(os.getenv("GOAL_SCANNER_DB", "data/goal_scanner.sqlite3"))
 LOCAL_TZ = ZoneInfo("Africa/Johannesburg")
 SELECTABLE_MARKETS = {
@@ -86,7 +99,7 @@ def _fixture_dict(item) -> dict:
 
 @app.get("/health")
 def health():
-    return {"status": "ok", "version": app.version, "database": "sqlite"}
+    return {"status": "ok", "version": app.version, "database": "sqlite", "auth_required": bool(os.getenv("GOAL_SCANNER_API_TOKEN", "").strip())}
 
 
 @app.post("/probabilities")
