@@ -166,14 +166,18 @@ private fun GoalScannerApp(prefs: android.content.SharedPreferences) {
                     prefs.edit().putFloat("minimum",minimum).putStringSet("markets",markets).apply()
                     message="Scanner preferences saved."
                 },message,apiUrl,season,division,recommendations,scanSummary,busy,
-                onRun={minOdds,maxOdds ->
+                onRun={dateChoice,competitionQuery,teamQuery,minOdds,maxOdds ->
                     scope.launch {
                         busy=true; message=""
                         try {
+                            val chosenDate=if(dateChoice=="Tomorrow") LocalDate.now().plusDays(1) else LocalDate.now()
+                            val hours=if(dateChoice=="7 days") 168 else 24
                             val body=JSONObject().put("season",season.trim()).put("division",division.trim())
-                                .put("match_date",LocalDate.now().toString()).put("hours_ahead",48)
+                                .put("match_date",chosenDate.toString()).put("hours_ahead",hours)
                                 .put("minimum_probability",minimum/100.0)
                                 .put("mode",if(scannerView=="Recommended") "recommended" else "full")
+                            if(competitionQuery.isNotBlank()) body.put("competition_query",competitionQuery.trim())
+                            if(teamQuery.isNotBlank()) body.put("team_query",teamQuery.trim())
                             val marketArray=org.json.JSONArray()
                             markets.sorted().forEach { marketArray.put(it) }
                             body.put("markets",marketArray)
@@ -308,7 +312,7 @@ private fun ScannerScreen(
     modifier:Modifier,view:String,onView:(String)->Unit,minimum:Float,onMinimum:(Float)->Unit,
     selected:Set<String>,onSelected:(Set<String>)->Unit,onSave:()->Unit,message:String,
     apiUrl:String,season:String,division:String,recommendations:List<JSONObject>,scanSummary:String,
-    busy:Boolean,onRun:(Double?,Double?)->Unit,onSelect:(JSONObject)->Unit
+    busy:Boolean,onRun:(String,String,String,Double?,Double?)->Unit,onSelect:(JSONObject)->Unit
 ) {
     var date by rememberSaveable { mutableStateOf("Today") }
     var competition by rememberSaveable { mutableStateOf("") }
@@ -345,7 +349,7 @@ private fun ScannerScreen(
                 OutlinedTextField(minOdds,{minOdds=it},label={Text("Minimum odds (optional)")},modifier=Modifier.weight(1f),singleLine=true)
                 OutlinedTextField(maxOdds,{maxOdds=it},label={Text("Maximum odds (optional)")},modifier=Modifier.weight(1f),singleLine=true)
             }
-            Text("Competition and team text filters are visual placeholders in this build; the backend currently scans the configured competition and 48-hour window.",
+            Text("These filters are applied by the backend before the historical model is run.",
                 style=MaterialTheme.typography.bodySmall,color=MaterialTheme.colorScheme.onSurfaceVariant)
         }
         Card { Column(Modifier.padding(16.dp),verticalArrangement=Arrangement.spacedBy(7.dp)) {
@@ -366,7 +370,7 @@ private fun ScannerScreen(
                 }
             }
         }
-        Button(onClick={onRun(minOdds.toDoubleOrNull(),maxOdds.toDoubleOrNull())},
+        Button(onClick={onRun(date,competition,team,minOdds.toDoubleOrNull(),maxOdds.toDoubleOrNull())},
             enabled=!busy&&apiUrl.isNotBlank()&&season.isNotBlank()&&division.isNotBlank()&&selected.isNotEmpty(),
             modifier=Modifier.fillMaxWidth()) {
             Text(if(busy) "Scanning fixtures…" else "Run scanner")
