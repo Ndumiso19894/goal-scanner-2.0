@@ -21,7 +21,7 @@ def history_rows():
 
 def test_fixture_lambdas_use_only_prior_venue_matches():
     rows = history_rows()
-    rows.append({"date": "2026-11-22", "home": "Home FC", "away": "Away FC",
+    rows.append({"date": "2026-11-23", "home": "Home FC", "away": "Away FC",
                  "home_goals": 6, "away_goals": 0})
     result = estimate_fixture_lambdas(
         rows, "Home FC", "Away FC", "2026-11-23T18:00:00+02:00"
