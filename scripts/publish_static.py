@@ -92,8 +92,12 @@ def main() -> None:
         except (TypeError, ValueError):
             continue
         candidate = {**candidate, "prediction_id": row["id"], "status": "PENDING"}
-        key = (str(candidate.get("fixture_id", "")), str(candidate.get("market", "")),
-               str(candidate.get("selection", "")))
+        market = str(candidate.get("market", ""))
+        selection = str(candidate.get("selection", ""))
+        market_key = f"match_winner_{selection}" if market == "match_winner" else market
+        if market_key not in api.SELECTABLE_MARKETS:
+            continue
+        key = (str(candidate.get("fixture_id", "")), market, selection)
         # list_predictions is newest-first, so the first record is the latest snapshot.
         latest_by_market.setdefault(key, candidate)
 
