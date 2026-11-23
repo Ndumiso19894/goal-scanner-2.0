@@ -132,7 +132,9 @@ def build_fixture_candidates(fixture,historical_rows,odds_event,selected_markets
     probabilities={k.value:v for k,v in goal_market_probabilities(estimate["home_lambda"],estimate["away_lambda"]).items()}
     prices=(odds_event or {}).get("odds") or {}; candidates=[]
     for item in market_selections(probabilities,prices,estimate.get("count_expectations")):
-        if item["market"] not in selected_markets or item["estimated_probability"]<min_probability: continue
+        selection_key = f"match_winner_{item['selection']}" if item["market"] == "match_winner" else item["market"]
+        if selection_key not in selected_markets and item["market"] not in selected_markets: continue
+        if item["estimated_probability"]<min_probability: continue
         price=item["odds"]
         if min_odds is not None and (price is None or price<min_odds): continue
         if max_odds is not None and (price is None or price>max_odds): continue
