@@ -498,7 +498,13 @@ private fun AnalysisScreen(modifier:Modifier,candidate:JSONObject?) {
                     }
                     HorizontalDivider(Modifier.padding(vertical=8.dp))
                     MarketIds.forEachIndexed { index, market ->
-                        val p=marketProbabilities.optDouble(market,Double.NaN)
+                        val p=when(market) {
+                            "match_winner" -> marketProbabilities.optDouble(when(candidate.optString("selection")) {
+                                "home" -> "home_win"; "draw" -> "draw"; else -> "away_win"
+                            },Double.NaN)
+                            "double_chance" -> marketProbabilities.optDouble("double_chance_"+candidate.optString("selection").lowercase(),Double.NaN)
+                            else -> marketProbabilities.optDouble(market,Double.NaN)
+                        }
                         val price=when(market) {
                             "home_over_0_5" -> odds.optJSONObject("home_team_goals")?.optJSONObject("0.5")?.optDouble("over",Double.NaN) ?: Double.NaN
                             "away_over_0_5" -> odds.optJSONObject("away_team_goals")?.optJSONObject("0.5")?.optDouble("over",Double.NaN) ?: Double.NaN
