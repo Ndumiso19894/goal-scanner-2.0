@@ -1060,6 +1060,20 @@ private fun ScannerScreen(
     }
 }
 @Composable
+private fun ProbabilityGauge(value: Int) {
+    Box(Modifier.size(112.dp),contentAlignment=Alignment.Center) {
+        Canvas(Modifier.fillMaxSize()) {
+            val stroke=11.dp.toPx()
+            drawArc(Color(0xFF2A3D50),startAngle=135f,sweepAngle=270f,useCenter=false,style=androidx.compose.ui.graphics.drawscope.Stroke(width=stroke,cap=StrokeCap.Round))
+            drawArc(Color(0xFFB7F36B),startAngle=135f,sweepAngle=270f*(value/100f).coerceIn(0f,1f),useCenter=false,style=androidx.compose.ui.graphics.drawscope.Stroke(width=stroke,cap=StrokeCap.Round))
+        }
+        Column(horizontalAlignment=Alignment.CenterHorizontally,verticalArrangement=Arrangement.spacedBy(0.dp)) {
+            Text("$value%",color=Color.White,fontWeight=FontWeight.ExtraBold,style=MaterialTheme.typography.headlineMedium)
+            Text("MODEL",color=Color(0xFF91A2B3),fontWeight=FontWeight.Bold,style=MaterialTheme.typography.labelSmall,letterSpacing=.8.sp)
+        }
+    }
+}
+@Composable
 private fun AnalysisScreen(modifier:Modifier,candidate:JSONObject?,related:List<JSONObject>,fixture:JSONObject?) {
     ScreenColumn(modifier) {
         Heading("Match analysis","The exact market threshold, model estimate and supporting historical data.")
@@ -1089,16 +1103,14 @@ private fun AnalysisScreen(modifier:Modifier,candidate:JSONObject?,related:List<
                     HorizontalDivider(color=Color(0xFF40515C))
                     Text("SELECTED MARKET",color=Color(0xFF9EADB9),style=MaterialTheme.typography.labelSmall,letterSpacing=1.sp)
                     Text(marketTitle(candidate),color=Color.White,fontWeight=FontWeight.ExtraBold,style=MaterialTheme.typography.titleLarge)
-                    Row(verticalAlignment=Alignment.Bottom,horizontalArrangement=Arrangement.spacedBy(9.dp)) {
-                        Text("$probability%",style=MaterialTheme.typography.displayMedium,color=Color(0xFFB7F36B),fontWeight=FontWeight.ExtraBold)
-                        Text("MODEL ESTIMATE",color=Color(0xFFB9C5CC),modifier=Modifier.padding(bottom=9.dp),
-                            style=MaterialTheme.typography.labelSmall,fontWeight=FontWeight.Bold)
+                    Row(Modifier.fillMaxWidth(),verticalAlignment=Alignment.CenterVertically,horizontalArrangement=Arrangement.spacedBy(17.dp)) {
+                        ProbabilityGauge(probability)
+                        Column(Modifier.weight(1f),verticalArrangement=Arrangement.spacedBy(7.dp)) {
+                            Text("MODEL PROBABILITY",color=Color(0xFF91A2B3),style=MaterialTheme.typography.labelSmall,fontWeight=FontWeight.Bold,letterSpacing=.8.sp)
+                            Text(if(candidate.isNull("odds")) "Price unavailable" else "SportyBet  ${String.format("%.2f",candidate.optDouble("odds"))}",color=Color.White,fontWeight=FontWeight.ExtraBold,style=MaterialTheme.typography.titleLarge)
+                            Text("The model estimate and bookmaker quote are separate measures.",color=Color(0xFF9FB0BE),style=MaterialTheme.typography.bodySmall,lineHeight=17.sp)
+                        }
                     }
-                    LinearProgressIndicator(progress={probability/100f},modifier=Modifier.fillMaxWidth().height(7.dp),
-                        color=Color(0xFFB7F36B),trackColor=Color(0xFF34434B))
-                    Text(if(candidate.isNull("odds")) "Bookmaker odds: unavailable" else
-                        "Observed bookmaker odds: "+String.format("%.2f",candidate.optDouble("odds")),
-                        color=Color(0xFFB9C5CC),style=MaterialTheme.typography.bodySmall)
                 }
             }
             if(fixture!=null) PreMatchStats(fixture.optJSONObject("pre_match_stats"))
