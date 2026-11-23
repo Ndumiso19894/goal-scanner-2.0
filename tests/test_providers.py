@@ -6,10 +6,12 @@ from goal_scanner.providers import (
 def test_livescore_event_normalisation():
     stage={"Snm":"Premier League","Cnm":"England"}
     event={"Eid":"123","Esd":"20261122190000","Eps":"FT","Tr1":"2","Tr2":"1","Trh1":"1","Trh2":"0",
-           "T1":[{"Nm":"Arsenal"}],"T2":[{"Nm":"Chelsea"}]}
+           "T1":[{"Nm":"Arsenal","ID":"1","Img":"enet/1.png"}],"T2":[{"Nm":"Chelsea","ID":"2","Img":"enet/2.png"}]}
     fixture=LiveScoreProvider._event(event,stage,2)
     assert fixture and fixture.source_id=="123" and fixture.home_score==2 and fixture.away_score==1
     assert fixture.competition=="Premier League" and fixture.kickoff.endswith("+02:00")
+    assert fixture.home_team_id=="1" and fixture.away_team_id=="2"
+    assert fixture.home_badge_path=="enet/1.png" and fixture.away_badge_path=="enet/2.png"
 
 def test_football_data_missing_stats_remain_missing():
     row={"Date":"22/11/2026","Time":"15:00","HomeTeam":"Arsenal","AwayTeam":"Chelsea",
