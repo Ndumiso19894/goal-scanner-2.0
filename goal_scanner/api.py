@@ -68,6 +68,7 @@ class ScannerRunInput(BaseModel):
     min_odds: float | None = Field(default=None, gt=1)
     max_odds: float | None = Field(default=None, gt=1)
     competition_query: str | None = Field(default=None, max_length=80)
+    country_query: str | None = Field(default=None, max_length=80)
     team_query: str | None = Field(default=None, max_length=80)
 
 
@@ -170,6 +171,9 @@ def scanner_run(data: ScannerRunInput):
     if data.competition_query:
         needle = data.competition_query.casefold().strip()
         upcoming = [row for row in upcoming if needle in str(row.get("competition") or "").casefold()]
+    if data.country_query:
+        country = data.country_query.casefold().strip()
+        upcoming = [row for row in upcoming if country == str(row.get("country") or "").casefold()]
     if data.team_query:
         needle = data.team_query.casefold().strip()
         upcoming = [row for row in upcoming if needle in

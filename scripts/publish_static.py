@@ -35,6 +35,23 @@ LEAGUES = [
     ("N2", "Eerste Divisie"),
     ("B2", "Challenger Pro League"),
     ("P2", "Liga Portugal 2"),
+    # Football-Data all-seasons CSV archives (16 additional countries).
+    ("ARG", "Primera Division"),
+    ("AUT", "Bundesliga"),
+    ("BRA", "Serie A"),
+    ("CHN", "Super League"),
+    ("DNK", "Superliga"),
+    ("FIN", "Veikkausliiga"),
+    ("IRL", "Premier Division"),
+    ("JPN", "J1 League"),
+    ("MEX", "Liga MX"),
+    ("NOR", "Eliteserien"),
+    ("POL", "Ekstraklasa"),
+    ("ROU", "Liga I"),
+    ("RUS", "Premier League"),
+    ("SWE", "Allsvenskan"),
+    ("SWZ", "Super League"),
+    ("USA", "Major League Soccer"),
 ]
 COMPETITION_ALIASES = {"League 1": "League One", "League 2": "League Two"}
 COMPETITION_COUNTRIES = {
@@ -45,6 +62,21 @@ COMPETITION_COUNTRIES = {
     "Eredivisie": "Netherlands", "Eerste Divisie": "Netherlands", "Pro League": "Belgium",
     "Challenger Pro League": "Belgium", "Liga Portugal": "Portugal", "Liga Portugal 2": "Portugal",
     "Süper Lig": "Turkey", "Super League": "Greece",
+    "Primera Division": "Argentina", "Superliga": "Denmark",
+    "Veikkausliiga": "Finland", "Premier Division": "Ireland",
+    "J1 League": "Japan", "Liga MX": "Mexico", "Eliteserien": "Norway",
+    "Ekstraklasa": "Poland", "Liga I": "Romania", "Allsvenskan": "Sweden",
+    "Major League Soccer": "USA",
+}
+LEAGUE_COUNTRIES = {
+    "E0":"England","E1":"England","E2":"England","E3":"England","EC":"England",
+    "SC0":"Scotland","D1":"Germany","D2":"Germany","I1":"Italy","I2":"Italy",
+    "SP1":"Spain","SP2":"Spain","F1":"France","F2":"France","N1":"Netherlands",
+    "N2":"Netherlands","B1":"Belgium","B2":"Belgium","P1":"Portugal","P2":"Portugal",
+    "T1":"Turkey","G1":"Greece",
+    "ARG":"Argentina","AUT":"Austria","BRA":"Brazil","CHN":"China","DNK":"Denmark",
+    "FIN":"Finland","IRL":"Ireland","JPN":"Japan","MEX":"Mexico","NOR":"Norway",
+    "POL":"Poland","ROU":"Romania","RUS":"Russia","SWE":"Sweden","SWZ":"Switzerland","USA":"USA",
 }
 MARKETS = sorted(api.SELECTABLE_MARKETS)
 OUTPUT = Path("docs/data")
@@ -263,6 +295,7 @@ def main() -> None:
                 markets=MARKETS,
                 mode="full",
                 competition_query=competition,
+                country_query=LEAGUE_COUNTRIES.get(division),
             )
             result = api.scanner_run(request)
             league_status.append({
@@ -334,34 +367,60 @@ def main() -> None:
                 })
         except ProviderError as exc:
             fixture_errors.append(str(exc))
+    allowed_competition_country_pairs = {
+        (COMPETITION_ALIASES.get(competition, competition).casefold(), LEAGUE_COUNTRIES[division].casefold())
+        for division, competition in LEAGUES if division in LEAGUE_COUNTRIES
+    }
     fixture_rows = [
         item for item in fixture_rows
-        if COMPETITION_COUNTRIES.get(COMPETITION_ALIASES.get(item.get("competition", ""), item.get("competition", "")), "").casefold()
-        == str(item.get("country") or "").casefold()
+        if (COMPETITION_ALIASES.get(item.get("competition", ""), item.get("competition", "")).casefold(),
+            str(item.get("country") or "").casefold()) in allowed_competition_country_pairs
     ]
     fixture_rows.sort(key=lambda item: item.get("kickoff") or "")
 
     # Enrich fixtures with team crests and historical pre-match data where a
     # matching Football-Data competition exists. Missing fields stay null.
-    history_by_competition = {}
+    history_by_division = {}
     for division, competition in LEAGUES:
         try:
-            history_by_competition[competition] = FootballDataProvider().fetch_season(season, division)
+            history_by_division[division] = FootballDataProvider().fetch_season(season, division)
         except (ProviderError, ValueError):
-            history_by_competition[competition] = []
+            history_by_division[division] = []
     # Use prior seasons for team form and H2H; league tables remain current-season only.
-    context_history_by_competition = {name: list(rows) for name, rows in history_by_competition.items()}
+    context_history_by_division = {code: list(rows) for code, rows in history_by_division.items()}
     season_start = today.year if today.month >= 7 else today.year - 1
     prior_seasons = [f"{(season_start - offset) % 100:02d}{(season_start - offset + 1) % 100:02d}" for offset in (1, 2)]
-    active_competitions = {COMPETITION_ALIASES.get(x.get("competition", ""), x.get("competition", "")) for x in fixture_rows}
+    active_pairs = {
+        (COMPETITION_ALIASES.get(x.get("competition", ""), x.get("competition", "")).casefold(),
+         str(x.get("country") or "").casefold())
+        for x in fixture_rows
+    }
     for division, competition in LEAGUES:
-        if competition not in active_competitions:
+        pair = (COMPETITION_ALIASES.get(competition, competition).casefold(),
+                LEAGUE_COUNTRIES.get(division, "").casefold())
+        if pair not in active_pairs or division in FootballDataProvider.EXTRA_LEAGUE_CODES:
             continue
         for prior_season in prior_seasons:
             try:
-                context_history_by_competition[competition].extend(FootballDataProvider().fetch_season(prior_season, division))
+                context_history_by_division[division].extend(FootballDataProvider().fetch_season(prior_season, division))
             except (ProviderError, ValueError):
                 continue
+    divisions_by_pair = {
+        (COMPETITION_ALIASES.get(competition, competition).casefold(),
+         LEAGUE_COUNTRIES.get(division, "").casefold()): division
+        for division, competition in LEAGUES
+    }
+    squads_by_division = {}
+    squad_provider = TransfermarktProvider()
+    active_divisions = {divisions_by_pair[pair] for pair in active_pairs if pair in divisions_by_pair}
+    for division in sorted(active_divisions):
+        try: squads_by_division[division] = squad_provider.fetch_division_squads(division)
+        except (ProviderError, ValueError): squads_by_division[division] = []
+    league_tables = [{"division": division, "competition": competition,
+                      "table": _league_table(
+                          history_by_division.get(division, [])
+                          if division not in FootballDataProvider.EXTRA_LEAGUE_CODES else [], today),
+                      "source": "Football-Data.co.uk"} for division, competition in LEAGUES]
     crest_downloads = _download_club_crests(fixture_rows)
     divisions_by_competition = {competition: division for division, competition in LEAGUES}
     squads_by_competition = {}
@@ -380,21 +439,25 @@ def main() -> None:
             f"https://raw.githubusercontent.com/Ndumiso19894/goal-scanner-2.0/main/docs/assets/crests/{fixture['away_team_id']}.png"
             if fixture.get("away_team_id") else None)
         canonical_competition = COMPETITION_ALIASES.get(fixture.get("competition", ""), fixture.get("competition", ""))
-        history = context_history_by_competition.get(canonical_competition, [])
+        pair = (canonical_competition.casefold(), str(fixture.get("country") or "").casefold())
+        division = divisions_by_pair.get(pair)
+        history = context_history_by_division.get(division, []) if division else []
         home_name, away_name, kickoff = fixture.get("home", ""), fixture.get("away", ""), fixture.get("kickoff", "")
-        squad_pool = squads_by_competition.get(canonical_competition, [])
+        squad_pool = squads_by_division.get(division, []) if division else []
         fixture["pre_match_stats"] = {
             "home": _team_pre_match_stats(history, home_name, kickoff, "home"),
             "away": _team_pre_match_stats(history, away_name, kickoff, "away"),
             "head_to_head": _head_to_head(history, home_name, away_name, kickoff),
             "context": {"home_rest_days": _rest_days(history, home_name, kickoff), "away_rest_days": _rest_days(history, away_name, kickoff), "home_squad": TransfermarktProvider.match_team(home_name, squad_pool), "away_squad": TransfermarktProvider.match_team(away_name, squad_pool), "league_performance_baseline": _league_context(history, kickoff)},
-            "source": "Football-Data.co.uk (up to three seasons) and Transfermarkt", "history_seasons": 3, "available": bool(history),
+            "source": "Football-Data.co.uk (up to three seasons for main leagues; full available archive for extra countries) and Transfermarkt",
+            "history_seasons": None if division in FootballDataProvider.EXTRA_LEAGUE_CODES else 3,
+            "available": bool(history),
         }
 
     generated_at = datetime.now(timezone.utc).isoformat()
     sources = {
         "livescore_and_odds": "Collected during each league scan; bookmaker odds are comparison-only.",
-        "historical_results": "Football-Data.co.uk completed results, filtered to matches before each fixture.",
+        "historical_results": "Football-Data.co.uk completed results from 22 main competitions plus 16 extra-country archives, filtered to matches before each fixture.",
         "league_runs": league_status,
     }
     write_json("latest.json", {
@@ -409,7 +472,9 @@ def main() -> None:
         "notes": [
             "Probabilities are uncalibrated historical-rate estimates, not guaranteed outcomes.",
             "Bookmaker odds are attached after model probabilities and are not model inputs.",
-            "Only fixtures with sufficient prior home/away history are eligible.",
+            "Fixture discovery is broader than prediction eligibility; matches remain visible when historical coverage is limited.",
+            "Historical feeds include 22 main competitions and 16 additional country archives; missing statistics are not fabricated.",
+            "League tables are published only where a current-season split is reliable.",
         ],
     })
     write_json("league-tables.json", {
