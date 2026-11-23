@@ -259,7 +259,7 @@ class Store:
         with self.connect() as db:
             placeholders = ",".join("?" for _ in SUPPORTED_MARKETS)
             rows = db.execute(
-                f"SELECT * FROM predictions WHERE market IN ({placeholders}) ORDER BY created_at",
+                f"SELECT * FROM predictions WHERE market IN ({placeholders}) AND odds IS NOT NULL AND odds > 1 ORDER BY created_at",
                 tuple(sorted(SUPPORTED_MARKETS))
             ).fetchall()
         settled = [row for row in rows if row["status"] in {"WON", "LOST"}]
