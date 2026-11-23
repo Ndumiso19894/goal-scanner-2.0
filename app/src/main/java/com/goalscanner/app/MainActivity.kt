@@ -476,6 +476,8 @@ private fun TeamFormPanel(modifier:Modifier,name:String,stats:JSONObject?,venueL
             if(stats==null) Text("Historical stats unavailable",style=MaterialTheme.typography.bodySmall,color=Color(0xFF9EADB9))
             else {
                 FormStrip(stats.optString("form"))
+                val trend=stats.optJSONObject("recent_trends")
+                if(trend!=null) Text("Last five: ${trend.optInt("last5_wins")}W ${trend.optInt("last5_draws")}D ${trend.optInt("last5_losses")}L  ·  Goals ${trend.optInt("last5_goals_for")}-${trend.optInt("last5_goals_against")}",style=MaterialTheme.typography.labelSmall,color=Color(0xFFB7F36B))
                 Text("${stats.optInt("wins")}W  ${stats.optInt("draws")}D  ${stats.optInt("losses")}L",
                     style=MaterialTheme.typography.labelSmall,color=Color(0xFFCDD6DC))
                 Text("${stats.optInt("played")} matches in sample",style=MaterialTheme.typography.labelSmall,color=Color(0xFF8797A4))
