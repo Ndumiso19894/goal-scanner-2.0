@@ -1,4 +1,4 @@
-name: Android APK
+name: Android Build Verification
 
 on:
   push:
@@ -53,10 +53,3 @@ jobs:
       - name: Build debug APK
         run: gradle --no-daemon assembleDebug
 
-      - name: Upload installable APK
-        uses: actions/upload-artifact@v4
-        with:
-          name: goal-scanner-pro-debug-apk
-          path: app/build/outputs/apk/debug/app-debug.apk
-          if-no-files-found: error
-          retention-days: 14
