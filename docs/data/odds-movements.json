@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-23T06:57:29.943569+00:00",
+  "updated_at": "2026-11-23T07:08:58.963775+00:00",
   "minimum_drop_pct": 3.0,
   "lookback_hours": 24,
-  "count": 5,
+  "count": 8,
   "movements": [
     {
       "fixture_id": "1834796",
@@ -17,8 +17,38 @@
       "current_odds": 10.5,
       "drop_pct": 12.5,
       "first_seen": "2026-11-23T04:43:57.126455+00:00",
-      "last_seen": "2026-11-23T06:18:27.665231+00:00",
-      "samples": 15
+      "last_seen": "2026-11-23T07:04:14.675496+00:00",
+      "samples": 16
+    },
+    {
+      "fixture_id": "1810741",
+      "home": "Levante",
+      "away": "Elche",
+      "kickoff": "2026-11-23T22:00:00+02:00",
+      "competition": "LaLiga",
+      "market": "home_cards",
+      "selection": "4.5/over",
+      "opening_odds": 11.0,
+      "current_odds": 10.0,
+      "drop_pct": 9.09,
+      "first_seen": "2026-11-23T04:44:15.649139+00:00",
+      "last_seen": "2026-11-23T07:04:34.568197+00:00",
+      "samples": 16
+    },
+    {
+      "fixture_id": "1854230",
+      "home": "Ben Aknoun",
+      "away": "USM Alger",
+      "kickoff": "2026-11-23T18:45:00+02:00",
+      "competition": "Ligue 1",
+      "market": "1X2",
+      "selection": "away",
+      "opening_odds": 2.3,
+      "current_odds": 2.1,
+      "drop_pct": 8.7,
+      "first_seen": "2026-11-23T04:44:24.984892+00:00",
+      "last_seen": "2026-11-23T07:04:48.082940+00:00",
+      "samples": 16
     },
     {
       "fixture_id": "1857559",
@@ -32,8 +62,8 @@
       "current_odds": 2.35,
       "drop_pct": 6.0,
       "first_seen": "2026-11-23T04:43:19.477336+00:00",
-      "last_seen": "2026-11-23T06:17:18.159241+00:00",
-      "samples": 15
+      "last_seen": "2026-11-23T07:03:12.736638+00:00",
+      "samples": 16
     },
     {
       "fixture_id": "1857559",
@@ -47,8 +77,23 @@
       "current_odds": 2.6,
       "drop_pct": 5.45,
       "first_seen": "2026-11-23T04:43:19.477336+00:00",
-      "last_seen": "2026-11-23T06:17:18.159241+00:00",
-      "samples": 15
+      "last_seen": "2026-11-23T07:03:12.736638+00:00",
+      "samples": 16
+    },
+    {
+      "fixture_id": "1810741",
+      "home": "Levante",
+      "away": "Elche",
+      "kickoff": "2026-11-23T22:00:00+02:00",
+      "competition": "LaLiga",
+      "market": "home_cards",
+      "selection": "2.5/over",
+      "opening_odds": 3.0,
+      "current_odds": 2.85,
+      "drop_pct": 5.0,
+      "first_seen": "2026-11-23T04:44:15.649139+00:00",
+      "last_seen": "2026-11-23T07:04:34.568197+00:00",
+      "samples": 16
     },
     {
       "fixture_id": "1825702",
@@ -62,8 +107,8 @@
       "current_odds": 2.0,
       "drop_pct": 4.76,
       "first_seen": "2026-11-23T04:43:19.477336+00:00",
-      "last_seen": "2026-11-23T06:17:18.159241+00:00",
-      "samples": 15
+      "last_seen": "2026-11-23T07:03:12.736638+00:00",
+      "samples": 16
     },
     {
       "fixture_id": "1810741",
@@ -72,13 +117,13 @@
       "kickoff": "2026-11-23T22:00:00+02:00",
       "competition": "LaLiga",
       "market": "home_cards",
-      "selection": "2.5/over",
-      "opening_odds": 3.0,
-      "current_odds": 2.9,
-      "drop_pct": 3.33,
+      "selection": "3.5/over",
+      "opening_odds": 5.75,
+      "current_odds": 5.5,
+      "drop_pct": 4.35,
       "first_seen": "2026-11-23T04:44:15.649139+00:00",
-      "last_seen": "2026-11-23T06:18:52.747718+00:00",
-      "samples": 15
+      "last_seen": "2026-11-23T07:04:34.568197+00:00",
+      "samples": 16
     }
   ],
   "note": "Only price changes observed in at least two snapshots are shown; odds movement is not a prediction."
