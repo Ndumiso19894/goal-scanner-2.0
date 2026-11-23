@@ -696,13 +696,12 @@ private fun SettingsScreen(modifier:Modifier,apiUrl:String,onApiUrl:(String)->Un
             TextButton(onClick=onBack) { Text("Back") }
             Text("Settings",style=MaterialTheme.typography.titleLarge,fontWeight=FontWeight.Bold)
         }
-        Heading("GitHub data feed","The app reads public JSON files. No separate API server or access token is required.")
-        OutlinedTextField(apiUrl,onApiUrl,modifier=Modifier.fillMaxWidth(),label={Text("Published data base URL")},
-            placeholder={Text("https://raw.githubusercontent.com/Ndumiso19894/goal-scanner-2.0/feature/android-goal-scanner-pro")},singleLine=true)
-        Text("GitHub Actions refreshes fixtures, predictions and results on a schedule. The app downloads the latest published snapshot when you refresh.",
-            style=MaterialTheme.typography.bodySmall,color=MaterialTheme.colorScheme.onSurfaceVariant)
-        Text("The first scheduled scan covers supported competitions automatically. The app no longer needs per-user API settings.",
-            style=MaterialTheme.typography.bodySmall,color=MaterialTheme.colorScheme.onSurfaceVariant)
+        Heading("Live data connection","Goal Scanner Pro reads the public data feed from its GitHub repository. No API key, paid server or manual endpoint is needed.")
+        Card { Column(Modifier.padding(14.dp),verticalArrangement=Arrangement.spacedBy(5.dp)) {
+            Text("Goal Scanner Pro · Main data feed",fontWeight=FontWeight.Bold)
+            Text("Fixtures, predictions, results and observed odds movements are published automatically by GitHub Actions.",style=MaterialTheme.typography.bodySmall,color=MaterialTheme.colorScheme.onSurfaceVariant)
+            Text("Repository: Ndumiso19894/goal-scanner-2.0",style=MaterialTheme.typography.labelSmall,color=MaterialTheme.colorScheme.primary)
+        } }
         Card { Column(Modifier.padding(14.dp),verticalArrangement=Arrangement.spacedBy(5.dp)) {
             Text("Connection",fontWeight=FontWeight.Bold)
             Text(connection,color=MaterialTheme.colorScheme.primary)
