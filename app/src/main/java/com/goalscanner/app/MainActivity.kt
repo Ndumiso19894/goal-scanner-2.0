@@ -807,7 +807,7 @@ private fun ScannerScreen(
     }
 }
 @Composable
-private fun AnalysisScreen(modifier:Modifier,candidate:JSONObject?,related:List<JSONObject>) {
+private fun AnalysisScreen(modifier:Modifier,candidate:JSONObject?,related:List<JSONObject>,fixture:JSONObject?) {
     ScreenColumn(modifier) {
         Heading("Match analysis","The exact market threshold, model estimate and supporting historical data.")
         if(candidate==null) Notice("No match selected","Open a match from Fixtures or Scanner to see its analysis.")
@@ -820,10 +820,17 @@ private fun AnalysisScreen(modifier:Modifier,candidate:JSONObject?,related:List<
                     Text(candidate.optString("competition","Competition unavailable").uppercase(),
                         color=Color(0xFFB7F36B),style=MaterialTheme.typography.labelSmall,letterSpacing=1.sp,fontWeight=FontWeight.Bold)
                     Row(Modifier.fillMaxWidth(),verticalAlignment=Alignment.CenterVertically) {
-                        Text(home,Modifier.weight(1f),style=MaterialTheme.typography.titleLarge,color=Color.White,fontWeight=FontWeight.ExtraBold)
+                        Column(Modifier.weight(1f),horizontalAlignment=Alignment.CenterHorizontally,verticalArrangement=Arrangement.spacedBy(7.dp)) {
+                            TeamCrest(home,fixture?.optString("home_crest_url").orEmpty(),62.dp)
+                            Text(home,style=MaterialTheme.typography.titleSmall,color=Color.White,fontWeight=FontWeight.Bold,
+                                textAlign=androidx.compose.ui.text.style.TextAlign.Center)
+                        }
                         Text("VS",style=MaterialTheme.typography.labelSmall,color=Color(0xFFB7F36B))
-                        Text(away,Modifier.weight(1f),style=MaterialTheme.typography.titleLarge,color=Color.White,
-                            fontWeight=FontWeight.ExtraBold,textAlign=androidx.compose.ui.text.style.TextAlign.End)
+                        Column(Modifier.weight(1f),horizontalAlignment=Alignment.CenterHorizontally,verticalArrangement=Arrangement.spacedBy(7.dp)) {
+                            TeamCrest(away,fixture?.optString("away_crest_url").orEmpty(),62.dp)
+                            Text(away,style=MaterialTheme.typography.titleSmall,color=Color.White,fontWeight=FontWeight.Bold,
+                                textAlign=androidx.compose.ui.text.style.TextAlign.Center)
+                        }
                     }
                     Text(formatKickoff(candidate.optString("kickoff")),color=Color(0xFFB9C5CC),style=MaterialTheme.typography.bodySmall)
                     HorizontalDivider(color=Color(0xFF40515C))
@@ -841,8 +848,9 @@ private fun AnalysisScreen(modifier:Modifier,candidate:JSONObject?,related:List<
                         color=Color(0xFFB9C5CC),style=MaterialTheme.typography.bodySmall)
                 }
             }
+            if(fixture!=null) PreMatchStats(fixture.optJSONObject("pre_match_stats"))
             val sample=candidate.optJSONObject("sample") ?: JSONObject()
-            Heading("Historical sample","Previous matches available to the model")
+            Heading("Model sample","Previous matches available to the probability model")
             Row(horizontalArrangement=Arrangement.spacedBy(9.dp)) {
                 Box(Modifier.weight(1f)) { Metric("Home at home",sample.optInt("home_home_matches").toString(),"Previous matches") }
                 Box(Modifier.weight(1f)) { Metric("Away away",sample.optInt("away_away_matches").toString(),"Previous matches") }
