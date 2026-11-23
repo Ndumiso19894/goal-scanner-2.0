@@ -73,7 +73,7 @@ jobs:
             cp "$RUNNER_TEMP/goal-scanner-feeds/"*.json docs/data/
             mkdir -p docs/assets/crests
             cp -a "$RUNNER_TEMP/goal-scanner-feeds/assets/crests/." docs/assets/crests/
-            git add docs/data/latest.json docs/data/fixtures.json docs/data/results.json docs/data/odds-movements.json docs/assets/crests/
+            git add docs/data/latest.json docs/data/fixtures.json docs/data/results.json docs/data/odds-movements.json docs/data/league-tables.json docs/assets/crests/
             git commit -m "chore: refresh Goal Scanner public data"
             git push origin HEAD:main
           fi
