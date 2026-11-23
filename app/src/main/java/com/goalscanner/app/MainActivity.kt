@@ -503,6 +503,8 @@ private fun AnalysisScreen(modifier:Modifier,candidate:JSONObject?) {
                             "match_winner_draw" -> marketProbabilities.optDouble("draw",Double.NaN)
                             "match_winner_away" -> marketProbabilities.optDouble("away_win",Double.NaN)
                             "team_corners_over" -> marketProbabilities.optDouble("team_corners_over_home",Double.NaN)
+                            "match_corners_over" -> marketProbabilities.optDouble("match_corners_over_over",Double.NaN)
+                            "match_bookings_over" -> marketProbabilities.optDouble("match_bookings_over_over",Double.NaN)
                             "team_bookings_over" -> marketProbabilities.optDouble("team_bookings_over_home",Double.NaN)
                             else -> marketProbabilities.optDouble(market,Double.NaN)
                         }
