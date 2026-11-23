@@ -8,6 +8,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
@@ -29,6 +30,9 @@ import androidx.compose.runtime.saveable.rememberSaveableStateHolder
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.Dp
@@ -51,7 +55,10 @@ import java.net.URL
 import java.time.LocalDate
 
 private val Blue = Color(0xFFB7F36B)
-private val Navy = Color(0xFF111A23)
+private val Navy = Color(0xFF101A27)
+private val AccentTeal = Color(0xFF55D6C2)
+private val MutedText = Color(0xFF91A2B3)
+private val PanelBorder = Color(0xFF26384A)
 private const val DEFAULT_DATA_URL = "https://raw.githubusercontent.com/Ndumiso19894/goal-scanner-2.0/main"
 private val MarketIds = listOf("team_corners_over","match_corners_over","match_bookings_over","team_bookings_over","match_over_2_5","btts_yes","match_winner_home","match_winner_draw","match_winner_away")
 private val MarketNames = listOf("Team corners · Over 4.5+","Total corners · Over 8.5+","Match bookings · Over 3.5+","Team bookings · Over 1.5+","Total goals · Over 2.5","Both teams to score · Yes","1X2 · Home","1X2 · Draw","1X2 · Away")
@@ -69,13 +76,13 @@ class MainActivity : ComponentActivity() {
         work.enqueue(OneTimeWorkRequestBuilder<ReleaseUpdateWorker>().build())
         setContent {
             val scheme = darkColorScheme(
-                primary=Color(0xFFB7F36B), onPrimary=Color(0xFF17220A),
-                secondary=Color(0xFF9EDB63), onSecondary=Color(0xFF15220A),
-                background=Color(0xFF080D13), onBackground=Color(0xFFF2F5F0),
-                surface=Color(0xFF111A23), onSurface=Color(0xFFF2F5F0),
-                surfaceVariant=Color(0xFF1B2732), onSurfaceVariant=Color(0xFFA5B2BE),
-                secondaryContainer=Color(0xFF24351D), onSecondaryContainer=Color(0xFFE4F4D3),
-                outline=Color(0xFF344452)
+                primary=Color(0xFFB7F36B), onPrimary=Color(0xFF111A17),
+                secondary=Color(0xFF55D6C2), onSecondary=Color(0xFF071B1A),
+                background=Color(0xFF070C14), onBackground=Color(0xFFF4F7FA),
+                surface=Color(0xFF101A27), onSurface=Color(0xFFF4F7FA),
+                surfaceVariant=Color(0xFF1A2938), onSurfaceVariant=Color(0xFF9AAABB),
+                secondaryContainer=Color(0xFF183A38), onSecondaryContainer=Color(0xFFDDF8F3),
+                outline=Color(0xFF304456)
             )
             MaterialTheme(
                 colorScheme=scheme,
