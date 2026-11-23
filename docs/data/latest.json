@@ -1,570 +1,11 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-23T06:08:21.092001+00:00",
+  "updated_at": "2026-11-23T06:16:39.271472+00:00",
   "season": "2627",
   "status": "ok",
-  "recommendation_count": 66,
+  "recommendation_count": 20,
   "fixture_count": 52,
   "recommendations": [
-    {
-      "away": "Wealdstone",
-      "away_lambda": 1.3216,
-      "calibration": "uncalibrated_baseline",
-      "competition": "National League",
-      "count_expectations": {
-        "bookings": {
-          "away_lambda": 3.4045833333333335,
-          "away_sample": 9,
-          "home_lambda": 2.090909090909091,
-          "home_sample": 8,
-          "league_matches": 200
-        },
-        "corners": {
-          "away_lambda": 3.6075,
-          "away_sample": 9,
-          "home_lambda": 5.243636363636363,
-          "home_sample": 8,
-          "league_matches": 200
-        }
-      },
-      "data_quality": 1.0,
-      "estimated_probability": 0.853677,
-      "expected_value": null,
-      "fixture_id": "1823599",
-      "history_cutoff": "2026-11-24",
-      "home": "Altrincham",
-      "home_lambda": 1.3477,
-      "kickoff": "2026-11-24T21:45:00+02:00",
-      "line": 1.5,
-      "market": "team_bookings_over",
-      "market_odds": {
-        "1X2": {
-          "away": 3.6,
-          "draw": 3.9,
-          "home": 1.84
-        },
-        "away_team_goals": {
-          "0.5": {
-            "over": 1.28,
-            "under": 3.25
-          },
-          "1.5": {
-            "over": 2.3,
-            "under": 1.52
-          },
-          "2.5": {
-            "over": 4.9,
-            "under": 1.13
-          }
-        },
-        "btts": {
-          "no": 2.45,
-          "yes": 1.47
-        },
-        "double_chance": {
-          "12": 1.23,
-          "1X": 1.26,
-          "X2": 1.79
-        },
-        "home_team_goals": {
-          "0.5": {
-            "over": 1.11,
-            "under": 5.2
-          },
-          "1.5": {
-            "over": 1.6,
-            "under": 2.15
-          },
-          "2.5": {
-            "over": 2.8,
-            "under": 1.37
-          }
-        },
-        "match_total_goals": {
-          "1.5": {
-            "over": 1.15,
-            "under": 5.1
-          },
-          "2.0": {
-            "over": 1.2,
-            "under": 4.2
-          },
-          "2.5": {
-            "over": 1.49,
-            "under": 2.5
-          },
-          "3.0": {
-            "over": 1.75,
-            "under": 2.0
-          },
-          "3.5": {
-            "over": 2.2,
-            "under": 1.63
-          },
-          "4.0": {
-            "over": 3.1,
-            "under": 1.35
-          },
-          "4.5": {
-            "over": 3.6,
-            "under": 1.26
-          }
-        }
-      },
-      "market_probabilities": {
-        "away_win": 0.3640181333191014,
-        "btts_yes": 0.5427552921423513,
-        "btts_yes_yes": 0.542755,
-        "draw": 0.2598745428498202,
-        "home_win": 0.376107323831078,
-        "match_bookings_over_over": 0.797789,
-        "match_corners_over_over": 0.524578,
-        "match_over_2_5": 0.4988254311717701,
-        "match_over_2_5_over": 0.498825,
-        "match_winner_away": 0.364018,
-        "match_winner_draw": 0.259875,
-        "match_winner_home": 0.376107,
-        "team_bookings_over_away": 0.853677,
-        "team_bookings_over_home": 0.618042,
-        "team_corners_over_away": 0.294996,
-        "team_corners_over_home": 0.601168
-      },
-      "model_version": "venue-poisson-goals-corners-cards-v2",
-      "odds": null,
-      "odds_status": "unavailable",
-      "rank_score": 0.844522,
-      "reasons": [
-        "Historical home/away sample: 8/9 matches",
-        "Count-market estimates are shown only when historical corner/card samples are available.",
-        "Bookmaker prices are comparisons only and do not determine model probabilities."
-      ],
-      "sample": {
-        "away_away_matches": 9,
-        "historical_matches": 200,
-        "home_home_matches": 8
-      },
-      "selection": "away",
-      "prediction_id": "50edf7e518084e9fa53d5889be80023c",
-      "status": "PENDING"
-    },
-    {
-      "away": "Wealdstone",
-      "away_lambda": 1.3216,
-      "calibration": "uncalibrated_baseline",
-      "competition": "National League",
-      "count_expectations": {
-        "bookings": {
-          "away_lambda": 3.4045833333333335,
-          "away_sample": 9,
-          "home_lambda": 2.090909090909091,
-          "home_sample": 8,
-          "league_matches": 200
-        },
-        "corners": {
-          "away_lambda": 3.6075,
-          "away_sample": 9,
-          "home_lambda": 5.243636363636363,
-          "home_sample": 8,
-          "league_matches": 200
-        }
-      },
-      "data_quality": 1.0,
-      "estimated_probability": 0.797789,
-      "expected_value": null,
-      "fixture_id": "1823599",
-      "history_cutoff": "2026-11-24",
-      "home": "Altrincham",
-      "home_lambda": 1.3477,
-      "kickoff": "2026-11-24T21:45:00+02:00",
-      "line": 3.5,
-      "market": "match_bookings_over",
-      "market_odds": {
-        "1X2": {
-          "away": 3.6,
-          "draw": 3.9,
-          "home": 1.84
-        },
-        "away_team_goals": {
-          "0.5": {
-            "over": 1.28,
-            "under": 3.25
-          },
-          "1.5": {
-            "over": 2.3,
-            "under": 1.52
-          },
-          "2.5": {
-            "over": 4.9,
-            "under": 1.13
-          }
-        },
-        "btts": {
-          "no": 2.45,
-          "yes": 1.47
-        },
-        "double_chance": {
-          "12": 1.23,
-          "1X": 1.26,
-          "X2": 1.79
-        },
-        "home_team_goals": {
-          "0.5": {
-            "over": 1.11,
-            "under": 5.2
-          },
-          "1.5": {
-            "over": 1.6,
-            "under": 2.15
-          },
-          "2.5": {
-            "over": 2.8,
-            "under": 1.37
-          }
-        },
-        "match_total_goals": {
-          "1.5": {
-            "over": 1.15,
-            "under": 5.1
-          },
-          "2.0": {
-            "over": 1.2,
-            "under": 4.2
-          },
-          "2.5": {
-            "over": 1.49,
-            "under": 2.5
-          },
-          "3.0": {
-            "over": 1.75,
-            "under": 2.0
-          },
-          "3.5": {
-            "over": 2.2,
-            "under": 1.63
-          },
-          "4.0": {
-            "over": 3.1,
-            "under": 1.35
-          },
-          "4.5": {
-            "over": 3.6,
-            "under": 1.26
-          }
-        }
-      },
-      "market_probabilities": {
-        "away_win": 0.3640181333191014,
-        "btts_yes": 0.5427552921423513,
-        "btts_yes_yes": 0.542755,
-        "draw": 0.2598745428498202,
-        "home_win": 0.376107323831078,
-        "match_bookings_over_over": 0.797789,
-        "match_corners_over_over": 0.524578,
-        "match_over_2_5": 0.4988254311717701,
-        "match_over_2_5_over": 0.498825,
-        "match_winner_away": 0.364018,
-        "match_winner_draw": 0.259875,
-        "match_winner_home": 0.376107,
-        "team_bookings_over_away": 0.853677,
-        "team_bookings_over_home": 0.618042,
-        "team_corners_over_away": 0.294996,
-        "team_corners_over_home": 0.601168
-      },
-      "model_version": "venue-poisson-goals-corners-cards-v2",
-      "odds": null,
-      "odds_status": "unavailable",
-      "rank_score": 0.813784,
-      "reasons": [
-        "Historical home/away sample: 8/9 matches",
-        "Count-market estimates are shown only when historical corner/card samples are available.",
-        "Bookmaker prices are comparisons only and do not determine model probabilities."
-      ],
-      "sample": {
-        "away_away_matches": 9,
-        "historical_matches": 200,
-        "home_home_matches": 8
-      },
-      "selection": "over",
-      "prediction_id": "db33248e6273433fa034a3d735f2e7d7",
-      "status": "PENDING"
-    },
-    {
-      "away": "Dundee FC",
-      "away_lambda": 1.5115,
-      "calibration": "uncalibrated_baseline",
-      "competition": "Premiership",
-      "count_expectations": {
-        "bookings": {
-          "away_lambda": 2.1733333333333333,
-          "away_sample": 6,
-          "home_lambda": 1.7066666666666666,
-          "home_sample": 6,
-          "league_matches": 75
-        },
-        "corners": {
-          "away_lambda": 5.297777777777778,
-          "away_sample": 6,
-          "home_lambda": 7.071111111111112,
-          "home_sample": 6,
-          "league_matches": 75
-        }
-      },
-      "data_quality": 0.797,
-      "estimated_probability": 0.867689,
-      "expected_value": null,
-      "fixture_id": "1792833",
-      "history_cutoff": "2026-11-24",
-      "home": "Hibernian",
-      "home_lambda": 0.9796,
-      "kickoff": "2026-11-24T21:45:00+02:00",
-      "line": 8.5,
-      "market": "match_corners_over",
-      "market_odds": {
-        "1X2": {
-          "away": 4.9,
-          "draw": 4.3,
-          "home": 1.63
-        },
-        "away_corners": {
-          "2.5": {
-            "over": 1.27,
-            "under": 3.55
-          },
-          "3.5": {
-            "over": 1.6,
-            "under": 2.25
-          },
-          "4.5": {
-            "over": 2.1,
-            "under": 1.68
-          },
-          "5.5": {
-            "over": 3.0,
-            "under": 1.36
-          },
-          "6.5": {
-            "over": 4.35,
-            "under": 1.19
-          }
-        },
-        "away_team_goals": {
-          "0.5": {
-            "over": 1.47,
-            "under": 2.55
-          },
-          "1.5": {
-            "over": 3.2,
-            "under": 1.33
-          },
-          "2.5": {
-            "over": 7.7,
-            "under": 1.06
-          }
-        },
-        "btts": {
-          "no": 2.1,
-          "yes": 1.68
-        },
-        "double_chance": {
-          "12": 1.22,
-          "1X": 1.18,
-          "X2": 2.1
-        },
-        "home_corners": {
-          "4.5": {
-            "over": 1.28,
-            "under": 3.5
-          },
-          "5.5": {
-            "over": 1.53,
-            "under": 2.4
-          },
-          "6.5": {
-            "over": 1.92,
-            "under": 1.82
-          },
-          "7.5": {
-            "over": 2.5,
-            "under": 1.5
-          },
-          "8.5": {
-            "over": 3.4,
-            "under": 1.29
-          }
-        },
-        "home_team_goals": {
-          "0.5": {
-            "over": 1.12,
-            "under": 5.7
-          },
-          "1.5": {
-            "over": 1.6,
-            "under": 2.25
-          },
-          "2.5": {
-            "over": 2.8,
-            "under": 1.4
-          },
-          "3.5": {
-            "over": 5.5,
-            "under": 1.12
-          },
-          "4.5": {
-            "over": 10.0,
-            "under": 1.03
-          }
-        },
-        "match_total_goals": {
-          "0.5": {
-            "over": 1.03,
-            "under": 11.0
-          },
-          "1.0": {
-            "over": 1.04,
-            "under": 10.5
-          },
-          "1.5": {
-            "over": 1.2,
-            "under": 4.4
-          },
-          "2.0": {
-            "over": 1.28,
-            "under": 3.6
-          },
-          "2.5": {
-            "over": 1.63,
-            "under": 2.25
-          },
-          "3.0": {
-            "over": 2.0,
-            "under": 1.77
-          },
-          "3.5": {
-            "over": 2.55,
-            "under": 1.5
-          },
-          "4.0": {
-            "over": 3.8,
-            "under": 1.25
-          },
-          "4.5": {
-            "over": 4.5,
-            "under": 1.2
-          },
-          "5.0": {
-            "over": 7.5,
-            "under": 1.08
-          },
-          "5.5": {
-            "over": 8.1,
-            "under": 1.07
-          }
-        }
-      },
-      "market_probabilities": {
-        "away_win": 0.4958809409738514,
-        "btts_yes": 0.4867787010423018,
-        "btts_yes_yes": 0.486779,
-        "draw": 0.2590397783448699,
-        "home_win": 0.24507928068127857,
-        "match_bookings_over_over": 0.542742,
-        "match_corners_over_over": 0.867689,
-        "match_over_2_5": 0.4539018717007438,
-        "match_over_2_5_over": 0.453902,
-        "match_winner_away": 0.495881,
-        "match_winner_draw": 0.25904,
-        "match_winner_home": 0.245079,
-        "team_bookings_over_away": 0.638882,
-        "team_bookings_over_home": 0.508822,
-        "team_corners_over_away": 0.610117,
-        "team_corners_over_home": 0.833397
-      },
-      "model_version": "venue-poisson-goals-corners-cards-v2",
-      "odds": null,
-      "odds_status": "unavailable",
-      "rank_score": 0.791329,
-      "reasons": [
-        "Historical home/away sample: 6/6 matches",
-        "Count-market estimates are shown only when historical corner/card samples are available.",
-        "Bookmaker prices are comparisons only and do not determine model probabilities."
-      ],
-      "sample": {
-        "away_away_matches": 6,
-        "historical_matches": 75,
-        "home_home_matches": 6
-      },
-      "selection": "over",
-      "prediction_id": "5887f6e3071d4bae93663aa5d8946812",
-      "status": "PENDING"
-    },
-    {
-      "away": "Aberdeen",
-      "away_lambda": 0.9008,
-      "calibration": "uncalibrated_baseline",
-      "competition": "Premiership",
-      "count_expectations": {
-        "bookings": {
-          "away_lambda": 2.07,
-          "away_sample": 5,
-          "home_lambda": 1.17,
-          "home_sample": 5,
-          "league_matches": 75
-        },
-        "corners": {
-          "away_lambda": 5.46,
-          "away_sample": 5,
-          "home_lambda": 7.955,
-          "home_sample": 5,
-          "league_matches": 75
-        }
-      },
-      "data_quality": 0.703,
-      "estimated_probability": 0.91776,
-      "expected_value": null,
-      "fixture_id": "1792830",
-      "history_cutoff": "2026-11-24",
-      "home": "Rangers",
-      "home_lambda": 2.0489,
-      "kickoff": "2026-11-24T22:00:00+02:00",
-      "line": 8.5,
-      "market": "match_corners_over",
-      "market_odds": {},
-      "market_probabilities": {
-        "away_win": 0.15644534194226903,
-        "btts_yes": 0.517234286240388,
-        "btts_yes_yes": 0.517234,
-        "draw": 0.20385136749599608,
-        "home_win": 0.6397032905617348,
-        "match_bookings_over_over": 0.406373,
-        "match_corners_over_over": 0.91776,
-        "match_over_2_5": 0.5654466897516637,
-        "match_over_2_5_over": 0.565447,
-        "match_winner_away": 0.156445,
-        "match_winner_draw": 0.203851,
-        "match_winner_home": 0.639703,
-        "team_bookings_over_away": 0.61261,
-        "team_bookings_over_home": 0.326504,
-        "team_corners_over_away": 0.636215,
-        "team_corners_over_home": 0.897762
-      },
-      "model_version": "venue-poisson-goals-corners-cards-v2",
-      "odds": null,
-      "odds_status": "unavailable",
-      "rank_score": 0.790668,
-      "reasons": [
-        "Historical home/away sample: 5/5 matches",
-        "Count-market estimates are shown only when historical corner/card samples are available.",
-        "Bookmaker prices are comparisons only and do not determine model probabilities."
-      ],
-      "sample": {
-        "away_away_matches": 5,
-        "historical_matches": 75,
-        "home_home_matches": 5
-      },
-      "selection": "over",
-      "prediction_id": "7782bec98b584cbb8407b27c107773fa",
-      "status": "PENDING"
-    },
     {
       "away": "Elche",
       "away_lambda": 2.3812,
@@ -608,16 +49,16 @@
             "under": 8.5
           },
           "1.5": {
-            "over": 1.36,
-            "under": 3.0
+            "over": 1.35,
+            "under": 3.05
           },
           "2.5": {
-            "over": 2.1,
-            "under": 1.68
+            "over": 2.08,
+            "under": 1.7
           },
           "3.5": {
-            "over": 3.75,
-            "under": 1.25
+            "over": 3.6,
+            "under": 1.26
           },
           "4.5": {
             "over": 6.5,
@@ -679,16 +120,16 @@
         },
         "home_cards": {
           "0.5": {
-            "over": 1.13,
-            "under": 5.5
+            "over": 1.12,
+            "under": 5.75
           },
           "1.5": {
-            "over": 1.65,
-            "under": 2.15
+            "over": 1.63,
+            "under": 2.2
           },
           "2.5": {
-            "over": 3.0,
-            "under": 1.36
+            "over": 2.9,
+            "under": 1.38
           },
           "3.5": {
             "over": 5.75,
@@ -867,7 +308,7 @@
         "home_home_matches": 5
       },
       "selection": "over",
-      "prediction_id": "7542d94ab23a44d1b6343bcf2c473cb1",
+      "prediction_id": "290f9786f425405f98e093d343993336",
       "status": "PENDING"
     },
     {
@@ -913,20 +354,20 @@
             "under": 3.55
           },
           "3.5": {
-            "over": 1.6,
-            "under": 2.25
+            "over": 1.57,
+            "under": 2.3
           },
           "4.5": {
             "over": 2.1,
             "under": 1.68
           },
           "5.5": {
-            "over": 3.0,
-            "under": 1.36
+            "over": 2.95,
+            "under": 1.37
           },
           "6.5": {
-            "over": 4.35,
-            "under": 1.19
+            "over": 4.25,
+            "under": 1.2
           }
         },
         "away_team_goals": {
@@ -1076,143 +517,7 @@
         "home_home_matches": 6
       },
       "selection": "home",
-      "prediction_id": "51fec00a71854053958267e59219dbd0",
-      "status": "PENDING"
-    },
-    {
-      "away": "Aberdeen",
-      "away_lambda": 0.9008,
-      "calibration": "uncalibrated_baseline",
-      "competition": "Premiership",
-      "count_expectations": {
-        "bookings": {
-          "away_lambda": 2.07,
-          "away_sample": 5,
-          "home_lambda": 1.17,
-          "home_sample": 5,
-          "league_matches": 75
-        },
-        "corners": {
-          "away_lambda": 5.46,
-          "away_sample": 5,
-          "home_lambda": 7.955,
-          "home_sample": 5,
-          "league_matches": 75
-        }
-      },
-      "data_quality": 0.703,
-      "estimated_probability": 0.897762,
-      "expected_value": null,
-      "fixture_id": "1792830",
-      "history_cutoff": "2026-11-24",
-      "home": "Rangers",
-      "home_lambda": 2.0489,
-      "kickoff": "2026-11-24T22:00:00+02:00",
-      "line": 4.5,
-      "market": "team_corners_over",
-      "market_odds": {},
-      "market_probabilities": {
-        "away_win": 0.15644534194226903,
-        "btts_yes": 0.517234286240388,
-        "btts_yes_yes": 0.517234,
-        "draw": 0.20385136749599608,
-        "home_win": 0.6397032905617348,
-        "match_bookings_over_over": 0.406373,
-        "match_corners_over_over": 0.91776,
-        "match_over_2_5": 0.5654466897516637,
-        "match_over_2_5_over": 0.565447,
-        "match_winner_away": 0.156445,
-        "match_winner_draw": 0.203851,
-        "match_winner_home": 0.639703,
-        "team_bookings_over_away": 0.61261,
-        "team_bookings_over_home": 0.326504,
-        "team_corners_over_away": 0.636215,
-        "team_corners_over_home": 0.897762
-      },
-      "model_version": "venue-poisson-goals-corners-cards-v2",
-      "odds": null,
-      "odds_status": "unavailable",
-      "rank_score": 0.779669,
-      "reasons": [
-        "Historical home/away sample: 5/5 matches",
-        "Count-market estimates are shown only when historical corner/card samples are available.",
-        "Bookmaker prices are comparisons only and do not determine model probabilities."
-      ],
-      "sample": {
-        "away_away_matches": 5,
-        "historical_matches": 75,
-        "home_home_matches": 5
-      },
-      "selection": "home",
-      "prediction_id": "f0e55a8780c8483f94e5ac050af58948",
-      "status": "PENDING"
-    },
-    {
-      "away": "Grenoble",
-      "away_lambda": 1.4441,
-      "calibration": "uncalibrated_baseline",
-      "competition": "Ligue 2",
-      "count_expectations": {
-        "bookings": {
-          "away_lambda": 3.2098765432098766,
-          "away_sample": 6,
-          "home_lambda": 2.04320987654321,
-          "home_sample": 6,
-          "league_matches": 108
-        },
-        "corners": {
-          "away_lambda": 2.861111111111111,
-          "away_sample": 6,
-          "home_lambda": 5.12037037037037,
-          "home_sample": 6,
-          "league_matches": 108
-        }
-      },
-      "data_quality": 0.812,
-      "estimated_probability": 0.830083,
-      "expected_value": null,
-      "fixture_id": "1795069",
-      "history_cutoff": "2026-11-23",
-      "home": "Nantes",
-      "home_lambda": 1.461,
-      "kickoff": "2026-11-23T21:45:00+02:00",
-      "line": 1.5,
-      "market": "team_bookings_over",
-      "market_odds": {},
-      "market_probabilities": {
-        "away_win": 0.37248151142036473,
-        "btts_yes": 0.5867808179311205,
-        "btts_yes_yes": 0.586781,
-        "draw": 0.24749655606199497,
-        "home_win": 0.3800219325176402,
-        "match_bookings_over_over": 0.768721,
-        "match_corners_over_over": 0.404868,
-        "match_over_2_5": 0.5552158673590952,
-        "match_over_2_5_over": 0.555216,
-        "match_winner_away": 0.372482,
-        "match_winner_draw": 0.247497,
-        "match_winner_home": 0.380022,
-        "team_bookings_over_away": 0.830083,
-        "team_bookings_over_home": 0.605563,
-        "team_corners_over_away": 0.161964,
-        "team_corners_over_home": 0.580368
-      },
-      "model_version": "venue-poisson-goals-corners-cards-v2",
-      "odds": null,
-      "odds_status": "unavailable",
-      "rank_score": 0.775146,
-      "reasons": [
-        "Historical home/away sample: 6/6 matches",
-        "Count-market estimates are shown only when historical corner/card samples are available.",
-        "Bookmaker prices are comparisons only and do not determine model probabilities."
-      ],
-      "sample": {
-        "away_away_matches": 6,
-        "historical_matches": 108,
-        "home_home_matches": 6
-      },
-      "selection": "away",
-      "prediction_id": "5893011bffb14ef4be32b56abbca595f",
+      "prediction_id": "a4897fad78cf4d18b2792e30f09227e9",
       "status": "PENDING"
     },
     {
@@ -1353,7 +658,7 @@
         "home_home_matches": 6
       },
       "selection": "over",
-      "prediction_id": "61de60a232954ecfa8c6615cccd3481e",
+      "prediction_id": "170036c484834035be6ab7e64a05cf83",
       "status": "PENDING"
     },
     {
@@ -1604,7 +909,7 @@
         "home_home_matches": 8
       },
       "selection": "home",
-      "prediction_id": "94d580f50bab46bfacac1049abc0dc03",
+      "prediction_id": "1284edad528e4b14973f8731ce6ef119",
       "status": "PENDING"
     },
     {
@@ -1650,16 +955,16 @@
             "under": 8.5
           },
           "1.5": {
-            "over": 1.36,
-            "under": 3.0
+            "over": 1.35,
+            "under": 3.05
           },
           "2.5": {
-            "over": 2.1,
-            "under": 1.68
+            "over": 2.08,
+            "under": 1.7
           },
           "3.5": {
-            "over": 3.75,
-            "under": 1.25
+            "over": 3.6,
+            "under": 1.26
           },
           "4.5": {
             "over": 6.5,
@@ -1721,16 +1026,16 @@
         },
         "home_cards": {
           "0.5": {
-            "over": 1.13,
-            "under": 5.5
+            "over": 1.12,
+            "under": 5.75
           },
           "1.5": {
-            "over": 1.65,
-            "under": 2.15
+            "over": 1.63,
+            "under": 2.2
           },
           "2.5": {
-            "over": 3.0,
-            "under": 1.36
+            "over": 2.9,
+            "under": 1.38
           },
           "3.5": {
             "over": 5.75,
@@ -1909,7 +1214,7 @@
         "home_home_matches": 5
       },
       "selection": "yes",
-      "prediction_id": "46b70bd69a7a4a40af082cf1e6eab7d4",
+      "prediction_id": "6d6cdfe0a1fd4625a9154d9bd6a84b14",
       "status": "PENDING"
     },
     {
@@ -2050,7 +1355,7 @@
         "home_home_matches": 8
       },
       "selection": "over",
-      "prediction_id": "9b9d17e2af404ef6b0123df2cc4fd859",
+      "prediction_id": "95fc1f262bd44287960aa2174decbc69",
       "status": "PENDING"
     },
     {
@@ -2301,570 +1606,7 @@
         "home_home_matches": 8
       },
       "selection": "home",
-      "prediction_id": "f02ccf9adeaa4cd4a9e8a8b79af1dbe3",
-      "status": "PENDING"
-    },
-    {
-      "away": "Hoffenheim W",
-      "away_lambda": 1.101,
-      "calibration": "uncalibrated_baseline",
-      "competition": "Frauen-Bundesliga",
-      "count_expectations": {
-        "bookings": {
-          "away_lambda": 1.5873015873015872,
-          "away_sample": 4,
-          "home_lambda": 1.4814814814814814,
-          "home_sample": 4,
-          "league_matches": 81
-        },
-        "corners": {
-          "away_lambda": 5.1534391534391535,
-          "away_sample": 4,
-          "home_lambda": 7.312169312169312,
-          "home_sample": 4,
-          "league_matches": 81
-        }
-      },
-      "data_quality": 0.625,
-      "estimated_probability": 0.873177,
-      "expected_value": null,
-      "fixture_id": "1834796",
-      "history_cutoff": "2026-11-23",
-      "home": "Bayern Munich W",
-      "home_lambda": 3.8955,
-      "kickoff": "2026-11-23T19:00:00+02:00",
-      "line": 8.5,
-      "market": "match_corners_over",
-      "market_odds": {
-        "1X2": {
-          "away": 24.0,
-          "draw": 10.5,
-          "home": 1.04
-        },
-        "double_chance": {
-          "12": 1.02,
-          "1X": 1.01,
-          "X2": 4.9
-        },
-        "match_total_goals": {
-          "0.5": {
-            "over": 1.01,
-            "under": 11.0
-          },
-          "1.5": {
-            "over": 1.04,
-            "under": 8.0
-          },
-          "2.5": {
-            "over": 1.16,
-            "under": 4.4
-          },
-          "3.5": {
-            "over": 1.45,
-            "under": 2.5
-          },
-          "4.5": {
-            "over": 1.99,
-            "under": 1.7
-          },
-          "5.5": {
-            "over": 3.0,
-            "under": 1.32
-          },
-          "6.5": {
-            "over": 4.75,
-            "under": 1.14
-          }
-        }
-      },
-      "market_probabilities": {
-        "away_win": 0.05923427724001698,
-        "btts_yes": 0.6538899867428334,
-        "btts_yes_yes": 0.65389,
-        "draw": 0.0864171064579042,
-        "home_win": 0.8543486163020788,
-        "match_bookings_over_over": 0.368174,
-        "match_corners_over_over": 0.873177,
-        "match_over_2_5": 0.8750528848144057,
-        "match_over_2_5_over": 0.875053,
-        "match_winner_away": 0.059234,
-        "match_winner_draw": 0.086417,
-        "match_winner_home": 0.854349,
-        "team_bookings_over_away": 0.470957,
-        "team_bookings_over_home": 0.435958,
-        "team_corners_over_away": 0.586005,
-        "team_corners_over_home": 0.85363
-      },
-      "model_version": "venue-poisson-goals-corners-cards-v2",
-      "odds": null,
-      "odds_status": "unavailable",
-      "rank_score": 0.742747,
-      "reasons": [
-        "Historical home/away sample: 4/4 matches",
-        "Count-market estimates are shown only when historical corner/card samples are available.",
-        "Bookmaker prices are comparisons only and do not determine model probabilities."
-      ],
-      "sample": {
-        "away_away_matches": 4,
-        "historical_matches": 81,
-        "home_home_matches": 4
-      },
-      "selection": "over",
-      "prediction_id": "28e33a653eab42879b6cae82caee2c9c",
-      "status": "PENDING"
-    },
-    {
-      "away": "Grenoble",
-      "away_lambda": 1.4441,
-      "calibration": "uncalibrated_baseline",
-      "competition": "Ligue 2",
-      "count_expectations": {
-        "bookings": {
-          "away_lambda": 3.2098765432098766,
-          "away_sample": 6,
-          "home_lambda": 2.04320987654321,
-          "home_sample": 6,
-          "league_matches": 108
-        },
-        "corners": {
-          "away_lambda": 2.861111111111111,
-          "away_sample": 6,
-          "home_lambda": 5.12037037037037,
-          "home_sample": 6,
-          "league_matches": 108
-        }
-      },
-      "data_quality": 0.812,
-      "estimated_probability": 0.768721,
-      "expected_value": null,
-      "fixture_id": "1795069",
-      "history_cutoff": "2026-11-23",
-      "home": "Nantes",
-      "home_lambda": 1.461,
-      "kickoff": "2026-11-23T21:45:00+02:00",
-      "line": 3.5,
-      "market": "match_bookings_over",
-      "market_odds": {},
-      "market_probabilities": {
-        "away_win": 0.37248151142036473,
-        "btts_yes": 0.5867808179311205,
-        "btts_yes_yes": 0.586781,
-        "draw": 0.24749655606199497,
-        "home_win": 0.3800219325176402,
-        "match_bookings_over_over": 0.768721,
-        "match_corners_over_over": 0.404868,
-        "match_over_2_5": 0.5552158673590952,
-        "match_over_2_5_over": 0.555216,
-        "match_winner_away": 0.372482,
-        "match_winner_draw": 0.247497,
-        "match_winner_home": 0.380022,
-        "team_bookings_over_away": 0.830083,
-        "team_bookings_over_home": 0.605563,
-        "team_corners_over_away": 0.161964,
-        "team_corners_over_home": 0.580368
-      },
-      "model_version": "venue-poisson-goals-corners-cards-v2",
-      "odds": null,
-      "odds_status": "unavailable",
-      "rank_score": 0.741397,
-      "reasons": [
-        "Historical home/away sample: 6/6 matches",
-        "Count-market estimates are shown only when historical corner/card samples are available.",
-        "Bookmaker prices are comparisons only and do not determine model probabilities."
-      ],
-      "sample": {
-        "away_away_matches": 6,
-        "historical_matches": 108,
-        "home_home_matches": 6
-      },
-      "selection": "over",
-      "prediction_id": "a35d4e1cfcaa41748a893456e15dcd09",
-      "status": "PENDING"
-    },
-    {
-      "away": "Empoli",
-      "away_lambda": 1.1188,
-      "calibration": "uncalibrated_baseline",
-      "competition": "Serie B",
-      "count_expectations": {
-        "bookings": {
-          "away_lambda": 2.5585858585858587,
-          "away_sample": 6,
-          "home_lambda": 2.210909090909091,
-          "home_sample": 7,
-          "league_matches": 110
-        },
-        "corners": {
-          "away_lambda": 5.212121212121212,
-          "away_sample": 6,
-          "home_lambda": 5.780909090909091,
-          "home_sample": 7,
-          "league_matches": 110
-        }
-      },
-      "data_quality": 0.812,
-      "estimated_probability": 0.767395,
-      "expected_value": null,
-      "fixture_id": "1845177",
-      "history_cutoff": "2026-11-24",
-      "home": "Benevento",
-      "home_lambda": 1.743,
-      "kickoff": "2026-11-24T21:00:00+02:00",
-      "line": 8.5,
-      "market": "match_corners_over",
-      "market_odds": {},
-      "market_probabilities": {
-        "away_win": 0.24382449113673546,
-        "btts_yes": 0.555499575357005,
-        "btts_yes_yes": 0.5555,
-        "draw": 0.2363190166479944,
-        "home_win": 0.5198564922152699,
-        "match_bookings_over_over": 0.701116,
-        "match_corners_over_over": 0.767395,
-        "match_over_2_5": 0.5451462875076862,
-        "match_over_2_5_over": 0.545146,
-        "match_winner_away": 0.243824,
-        "match_winner_draw": 0.236319,
-        "match_winner_home": 0.519856,
-        "team_bookings_over_away": 0.724515,
-        "team_bookings_over_home": 0.648081,
-        "team_corners_over_away": 0.595906,
-        "team_corners_over_home": 0.684548
-      },
-      "model_version": "venue-poisson-goals-corners-cards-v2",
-      "odds": null,
-      "odds_status": "unavailable",
-      "rank_score": 0.740667,
-      "reasons": [
-        "Historical home/away sample: 7/6 matches",
-        "Count-market estimates are shown only when historical corner/card samples are available.",
-        "Bookmaker prices are comparisons only and do not determine model probabilities."
-      ],
-      "sample": {
-        "away_away_matches": 6,
-        "historical_matches": 110,
-        "home_home_matches": 7
-      },
-      "selection": "over",
-      "prediction_id": "70a337f81bb54d8a9a5f6d04a123a12a",
-      "status": "PENDING"
-    },
-    {
-      "away": "Worthing",
-      "away_lambda": 2.1489,
-      "calibration": "uncalibrated_baseline",
-      "competition": "National League",
-      "count_expectations": {
-        "bookings": {
-          "away_lambda": 2.2595454545454547,
-          "away_sample": 8,
-          "home_lambda": 1.8181818181818181,
-          "home_sample": 8,
-          "league_matches": 200
-        },
-        "corners": {
-          "away_lambda": 3.6627272727272726,
-          "away_sample": 8,
-          "home_lambda": 4.698181818181818,
-          "home_sample": 8,
-          "league_matches": 200
-        }
-      },
-      "data_quality": 1.0,
-      "estimated_probability": 0.65971,
-      "expected_value": null,
-      "fixture_id": "1823602",
-      "history_cutoff": "2026-11-24",
-      "home": "Woking",
-      "home_lambda": 1.4165,
-      "kickoff": "2026-11-24T21:45:00+02:00",
-      "line": 1.5,
-      "market": "team_bookings_over",
-      "market_odds": {
-        "1X2": {
-          "away": 2.8,
-          "draw": 3.6,
-          "home": 2.25
-        },
-        "away_team_goals": {
-          "0.5": {
-            "over": 1.22,
-            "under": 3.75
-          },
-          "1.5": {
-            "over": 2.05,
-            "under": 1.67
-          },
-          "2.5": {
-            "over": 4.1,
-            "under": 1.18
-          }
-        },
-        "btts": {
-          "no": 2.5,
-          "yes": 1.45
-        },
-        "double_chance": {
-          "12": 1.27,
-          "1X": 1.38,
-          "X2": 1.55
-        },
-        "home_team_goals": {
-          "0.5": {
-            "over": 1.16,
-            "under": 4.4
-          },
-          "1.5": {
-            "over": 1.8,
-            "under": 1.87
-          },
-          "2.5": {
-            "over": 3.4,
-            "under": 1.26
-          }
-        },
-        "match_total_goals": {
-          "1.5": {
-            "over": 1.16,
-            "under": 4.9
-          },
-          "2.0": {
-            "over": 1.22,
-            "under": 4.0
-          },
-          "2.5": {
-            "over": 1.52,
-            "under": 2.4
-          },
-          "3.0": {
-            "over": 1.81,
-            "under": 1.94
-          },
-          "3.5": {
-            "over": 2.25,
-            "under": 1.59
-          },
-          "4.0": {
-            "over": 3.2,
-            "under": 1.32
-          },
-          "4.5": {
-            "over": 3.8,
-            "under": 1.24
-          }
-        }
-      },
-      "market_probabilities": {
-        "away_win": 0.5427895528528606,
-        "btts_yes": 0.6691118099243287,
-        "btts_yes_yes": 0.669112,
-        "draw": 0.20683951185306923,
-        "home_win": 0.2503709352940705,
-        "match_bookings_over_over": 0.581566,
-        "match_corners_over_over": 0.457697,
-        "match_over_2_5": 0.6910798038306075,
-        "match_over_2_5_over": 0.69108,
-        "match_winner_away": 0.54279,
-        "match_winner_draw": 0.20684,
-        "match_winner_home": 0.250371,
-        "team_bookings_over_away": 0.65971,
-        "team_bookings_over_home": 0.542551,
-        "team_corners_over_away": 0.305596,
-        "team_corners_over_home": 0.505055
-      },
-      "model_version": "venue-poisson-goals-corners-cards-v2",
-      "odds": null,
-      "odds_status": "unavailable",
-      "rank_score": 0.737841,
-      "reasons": [
-        "Historical home/away sample: 8/8 matches",
-        "Count-market estimates are shown only when historical corner/card samples are available.",
-        "Bookmaker prices are comparisons only and do not determine model probabilities."
-      ],
-      "sample": {
-        "away_away_matches": 8,
-        "historical_matches": 200,
-        "home_home_matches": 8
-      },
-      "selection": "away",
-      "prediction_id": "a8657c52132c43d79a80c2f25a03491a",
-      "status": "PENDING"
-    },
-    {
-      "away": "Fiorentina",
-      "away_lambda": 2.0347,
-      "calibration": "uncalibrated_baseline",
-      "competition": "Serie A",
-      "count_expectations": {
-        "bookings": {
-          "away_lambda": 2.134090909090909,
-          "away_sample": 5,
-          "home_lambda": 2.252272727272727,
-          "home_sample": 5,
-          "league_matches": 110
-        },
-        "corners": {
-          "away_lambda": 3.6443181818181816,
-          "away_sample": 5,
-          "home_lambda": 4.510227272727272,
-          "home_sample": 5,
-          "league_matches": 110
-        }
-      },
-      "data_quality": 0.719,
-      "estimated_probability": 0.802495,
-      "expected_value": null,
-      "fixture_id": "1785426",
-      "history_cutoff": "2026-11-23",
-      "home": "Monza",
-      "home_lambda": 2.2641,
-      "kickoff": "2026-11-23T21:45:00+02:00",
-      "line": 2.5,
-      "market": "match_over_2_5",
-      "market_odds": {},
-      "market_probabilities": {
-        "away_win": 0.3582845769800676,
-        "btts_yes": 0.7789416348905694,
-        "btts_yes_yes": 0.778942,
-        "draw": 0.19799055191394754,
-        "home_win": 0.4437248711059848,
-        "match_bookings_over_over": 0.63817,
-        "match_corners_over_over": 0.429014,
-        "match_over_2_5": 0.802494731257794,
-        "match_over_2_5_over": 0.802495,
-        "match_winner_away": 0.358285,
-        "match_winner_draw": 0.197991,
-        "match_winner_home": 0.443725,
-        "team_bookings_over_away": 0.629074,
-        "team_bookings_over_home": 0.657991,
-        "team_corners_over_away": 0.302056,
-        "team_corners_over_home": 0.469837
-      },
-      "model_version": "venue-poisson-goals-corners-cards-v2",
-      "odds": null,
-      "odds_status": "unavailable",
-      "rank_score": 0.732072,
-      "reasons": [
-        "Historical home/away sample: 5/5 matches",
-        "Count-market estimates are shown only when historical corner/card samples are available.",
-        "Bookmaker prices are comparisons only and do not determine model probabilities."
-      ],
-      "sample": {
-        "away_away_matches": 5,
-        "historical_matches": 110,
-        "home_home_matches": 5
-      },
-      "selection": "over",
-      "prediction_id": "a8ed3677870d48538eb5c9463c8dd636",
-      "status": "PENDING"
-    },
-    {
-      "away": "Hoffenheim W",
-      "away_lambda": 1.101,
-      "calibration": "uncalibrated_baseline",
-      "competition": "Frauen-Bundesliga",
-      "count_expectations": {
-        "bookings": {
-          "away_lambda": 1.5873015873015872,
-          "away_sample": 4,
-          "home_lambda": 1.4814814814814814,
-          "home_sample": 4,
-          "league_matches": 81
-        },
-        "corners": {
-          "away_lambda": 5.1534391534391535,
-          "away_sample": 4,
-          "home_lambda": 7.312169312169312,
-          "home_sample": 4,
-          "league_matches": 81
-        }
-      },
-      "data_quality": 0.625,
-      "estimated_probability": 0.85363,
-      "expected_value": null,
-      "fixture_id": "1834796",
-      "history_cutoff": "2026-11-23",
-      "home": "Bayern Munich W",
-      "home_lambda": 3.8955,
-      "kickoff": "2026-11-23T19:00:00+02:00",
-      "line": 4.5,
-      "market": "team_corners_over",
-      "market_odds": {
-        "1X2": {
-          "away": 24.0,
-          "draw": 10.5,
-          "home": 1.04
-        },
-        "double_chance": {
-          "12": 1.02,
-          "1X": 1.01,
-          "X2": 4.9
-        },
-        "match_total_goals": {
-          "0.5": {
-            "over": 1.01,
-            "under": 11.0
-          },
-          "1.5": {
-            "over": 1.04,
-            "under": 8.0
-          },
-          "2.5": {
-            "over": 1.16,
-            "under": 4.4
-          },
-          "3.5": {
-            "over": 1.45,
-            "under": 2.5
-          },
-          "4.5": {
-            "over": 1.99,
-            "under": 1.7
-          },
-          "5.5": {
-            "over": 3.0,
-            "under": 1.32
-          },
-          "6.5": {
-            "over": 4.75,
-            "under": 1.14
-          }
-        }
-      },
-      "market_probabilities": {
-        "away_win": 0.05923427724001698,
-        "btts_yes": 0.6538899867428334,
-        "btts_yes_yes": 0.65389,
-        "draw": 0.0864171064579042,
-        "home_win": 0.8543486163020788,
-        "match_bookings_over_over": 0.368174,
-        "match_corners_over_over": 0.873177,
-        "match_over_2_5": 0.8750528848144057,
-        "match_over_2_5_over": 0.875053,
-        "match_winner_away": 0.059234,
-        "match_winner_draw": 0.086417,
-        "match_winner_home": 0.854349,
-        "team_bookings_over_away": 0.470957,
-        "team_bookings_over_home": 0.435958,
-        "team_corners_over_away": 0.586005,
-        "team_corners_over_home": 0.85363
-      },
-      "model_version": "venue-poisson-goals-corners-cards-v2",
-      "odds": null,
-      "odds_status": "unavailable",
-      "rank_score": 0.731996,
-      "reasons": [
-        "Historical home/away sample: 4/4 matches",
-        "Count-market estimates are shown only when historical corner/card samples are available.",
-        "Bookmaker prices are comparisons only and do not determine model probabilities."
-      ],
-      "sample": {
-        "away_away_matches": 4,
-        "historical_matches": 81,
-        "home_home_matches": 4
-      },
-      "selection": "home",
-      "prediction_id": "769dfa5e57df43f8849038cc9fe9c4b5",
+      "prediction_id": "39d732df232a4a55a81581dc60dcdedf",
       "status": "PENDING"
     },
     {
@@ -3005,7 +1747,7 @@
         "home_home_matches": 6
       },
       "selection": "away",
-      "prediction_id": "c2cef4dcc05b4cf084710116c2aa8920",
+      "prediction_id": "b3214a2acb2a4edeb9491cf9a86a39e4",
       "status": "PENDING"
     },
     {
@@ -3114,7 +1856,7 @@
         "home_home_matches": 4
       },
       "selection": "over",
-      "prediction_id": "6b380d83abbc4e21acf857b74ab29e5f",
+      "prediction_id": "95715a524a90477ea340ae6482c5edde",
       "status": "PENDING"
     },
     {
@@ -3160,20 +1902,20 @@
             "under": 3.55
           },
           "3.5": {
-            "over": 1.6,
-            "under": 2.25
+            "over": 1.57,
+            "under": 2.3
           },
           "4.5": {
             "over": 2.1,
             "under": 1.68
           },
           "5.5": {
-            "over": 3.0,
-            "under": 1.36
+            "over": 2.95,
+            "under": 1.37
           },
           "6.5": {
-            "over": 4.35,
-            "under": 1.19
+            "over": 4.25,
+            "under": 1.2
           }
         },
         "away_team_goals": {
@@ -3323,7 +2065,7 @@
         "home_home_matches": 6
       },
       "selection": "away",
-      "prediction_id": "59e26b4dd91340d383dff9fd39edaf5b",
+      "prediction_id": "21188d36fff44b719ac1b047da329a11",
       "status": "PENDING"
     },
     {
@@ -3628,75 +2370,7 @@
         "home_home_matches": 5
       },
       "selection": "home",
-      "prediction_id": "3dd242f9d23e410db411bb18720ee6e8",
-      "status": "PENDING"
-    },
-    {
-      "away": "Fiorentina",
-      "away_lambda": 2.0347,
-      "calibration": "uncalibrated_baseline",
-      "competition": "Serie A",
-      "count_expectations": {
-        "bookings": {
-          "away_lambda": 2.134090909090909,
-          "away_sample": 5,
-          "home_lambda": 2.252272727272727,
-          "home_sample": 5,
-          "league_matches": 110
-        },
-        "corners": {
-          "away_lambda": 3.6443181818181816,
-          "away_sample": 5,
-          "home_lambda": 4.510227272727272,
-          "home_sample": 5,
-          "league_matches": 110
-        }
-      },
-      "data_quality": 0.719,
-      "estimated_probability": 0.778942,
-      "expected_value": null,
-      "fixture_id": "1785426",
-      "history_cutoff": "2026-11-23",
-      "home": "Monza",
-      "home_lambda": 2.2641,
-      "kickoff": "2026-11-23T21:45:00+02:00",
-      "line": null,
-      "market": "btts_yes",
-      "market_odds": {},
-      "market_probabilities": {
-        "away_win": 0.3582845769800676,
-        "btts_yes": 0.7789416348905694,
-        "btts_yes_yes": 0.778942,
-        "draw": 0.19799055191394754,
-        "home_win": 0.4437248711059848,
-        "match_bookings_over_over": 0.63817,
-        "match_corners_over_over": 0.429014,
-        "match_over_2_5": 0.802494731257794,
-        "match_over_2_5_over": 0.802495,
-        "match_winner_away": 0.358285,
-        "match_winner_draw": 0.197991,
-        "match_winner_home": 0.443725,
-        "team_bookings_over_away": 0.629074,
-        "team_bookings_over_home": 0.657991,
-        "team_corners_over_away": 0.302056,
-        "team_corners_over_home": 0.469837
-      },
-      "model_version": "venue-poisson-goals-corners-cards-v2",
-      "odds": null,
-      "odds_status": "unavailable",
-      "rank_score": 0.719118,
-      "reasons": [
-        "Historical home/away sample: 5/5 matches",
-        "Count-market estimates are shown only when historical corner/card samples are available.",
-        "Bookmaker prices are comparisons only and do not determine model probabilities."
-      ],
-      "sample": {
-        "away_away_matches": 5,
-        "historical_matches": 110,
-        "home_home_matches": 5
-      },
-      "selection": "yes",
-      "prediction_id": "3af1d1a38e6e4059944a8a09f7635e85",
+      "prediction_id": "002804f88ced4ea2a491d4165bf11f3b",
       "status": "PENDING"
     },
     {
@@ -3947,566 +2621,7 @@
         "home_home_matches": 8
       },
       "selection": "over",
-      "prediction_id": "9f6584cdeabb4997b9f64b254c6e50cb",
-      "status": "PENDING"
-    },
-    {
-      "away": "Empoli",
-      "away_lambda": 1.1188,
-      "calibration": "uncalibrated_baseline",
-      "competition": "Serie B",
-      "count_expectations": {
-        "bookings": {
-          "away_lambda": 2.5585858585858587,
-          "away_sample": 6,
-          "home_lambda": 2.210909090909091,
-          "home_sample": 7,
-          "league_matches": 110
-        },
-        "corners": {
-          "away_lambda": 5.212121212121212,
-          "away_sample": 6,
-          "home_lambda": 5.780909090909091,
-          "home_sample": 7,
-          "league_matches": 110
-        }
-      },
-      "data_quality": 0.812,
-      "estimated_probability": 0.724515,
-      "expected_value": null,
-      "fixture_id": "1845177",
-      "history_cutoff": "2026-11-24",
-      "home": "Benevento",
-      "home_lambda": 1.743,
-      "kickoff": "2026-11-24T21:00:00+02:00",
-      "line": 1.5,
-      "market": "team_bookings_over",
-      "market_odds": {},
-      "market_probabilities": {
-        "away_win": 0.24382449113673546,
-        "btts_yes": 0.555499575357005,
-        "btts_yes_yes": 0.5555,
-        "draw": 0.2363190166479944,
-        "home_win": 0.5198564922152699,
-        "match_bookings_over_over": 0.701116,
-        "match_corners_over_over": 0.767395,
-        "match_over_2_5": 0.5451462875076862,
-        "match_over_2_5_over": 0.545146,
-        "match_winner_away": 0.243824,
-        "match_winner_draw": 0.236319,
-        "match_winner_home": 0.519856,
-        "team_bookings_over_away": 0.724515,
-        "team_bookings_over_home": 0.648081,
-        "team_corners_over_away": 0.595906,
-        "team_corners_over_home": 0.684548
-      },
-      "model_version": "venue-poisson-goals-corners-cards-v2",
-      "odds": null,
-      "odds_status": "unavailable",
-      "rank_score": 0.717083,
-      "reasons": [
-        "Historical home/away sample: 7/6 matches",
-        "Count-market estimates are shown only when historical corner/card samples are available.",
-        "Bookmaker prices are comparisons only and do not determine model probabilities."
-      ],
-      "sample": {
-        "away_away_matches": 6,
-        "historical_matches": 110,
-        "home_home_matches": 7
-      },
-      "selection": "away",
-      "prediction_id": "df1976454842436589b9fcd4510c5329",
-      "status": "PENDING"
-    },
-    {
-      "away": "Modena",
-      "away_lambda": 2.2819,
-      "calibration": "uncalibrated_baseline",
-      "competition": "Serie B",
-      "count_expectations": {
-        "bookings": {
-          "away_lambda": 1.5585858585858585,
-          "away_sample": 6,
-          "home_lambda": 2.2343434343434345,
-          "home_sample": 6,
-          "league_matches": 110
-        },
-        "corners": {
-          "away_lambda": 4.767676767676767,
-          "away_sample": 6,
-          "home_lambda": 5.756565656565657,
-          "home_sample": 6,
-          "league_matches": 110
-        }
-      },
-      "data_quality": 0.812,
-      "estimated_probability": 0.723026,
-      "expected_value": null,
-      "fixture_id": "1845176",
-      "history_cutoff": "2026-11-25",
-      "home": "Pisa",
-      "home_lambda": 1.2468,
-      "kickoff": "2026-11-25T21:00:00+02:00",
-      "line": 8.5,
-      "market": "match_corners_over",
-      "market_odds": {
-        "1X2": {
-          "away": 3.0,
-          "draw": 3.25,
-          "home": 2.4
-        },
-        "away_team_goals": {
-          "0.5": {
-            "over": 1.32,
-            "under": 3.1
-          },
-          "1.5": {
-            "over": 2.5,
-            "under": 1.47
-          },
-          "2.5": {
-            "over": 5.6,
-            "under": 1.11
-          }
-        },
-        "btts": {
-          "no": 2.1,
-          "yes": 1.67
-        },
-        "double_chance": {
-          "12": 1.33,
-          "1X": 1.36,
-          "X2": 1.51
-        },
-        "home_team_goals": {
-          "0.5": {
-            "over": 1.25,
-            "under": 3.6
-          },
-          "1.5": {
-            "over": 2.15,
-            "under": 1.61
-          },
-          "2.5": {
-            "over": 4.6,
-            "under": 1.16
-          }
-        },
-        "match_total_goals": {
-          "1.0": {
-            "over": 1.07,
-            "under": 7.5
-          },
-          "1.5": {
-            "over": 1.27,
-            "under": 3.6
-          },
-          "2.0": {
-            "over": 1.42,
-            "under": 2.75
-          },
-          "2.5": {
-            "over": 1.86,
-            "under": 1.88
-          },
-          "3.0": {
-            "over": 2.45,
-            "under": 1.5
-          },
-          "3.5": {
-            "over": 3.0,
-            "under": 1.35
-          },
-          "4.0": {
-            "over": 5.0,
-            "under": 1.15
-          }
-        }
-      },
-      "market_probabilities": {
-        "away_win": 0.6064184497714535,
-        "btts_yes": 0.6398299051214535,
-        "btts_yes_yes": 0.63983,
-        "draw": 0.19472523763946462,
-        "home_win": 0.1988563125890822,
-        "match_bookings_over_over": 0.525067,
-        "match_corners_over_over": 0.723026,
-        "match_over_2_5": 0.6844284935291678,
-        "match_over_2_5_over": 0.684428,
-        "match_winner_away": 0.606418,
-        "match_winner_draw": 0.194725,
-        "match_winner_home": 0.198856,
-        "team_bookings_over_away": 0.461588,
-        "team_bookings_over_home": 0.653723,
-        "team_corners_over_away": 0.517842,
-        "team_corners_over_home": 0.681039
-      },
-      "model_version": "venue-poisson-goals-corners-cards-v2",
-      "odds": null,
-      "odds_status": "unavailable",
-      "rank_score": 0.716264,
-      "reasons": [
-        "Historical home/away sample: 6/6 matches",
-        "Count-market estimates are shown only when historical corner/card samples are available.",
-        "Bookmaker prices are comparisons only and do not determine model probabilities."
-      ],
-      "sample": {
-        "away_away_matches": 6,
-        "historical_matches": 110,
-        "home_home_matches": 6
-      },
-      "selection": "over",
-      "prediction_id": "2bfea13ee9c84b83af9857c53682287a",
-      "status": "PENDING"
-    },
-    {
-      "away": "Wealdstone",
-      "away_lambda": 1.3216,
-      "calibration": "uncalibrated_baseline",
-      "competition": "National League",
-      "count_expectations": {
-        "bookings": {
-          "away_lambda": 3.4045833333333335,
-          "away_sample": 9,
-          "home_lambda": 2.090909090909091,
-          "home_sample": 8,
-          "league_matches": 200
-        },
-        "corners": {
-          "away_lambda": 3.6075,
-          "away_sample": 9,
-          "home_lambda": 5.243636363636363,
-          "home_sample": 8,
-          "league_matches": 200
-        }
-      },
-      "data_quality": 1.0,
-      "estimated_probability": 0.618042,
-      "expected_value": null,
-      "fixture_id": "1823599",
-      "history_cutoff": "2026-11-24",
-      "home": "Altrincham",
-      "home_lambda": 1.3477,
-      "kickoff": "2026-11-24T21:45:00+02:00",
-      "line": 1.5,
-      "market": "team_bookings_over",
-      "market_odds": {
-        "1X2": {
-          "away": 3.6,
-          "draw": 3.9,
-          "home": 1.84
-        },
-        "away_team_goals": {
-          "0.5": {
-            "over": 1.28,
-            "under": 3.25
-          },
-          "1.5": {
-            "over": 2.3,
-            "under": 1.52
-          },
-          "2.5": {
-            "over": 4.9,
-            "under": 1.13
-          }
-        },
-        "btts": {
-          "no": 2.45,
-          "yes": 1.47
-        },
-        "double_chance": {
-          "12": 1.23,
-          "1X": 1.26,
-          "X2": 1.79
-        },
-        "home_team_goals": {
-          "0.5": {
-            "over": 1.11,
-            "under": 5.2
-          },
-          "1.5": {
-            "over": 1.6,
-            "under": 2.15
-          },
-          "2.5": {
-            "over": 2.8,
-            "under": 1.37
-          }
-        },
-        "match_total_goals": {
-          "1.5": {
-            "over": 1.15,
-            "under": 5.1
-          },
-          "2.0": {
-            "over": 1.2,
-            "under": 4.2
-          },
-          "2.5": {
-            "over": 1.49,
-            "under": 2.5
-          },
-          "3.0": {
-            "over": 1.75,
-            "under": 2.0
-          },
-          "3.5": {
-            "over": 2.2,
-            "under": 1.63
-          },
-          "4.0": {
-            "over": 3.1,
-            "under": 1.35
-          },
-          "4.5": {
-            "over": 3.6,
-            "under": 1.26
-          }
-        }
-      },
-      "market_probabilities": {
-        "away_win": 0.3640181333191014,
-        "btts_yes": 0.5427552921423513,
-        "btts_yes_yes": 0.542755,
-        "draw": 0.2598745428498202,
-        "home_win": 0.376107323831078,
-        "match_bookings_over_over": 0.797789,
-        "match_corners_over_over": 0.524578,
-        "match_over_2_5": 0.4988254311717701,
-        "match_over_2_5_over": 0.498825,
-        "match_winner_away": 0.364018,
-        "match_winner_draw": 0.259875,
-        "match_winner_home": 0.376107,
-        "team_bookings_over_away": 0.853677,
-        "team_bookings_over_home": 0.618042,
-        "team_corners_over_away": 0.294996,
-        "team_corners_over_home": 0.601168
-      },
-      "model_version": "venue-poisson-goals-corners-cards-v2",
-      "odds": null,
-      "odds_status": "unavailable",
-      "rank_score": 0.714923,
-      "reasons": [
-        "Historical home/away sample: 8/9 matches",
-        "Count-market estimates are shown only when historical corner/card samples are available.",
-        "Bookmaker prices are comparisons only and do not determine model probabilities."
-      ],
-      "sample": {
-        "away_away_matches": 9,
-        "historical_matches": 200,
-        "home_home_matches": 8
-      },
-      "selection": "home",
-      "prediction_id": "00031d4ccd704b1cb8bf69582a940e49",
-      "status": "PENDING"
-    },
-    {
-      "away": "Wealdstone",
-      "away_lambda": 1.3216,
-      "calibration": "uncalibrated_baseline",
-      "competition": "National League",
-      "count_expectations": {
-        "bookings": {
-          "away_lambda": 3.4045833333333335,
-          "away_sample": 9,
-          "home_lambda": 2.090909090909091,
-          "home_sample": 8,
-          "league_matches": 200
-        },
-        "corners": {
-          "away_lambda": 3.6075,
-          "away_sample": 9,
-          "home_lambda": 5.243636363636363,
-          "home_sample": 8,
-          "league_matches": 200
-        }
-      },
-      "data_quality": 1.0,
-      "estimated_probability": 0.601168,
-      "expected_value": null,
-      "fixture_id": "1823599",
-      "history_cutoff": "2026-11-24",
-      "home": "Altrincham",
-      "home_lambda": 1.3477,
-      "kickoff": "2026-11-24T21:45:00+02:00",
-      "line": 4.5,
-      "market": "team_corners_over",
-      "market_odds": {
-        "1X2": {
-          "away": 3.6,
-          "draw": 3.9,
-          "home": 1.84
-        },
-        "away_team_goals": {
-          "0.5": {
-            "over": 1.28,
-            "under": 3.25
-          },
-          "1.5": {
-            "over": 2.3,
-            "under": 1.52
-          },
-          "2.5": {
-            "over": 4.9,
-            "under": 1.13
-          }
-        },
-        "btts": {
-          "no": 2.45,
-          "yes": 1.47
-        },
-        "double_chance": {
-          "12": 1.23,
-          "1X": 1.26,
-          "X2": 1.79
-        },
-        "home_team_goals": {
-          "0.5": {
-            "over": 1.11,
-            "under": 5.2
-          },
-          "1.5": {
-            "over": 1.6,
-            "under": 2.15
-          },
-          "2.5": {
-            "over": 2.8,
-            "under": 1.37
-          }
-        },
-        "match_total_goals": {
-          "1.5": {
-            "over": 1.15,
-            "under": 5.1
-          },
-          "2.0": {
-            "over": 1.2,
-            "under": 4.2
-          },
-          "2.5": {
-            "over": 1.49,
-            "under": 2.5
-          },
-          "3.0": {
-            "over": 1.75,
-            "under": 2.0
-          },
-          "3.5": {
-            "over": 2.2,
-            "under": 1.63
-          },
-          "4.0": {
-            "over": 3.1,
-            "under": 1.35
-          },
-          "4.5": {
-            "over": 3.6,
-            "under": 1.26
-          }
-        }
-      },
-      "market_probabilities": {
-        "away_win": 0.3640181333191014,
-        "btts_yes": 0.5427552921423513,
-        "btts_yes_yes": 0.542755,
-        "draw": 0.2598745428498202,
-        "home_win": 0.376107323831078,
-        "match_bookings_over_over": 0.797789,
-        "match_corners_over_over": 0.524578,
-        "match_over_2_5": 0.4988254311717701,
-        "match_over_2_5_over": 0.498825,
-        "match_winner_away": 0.364018,
-        "match_winner_draw": 0.259875,
-        "match_winner_home": 0.376107,
-        "team_bookings_over_away": 0.853677,
-        "team_bookings_over_home": 0.618042,
-        "team_corners_over_away": 0.294996,
-        "team_corners_over_home": 0.601168
-      },
-      "model_version": "venue-poisson-goals-corners-cards-v2",
-      "odds": null,
-      "odds_status": "unavailable",
-      "rank_score": 0.705642,
-      "reasons": [
-        "Historical home/away sample: 8/9 matches",
-        "Count-market estimates are shown only when historical corner/card samples are available.",
-        "Bookmaker prices are comparisons only and do not determine model probabilities."
-      ],
-      "sample": {
-        "away_away_matches": 9,
-        "historical_matches": 200,
-        "home_home_matches": 8
-      },
-      "selection": "home",
-      "prediction_id": "60cbd4e619ac4917aed535a992fe8624",
-      "status": "PENDING"
-    },
-    {
-      "away": "Empoli",
-      "away_lambda": 1.1188,
-      "calibration": "uncalibrated_baseline",
-      "competition": "Serie B",
-      "count_expectations": {
-        "bookings": {
-          "away_lambda": 2.5585858585858587,
-          "away_sample": 6,
-          "home_lambda": 2.210909090909091,
-          "home_sample": 7,
-          "league_matches": 110
-        },
-        "corners": {
-          "away_lambda": 5.212121212121212,
-          "away_sample": 6,
-          "home_lambda": 5.780909090909091,
-          "home_sample": 7,
-          "league_matches": 110
-        }
-      },
-      "data_quality": 0.812,
-      "estimated_probability": 0.701116,
-      "expected_value": null,
-      "fixture_id": "1845177",
-      "history_cutoff": "2026-11-24",
-      "home": "Benevento",
-      "home_lambda": 1.743,
-      "kickoff": "2026-11-24T21:00:00+02:00",
-      "line": 3.5,
-      "market": "match_bookings_over",
-      "market_odds": {},
-      "market_probabilities": {
-        "away_win": 0.24382449113673546,
-        "btts_yes": 0.555499575357005,
-        "btts_yes_yes": 0.5555,
-        "draw": 0.2363190166479944,
-        "home_win": 0.5198564922152699,
-        "match_bookings_over_over": 0.701116,
-        "match_corners_over_over": 0.767395,
-        "match_over_2_5": 0.5451462875076862,
-        "match_over_2_5_over": 0.545146,
-        "match_winner_away": 0.243824,
-        "match_winner_draw": 0.236319,
-        "match_winner_home": 0.519856,
-        "team_bookings_over_away": 0.724515,
-        "team_bookings_over_home": 0.648081,
-        "team_corners_over_away": 0.595906,
-        "team_corners_over_home": 0.684548
-      },
-      "model_version": "venue-poisson-goals-corners-cards-v2",
-      "odds": null,
-      "odds_status": "unavailable",
-      "rank_score": 0.704214,
-      "reasons": [
-        "Historical home/away sample: 7/6 matches",
-        "Count-market estimates are shown only when historical corner/card samples are available.",
-        "Bookmaker prices are comparisons only and do not determine model probabilities."
-      ],
-      "sample": {
-        "away_away_matches": 6,
-        "historical_matches": 110,
-        "home_home_matches": 7
-      },
-      "selection": "over",
-      "prediction_id": "1dc476a47d6d4caba426474205274df3",
+      "prediction_id": "1ceb1133a158424dacfec1026f7169f4",
       "status": "PENDING"
     },
     {
@@ -4647,488 +2762,7 @@
         "home_home_matches": 8
       },
       "selection": "yes",
-      "prediction_id": "b47fe817dfee4e9690d43c9ac3183bcb",
-      "status": "PENDING"
-    },
-    {
-      "away": "Aris",
-      "away_lambda": 0.9959,
-      "calibration": "uncalibrated_baseline",
-      "competition": "Super League",
-      "count_expectations": {
-        "bookings": {
-          "away_lambda": 2.0217391304347827,
-          "away_sample": 5,
-          "home_lambda": 2.7439613526570046,
-          "home_sample": 6,
-          "league_matches": 69
-        },
-        "corners": {
-          "away_lambda": 5.407608695652174,
-          "away_sample": 5,
-          "home_lambda": 4.859903381642512,
-          "home_sample": 6,
-          "league_matches": 69
-        }
-      },
-      "data_quality": 0.684,
-      "estimated_probability": 0.759207,
-      "expected_value": null,
-      "fixture_id": "1836632",
-      "history_cutoff": "2026-11-23",
-      "home": "Asteras Tripolis",
-      "home_lambda": 1.3444,
-      "kickoff": "2026-11-23T17:00:00+02:00",
-      "line": 1.5,
-      "market": "team_bookings_over",
-      "market_odds": {},
-      "market_probabilities": {
-        "away_win": 0.2773326396739889,
-        "btts_yes": 0.46621182254506083,
-        "btts_yes_yes": 0.466212,
-        "draw": 0.2753761151566278,
-        "home_win": 0.4472912451693829,
-        "match_bookings_over_over": 0.700534,
-        "match_corners_over_over": 0.696483,
-        "match_over_2_5": 0.41461899638032396,
-        "match_over_2_5_over": 0.414619,
-        "match_winner_away": 0.277333,
-        "match_winner_draw": 0.275376,
-        "match_winner_home": 0.447291,
-        "team_bookings_over_away": 0.599846,
-        "team_bookings_over_home": 0.759207,
-        "team_corners_over_away": 0.627906,
-        "team_corners_over_home": 0.53459
-      },
-      "model_version": "venue-poisson-goals-corners-cards-v2",
-      "odds": null,
-      "odds_status": "unavailable",
-      "rank_score": 0.697764,
-      "reasons": [
-        "Historical home/away sample: 6/5 matches",
-        "Count-market estimates are shown only when historical corner/card samples are available.",
-        "Bookmaker prices are comparisons only and do not determine model probabilities."
-      ],
-      "sample": {
-        "away_away_matches": 5,
-        "historical_matches": 69,
-        "home_home_matches": 6
-      },
-      "selection": "home",
-      "prediction_id": "ea97024b80f6435488be44ec6c5a47b6",
-      "status": "PENDING"
-    },
-    {
-      "away": "Empoli",
-      "away_lambda": 1.1188,
-      "calibration": "uncalibrated_baseline",
-      "competition": "Serie B",
-      "count_expectations": {
-        "bookings": {
-          "away_lambda": 2.5585858585858587,
-          "away_sample": 6,
-          "home_lambda": 2.210909090909091,
-          "home_sample": 7,
-          "league_matches": 110
-        },
-        "corners": {
-          "away_lambda": 5.212121212121212,
-          "away_sample": 6,
-          "home_lambda": 5.780909090909091,
-          "home_sample": 7,
-          "league_matches": 110
-        }
-      },
-      "data_quality": 0.812,
-      "estimated_probability": 0.684548,
-      "expected_value": null,
-      "fixture_id": "1845177",
-      "history_cutoff": "2026-11-24",
-      "home": "Benevento",
-      "home_lambda": 1.743,
-      "kickoff": "2026-11-24T21:00:00+02:00",
-      "line": 4.5,
-      "market": "team_corners_over",
-      "market_odds": {},
-      "market_probabilities": {
-        "away_win": 0.24382449113673546,
-        "btts_yes": 0.555499575357005,
-        "btts_yes_yes": 0.5555,
-        "draw": 0.2363190166479944,
-        "home_win": 0.5198564922152699,
-        "match_bookings_over_over": 0.701116,
-        "match_corners_over_over": 0.767395,
-        "match_over_2_5": 0.5451462875076862,
-        "match_over_2_5_over": 0.545146,
-        "match_winner_away": 0.243824,
-        "match_winner_draw": 0.236319,
-        "match_winner_home": 0.519856,
-        "team_bookings_over_away": 0.724515,
-        "team_bookings_over_home": 0.648081,
-        "team_corners_over_away": 0.595906,
-        "team_corners_over_home": 0.684548
-      },
-      "model_version": "venue-poisson-goals-corners-cards-v2",
-      "odds": null,
-      "odds_status": "unavailable",
-      "rank_score": 0.695101,
-      "reasons": [
-        "Historical home/away sample: 7/6 matches",
-        "Count-market estimates are shown only when historical corner/card samples are available.",
-        "Bookmaker prices are comparisons only and do not determine model probabilities."
-      ],
-      "sample": {
-        "away_away_matches": 6,
-        "historical_matches": 110,
-        "home_home_matches": 7
-      },
-      "selection": "home",
-      "prediction_id": "880a7674f7d44b66ad97a39c49033b05",
-      "status": "PENDING"
-    },
-    {
-      "away": "Dunkerque",
-      "away_lambda": 1.3003,
-      "calibration": "uncalibrated_baseline",
-      "competition": "Ligue 2",
-      "count_expectations": {
-        "bookings": {
-          "away_lambda": 2.611111111111111,
-          "away_sample": 5,
-          "home_lambda": 1.4236111111111112,
-          "home_sample": 5,
-          "league_matches": 108
-        },
-        "corners": {
-          "away_lambda": 4.71875,
-          "away_sample": 5,
-          "home_lambda": 5.885416666666666,
-          "home_sample": 5,
-          "league_matches": 108
-        }
-      },
-      "data_quality": 0.719,
-      "estimated_probability": 0.734753,
-      "expected_value": null,
-      "fixture_id": "1795074",
-      "history_cutoff": "2026-11-23",
-      "home": "Sochaux",
-      "home_lambda": 1.3016,
-      "kickoff": "2026-11-23T21:45:00+02:00",
-      "line": 1.5,
-      "market": "team_bookings_over",
-      "market_odds": {},
-      "market_probabilities": {
-        "away_win": 0.36779482716145045,
-        "btts_yes": 0.5295864558159821,
-        "btts_yes_yes": 0.529586,
-        "draw": 0.26380140392671586,
-        "home_win": 0.3684037689118338,
-        "match_bookings_over_over": 0.573284,
-        "match_corners_over_over": 0.730967,
-        "match_over_2_5": 0.4820473043439046,
-        "match_over_2_5_over": 0.482047,
-        "match_winner_away": 0.367795,
-        "match_winner_draw": 0.263801,
-        "match_winner_home": 0.368404,
-        "team_bookings_over_away": 0.734753,
-        "team_bookings_over_home": 0.416291,
-        "team_corners_over_away": 0.508854,
-        "team_corners_over_home": 0.699313
-      },
-      "model_version": "venue-poisson-goals-corners-cards-v2",
-      "odds": null,
-      "odds_status": "unavailable",
-      "rank_score": 0.694814,
-      "reasons": [
-        "Historical home/away sample: 5/5 matches",
-        "Count-market estimates are shown only when historical corner/card samples are available.",
-        "Bookmaker prices are comparisons only and do not determine model probabilities."
-      ],
-      "sample": {
-        "away_away_matches": 5,
-        "historical_matches": 108,
-        "home_home_matches": 5
-      },
-      "selection": "away",
-      "prediction_id": "93cfd2f437964c52ad8db5ebafcc5c26",
-      "status": "PENDING"
-    },
-    {
-      "away": "Modena",
-      "away_lambda": 2.2819,
-      "calibration": "uncalibrated_baseline",
-      "competition": "Serie B",
-      "count_expectations": {
-        "bookings": {
-          "away_lambda": 1.5585858585858585,
-          "away_sample": 6,
-          "home_lambda": 2.2343434343434345,
-          "home_sample": 6,
-          "league_matches": 110
-        },
-        "corners": {
-          "away_lambda": 4.767676767676767,
-          "away_sample": 6,
-          "home_lambda": 5.756565656565657,
-          "home_sample": 6,
-          "league_matches": 110
-        }
-      },
-      "data_quality": 0.812,
-      "estimated_probability": 0.681039,
-      "expected_value": null,
-      "fixture_id": "1845176",
-      "history_cutoff": "2026-11-25",
-      "home": "Pisa",
-      "home_lambda": 1.2468,
-      "kickoff": "2026-11-25T21:00:00+02:00",
-      "line": 4.5,
-      "market": "team_corners_over",
-      "market_odds": {
-        "1X2": {
-          "away": 3.0,
-          "draw": 3.25,
-          "home": 2.4
-        },
-        "away_team_goals": {
-          "0.5": {
-            "over": 1.32,
-            "under": 3.1
-          },
-          "1.5": {
-            "over": 2.5,
-            "under": 1.47
-          },
-          "2.5": {
-            "over": 5.6,
-            "under": 1.11
-          }
-        },
-        "btts": {
-          "no": 2.1,
-          "yes": 1.67
-        },
-        "double_chance": {
-          "12": 1.33,
-          "1X": 1.36,
-          "X2": 1.51
-        },
-        "home_team_goals": {
-          "0.5": {
-            "over": 1.25,
-            "under": 3.6
-          },
-          "1.5": {
-            "over": 2.15,
-            "under": 1.61
-          },
-          "2.5": {
-            "over": 4.6,
-            "under": 1.16
-          }
-        },
-        "match_total_goals": {
-          "1.0": {
-            "over": 1.07,
-            "under": 7.5
-          },
-          "1.5": {
-            "over": 1.27,
-            "under": 3.6
-          },
-          "2.0": {
-            "over": 1.42,
-            "under": 2.75
-          },
-          "2.5": {
-            "over": 1.86,
-            "under": 1.88
-          },
-          "3.0": {
-            "over": 2.45,
-            "under": 1.5
-          },
-          "3.5": {
-            "over": 3.0,
-            "under": 1.35
-          },
-          "4.0": {
-            "over": 5.0,
-            "under": 1.15
-          }
-        }
-      },
-      "market_probabilities": {
-        "away_win": 0.6064184497714535,
-        "btts_yes": 0.6398299051214535,
-        "btts_yes_yes": 0.63983,
-        "draw": 0.19472523763946462,
-        "home_win": 0.1988563125890822,
-        "match_bookings_over_over": 0.525067,
-        "match_corners_over_over": 0.723026,
-        "match_over_2_5": 0.6844284935291678,
-        "match_over_2_5_over": 0.684428,
-        "match_winner_away": 0.606418,
-        "match_winner_draw": 0.194725,
-        "match_winner_home": 0.198856,
-        "team_bookings_over_away": 0.461588,
-        "team_bookings_over_home": 0.653723,
-        "team_corners_over_away": 0.517842,
-        "team_corners_over_home": 0.681039
-      },
-      "model_version": "venue-poisson-goals-corners-cards-v2",
-      "odds": null,
-      "odds_status": "unavailable",
-      "rank_score": 0.693171,
-      "reasons": [
-        "Historical home/away sample: 6/6 matches",
-        "Count-market estimates are shown only when historical corner/card samples are available.",
-        "Bookmaker prices are comparisons only and do not determine model probabilities."
-      ],
-      "sample": {
-        "away_away_matches": 6,
-        "historical_matches": 110,
-        "home_home_matches": 6
-      },
-      "selection": "home",
-      "prediction_id": "ab9b9d62c7cc41a0ba7fa23427355142",
-      "status": "PENDING"
-    },
-    {
-      "away": "Dunkerque",
-      "away_lambda": 1.3003,
-      "calibration": "uncalibrated_baseline",
-      "competition": "Ligue 2",
-      "count_expectations": {
-        "bookings": {
-          "away_lambda": 2.611111111111111,
-          "away_sample": 5,
-          "home_lambda": 1.4236111111111112,
-          "home_sample": 5,
-          "league_matches": 108
-        },
-        "corners": {
-          "away_lambda": 4.71875,
-          "away_sample": 5,
-          "home_lambda": 5.885416666666666,
-          "home_sample": 5,
-          "league_matches": 108
-        }
-      },
-      "data_quality": 0.719,
-      "estimated_probability": 0.730967,
-      "expected_value": null,
-      "fixture_id": "1795074",
-      "history_cutoff": "2026-11-23",
-      "home": "Sochaux",
-      "home_lambda": 1.3016,
-      "kickoff": "2026-11-23T21:45:00+02:00",
-      "line": 8.5,
-      "market": "match_corners_over",
-      "market_odds": {},
-      "market_probabilities": {
-        "away_win": 0.36779482716145045,
-        "btts_yes": 0.5295864558159821,
-        "btts_yes_yes": 0.529586,
-        "draw": 0.26380140392671586,
-        "home_win": 0.3684037689118338,
-        "match_bookings_over_over": 0.573284,
-        "match_corners_over_over": 0.730967,
-        "match_over_2_5": 0.4820473043439046,
-        "match_over_2_5_over": 0.482047,
-        "match_winner_away": 0.367795,
-        "match_winner_draw": 0.263801,
-        "match_winner_home": 0.368404,
-        "team_bookings_over_away": 0.734753,
-        "team_bookings_over_home": 0.416291,
-        "team_corners_over_away": 0.508854,
-        "team_corners_over_home": 0.699313
-      },
-      "model_version": "venue-poisson-goals-corners-cards-v2",
-      "odds": null,
-      "odds_status": "unavailable",
-      "rank_score": 0.692732,
-      "reasons": [
-        "Historical home/away sample: 5/5 matches",
-        "Count-market estimates are shown only when historical corner/card samples are available.",
-        "Bookmaker prices are comparisons only and do not determine model probabilities."
-      ],
-      "sample": {
-        "away_away_matches": 5,
-        "historical_matches": 108,
-        "home_home_matches": 5
-      },
-      "selection": "over",
-      "prediction_id": "7123cc8a41b44ffc80e353aee393b679",
-      "status": "PENDING"
-    },
-    {
-      "away": "Ascoli",
-      "away_lambda": 1.2689,
-      "calibration": "uncalibrated_baseline",
-      "competition": "Serie B",
-      "count_expectations": {
-        "bookings": {
-          "away_lambda": 2.128409090909091,
-          "away_sample": 5,
-          "home_lambda": 2.2343434343434345,
-          "home_sample": 6,
-          "league_matches": 110
-        },
-        "corners": {
-          "away_lambda": 5.363636363636363,
-          "away_sample": 5,
-          "home_lambda": 5.201010101010102,
-          "home_sample": 6,
-          "league_matches": 110
-        }
-      },
-      "data_quality": 0.719,
-      "estimated_probability": 0.72706,
-      "expected_value": null,
-      "fixture_id": "1845175",
-      "history_cutoff": "2026-11-24",
-      "home": "Cesena FC",
-      "home_lambda": 0.8743,
-      "kickoff": "2026-11-24T21:00:00+02:00",
-      "line": 8.5,
-      "market": "match_corners_over",
-      "market_odds": {},
-      "market_probabilities": {
-        "away_win": 0.4555589373636279,
-        "btts_yes": 0.41898431749977183,
-        "btts_yes_yes": 0.418984,
-        "draw": 0.28824459842060685,
-        "home_win": 0.2561964642157651,
-        "match_bookings_over_over": 0.634021,
-        "match_corners_over_over": 0.72706,
-        "match_over_2_5": 0.36201974187679165,
-        "match_over_2_5_over": 0.36202,
-        "match_winner_away": 0.455559,
-        "match_winner_draw": 0.288245,
-        "match_winner_home": 0.256196,
-        "team_bookings_over_away": 0.627636,
-        "team_bookings_over_home": 0.653723,
-        "team_corners_over_away": 0.620843,
-        "team_corners_over_home": 0.594042
-      },
-      "model_version": "venue-poisson-goals-corners-cards-v2",
-      "odds": null,
-      "odds_status": "unavailable",
-      "rank_score": 0.690583,
-      "reasons": [
-        "Historical home/away sample: 6/5 matches",
-        "Count-market estimates are shown only when historical corner/card samples are available.",
-        "Bookmaker prices are comparisons only and do not determine model probabilities."
-      ],
-      "sample": {
-        "away_away_matches": 5,
-        "historical_matches": 110,
-        "home_home_matches": 6
-      },
-      "selection": "over",
-      "prediction_id": "2b0088f58e95444d838efcaa00d1a0b7",
+      "prediction_id": "cdea1046373a47d68fcadf46a9df2676",
       "status": "PENDING"
     },
     {
@@ -5269,284 +2903,7 @@
         "home_home_matches": 6
       },
       "selection": "yes",
-      "prediction_id": "f42d9b80637d47d3910722dcc53cce25",
-      "status": "PENDING"
-    },
-    {
-      "away": "Modena",
-      "away_lambda": 2.2819,
-      "calibration": "uncalibrated_baseline",
-      "competition": "Serie B",
-      "count_expectations": {
-        "bookings": {
-          "away_lambda": 1.5585858585858585,
-          "away_sample": 6,
-          "home_lambda": 2.2343434343434345,
-          "home_sample": 6,
-          "league_matches": 110
-        },
-        "corners": {
-          "away_lambda": 4.767676767676767,
-          "away_sample": 6,
-          "home_lambda": 5.756565656565657,
-          "home_sample": 6,
-          "league_matches": 110
-        }
-      },
-      "data_quality": 0.812,
-      "estimated_probability": 0.653723,
-      "expected_value": null,
-      "fixture_id": "1845176",
-      "history_cutoff": "2026-11-25",
-      "home": "Pisa",
-      "home_lambda": 1.2468,
-      "kickoff": "2026-11-25T21:00:00+02:00",
-      "line": 1.5,
-      "market": "team_bookings_over",
-      "market_odds": {
-        "1X2": {
-          "away": 3.0,
-          "draw": 3.25,
-          "home": 2.4
-        },
-        "away_team_goals": {
-          "0.5": {
-            "over": 1.32,
-            "under": 3.1
-          },
-          "1.5": {
-            "over": 2.5,
-            "under": 1.47
-          },
-          "2.5": {
-            "over": 5.6,
-            "under": 1.11
-          }
-        },
-        "btts": {
-          "no": 2.1,
-          "yes": 1.67
-        },
-        "double_chance": {
-          "12": 1.33,
-          "1X": 1.36,
-          "X2": 1.51
-        },
-        "home_team_goals": {
-          "0.5": {
-            "over": 1.25,
-            "under": 3.6
-          },
-          "1.5": {
-            "over": 2.15,
-            "under": 1.61
-          },
-          "2.5": {
-            "over": 4.6,
-            "under": 1.16
-          }
-        },
-        "match_total_goals": {
-          "1.0": {
-            "over": 1.07,
-            "under": 7.5
-          },
-          "1.5": {
-            "over": 1.27,
-            "under": 3.6
-          },
-          "2.0": {
-            "over": 1.42,
-            "under": 2.75
-          },
-          "2.5": {
-            "over": 1.86,
-            "under": 1.88
-          },
-          "3.0": {
-            "over": 2.45,
-            "under": 1.5
-          },
-          "3.5": {
-            "over": 3.0,
-            "under": 1.35
-          },
-          "4.0": {
-            "over": 5.0,
-            "under": 1.15
-          }
-        }
-      },
-      "market_probabilities": {
-        "away_win": 0.6064184497714535,
-        "btts_yes": 0.6398299051214535,
-        "btts_yes_yes": 0.63983,
-        "draw": 0.19472523763946462,
-        "home_win": 0.1988563125890822,
-        "match_bookings_over_over": 0.525067,
-        "match_corners_over_over": 0.723026,
-        "match_over_2_5": 0.6844284935291678,
-        "match_over_2_5_over": 0.684428,
-        "match_winner_away": 0.606418,
-        "match_winner_draw": 0.194725,
-        "match_winner_home": 0.198856,
-        "team_bookings_over_away": 0.461588,
-        "team_bookings_over_home": 0.653723,
-        "team_corners_over_away": 0.517842,
-        "team_corners_over_home": 0.681039
-      },
-      "model_version": "venue-poisson-goals-corners-cards-v2",
-      "odds": null,
-      "odds_status": "unavailable",
-      "rank_score": 0.678148,
-      "reasons": [
-        "Historical home/away sample: 6/6 matches",
-        "Count-market estimates are shown only when historical corner/card samples are available.",
-        "Bookmaker prices are comparisons only and do not determine model probabilities."
-      ],
-      "sample": {
-        "away_away_matches": 6,
-        "historical_matches": 110,
-        "home_home_matches": 6
-      },
-      "selection": "home",
-      "prediction_id": "4d65704b64944906907b30a80d658c99",
-      "status": "PENDING"
-    },
-    {
-      "away": "Dunkerque",
-      "away_lambda": 1.3003,
-      "calibration": "uncalibrated_baseline",
-      "competition": "Ligue 2",
-      "count_expectations": {
-        "bookings": {
-          "away_lambda": 2.611111111111111,
-          "away_sample": 5,
-          "home_lambda": 1.4236111111111112,
-          "home_sample": 5,
-          "league_matches": 108
-        },
-        "corners": {
-          "away_lambda": 4.71875,
-          "away_sample": 5,
-          "home_lambda": 5.885416666666666,
-          "home_sample": 5,
-          "league_matches": 108
-        }
-      },
-      "data_quality": 0.719,
-      "estimated_probability": 0.699313,
-      "expected_value": null,
-      "fixture_id": "1795074",
-      "history_cutoff": "2026-11-23",
-      "home": "Sochaux",
-      "home_lambda": 1.3016,
-      "kickoff": "2026-11-23T21:45:00+02:00",
-      "line": 4.5,
-      "market": "team_corners_over",
-      "market_odds": {},
-      "market_probabilities": {
-        "away_win": 0.36779482716145045,
-        "btts_yes": 0.5295864558159821,
-        "btts_yes_yes": 0.529586,
-        "draw": 0.26380140392671586,
-        "home_win": 0.3684037689118338,
-        "match_bookings_over_over": 0.573284,
-        "match_corners_over_over": 0.730967,
-        "match_over_2_5": 0.4820473043439046,
-        "match_over_2_5_over": 0.482047,
-        "match_winner_away": 0.367795,
-        "match_winner_draw": 0.263801,
-        "match_winner_home": 0.368404,
-        "team_bookings_over_away": 0.734753,
-        "team_bookings_over_home": 0.416291,
-        "team_corners_over_away": 0.508854,
-        "team_corners_over_home": 0.699313
-      },
-      "model_version": "venue-poisson-goals-corners-cards-v2",
-      "odds": null,
-      "odds_status": "unavailable",
-      "rank_score": 0.675322,
-      "reasons": [
-        "Historical home/away sample: 5/5 matches",
-        "Count-market estimates are shown only when historical corner/card samples are available.",
-        "Bookmaker prices are comparisons only and do not determine model probabilities."
-      ],
-      "sample": {
-        "away_away_matches": 5,
-        "historical_matches": 108,
-        "home_home_matches": 5
-      },
-      "selection": "home",
-      "prediction_id": "68ae649ddee24ddca95cba9a861173f3",
-      "status": "PENDING"
-    },
-    {
-      "away": "Empoli",
-      "away_lambda": 1.1188,
-      "calibration": "uncalibrated_baseline",
-      "competition": "Serie B",
-      "count_expectations": {
-        "bookings": {
-          "away_lambda": 2.5585858585858587,
-          "away_sample": 6,
-          "home_lambda": 2.210909090909091,
-          "home_sample": 7,
-          "league_matches": 110
-        },
-        "corners": {
-          "away_lambda": 5.212121212121212,
-          "away_sample": 6,
-          "home_lambda": 5.780909090909091,
-          "home_sample": 7,
-          "league_matches": 110
-        }
-      },
-      "data_quality": 0.812,
-      "estimated_probability": 0.648081,
-      "expected_value": null,
-      "fixture_id": "1845177",
-      "history_cutoff": "2026-11-24",
-      "home": "Benevento",
-      "home_lambda": 1.743,
-      "kickoff": "2026-11-24T21:00:00+02:00",
-      "line": 1.5,
-      "market": "team_bookings_over",
-      "market_odds": {},
-      "market_probabilities": {
-        "away_win": 0.24382449113673546,
-        "btts_yes": 0.555499575357005,
-        "btts_yes_yes": 0.5555,
-        "draw": 0.2363190166479944,
-        "home_win": 0.5198564922152699,
-        "match_bookings_over_over": 0.701116,
-        "match_corners_over_over": 0.767395,
-        "match_over_2_5": 0.5451462875076862,
-        "match_over_2_5_over": 0.545146,
-        "match_winner_away": 0.243824,
-        "match_winner_draw": 0.236319,
-        "match_winner_home": 0.519856,
-        "team_bookings_over_away": 0.724515,
-        "team_bookings_over_home": 0.648081,
-        "team_corners_over_away": 0.595906,
-        "team_corners_over_home": 0.684548
-      },
-      "model_version": "venue-poisson-goals-corners-cards-v2",
-      "odds": null,
-      "odds_status": "unavailable",
-      "rank_score": 0.675045,
-      "reasons": [
-        "Historical home/away sample: 7/6 matches",
-        "Count-market estimates are shown only when historical corner/card samples are available.",
-        "Bookmaker prices are comparisons only and do not determine model probabilities."
-      ],
-      "sample": {
-        "away_away_matches": 6,
-        "historical_matches": 110,
-        "home_home_matches": 7
-      },
-      "selection": "home",
-      "prediction_id": "ba8ef694ed384fd4b09793a9e2864a11",
+      "prediction_id": "e526cb1ea7594ce38a5c05f61c93665d",
       "status": "PENDING"
     },
     {
@@ -5851,352 +3208,7 @@
         "home_home_matches": 5
       },
       "selection": "over",
-      "prediction_id": "df437f9bc01f45589de1d0e96d71ae48",
-      "status": "PENDING"
-    },
-    {
-      "away": "Aris",
-      "away_lambda": 0.9959,
-      "calibration": "uncalibrated_baseline",
-      "competition": "Super League",
-      "count_expectations": {
-        "bookings": {
-          "away_lambda": 2.0217391304347827,
-          "away_sample": 5,
-          "home_lambda": 2.7439613526570046,
-          "home_sample": 6,
-          "league_matches": 69
-        },
-        "corners": {
-          "away_lambda": 5.407608695652174,
-          "away_sample": 5,
-          "home_lambda": 4.859903381642512,
-          "home_sample": 6,
-          "league_matches": 69
-        }
-      },
-      "data_quality": 0.684,
-      "estimated_probability": 0.700534,
-      "expected_value": null,
-      "fixture_id": "1836632",
-      "history_cutoff": "2026-11-23",
-      "home": "Asteras Tripolis",
-      "home_lambda": 1.3444,
-      "kickoff": "2026-11-23T17:00:00+02:00",
-      "line": 3.5,
-      "market": "match_bookings_over",
-      "market_odds": {},
-      "market_probabilities": {
-        "away_win": 0.2773326396739889,
-        "btts_yes": 0.46621182254506083,
-        "btts_yes_yes": 0.466212,
-        "draw": 0.2753761151566278,
-        "home_win": 0.4472912451693829,
-        "match_bookings_over_over": 0.700534,
-        "match_corners_over_over": 0.696483,
-        "match_over_2_5": 0.41461899638032396,
-        "match_over_2_5_over": 0.414619,
-        "match_winner_away": 0.277333,
-        "match_winner_draw": 0.275376,
-        "match_winner_home": 0.447291,
-        "team_bookings_over_away": 0.599846,
-        "team_bookings_over_home": 0.759207,
-        "team_corners_over_away": 0.627906,
-        "team_corners_over_home": 0.53459
-      },
-      "model_version": "venue-poisson-goals-corners-cards-v2",
-      "odds": null,
-      "odds_status": "unavailable",
-      "rank_score": 0.665494,
-      "reasons": [
-        "Historical home/away sample: 6/5 matches",
-        "Count-market estimates are shown only when historical corner/card samples are available.",
-        "Bookmaker prices are comparisons only and do not determine model probabilities."
-      ],
-      "sample": {
-        "away_away_matches": 5,
-        "historical_matches": 69,
-        "home_home_matches": 6
-      },
-      "selection": "over",
-      "prediction_id": "54730e0d7837420aa482a9242bf9b0ca",
-      "status": "PENDING"
-    },
-    {
-      "away": "Dundee FC",
-      "away_lambda": 1.5115,
-      "calibration": "uncalibrated_baseline",
-      "competition": "Premiership",
-      "count_expectations": {
-        "bookings": {
-          "away_lambda": 2.1733333333333333,
-          "away_sample": 6,
-          "home_lambda": 1.7066666666666666,
-          "home_sample": 6,
-          "league_matches": 75
-        },
-        "corners": {
-          "away_lambda": 5.297777777777778,
-          "away_sample": 6,
-          "home_lambda": 7.071111111111112,
-          "home_sample": 6,
-          "league_matches": 75
-        }
-      },
-      "data_quality": 0.797,
-      "estimated_probability": 0.638882,
-      "expected_value": null,
-      "fixture_id": "1792833",
-      "history_cutoff": "2026-11-24",
-      "home": "Hibernian",
-      "home_lambda": 0.9796,
-      "kickoff": "2026-11-24T21:45:00+02:00",
-      "line": 1.5,
-      "market": "team_bookings_over",
-      "market_odds": {
-        "1X2": {
-          "away": 4.9,
-          "draw": 4.3,
-          "home": 1.63
-        },
-        "away_corners": {
-          "2.5": {
-            "over": 1.27,
-            "under": 3.55
-          },
-          "3.5": {
-            "over": 1.6,
-            "under": 2.25
-          },
-          "4.5": {
-            "over": 2.1,
-            "under": 1.68
-          },
-          "5.5": {
-            "over": 3.0,
-            "under": 1.36
-          },
-          "6.5": {
-            "over": 4.35,
-            "under": 1.19
-          }
-        },
-        "away_team_goals": {
-          "0.5": {
-            "over": 1.47,
-            "under": 2.55
-          },
-          "1.5": {
-            "over": 3.2,
-            "under": 1.33
-          },
-          "2.5": {
-            "over": 7.7,
-            "under": 1.06
-          }
-        },
-        "btts": {
-          "no": 2.1,
-          "yes": 1.68
-        },
-        "double_chance": {
-          "12": 1.22,
-          "1X": 1.18,
-          "X2": 2.1
-        },
-        "home_corners": {
-          "4.5": {
-            "over": 1.28,
-            "under": 3.5
-          },
-          "5.5": {
-            "over": 1.53,
-            "under": 2.4
-          },
-          "6.5": {
-            "over": 1.92,
-            "under": 1.82
-          },
-          "7.5": {
-            "over": 2.5,
-            "under": 1.5
-          },
-          "8.5": {
-            "over": 3.4,
-            "under": 1.29
-          }
-        },
-        "home_team_goals": {
-          "0.5": {
-            "over": 1.12,
-            "under": 5.7
-          },
-          "1.5": {
-            "over": 1.6,
-            "under": 2.25
-          },
-          "2.5": {
-            "over": 2.8,
-            "under": 1.4
-          },
-          "3.5": {
-            "over": 5.5,
-            "under": 1.12
-          },
-          "4.5": {
-            "over": 10.0,
-            "under": 1.03
-          }
-        },
-        "match_total_goals": {
-          "0.5": {
-            "over": 1.03,
-            "under": 11.0
-          },
-          "1.0": {
-            "over": 1.04,
-            "under": 10.5
-          },
-          "1.5": {
-            "over": 1.2,
-            "under": 4.4
-          },
-          "2.0": {
-            "over": 1.28,
-            "under": 3.6
-          },
-          "2.5": {
-            "over": 1.63,
-            "under": 2.25
-          },
-          "3.0": {
-            "over": 2.0,
-            "under": 1.77
-          },
-          "3.5": {
-            "over": 2.55,
-            "under": 1.5
-          },
-          "4.0": {
-            "over": 3.8,
-            "under": 1.25
-          },
-          "4.5": {
-            "over": 4.5,
-            "under": 1.2
-          },
-          "5.0": {
-            "over": 7.5,
-            "under": 1.08
-          },
-          "5.5": {
-            "over": 8.1,
-            "under": 1.07
-          }
-        }
-      },
-      "market_probabilities": {
-        "away_win": 0.4958809409738514,
-        "btts_yes": 0.4867787010423018,
-        "btts_yes_yes": 0.486779,
-        "draw": 0.2590397783448699,
-        "home_win": 0.24507928068127857,
-        "match_bookings_over_over": 0.542742,
-        "match_corners_over_over": 0.867689,
-        "match_over_2_5": 0.4539018717007438,
-        "match_over_2_5_over": 0.453902,
-        "match_winner_away": 0.495881,
-        "match_winner_draw": 0.25904,
-        "match_winner_home": 0.245079,
-        "team_bookings_over_away": 0.638882,
-        "team_bookings_over_home": 0.508822,
-        "team_corners_over_away": 0.610117,
-        "team_corners_over_home": 0.833397
-      },
-      "model_version": "venue-poisson-goals-corners-cards-v2",
-      "odds": null,
-      "odds_status": "unavailable",
-      "rank_score": 0.665485,
-      "reasons": [
-        "Historical home/away sample: 6/6 matches",
-        "Count-market estimates are shown only when historical corner/card samples are available.",
-        "Bookmaker prices are comparisons only and do not determine model probabilities."
-      ],
-      "sample": {
-        "away_away_matches": 6,
-        "historical_matches": 75,
-        "home_home_matches": 6
-      },
-      "selection": "away",
-      "prediction_id": "85ca0aa037b64d09b42a502b82c5a5d2",
-      "status": "PENDING"
-    },
-    {
-      "away": "Aris",
-      "away_lambda": 0.9959,
-      "calibration": "uncalibrated_baseline",
-      "competition": "Super League",
-      "count_expectations": {
-        "bookings": {
-          "away_lambda": 2.0217391304347827,
-          "away_sample": 5,
-          "home_lambda": 2.7439613526570046,
-          "home_sample": 6,
-          "league_matches": 69
-        },
-        "corners": {
-          "away_lambda": 5.407608695652174,
-          "away_sample": 5,
-          "home_lambda": 4.859903381642512,
-          "home_sample": 6,
-          "league_matches": 69
-        }
-      },
-      "data_quality": 0.684,
-      "estimated_probability": 0.696483,
-      "expected_value": null,
-      "fixture_id": "1836632",
-      "history_cutoff": "2026-11-23",
-      "home": "Asteras Tripolis",
-      "home_lambda": 1.3444,
-      "kickoff": "2026-11-23T17:00:00+02:00",
-      "line": 8.5,
-      "market": "match_corners_over",
-      "market_odds": {},
-      "market_probabilities": {
-        "away_win": 0.2773326396739889,
-        "btts_yes": 0.46621182254506083,
-        "btts_yes_yes": 0.466212,
-        "draw": 0.2753761151566278,
-        "home_win": 0.4472912451693829,
-        "match_bookings_over_over": 0.700534,
-        "match_corners_over_over": 0.696483,
-        "match_over_2_5": 0.41461899638032396,
-        "match_over_2_5_over": 0.414619,
-        "match_winner_away": 0.277333,
-        "match_winner_draw": 0.275376,
-        "match_winner_home": 0.447291,
-        "team_bookings_over_away": 0.599846,
-        "team_bookings_over_home": 0.759207,
-        "team_corners_over_away": 0.627906,
-        "team_corners_over_home": 0.53459
-      },
-      "model_version": "venue-poisson-goals-corners-cards-v2",
-      "odds": null,
-      "odds_status": "unavailable",
-      "rank_score": 0.663266,
-      "reasons": [
-        "Historical home/away sample: 6/5 matches",
-        "Count-market estimates are shown only when historical corner/card samples are available.",
-        "Bookmaker prices are comparisons only and do not determine model probabilities."
-      ],
-      "sample": {
-        "away_away_matches": 5,
-        "historical_matches": 69,
-        "home_home_matches": 6
-      },
-      "selection": "over",
-      "prediction_id": "83fb4efff5f6466db00e2cdde2787906",
+      "prediction_id": "96e146b66bac4d7b8a808ef17a99eb72",
       "status": "PENDING"
     },
     {
@@ -6447,7 +3459,116 @@
         "home_home_matches": 7
       },
       "selection": "away",
-      "prediction_id": "d98b0215635a4a628559d2be8294c1d0",
+      "prediction_id": "d96987c042a54f2386d50283f31da21f",
+      "status": "PENDING"
+    },
+    {
+      "away": "Hoffenheim W",
+      "away_lambda": 1.101,
+      "calibration": "uncalibrated_baseline",
+      "competition": "Frauen-Bundesliga",
+      "count_expectations": {
+        "bookings": {
+          "away_lambda": 1.5873015873015872,
+          "away_sample": 4,
+          "home_lambda": 1.4814814814814814,
+          "home_sample": 4,
+          "league_matches": 81
+        },
+        "corners": {
+          "away_lambda": 5.1534391534391535,
+          "away_sample": 4,
+          "home_lambda": 7.312169312169312,
+          "home_sample": 4,
+          "league_matches": 81
+        }
+      },
+      "data_quality": 0.625,
+      "estimated_probability": 0.854349,
+      "expected_value": -0.111477,
+      "fixture_id": "1834796",
+      "history_cutoff": "2026-11-23",
+      "home": "Bayern Munich W",
+      "home_lambda": 3.8955,
+      "kickoff": "2026-11-23T19:00:00+02:00",
+      "line": null,
+      "market": "match_winner",
+      "market_odds": {
+        "1X2": {
+          "away": 24.0,
+          "draw": 10.5,
+          "home": 1.04
+        },
+        "double_chance": {
+          "12": 1.02,
+          "1X": 1.01,
+          "X2": 4.9
+        },
+        "match_total_goals": {
+          "0.5": {
+            "over": 1.01,
+            "under": 11.0
+          },
+          "1.5": {
+            "over": 1.04,
+            "under": 8.0
+          },
+          "2.5": {
+            "over": 1.16,
+            "under": 4.4
+          },
+          "3.5": {
+            "over": 1.45,
+            "under": 2.5
+          },
+          "4.5": {
+            "over": 1.99,
+            "under": 1.7
+          },
+          "5.5": {
+            "over": 3.0,
+            "under": 1.32
+          },
+          "6.5": {
+            "over": 4.75,
+            "under": 1.14
+          }
+        }
+      },
+      "market_probabilities": {
+        "away_win": 0.05923427724001698,
+        "btts_yes": 0.6538899867428334,
+        "btts_yes_yes": 0.65389,
+        "draw": 0.0864171064579042,
+        "home_win": 0.8543486163020788,
+        "match_bookings_over_over": 0.368174,
+        "match_corners_over_over": 0.873177,
+        "match_over_2_5": 0.8750528848144057,
+        "match_over_2_5_over": 0.875053,
+        "match_winner_away": 0.059234,
+        "match_winner_draw": 0.086417,
+        "match_winner_home": 0.854349,
+        "team_bookings_over_away": 0.470957,
+        "team_bookings_over_home": 0.435958,
+        "team_corners_over_away": 0.586005,
+        "team_corners_over_home": 0.85363
+      },
+      "model_version": "venue-poisson-goals-corners-cards-v2",
+      "odds": 1.04,
+      "odds_status": "available",
+      "rank_score": 0.657392,
+      "reasons": [
+        "Historical home/away sample: 4/4 matches",
+        "Count-market estimates are shown only when historical corner/card samples are available.",
+        "Bookmaker prices are comparisons only and do not determine model probabilities."
+      ],
+      "sample": {
+        "away_away_matches": 4,
+        "historical_matches": 81,
+        "home_home_matches": 4
+      },
+      "selection": "home",
+      "prediction_id": "0845fd46d3a84f8fb1b92afb9db696d2",
       "status": "PENDING"
     },
     {
@@ -6473,7 +3594,7 @@
       },
       "data_quality": 0.719,
       "estimated_probability": 0.725209,
-      "expected_value": -0.013716,
+      "expected_value": -0.020968,
       "fixture_id": "1810741",
       "history_cutoff": "2026-11-23",
       "home": "Levante",
@@ -6493,16 +3614,16 @@
             "under": 8.5
           },
           "1.5": {
-            "over": 1.36,
-            "under": 3.0
+            "over": 1.35,
+            "under": 3.05
           },
           "2.5": {
-            "over": 2.1,
-            "under": 1.68
+            "over": 2.08,
+            "under": 1.7
           },
           "3.5": {
-            "over": 3.75,
-            "under": 1.25
+            "over": 3.6,
+            "under": 1.26
           },
           "4.5": {
             "over": 6.5,
@@ -6564,16 +3685,16 @@
         },
         "home_cards": {
           "0.5": {
-            "over": 1.13,
-            "under": 5.5
+            "over": 1.12,
+            "under": 5.75
           },
           "1.5": {
-            "over": 1.65,
-            "under": 2.15
+            "over": 1.63,
+            "under": 2.2
           },
           "2.5": {
-            "over": 3.0,
-            "under": 1.36
+            "over": 2.9,
+            "under": 1.38
           },
           "3.5": {
             "over": 5.75,
@@ -6738,9 +3859,9 @@
         "team_corners_over_home": 0.489285
       },
       "model_version": "venue-poisson-goals-corners-cards-v2",
-      "odds": 1.36,
+      "odds": 1.35,
       "odds_status": "available",
-      "rank_score": 0.657707,
+      "rank_score": 0.654081,
       "reasons": [
         "Historical home/away sample: 5/6 matches",
         "Count-market estimates are shown only when historical corner/card samples are available.",
@@ -6752,1360 +3873,7 @@
         "home_home_matches": 5
       },
       "selection": "away",
-      "prediction_id": "a59596d1e0cf4d2aace4cd995a827913",
-      "status": "PENDING"
-    },
-    {
-      "away": "Hoffenheim W",
-      "away_lambda": 1.101,
-      "calibration": "uncalibrated_baseline",
-      "competition": "Frauen-Bundesliga",
-      "count_expectations": {
-        "bookings": {
-          "away_lambda": 1.5873015873015872,
-          "away_sample": 4,
-          "home_lambda": 1.4814814814814814,
-          "home_sample": 4,
-          "league_matches": 81
-        },
-        "corners": {
-          "away_lambda": 5.1534391534391535,
-          "away_sample": 4,
-          "home_lambda": 7.312169312169312,
-          "home_sample": 4,
-          "league_matches": 81
-        }
-      },
-      "data_quality": 0.625,
-      "estimated_probability": 0.854349,
-      "expected_value": -0.111477,
-      "fixture_id": "1834796",
-      "history_cutoff": "2026-11-23",
-      "home": "Bayern Munich W",
-      "home_lambda": 3.8955,
-      "kickoff": "2026-11-23T19:00:00+02:00",
-      "line": null,
-      "market": "match_winner",
-      "market_odds": {
-        "1X2": {
-          "away": 24.0,
-          "draw": 10.5,
-          "home": 1.04
-        },
-        "double_chance": {
-          "12": 1.02,
-          "1X": 1.01,
-          "X2": 4.9
-        },
-        "match_total_goals": {
-          "0.5": {
-            "over": 1.01,
-            "under": 11.0
-          },
-          "1.5": {
-            "over": 1.04,
-            "under": 8.0
-          },
-          "2.5": {
-            "over": 1.16,
-            "under": 4.4
-          },
-          "3.5": {
-            "over": 1.45,
-            "under": 2.5
-          },
-          "4.5": {
-            "over": 1.99,
-            "under": 1.7
-          },
-          "5.5": {
-            "over": 3.0,
-            "under": 1.32
-          },
-          "6.5": {
-            "over": 4.75,
-            "under": 1.14
-          }
-        }
-      },
-      "market_probabilities": {
-        "away_win": 0.05923427724001698,
-        "btts_yes": 0.6538899867428334,
-        "btts_yes_yes": 0.65389,
-        "draw": 0.0864171064579042,
-        "home_win": 0.8543486163020788,
-        "match_bookings_over_over": 0.368174,
-        "match_corners_over_over": 0.873177,
-        "match_over_2_5": 0.8750528848144057,
-        "match_over_2_5_over": 0.875053,
-        "match_winner_away": 0.059234,
-        "match_winner_draw": 0.086417,
-        "match_winner_home": 0.854349,
-        "team_bookings_over_away": 0.470957,
-        "team_bookings_over_home": 0.435958,
-        "team_corners_over_away": 0.586005,
-        "team_corners_over_home": 0.85363
-      },
-      "model_version": "venue-poisson-goals-corners-cards-v2",
-      "odds": 1.04,
-      "odds_status": "available",
-      "rank_score": 0.657392,
-      "reasons": [
-        "Historical home/away sample: 4/4 matches",
-        "Count-market estimates are shown only when historical corner/card samples are available.",
-        "Bookmaker prices are comparisons only and do not determine model probabilities."
-      ],
-      "sample": {
-        "away_away_matches": 4,
-        "historical_matches": 81,
-        "home_home_matches": 4
-      },
-      "selection": "home",
-      "prediction_id": "30be3fa72b51436fb14b381e7fcd1149",
-      "status": "PENDING"
-    },
-    {
-      "away": "Fiorentina",
-      "away_lambda": 2.0347,
-      "calibration": "uncalibrated_baseline",
-      "competition": "Serie A",
-      "count_expectations": {
-        "bookings": {
-          "away_lambda": 2.134090909090909,
-          "away_sample": 5,
-          "home_lambda": 2.252272727272727,
-          "home_sample": 5,
-          "league_matches": 110
-        },
-        "corners": {
-          "away_lambda": 3.6443181818181816,
-          "away_sample": 5,
-          "home_lambda": 4.510227272727272,
-          "home_sample": 5,
-          "league_matches": 110
-        }
-      },
-      "data_quality": 0.719,
-      "estimated_probability": 0.657991,
-      "expected_value": null,
-      "fixture_id": "1785426",
-      "history_cutoff": "2026-11-23",
-      "home": "Monza",
-      "home_lambda": 2.2641,
-      "kickoff": "2026-11-23T21:45:00+02:00",
-      "line": 1.5,
-      "market": "team_bookings_over",
-      "market_odds": {},
-      "market_probabilities": {
-        "away_win": 0.3582845769800676,
-        "btts_yes": 0.7789416348905694,
-        "btts_yes_yes": 0.778942,
-        "draw": 0.19799055191394754,
-        "home_win": 0.4437248711059848,
-        "match_bookings_over_over": 0.63817,
-        "match_corners_over_over": 0.429014,
-        "match_over_2_5": 0.802494731257794,
-        "match_over_2_5_over": 0.802495,
-        "match_winner_away": 0.358285,
-        "match_winner_draw": 0.197991,
-        "match_winner_home": 0.443725,
-        "team_bookings_over_away": 0.629074,
-        "team_bookings_over_home": 0.657991,
-        "team_corners_over_away": 0.302056,
-        "team_corners_over_home": 0.469837
-      },
-      "model_version": "venue-poisson-goals-corners-cards-v2",
-      "odds": null,
-      "odds_status": "unavailable",
-      "rank_score": 0.652595,
-      "reasons": [
-        "Historical home/away sample: 5/5 matches",
-        "Count-market estimates are shown only when historical corner/card samples are available.",
-        "Bookmaker prices are comparisons only and do not determine model probabilities."
-      ],
-      "sample": {
-        "away_away_matches": 5,
-        "historical_matches": 110,
-        "home_home_matches": 5
-      },
-      "selection": "home",
-      "prediction_id": "54d1d1d5d5dd47e18c4508e859fb2a33",
-      "status": "PENDING"
-    },
-    {
-      "away": "Grenoble",
-      "away_lambda": 1.4441,
-      "calibration": "uncalibrated_baseline",
-      "competition": "Ligue 2",
-      "count_expectations": {
-        "bookings": {
-          "away_lambda": 3.2098765432098766,
-          "away_sample": 6,
-          "home_lambda": 2.04320987654321,
-          "home_sample": 6,
-          "league_matches": 108
-        },
-        "corners": {
-          "away_lambda": 2.861111111111111,
-          "away_sample": 6,
-          "home_lambda": 5.12037037037037,
-          "home_sample": 6,
-          "league_matches": 108
-        }
-      },
-      "data_quality": 0.812,
-      "estimated_probability": 0.605563,
-      "expected_value": null,
-      "fixture_id": "1795069",
-      "history_cutoff": "2026-11-23",
-      "home": "Nantes",
-      "home_lambda": 1.461,
-      "kickoff": "2026-11-23T21:45:00+02:00",
-      "line": 1.5,
-      "market": "team_bookings_over",
-      "market_odds": {},
-      "market_probabilities": {
-        "away_win": 0.37248151142036473,
-        "btts_yes": 0.5867808179311205,
-        "btts_yes_yes": 0.586781,
-        "draw": 0.24749655606199497,
-        "home_win": 0.3800219325176402,
-        "match_bookings_over_over": 0.768721,
-        "match_corners_over_over": 0.404868,
-        "match_over_2_5": 0.5552158673590952,
-        "match_over_2_5_over": 0.555216,
-        "match_winner_away": 0.372482,
-        "match_winner_draw": 0.247497,
-        "match_winner_home": 0.380022,
-        "team_bookings_over_away": 0.830083,
-        "team_bookings_over_home": 0.605563,
-        "team_corners_over_away": 0.161964,
-        "team_corners_over_home": 0.580368
-      },
-      "model_version": "venue-poisson-goals-corners-cards-v2",
-      "odds": null,
-      "odds_status": "unavailable",
-      "rank_score": 0.65166,
-      "reasons": [
-        "Historical home/away sample: 6/6 matches",
-        "Count-market estimates are shown only when historical corner/card samples are available.",
-        "Bookmaker prices are comparisons only and do not determine model probabilities."
-      ],
-      "sample": {
-        "away_away_matches": 6,
-        "historical_matches": 108,
-        "home_home_matches": 6
-      },
-      "selection": "home",
-      "prediction_id": "b87c7a1b6f3c4888a289bdd4ba6472b7",
-      "status": "PENDING"
-    },
-    {
-      "away": "Ascoli",
-      "away_lambda": 1.2689,
-      "calibration": "uncalibrated_baseline",
-      "competition": "Serie B",
-      "count_expectations": {
-        "bookings": {
-          "away_lambda": 2.128409090909091,
-          "away_sample": 5,
-          "home_lambda": 2.2343434343434345,
-          "home_sample": 6,
-          "league_matches": 110
-        },
-        "corners": {
-          "away_lambda": 5.363636363636363,
-          "away_sample": 5,
-          "home_lambda": 5.201010101010102,
-          "home_sample": 6,
-          "league_matches": 110
-        }
-      },
-      "data_quality": 0.719,
-      "estimated_probability": 0.653723,
-      "expected_value": null,
-      "fixture_id": "1845175",
-      "history_cutoff": "2026-11-24",
-      "home": "Cesena FC",
-      "home_lambda": 0.8743,
-      "kickoff": "2026-11-24T21:00:00+02:00",
-      "line": 1.5,
-      "market": "team_bookings_over",
-      "market_odds": {},
-      "market_probabilities": {
-        "away_win": 0.4555589373636279,
-        "btts_yes": 0.41898431749977183,
-        "btts_yes_yes": 0.418984,
-        "draw": 0.28824459842060685,
-        "home_win": 0.2561964642157651,
-        "match_bookings_over_over": 0.634021,
-        "match_corners_over_over": 0.72706,
-        "match_over_2_5": 0.36201974187679165,
-        "match_over_2_5_over": 0.36202,
-        "match_winner_away": 0.455559,
-        "match_winner_draw": 0.288245,
-        "match_winner_home": 0.256196,
-        "team_bookings_over_away": 0.627636,
-        "team_bookings_over_home": 0.653723,
-        "team_corners_over_away": 0.620843,
-        "team_corners_over_home": 0.594042
-      },
-      "model_version": "venue-poisson-goals-corners-cards-v2",
-      "odds": null,
-      "odds_status": "unavailable",
-      "rank_score": 0.650248,
-      "reasons": [
-        "Historical home/away sample: 6/5 matches",
-        "Count-market estimates are shown only when historical corner/card samples are available.",
-        "Bookmaker prices are comparisons only and do not determine model probabilities."
-      ],
-      "sample": {
-        "away_away_matches": 5,
-        "historical_matches": 110,
-        "home_home_matches": 6
-      },
-      "selection": "home",
-      "prediction_id": "8eec796aae764514b50cb52520229fa7",
-      "status": "PENDING"
-    },
-    {
-      "away": "Sudtirol",
-      "away_lambda": 1.0395,
-      "calibration": "uncalibrated_baseline",
-      "competition": "Serie B",
-      "count_expectations": {
-        "bookings": {
-          "away_lambda": 1.878409090909091,
-          "away_sample": 5,
-          "home_lambda": 2.0136363636363637,
-          "home_sample": 5,
-          "league_matches": 110
-        },
-        "corners": {
-          "away_lambda": 3.6136363636363638,
-          "away_sample": 5,
-          "home_lambda": 4.851136363636364,
-          "home_sample": 5,
-          "league_matches": 110
-        }
-      },
-      "data_quality": 0.719,
-      "estimated_probability": 0.651747,
-      "expected_value": null,
-      "fixture_id": "1845198",
-      "history_cutoff": "2026-11-24",
-      "home": "Palermo",
-      "home_lambda": 2.2764,
-      "kickoff": "2026-11-24T21:00:00+02:00",
-      "line": null,
-      "market": "match_winner",
-      "market_odds": {},
-      "market_probabilities": {
-        "away_win": 0.15969709829902562,
-        "btts_yes": 0.5800168156980419,
-        "btts_yes_yes": 0.580017,
-        "draw": 0.18855592335792223,
-        "home_win": 0.6517469783430524,
-        "match_bookings_over_over": 0.54516,
-        "match_corners_over_over": 0.472046,
-        "match_over_2_5": 0.6437567081913973,
-        "match_over_2_5_over": 0.643757,
-        "match_winner_away": 0.159697,
-        "match_winner_draw": 0.188556,
-        "match_winner_home": 0.651747,
-        "team_bookings_over_away": 0.560084,
-        "team_bookings_over_home": 0.597673,
-        "team_corners_over_away": 0.296171,
-        "team_corners_over_home": 0.533009
-      },
-      "model_version": "venue-poisson-goals-corners-cards-v2",
-      "odds": null,
-      "odds_status": "unavailable",
-      "rank_score": 0.649161,
-      "reasons": [
-        "Historical home/away sample: 5/5 matches",
-        "Count-market estimates are shown only when historical corner/card samples are available.",
-        "Bookmaker prices are comparisons only and do not determine model probabilities."
-      ],
-      "sample": {
-        "away_away_matches": 5,
-        "historical_matches": 110,
-        "home_home_matches": 5
-      },
-      "selection": "home",
-      "prediction_id": "c6b56291ae094e68baf741363108ed8b",
-      "status": "PENDING"
-    },
-    {
-      "away": "Sudtirol",
-      "away_lambda": 1.0395,
-      "calibration": "uncalibrated_baseline",
-      "competition": "Serie B",
-      "count_expectations": {
-        "bookings": {
-          "away_lambda": 1.878409090909091,
-          "away_sample": 5,
-          "home_lambda": 2.0136363636363637,
-          "home_sample": 5,
-          "league_matches": 110
-        },
-        "corners": {
-          "away_lambda": 3.6136363636363638,
-          "away_sample": 5,
-          "home_lambda": 4.851136363636364,
-          "home_sample": 5,
-          "league_matches": 110
-        }
-      },
-      "data_quality": 0.719,
-      "estimated_probability": 0.643757,
-      "expected_value": null,
-      "fixture_id": "1845198",
-      "history_cutoff": "2026-11-24",
-      "home": "Palermo",
-      "home_lambda": 2.2764,
-      "kickoff": "2026-11-24T21:00:00+02:00",
-      "line": 2.5,
-      "market": "match_over_2_5",
-      "market_odds": {},
-      "market_probabilities": {
-        "away_win": 0.15969709829902562,
-        "btts_yes": 0.5800168156980419,
-        "btts_yes_yes": 0.580017,
-        "draw": 0.18855592335792223,
-        "home_win": 0.6517469783430524,
-        "match_bookings_over_over": 0.54516,
-        "match_corners_over_over": 0.472046,
-        "match_over_2_5": 0.6437567081913973,
-        "match_over_2_5_over": 0.643757,
-        "match_winner_away": 0.159697,
-        "match_winner_draw": 0.188556,
-        "match_winner_home": 0.651747,
-        "team_bookings_over_away": 0.560084,
-        "team_bookings_over_home": 0.597673,
-        "team_corners_over_away": 0.296171,
-        "team_corners_over_home": 0.533009
-      },
-      "model_version": "venue-poisson-goals-corners-cards-v2",
-      "odds": null,
-      "odds_status": "unavailable",
-      "rank_score": 0.644766,
-      "reasons": [
-        "Historical home/away sample: 5/5 matches",
-        "Count-market estimates are shown only when historical corner/card samples are available.",
-        "Bookmaker prices are comparisons only and do not determine model probabilities."
-      ],
-      "sample": {
-        "away_away_matches": 5,
-        "historical_matches": 110,
-        "home_home_matches": 5
-      },
-      "selection": "over",
-      "prediction_id": "3db0f3fe302348c2b050f148f786e74a",
-      "status": "PENDING"
-    },
-    {
-      "away": "Fiorentina",
-      "away_lambda": 2.0347,
-      "calibration": "uncalibrated_baseline",
-      "competition": "Serie A",
-      "count_expectations": {
-        "bookings": {
-          "away_lambda": 2.134090909090909,
-          "away_sample": 5,
-          "home_lambda": 2.252272727272727,
-          "home_sample": 5,
-          "league_matches": 110
-        },
-        "corners": {
-          "away_lambda": 3.6443181818181816,
-          "away_sample": 5,
-          "home_lambda": 4.510227272727272,
-          "home_sample": 5,
-          "league_matches": 110
-        }
-      },
-      "data_quality": 0.719,
-      "estimated_probability": 0.63817,
-      "expected_value": null,
-      "fixture_id": "1785426",
-      "history_cutoff": "2026-11-23",
-      "home": "Monza",
-      "home_lambda": 2.2641,
-      "kickoff": "2026-11-23T21:45:00+02:00",
-      "line": 3.5,
-      "market": "match_bookings_over",
-      "market_odds": {},
-      "market_probabilities": {
-        "away_win": 0.3582845769800676,
-        "btts_yes": 0.7789416348905694,
-        "btts_yes_yes": 0.778942,
-        "draw": 0.19799055191394754,
-        "home_win": 0.4437248711059848,
-        "match_bookings_over_over": 0.63817,
-        "match_corners_over_over": 0.429014,
-        "match_over_2_5": 0.802494731257794,
-        "match_over_2_5_over": 0.802495,
-        "match_winner_away": 0.358285,
-        "match_winner_draw": 0.197991,
-        "match_winner_home": 0.443725,
-        "team_bookings_over_away": 0.629074,
-        "team_bookings_over_home": 0.657991,
-        "team_corners_over_away": 0.302056,
-        "team_corners_over_home": 0.469837
-      },
-      "model_version": "venue-poisson-goals-corners-cards-v2",
-      "odds": null,
-      "odds_status": "unavailable",
-      "rank_score": 0.641693,
-      "reasons": [
-        "Historical home/away sample: 5/5 matches",
-        "Count-market estimates are shown only when historical corner/card samples are available.",
-        "Bookmaker prices are comparisons only and do not determine model probabilities."
-      ],
-      "sample": {
-        "away_away_matches": 5,
-        "historical_matches": 110,
-        "home_home_matches": 5
-      },
-      "selection": "over",
-      "prediction_id": "92b7e08fe50e402a90af2ad005b9af76",
-      "status": "PENDING"
-    },
-    {
-      "away": "Ascoli",
-      "away_lambda": 1.2689,
-      "calibration": "uncalibrated_baseline",
-      "competition": "Serie B",
-      "count_expectations": {
-        "bookings": {
-          "away_lambda": 2.128409090909091,
-          "away_sample": 5,
-          "home_lambda": 2.2343434343434345,
-          "home_sample": 6,
-          "league_matches": 110
-        },
-        "corners": {
-          "away_lambda": 5.363636363636363,
-          "away_sample": 5,
-          "home_lambda": 5.201010101010102,
-          "home_sample": 6,
-          "league_matches": 110
-        }
-      },
-      "data_quality": 0.719,
-      "estimated_probability": 0.634021,
-      "expected_value": null,
-      "fixture_id": "1845175",
-      "history_cutoff": "2026-11-24",
-      "home": "Cesena FC",
-      "home_lambda": 0.8743,
-      "kickoff": "2026-11-24T21:00:00+02:00",
-      "line": 3.5,
-      "market": "match_bookings_over",
-      "market_odds": {},
-      "market_probabilities": {
-        "away_win": 0.4555589373636279,
-        "btts_yes": 0.41898431749977183,
-        "btts_yes_yes": 0.418984,
-        "draw": 0.28824459842060685,
-        "home_win": 0.2561964642157651,
-        "match_bookings_over_over": 0.634021,
-        "match_corners_over_over": 0.72706,
-        "match_over_2_5": 0.36201974187679165,
-        "match_over_2_5_over": 0.36202,
-        "match_winner_away": 0.455559,
-        "match_winner_draw": 0.288245,
-        "match_winner_home": 0.256196,
-        "team_bookings_over_away": 0.627636,
-        "team_bookings_over_home": 0.653723,
-        "team_corners_over_away": 0.620843,
-        "team_corners_over_home": 0.594042
-      },
-      "model_version": "venue-poisson-goals-corners-cards-v2",
-      "odds": null,
-      "odds_status": "unavailable",
-      "rank_score": 0.639412,
-      "reasons": [
-        "Historical home/away sample: 6/5 matches",
-        "Count-market estimates are shown only when historical corner/card samples are available.",
-        "Bookmaker prices are comparisons only and do not determine model probabilities."
-      ],
-      "sample": {
-        "away_away_matches": 5,
-        "historical_matches": 110,
-        "home_home_matches": 6
-      },
-      "selection": "over",
-      "prediction_id": "df49f8ae81b64dc9972bb1ac90e5840a",
-      "status": "PENDING"
-    },
-    {
-      "away": "Aberdeen",
-      "away_lambda": 0.9008,
-      "calibration": "uncalibrated_baseline",
-      "competition": "Premiership",
-      "count_expectations": {
-        "bookings": {
-          "away_lambda": 2.07,
-          "away_sample": 5,
-          "home_lambda": 1.17,
-          "home_sample": 5,
-          "league_matches": 75
-        },
-        "corners": {
-          "away_lambda": 5.46,
-          "away_sample": 5,
-          "home_lambda": 7.955,
-          "home_sample": 5,
-          "league_matches": 75
-        }
-      },
-      "data_quality": 0.703,
-      "estimated_probability": 0.639703,
-      "expected_value": null,
-      "fixture_id": "1792830",
-      "history_cutoff": "2026-11-24",
-      "home": "Rangers",
-      "home_lambda": 2.0489,
-      "kickoff": "2026-11-24T22:00:00+02:00",
-      "line": null,
-      "market": "match_winner",
-      "market_odds": {},
-      "market_probabilities": {
-        "away_win": 0.15644534194226903,
-        "btts_yes": 0.517234286240388,
-        "btts_yes_yes": 0.517234,
-        "draw": 0.20385136749599608,
-        "home_win": 0.6397032905617348,
-        "match_bookings_over_over": 0.406373,
-        "match_corners_over_over": 0.91776,
-        "match_over_2_5": 0.5654466897516637,
-        "match_over_2_5_over": 0.565447,
-        "match_winner_away": 0.156445,
-        "match_winner_draw": 0.203851,
-        "match_winner_home": 0.639703,
-        "team_bookings_over_away": 0.61261,
-        "team_bookings_over_home": 0.326504,
-        "team_corners_over_away": 0.636215,
-        "team_corners_over_home": 0.897762
-      },
-      "model_version": "venue-poisson-goals-corners-cards-v2",
-      "odds": null,
-      "odds_status": "unavailable",
-      "rank_score": 0.637737,
-      "reasons": [
-        "Historical home/away sample: 5/5 matches",
-        "Count-market estimates are shown only when historical corner/card samples are available.",
-        "Bookmaker prices are comparisons only and do not determine model probabilities."
-      ],
-      "sample": {
-        "away_away_matches": 5,
-        "historical_matches": 75,
-        "home_home_matches": 5
-      },
-      "selection": "home",
-      "prediction_id": "bea6e094366643a890bde3f2b5906517",
-      "status": "PENDING"
-    },
-    {
-      "away": "Fiorentina",
-      "away_lambda": 2.0347,
-      "calibration": "uncalibrated_baseline",
-      "competition": "Serie A",
-      "count_expectations": {
-        "bookings": {
-          "away_lambda": 2.134090909090909,
-          "away_sample": 5,
-          "home_lambda": 2.252272727272727,
-          "home_sample": 5,
-          "league_matches": 110
-        },
-        "corners": {
-          "away_lambda": 3.6443181818181816,
-          "away_sample": 5,
-          "home_lambda": 4.510227272727272,
-          "home_sample": 5,
-          "league_matches": 110
-        }
-      },
-      "data_quality": 0.719,
-      "estimated_probability": 0.629074,
-      "expected_value": null,
-      "fixture_id": "1785426",
-      "history_cutoff": "2026-11-23",
-      "home": "Monza",
-      "home_lambda": 2.2641,
-      "kickoff": "2026-11-23T21:45:00+02:00",
-      "line": 1.5,
-      "market": "team_bookings_over",
-      "market_odds": {},
-      "market_probabilities": {
-        "away_win": 0.3582845769800676,
-        "btts_yes": 0.7789416348905694,
-        "btts_yes_yes": 0.778942,
-        "draw": 0.19799055191394754,
-        "home_win": 0.4437248711059848,
-        "match_bookings_over_over": 0.63817,
-        "match_corners_over_over": 0.429014,
-        "match_over_2_5": 0.802494731257794,
-        "match_over_2_5_over": 0.802495,
-        "match_winner_away": 0.358285,
-        "match_winner_draw": 0.197991,
-        "match_winner_home": 0.443725,
-        "team_bookings_over_away": 0.629074,
-        "team_bookings_over_home": 0.657991,
-        "team_corners_over_away": 0.302056,
-        "team_corners_over_home": 0.469837
-      },
-      "model_version": "venue-poisson-goals-corners-cards-v2",
-      "odds": null,
-      "odds_status": "unavailable",
-      "rank_score": 0.636691,
-      "reasons": [
-        "Historical home/away sample: 5/5 matches",
-        "Count-market estimates are shown only when historical corner/card samples are available.",
-        "Bookmaker prices are comparisons only and do not determine model probabilities."
-      ],
-      "sample": {
-        "away_away_matches": 5,
-        "historical_matches": 110,
-        "home_home_matches": 5
-      },
-      "selection": "away",
-      "prediction_id": "7d7606a7fd75481c95af488e0975af20",
-      "status": "PENDING"
-    },
-    {
-      "away": "Ascoli",
-      "away_lambda": 1.2689,
-      "calibration": "uncalibrated_baseline",
-      "competition": "Serie B",
-      "count_expectations": {
-        "bookings": {
-          "away_lambda": 2.128409090909091,
-          "away_sample": 5,
-          "home_lambda": 2.2343434343434345,
-          "home_sample": 6,
-          "league_matches": 110
-        },
-        "corners": {
-          "away_lambda": 5.363636363636363,
-          "away_sample": 5,
-          "home_lambda": 5.201010101010102,
-          "home_sample": 6,
-          "league_matches": 110
-        }
-      },
-      "data_quality": 0.719,
-      "estimated_probability": 0.627636,
-      "expected_value": null,
-      "fixture_id": "1845175",
-      "history_cutoff": "2026-11-24",
-      "home": "Cesena FC",
-      "home_lambda": 0.8743,
-      "kickoff": "2026-11-24T21:00:00+02:00",
-      "line": 1.5,
-      "market": "team_bookings_over",
-      "market_odds": {},
-      "market_probabilities": {
-        "away_win": 0.4555589373636279,
-        "btts_yes": 0.41898431749977183,
-        "btts_yes_yes": 0.418984,
-        "draw": 0.28824459842060685,
-        "home_win": 0.2561964642157651,
-        "match_bookings_over_over": 0.634021,
-        "match_corners_over_over": 0.72706,
-        "match_over_2_5": 0.36201974187679165,
-        "match_over_2_5_over": 0.36202,
-        "match_winner_away": 0.455559,
-        "match_winner_draw": 0.288245,
-        "match_winner_home": 0.256196,
-        "team_bookings_over_away": 0.627636,
-        "team_bookings_over_home": 0.653723,
-        "team_corners_over_away": 0.620843,
-        "team_corners_over_home": 0.594042
-      },
-      "model_version": "venue-poisson-goals-corners-cards-v2",
-      "odds": null,
-      "odds_status": "unavailable",
-      "rank_score": 0.6359,
-      "reasons": [
-        "Historical home/away sample: 6/5 matches",
-        "Count-market estimates are shown only when historical corner/card samples are available.",
-        "Bookmaker prices are comparisons only and do not determine model probabilities."
-      ],
-      "sample": {
-        "away_away_matches": 5,
-        "historical_matches": 110,
-        "home_home_matches": 6
-      },
-      "selection": "away",
-      "prediction_id": "66441d35691542618f692c45487f0626",
-      "status": "PENDING"
-    },
-    {
-      "away": "Aberdeen",
-      "away_lambda": 0.9008,
-      "calibration": "uncalibrated_baseline",
-      "competition": "Premiership",
-      "count_expectations": {
-        "bookings": {
-          "away_lambda": 2.07,
-          "away_sample": 5,
-          "home_lambda": 1.17,
-          "home_sample": 5,
-          "league_matches": 75
-        },
-        "corners": {
-          "away_lambda": 5.46,
-          "away_sample": 5,
-          "home_lambda": 7.955,
-          "home_sample": 5,
-          "league_matches": 75
-        }
-      },
-      "data_quality": 0.703,
-      "estimated_probability": 0.636215,
-      "expected_value": null,
-      "fixture_id": "1792830",
-      "history_cutoff": "2026-11-24",
-      "home": "Rangers",
-      "home_lambda": 2.0489,
-      "kickoff": "2026-11-24T22:00:00+02:00",
-      "line": 4.5,
-      "market": "team_corners_over",
-      "market_odds": {},
-      "market_probabilities": {
-        "away_win": 0.15644534194226903,
-        "btts_yes": 0.517234286240388,
-        "btts_yes_yes": 0.517234,
-        "draw": 0.20385136749599608,
-        "home_win": 0.6397032905617348,
-        "match_bookings_over_over": 0.406373,
-        "match_corners_over_over": 0.91776,
-        "match_over_2_5": 0.5654466897516637,
-        "match_over_2_5_over": 0.565447,
-        "match_winner_away": 0.156445,
-        "match_winner_draw": 0.203851,
-        "match_winner_home": 0.639703,
-        "team_bookings_over_away": 0.61261,
-        "team_bookings_over_home": 0.326504,
-        "team_corners_over_away": 0.636215,
-        "team_corners_over_home": 0.897762
-      },
-      "model_version": "venue-poisson-goals-corners-cards-v2",
-      "odds": null,
-      "odds_status": "unavailable",
-      "rank_score": 0.635818,
-      "reasons": [
-        "Historical home/away sample: 5/5 matches",
-        "Count-market estimates are shown only when historical corner/card samples are available.",
-        "Bookmaker prices are comparisons only and do not determine model probabilities."
-      ],
-      "sample": {
-        "away_away_matches": 5,
-        "historical_matches": 75,
-        "home_home_matches": 5
-      },
-      "selection": "away",
-      "prediction_id": "e88794a6f68149c2b5c471b592f46b2f",
-      "status": "PENDING"
-    },
-    {
-      "away": "Catanzaro",
-      "away_lambda": 0.9384,
-      "calibration": "uncalibrated_baseline",
-      "competition": "Serie B",
-      "count_expectations": {
-        "bookings": {
-          "away_lambda": 2.1027272727272726,
-          "away_sample": 7,
-          "home_lambda": 1.5136363636363637,
-          "home_sample": 5,
-          "league_matches": 110
-        },
-        "corners": {
-          "away_lambda": 5.1909090909090905,
-          "away_sample": 7,
-          "home_lambda": 4.726136363636364,
-          "home_sample": 5,
-          "league_matches": 110
-        }
-      },
-      "data_quality": 0.719,
-      "estimated_probability": 0.621086,
-      "expected_value": null,
-      "fixture_id": "1845174",
-      "history_cutoff": "2026-11-24",
-      "home": "Juve Stabia",
-      "home_lambda": 1.4302,
-      "kickoff": "2026-11-24T20:00:00+02:00",
-      "line": 1.5,
-      "market": "team_bookings_over",
-      "market_odds": {
-        "1X2": {
-          "away": 3.9,
-          "draw": 3.6,
-          "home": 1.89
-        },
-        "away_corners": {
-          "2.5": {
-            "over": 1.24,
-            "under": 3.8
-          },
-          "3.5": {
-            "over": 1.55,
-            "under": 2.35
-          },
-          "4.5": {
-            "over": 2.08,
-            "under": 1.7
-          },
-          "5.5": {
-            "over": 3.0,
-            "under": 1.36
-          }
-        },
-        "away_team_goals": {
-          "0.5": {
-            "over": 1.38,
-            "under": 2.8
-          },
-          "1.5": {
-            "over": 2.75,
-            "under": 1.39
-          },
-          "2.5": {
-            "over": 6.5,
-            "under": 1.08
-          }
-        },
-        "btts": {
-          "no": 2.15,
-          "yes": 1.62
-        },
-        "double_chance": {
-          "12": 1.27,
-          "1X": 1.24,
-          "X2": 1.79
-        },
-        "home_corners": {
-          "3.5": {
-            "over": 1.25,
-            "under": 3.75
-          },
-          "4.5": {
-            "over": 1.53,
-            "under": 2.4
-          },
-          "5.5": {
-            "over": 2.05,
-            "under": 1.72
-          },
-          "6.5": {
-            "over": 2.9,
-            "under": 1.38
-          }
-        },
-        "home_team_goals": {
-          "0.5": {
-            "over": 1.16,
-            "under": 4.7
-          },
-          "1.5": {
-            "over": 1.77,
-            "under": 1.94
-          },
-          "2.5": {
-            "over": 3.33,
-            "under": 1.28
-          }
-        },
-        "match_corners": {
-          "9.5": {
-            "over": 1.84,
-            "under": 1.86
-          }
-        },
-        "match_total_goals": {
-          "1.0": {
-            "over": 1.05,
-            "under": 8.7
-          },
-          "1.5": {
-            "over": 1.22,
-            "under": 4.0
-          },
-          "2.0": {
-            "over": 1.32,
-            "under": 3.2
-          },
-          "2.5": {
-            "over": 1.7,
-            "under": 2.1
-          },
-          "3.0": {
-            "over": 2.15,
-            "under": 1.66
-          },
-          "3.5": {
-            "over": 2.65,
-            "under": 1.44
-          },
-          "4.0": {
-            "over": 4.1,
-            "under": 1.21
-          }
-        }
-      },
-      "market_probabilities": {
-        "away_win": 0.2472085998116862,
-        "btts_yes": 0.46309728553806195,
-        "btts_yes_yes": 0.463097,
-        "draw": 0.26824478145901304,
-        "home_win": 0.48454661872930077,
-        "match_bookings_over_over": 0.488256,
-        "match_corners_over_over": 0.53165,
-        "match_over_2_5": 0.4220664162762808,
-        "match_over_2_5_over": 0.422066,
-        "match_winner_away": 0.247209,
-        "match_winner_draw": 0.268245,
-        "match_winner_home": 0.484547,
-        "team_bookings_over_away": 0.621086,
-        "team_bookings_over_home": 0.446728,
-        "team_corners_over_away": 0.592343,
-        "team_corners_over_home": 0.510215
-      },
-      "model_version": "venue-poisson-goals-corners-cards-v2",
-      "odds": null,
-      "odds_status": "unavailable",
-      "rank_score": 0.632297,
-      "reasons": [
-        "Historical home/away sample: 5/7 matches",
-        "Count-market estimates are shown only when historical corner/card samples are available.",
-        "Bookmaker prices are comparisons only and do not determine model probabilities."
-      ],
-      "sample": {
-        "away_away_matches": 7,
-        "historical_matches": 110,
-        "home_home_matches": 5
-      },
-      "selection": "away",
-      "prediction_id": "4c2e7c7d570442f08ce7719122e365f4",
-      "status": "PENDING"
-    },
-    {
-      "away": "Ascoli",
-      "away_lambda": 1.2689,
-      "calibration": "uncalibrated_baseline",
-      "competition": "Serie B",
-      "count_expectations": {
-        "bookings": {
-          "away_lambda": 2.128409090909091,
-          "away_sample": 5,
-          "home_lambda": 2.2343434343434345,
-          "home_sample": 6,
-          "league_matches": 110
-        },
-        "corners": {
-          "away_lambda": 5.363636363636363,
-          "away_sample": 5,
-          "home_lambda": 5.201010101010102,
-          "home_sample": 6,
-          "league_matches": 110
-        }
-      },
-      "data_quality": 0.719,
-      "estimated_probability": 0.620843,
-      "expected_value": null,
-      "fixture_id": "1845175",
-      "history_cutoff": "2026-11-24",
-      "home": "Cesena FC",
-      "home_lambda": 0.8743,
-      "kickoff": "2026-11-24T21:00:00+02:00",
-      "line": 4.5,
-      "market": "team_corners_over",
-      "market_odds": {},
-      "market_probabilities": {
-        "away_win": 0.4555589373636279,
-        "btts_yes": 0.41898431749977183,
-        "btts_yes_yes": 0.418984,
-        "draw": 0.28824459842060685,
-        "home_win": 0.2561964642157651,
-        "match_bookings_over_over": 0.634021,
-        "match_corners_over_over": 0.72706,
-        "match_over_2_5": 0.36201974187679165,
-        "match_over_2_5_over": 0.36202,
-        "match_winner_away": 0.455559,
-        "match_winner_draw": 0.288245,
-        "match_winner_home": 0.256196,
-        "team_bookings_over_away": 0.627636,
-        "team_bookings_over_home": 0.653723,
-        "team_corners_over_away": 0.620843,
-        "team_corners_over_home": 0.594042
-      },
-      "model_version": "venue-poisson-goals-corners-cards-v2",
-      "odds": null,
-      "odds_status": "unavailable",
-      "rank_score": 0.632164,
-      "reasons": [
-        "Historical home/away sample: 6/5 matches",
-        "Count-market estimates are shown only when historical corner/card samples are available.",
-        "Bookmaker prices are comparisons only and do not determine model probabilities."
-      ],
-      "sample": {
-        "away_away_matches": 5,
-        "historical_matches": 110,
-        "home_home_matches": 6
-      },
-      "selection": "away",
-      "prediction_id": "6e0e34eb28a143af999c9eb340e4fc2a",
-      "status": "PENDING"
-    },
-    {
-      "away": "Aris",
-      "away_lambda": 0.9959,
-      "calibration": "uncalibrated_baseline",
-      "competition": "Super League",
-      "count_expectations": {
-        "bookings": {
-          "away_lambda": 2.0217391304347827,
-          "away_sample": 5,
-          "home_lambda": 2.7439613526570046,
-          "home_sample": 6,
-          "league_matches": 69
-        },
-        "corners": {
-          "away_lambda": 5.407608695652174,
-          "away_sample": 5,
-          "home_lambda": 4.859903381642512,
-          "home_sample": 6,
-          "league_matches": 69
-        }
-      },
-      "data_quality": 0.684,
-      "estimated_probability": 0.627906,
-      "expected_value": null,
-      "fixture_id": "1836632",
-      "history_cutoff": "2026-11-23",
-      "home": "Asteras Tripolis",
-      "home_lambda": 1.3444,
-      "kickoff": "2026-11-23T17:00:00+02:00",
-      "line": 4.5,
-      "market": "team_corners_over",
-      "market_odds": {},
-      "market_probabilities": {
-        "away_win": 0.2773326396739889,
-        "btts_yes": 0.46621182254506083,
-        "btts_yes_yes": 0.466212,
-        "draw": 0.2753761151566278,
-        "home_win": 0.4472912451693829,
-        "match_bookings_over_over": 0.700534,
-        "match_corners_over_over": 0.696483,
-        "match_over_2_5": 0.41461899638032396,
-        "match_over_2_5_over": 0.414619,
-        "match_winner_away": 0.277333,
-        "match_winner_draw": 0.275376,
-        "match_winner_home": 0.447291,
-        "team_bookings_over_away": 0.599846,
-        "team_bookings_over_home": 0.759207,
-        "team_corners_over_away": 0.627906,
-        "team_corners_over_home": 0.53459
-      },
-      "model_version": "venue-poisson-goals-corners-cards-v2",
-      "odds": null,
-      "odds_status": "unavailable",
-      "rank_score": 0.625548,
-      "reasons": [
-        "Historical home/away sample: 6/5 matches",
-        "Count-market estimates are shown only when historical corner/card samples are available.",
-        "Bookmaker prices are comparisons only and do not determine model probabilities."
-      ],
-      "sample": {
-        "away_away_matches": 5,
-        "historical_matches": 69,
-        "home_home_matches": 6
-      },
-      "selection": "away",
-      "prediction_id": "68e5040c575041b1a73af988c729a692",
-      "status": "PENDING"
-    },
-    {
-      "away": "Aberdeen",
-      "away_lambda": 0.9008,
-      "calibration": "uncalibrated_baseline",
-      "competition": "Premiership",
-      "count_expectations": {
-        "bookings": {
-          "away_lambda": 2.07,
-          "away_sample": 5,
-          "home_lambda": 1.17,
-          "home_sample": 5,
-          "league_matches": 75
-        },
-        "corners": {
-          "away_lambda": 5.46,
-          "away_sample": 5,
-          "home_lambda": 7.955,
-          "home_sample": 5,
-          "league_matches": 75
-        }
-      },
-      "data_quality": 0.703,
-      "estimated_probability": 0.61261,
-      "expected_value": null,
-      "fixture_id": "1792830",
-      "history_cutoff": "2026-11-24",
-      "home": "Rangers",
-      "home_lambda": 2.0489,
-      "kickoff": "2026-11-24T22:00:00+02:00",
-      "line": 1.5,
-      "market": "team_bookings_over",
-      "market_odds": {},
-      "market_probabilities": {
-        "away_win": 0.15644534194226903,
-        "btts_yes": 0.517234286240388,
-        "btts_yes_yes": 0.517234,
-        "draw": 0.20385136749599608,
-        "home_win": 0.6397032905617348,
-        "match_bookings_over_over": 0.406373,
-        "match_corners_over_over": 0.91776,
-        "match_over_2_5": 0.5654466897516637,
-        "match_over_2_5_over": 0.565447,
-        "match_winner_away": 0.156445,
-        "match_winner_draw": 0.203851,
-        "match_winner_home": 0.639703,
-        "team_bookings_over_away": 0.61261,
-        "team_bookings_over_home": 0.326504,
-        "team_corners_over_away": 0.636215,
-        "team_corners_over_home": 0.897762
-      },
-      "model_version": "venue-poisson-goals-corners-cards-v2",
-      "odds": null,
-      "odds_status": "unavailable",
-      "rank_score": 0.622835,
-      "reasons": [
-        "Historical home/away sample: 5/5 matches",
-        "Count-market estimates are shown only when historical corner/card samples are available.",
-        "Bookmaker prices are comparisons only and do not determine model probabilities."
-      ],
-      "sample": {
-        "away_away_matches": 5,
-        "historical_matches": 75,
-        "home_home_matches": 5
-      },
-      "selection": "away",
-      "prediction_id": "788c5823bf4b4771960522904150a7a4",
-      "status": "PENDING"
-    },
-    {
-      "away": "Hoffenheim W",
-      "away_lambda": 1.101,
-      "calibration": "uncalibrated_baseline",
-      "competition": "Frauen-Bundesliga",
-      "count_expectations": {
-        "bookings": {
-          "away_lambda": 1.5873015873015872,
-          "away_sample": 4,
-          "home_lambda": 1.4814814814814814,
-          "home_sample": 4,
-          "league_matches": 81
-        },
-        "corners": {
-          "away_lambda": 5.1534391534391535,
-          "away_sample": 4,
-          "home_lambda": 7.312169312169312,
-          "home_sample": 4,
-          "league_matches": 81
-        }
-      },
-      "data_quality": 0.625,
-      "estimated_probability": 0.65389,
-      "expected_value": null,
-      "fixture_id": "1834796",
-      "history_cutoff": "2026-11-23",
-      "home": "Bayern Munich W",
-      "home_lambda": 3.8955,
-      "kickoff": "2026-11-23T19:00:00+02:00",
-      "line": null,
-      "market": "btts_yes",
-      "market_odds": {
-        "1X2": {
-          "away": 24.0,
-          "draw": 10.5,
-          "home": 1.04
-        },
-        "double_chance": {
-          "12": 1.02,
-          "1X": 1.01,
-          "X2": 4.9
-        },
-        "match_total_goals": {
-          "0.5": {
-            "over": 1.01,
-            "under": 11.0
-          },
-          "1.5": {
-            "over": 1.04,
-            "under": 8.0
-          },
-          "2.5": {
-            "over": 1.16,
-            "under": 4.4
-          },
-          "3.5": {
-            "over": 1.45,
-            "under": 2.5
-          },
-          "4.5": {
-            "over": 1.99,
-            "under": 1.7
-          },
-          "5.5": {
-            "over": 3.0,
-            "under": 1.32
-          },
-          "6.5": {
-            "over": 4.75,
-            "under": 1.14
-          }
-        }
-      },
-      "market_probabilities": {
-        "away_win": 0.05923427724001698,
-        "btts_yes": 0.6538899867428334,
-        "btts_yes_yes": 0.65389,
-        "draw": 0.0864171064579042,
-        "home_win": 0.8543486163020788,
-        "match_bookings_over_over": 0.368174,
-        "match_corners_over_over": 0.873177,
-        "match_over_2_5": 0.8750528848144057,
-        "match_over_2_5_over": 0.875053,
-        "match_winner_away": 0.059234,
-        "match_winner_draw": 0.086417,
-        "match_winner_home": 0.854349,
-        "team_bookings_over_away": 0.470957,
-        "team_bookings_over_home": 0.435958,
-        "team_corners_over_away": 0.586005,
-        "team_corners_over_home": 0.85363
-      },
-      "model_version": "venue-poisson-goals-corners-cards-v2",
-      "odds": null,
-      "odds_status": "unavailable",
-      "rank_score": 0.622139,
-      "reasons": [
-        "Historical home/away sample: 4/4 matches",
-        "Count-market estimates are shown only when historical corner/card samples are available.",
-        "Bookmaker prices are comparisons only and do not determine model probabilities."
-      ],
-      "sample": {
-        "away_away_matches": 4,
-        "historical_matches": 81,
-        "home_home_matches": 4
-      },
-      "selection": "yes",
-      "prediction_id": "e7892a0cb05341eaaecf5b7a8c3951ba",
+      "prediction_id": "53bad6e9775e4a3a8f137406e2dde5e4",
       "status": "PENDING"
     },
     {
@@ -8410,7 +4178,7 @@
         "home_home_matches": 5
       },
       "selection": "over",
-      "prediction_id": "b92aef9ccdc746ecb10e5c9797736867",
+      "prediction_id": "fc53b1245acf446d89f46c86addd89a4",
       "status": "PENDING"
     },
     {
@@ -8456,16 +4224,16 @@
             "under": 8.5
           },
           "1.5": {
-            "over": 1.36,
-            "under": 3.0
+            "over": 1.35,
+            "under": 3.05
           },
           "2.5": {
-            "over": 2.1,
-            "under": 1.68
+            "over": 2.08,
+            "under": 1.7
           },
           "3.5": {
-            "over": 3.75,
-            "under": 1.25
+            "over": 3.6,
+            "under": 1.26
           },
           "4.5": {
             "over": 6.5,
@@ -8527,16 +4295,16 @@
         },
         "home_cards": {
           "0.5": {
-            "over": 1.13,
-            "under": 5.5
+            "over": 1.12,
+            "under": 5.75
           },
           "1.5": {
-            "over": 1.65,
-            "under": 2.15
+            "over": 1.63,
+            "under": 2.2
           },
           "2.5": {
-            "over": 3.0,
-            "under": 1.36
+            "over": 2.9,
+            "under": 1.38
           },
           "3.5": {
             "over": 5.75,
@@ -8715,7 +4483,7 @@
         "home_home_matches": 5
       },
       "selection": "over",
-      "prediction_id": "ca885f0e66384dbda28f57eabdc0695a",
+      "prediction_id": "d2d6e5459c61409b877aea2589e6a40d",
       "status": "PENDING"
     }
   ],
@@ -8820,7 +4588,7 @@
         "competition": "Premiership",
         "status": "ok",
         "fixtures": 4,
-        "recommendations": 9,
+        "recommendations": 2,
         "sources": {
           "livescore": {
             "status": "ok",
@@ -8843,7 +4611,7 @@
         "competition": "Bundesliga",
         "status": "ok",
         "fixtures": 1,
-        "recommendations": 5,
+        "recommendations": 2,
         "sources": {
           "livescore": {
             "status": "ok",
@@ -8864,9 +4632,9 @@
       {
         "division": "I1",
         "competition": "Serie A",
-        "status": "ok",
+        "status": "no_qualifying_recommendations",
         "fixtures": 9,
-        "recommendations": 5,
+        "recommendations": 0,
         "sources": {
           "livescore": {
             "status": "ok",
@@ -9025,9 +4793,9 @@
       {
         "division": "G1",
         "competition": "Super League",
-        "status": "ok",
+        "status": "no_qualifying_recommendations",
         "fixtures": 4,
-        "recommendations": 4,
+        "recommendations": 0,
         "sources": {
           "livescore": {
             "status": "ok",
@@ -9050,7 +4818,7 @@
         "competition": "National League",
         "status": "ok",
         "fixtures": 34,
-        "recommendations": 7,
+        "recommendations": 2,
         "sources": {
           "livescore": {
             "status": "ok",
@@ -9096,7 +4864,7 @@
         "competition": "Serie B",
         "status": "ok",
         "fixtures": 10,
-        "recommendations": 19,
+        "recommendations": 3,
         "sources": {
           "livescore": {
             "status": "ok",
@@ -9140,9 +4908,9 @@
       {
         "division": "F2",
         "competition": "Ligue 2",
-        "status": "ok",
+        "status": "no_qualifying_recommendations",
         "fixtures": 2,
-        "recommendations": 6,
+        "recommendations": 0,
         "sources": {
           "livescore": {
             "status": "ok",
