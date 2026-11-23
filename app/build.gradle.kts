@@ -26,15 +26,15 @@ android {
                 keyAlias = System.getenv("GOAL_SCANNER_KEY_ALIAS")
                 keyPassword = System.getenv("GOAL_SCANNER_KEY_PASSWORD")
             }
+            // Configure APK signature schemes on the signing config itself.
+            enableV1Signing = true
+            enableV2Signing = true
         }
     }
 
     buildTypes {
         getByName("release") {
             signingConfig = signingConfigs.getByName("release")
-            // Sign with both schemes for broad Android installer compatibility.
-            enableV1Signing = true
-            enableV2Signing = true
             isMinifyEnabled = false
         }
     }
