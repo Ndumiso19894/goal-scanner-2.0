@@ -595,25 +595,28 @@ private fun PreMatchStats(stats:JSONObject?) {
 
 @Composable
 private fun ScreenColumn(modifier:Modifier=Modifier,content:@Composable ColumnScope.()->Unit) {
-    Column(modifier.fillMaxSize().background(Color(0xFF080D13))
-        .verticalScroll(rememberScrollState()).padding(horizontal=17.dp,vertical=18.dp),
-        verticalArrangement=Arrangement.spacedBy(16.dp),content=content)
+    Column(modifier.fillMaxSize().background(Brush.verticalGradient(listOf(Color(0xFF070C14),Color(0xFF0A1420),Color(0xFF080F19))))
+        .verticalScroll(rememberScrollState()).padding(horizontal=18.dp,vertical=20.dp),
+        verticalArrangement=Arrangement.spacedBy(18.dp),content=content)
 }
 @Composable
 private fun Heading(title:String,subtitle:String?=null) {
-    Column(verticalArrangement=Arrangement.spacedBy(4.dp)) {
-        Text(title,style=MaterialTheme.typography.titleLarge,fontWeight=FontWeight.ExtraBold,color=Color(0xFFF2F5F0))
-        if(subtitle!=null) Text(subtitle,style=MaterialTheme.typography.bodySmall,color=Color(0xFF9EADB9),lineHeight=18.sp)
+    Row(verticalAlignment=Alignment.Top,horizontalArrangement=Arrangement.spacedBy(10.dp)) {
+        Box(Modifier.padding(top=3.dp).width(3.dp).height(if(subtitle==null) 23.dp else 38.dp).background(Brush.verticalGradient(listOf(Color(0xFFB7F36B),Color(0xFF55D6C2))),RoundedCornerShape(50)))
+        Column(verticalArrangement=Arrangement.spacedBy(4.dp)) {
+            Text(title,style=MaterialTheme.typography.titleLarge,fontWeight=FontWeight.ExtraBold,color=Color(0xFFF4F7FA),letterSpacing=(-0.35).sp)
+            if(subtitle!=null) Text(subtitle,style=MaterialTheme.typography.bodySmall,color=Color(0xFF91A2B3),lineHeight=18.sp)
+        }
     }
 }
 @Composable
 private fun Metric(title:String,value:String,detail:String) {
-    Card(shape=RoundedCornerShape(19.dp),colors=CardDefaults.cardColors(containerColor=Color(0xFF111A23)),
-        border=androidx.compose.foundation.BorderStroke(1.dp,Color(0xFF24313D))) {
+    Card(shape=RoundedCornerShape(19.dp),colors=CardDefaults.cardColors(containerColor=Color(0xFF111D2B)),
+        border=androidx.compose.foundation.BorderStroke(1.dp,Color(0xFF26384A))) {
         Column(Modifier.fillMaxWidth().padding(14.dp),verticalArrangement=Arrangement.spacedBy(6.dp)) {
-            Text(title.uppercase(),style=MaterialTheme.typography.labelSmall,color=Color(0xFF91A0AC),letterSpacing=0.8.sp)
+            Text(title.uppercase(),style=MaterialTheme.typography.labelSmall,color=Color(0xFF91A2B3),letterSpacing=1.sp,fontWeight=FontWeight.Bold)
             Text(value,style=MaterialTheme.typography.headlineSmall,fontWeight=FontWeight.ExtraBold,color=Color(0xFFB7F36B))
-            Text(detail,style=MaterialTheme.typography.labelSmall,color=Color(0xFF9EADB9),maxLines=2)
+            Text(detail,style=MaterialTheme.typography.labelSmall,color=Color(0xFF91A2B3),maxLines=2,lineHeight=15.sp)
         }
     }
 }
