@@ -2,7 +2,7 @@ name: Android Build Verification
 
 on:
   push:
-    branches: [main, feature/android-goal-scanner-pro]
+    branches: [main, feature/android-goal-scanner-pro, feature/match-centre-intelligence]
     paths:
       - "app/**"
       - "*.gradle.kts"
