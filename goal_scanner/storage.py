@@ -11,25 +11,35 @@ from typing import Any
 from .snapshots import PredictionSnapshot
 
 
-def _outcome(market: str, selection: str, home: int, away: int) -> bool | None:
+def _outcome(market: str, selection: str, home: int, away: int,
+            line: float | None = None, statistics: dict[str, Any] | None = None) -> bool | None:
     total = home + away
-    if market == "home_over_0_5": return home >= 1
-    if market == "away_over_0_5": return away >= 1
-    if market == "home_over_1_5": return home >= 2
-    if market == "away_over_1_5": return away >= 2
-    if market == "match_over_1_5": return total >= 2
     if market == "match_over_2_5": return total >= 3
     if market == "btts_yes": return home >= 1 and away >= 1
     if market == "match_winner":
         actual = "home" if home > away else "away" if away > home else "draw"
         return selection == actual
-    if market == "double_chance":
-        actual = "1X" if home >= away else "X2" if away >= home else "12"
-        # A draw wins both 1X and X2, but not 12.
-        if selection == "1X": return home >= away
-        if selection == "X2": return away >= home
-        if selection == "12": return home != away
-        return None
+    if market in {"team_corners_over", "match_corners_over", "team_bookings_over", "match_bookings_over"}:
+        if line is None or not isinstance(statistics, dict):
+            return None
+        home_stats = statistics.get("home") or {}
+        away_stats = statistics.get("away") or {}
+        if market in {"team_corners_over", "match_corners_over"}:
+            home_count = home_stats.get("corners")
+            away_count = away_stats.get("corners")
+        else:
+            home_yellow, home_red = home_stats.get("yellow_cards"), home_stats.get("red_cards")
+            away_yellow, away_red = away_stats.get("yellow_cards"), away_stats.get("red_cards")
+            if None in (home_yellow, home_red, away_yellow, away_red):
+                return None
+            home_count = int(home_yellow) + int(home_red)
+            away_count = int(away_yellow) + int(away_red)
+        if home_count is None or away_count is None:
+            return None
+        if market.startswith("team_"):
+            count = home_count if selection == "home" else away_count if selection == "away" else None
+            return None if count is None else float(count) > line
+        return float(home_count + away_count) > line
     return None
 
 
@@ -174,7 +184,8 @@ class Store:
         return prediction_id
 
     def settle_fixture(self, fixture_id: str, home_goals: int, away_goals: int,
-                       status: str, source: str = "livescore") -> int:
+                       status: str, source: str = "livescore",
+                       statistics: dict[str, Any] | None = None) -> int:
         if not fixture_id or home_goals < 0 or away_goals < 0:
             return 0
         if str(status).strip().upper() not in {"FT", "AET", "PEN", "FINISHED", "FULL TIME"}:
@@ -183,11 +194,17 @@ class Store:
         updated = 0
         with self.connect() as db:
             rows = db.execute(
-                "SELECT id,market,selection FROM predictions WHERE fixture_id=? AND status='PENDING'",
+                "SELECT id,market,selection,payload FROM predictions WHERE fixture_id=? AND status='PENDING'",
                 (str(fixture_id),)
             ).fetchall()
             for row in rows:
-                won = _outcome(row["market"], row["selection"], home_goals, away_goals)
+                try:
+                    payload = json.loads(row["payload"] or "{}")
+                    line = float(payload["line"]) if payload.get("line") is not None else None
+                except (TypeError, ValueError, KeyError, json.JSONDecodeError):
+                    line = None
+                won = _outcome(row["market"], row["selection"], home_goals, away_goals,
+                               line=line, statistics=statistics)
                 if won is None:
                     continue
                 db.execute("""
