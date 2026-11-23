@@ -39,7 +39,7 @@ import java.time.LocalDate
 
 private val Blue = Color(0xFF1976D2)
 private val Navy = Color(0xFF101C32)
-private const val DEFAULT_DATA_URL = "https://raw.githubusercontent.com/Ndumiso19894/goal-scanner-2.0/feature/android-goal-scanner-pro"
+private const val DEFAULT_DATA_URL = "https://raw.githubusercontent.com/Ndumiso19894/goal-scanner-2.0/main"
 private val MarketIds = listOf("team_corners_over","match_corners_over","match_bookings_over","team_bookings_over","match_over_2_5","btts_yes","match_winner_home","match_winner_draw","match_winner_away")
 private val MarketNames = listOf("Team corners over","Total match corners over","Match bookings over","Team bookings over","Total goals over 2.5","Both teams to score · Yes","1X2 · Home","1X2 · Draw","1X2 · Away")
 
@@ -79,7 +79,8 @@ private fun GoalScannerApp(prefs: android.content.SharedPreferences) {
     var connection by rememberSaveable { mutableStateOf("Connecting to GitHub feed…") }
     var providers by rememberSaveable { mutableStateOf("Waiting for published data") }
     var fixtureSummary by rememberSaveable { mutableStateOf("Loading published fixtures…") }
-    var fixtureRows by remember { mutableStateOf(emptyList<String>()) }
+    var fixtureRows by remember { mutableStateOf(emptyList<JSONObject>()) }
+    var selectedFixture by remember { mutableStateOf<JSONObject?>(null) }
     var message by rememberSaveable { mutableStateOf("") }
     var busy by remember { mutableStateOf(false) }
     var scannerView by rememberSaveable { mutableStateOf("Recommended") }
@@ -106,9 +107,7 @@ private fun GoalScannerApp(prefs: android.content.SharedPreferences) {
                 recommendations = if (picks == null) emptyList() else (0 until picks.length()).mapNotNull { picks.optJSONObject(it) }
                 val fixtureFeed = apiRequest(apiUrl, "docs/data/fixtures.json?ts=$stamp")
                 val fixtureArray = fixtureFeed.optJSONArray("fixtures")
-                fixtureRows = if (fixtureArray == null) emptyList() else (0 until fixtureArray.length()).mapNotNull { i ->
-                    fixtureArray.optJSONObject(i)?.let { fx -> "${fx.optString("home")} vs ${fx.optString("away")} · ${fx.optString("kickoff")}" }
-                }
+                fixtureRows = if (fixtureArray == null) emptyList() else (0 until fixtureArray.length()).mapNotNull { fixtureArray.optJSONObject(it) }
                 fixtureSummary = "${fixtureRows.size} fixtures · updated " + fixtureFeed.optString("updated_at", "not run yet")
                 val oddsFeed = apiRequest(apiUrl, "docs/data/odds-movements.json?ts=$stamp")
                 val movementArray = oddsFeed.optJSONArray("movements")
@@ -174,19 +173,14 @@ private fun GoalScannerApp(prefs: android.content.SharedPreferences) {
         } else when(tab) {
             "Home" -> HomeScreen(Modifier.padding(padding),connection,providers,fixtureSummary,
                 {tab="Scanner"},{tab="Fixtures"})
-            "Fixtures" -> FixturesScreen(Modifier.padding(padding),apiUrl,season,division,fixtureSummary,
-                fixtureRows,busy,message) {
+            "Fixtures" -> FixturesScreen(Modifier.padding(padding),fixtureSummary,
+                fixtureRows,busy,message,onSelect={ fixture -> selectedFixture=fixture; tab="Match" }) {
                 scope.launch {
                     busy=true; message=""
                     try {
                         val result=apiRequest(apiUrl,"docs/data/fixtures.json?ts=" + System.currentTimeMillis())
                         val array=result.optJSONArray("fixtures")
-                        fixtureRows=if(array==null) emptyList() else (0 until array.length()).mapNotNull { i ->
-                            array.optJSONObject(i)?.let { fx ->
-                                val home=fx.optString("home"); val away=fx.optString("away")
-                                if(home.isBlank()||away.isBlank()) null else "$home vs $away · "+fx.optString("kickoff","Kickoff unavailable")
-                            }
-                        }
+                        fixtureRows=if(array==null) emptyList() else (0 until array.length()).mapNotNull { array.optJSONObject(it) }
                         fixtureSummary="${fixtureRows.size} fixtures · updated "+result.optString("updated_at","unknown")
                         providers="Published fixtures feed"
                         message="Latest scheduled fixture data loaded."
@@ -227,7 +221,10 @@ private fun GoalScannerApp(prefs: android.content.SharedPreferences) {
                     }
                 },
                 onSelect={candidate -> selectedRecommendation=candidate; tab="Analysis"})
-            "Analysis" -> AnalysisScreen(Modifier.padding(padding),selectedRecommendation)
+            "Match" -> FixtureDetailsScreen(Modifier.padding(padding),selectedFixture,recommendations,
+                onBack={tab="Fixtures"},onSelect={ candidate -> selectedRecommendation=candidate; tab="Analysis" })
+            "Analysis" -> AnalysisScreen(Modifier.padding(padding),selectedRecommendation,
+                recommendations.filter { it.optString("fixture_id")==selectedRecommendation?.optString("fixture_id") })
             "Odds" -> DroppingOddsScreen(Modifier.padding(padding),oddsMovementRows,oddsMovementUpdated) {
                 scope.launch {
                     busy=true
@@ -335,21 +332,135 @@ private fun HomeScreen(modifier:Modifier,connection:String,providers:String,fixt
     }
 }
 @Composable
-private fun FixturesScreen(modifier:Modifier,apiUrl:String,season:String,division:String,summary:String,
-    fixtures:List<String>,busy:Boolean,message:String,onCollect:()->Unit) {
-    ScreenColumn(modifier) {
-        Heading("Fixtures","Latest fixtures published by the scheduled scanner.")
-        Card { Column(Modifier.padding(15.dp)) { Text("Latest collection",fontWeight=FontWeight.Bold); Text(summary,color=MaterialTheme.colorScheme.onSurfaceVariant) } }
-        Button(onClick=onCollect,enabled=!busy&&apiUrl.isNotBlank()&&season.isNotBlank()&&division.isNotBlank(),modifier=Modifier.fillMaxWidth()) {
-            Text(if(busy) "Collecting…" else "Collect today's fixtures")
+private fun FixturesScreen(
+    modifier:Modifier,summary:String,fixtures:List<JSONObject>,busy:Boolean,message:String,
+    onSelect:(JSONObject)->Unit,onCollect:()->Unit
+) {
+    var query by rememberSaveable { mutableStateOf("") }
+    var filter by rememberSaveable { mutableStateOf("All") }
+    val visible=fixtures.filter { fx ->
+        val text=(fx.optString("home")+" "+fx.optString("away")+" "+fx.optString("competition")).lowercase()
+        val status=fx.optString("status","NS").uppercase()
+        val queryOk=query.isBlank() || text.contains(query.lowercase())
+        val statusOk=when(filter) {
+            "Upcoming" -> status in listOf("NS","TBD","SCHEDULED","")
+            "Live" -> status in listOf("1H","2H","HT","LIVE","ET","P")
+            "Finished" -> status in listOf("FT","AET","PEN","FINISHED")
+            else -> true
         }
-        if(apiUrl.isBlank()) Notice("Data feed not configured","Enter the published GitHub data URL in Settings.")
-        if(season.isBlank()||division.isBlank()) Notice("Competition settings required","Set the Football-Data season and division codes in Settings.")
-        if(message.isNotBlank()) Text(message,style=MaterialTheme.typography.bodySmall)
-        if(fixtures.isNotEmpty()) {
-            Heading("Retrieved fixtures","${fixtures.size} records")
-            fixtures.forEach { Card { Text(it,Modifier.fillMaxWidth().padding(14.dp)) } }
-        } else Notice("No fixture records","No fixtures have been retrieved. Provider failures and missing coverage will not be treated as empty match statistics.")
+        queryOk && statusOk
+    }.sortedBy { it.optString("kickoff") }
+    ScreenColumn(modifier) {
+        Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween,verticalAlignment=Alignment.CenterVertically) {
+            Column(Modifier.weight(1f)) {
+                Text("Fixtures",style=MaterialTheme.typography.headlineSmall,fontWeight=FontWeight.ExtraBold)
+                Text("Browse matches and open each one for its details.",style=MaterialTheme.typography.bodySmall,color=MaterialTheme.colorScheme.onSurfaceVariant)
+            }
+            FilledTonalButton(onClick=onCollect,enabled=!busy) { Text(if(busy) "Loading…" else "Refresh") }
+        }
+        Card(shape=RoundedCornerShape(18.dp)) {
+            Column(Modifier.padding(14.dp),verticalArrangement=Arrangement.spacedBy(4.dp)) {
+                Text("${fixtures.size} matches available",fontWeight=FontWeight.Bold)
+                Text(summary,style=MaterialTheme.typography.bodySmall,color=MaterialTheme.colorScheme.onSurfaceVariant)
+            }
+        }
+        OutlinedTextField(query,{query=it},modifier=Modifier.fillMaxWidth(),singleLine=true,label={Text("Search team or competition")})
+        Row(horizontalArrangement=Arrangement.spacedBy(6.dp)) {
+            listOf("All","Upcoming","Live","Finished").forEach { item ->
+                FilterChip(selected=filter==item,onClick={filter=item},label={Text(item)})
+            }
+        }
+        if(message.isNotBlank()) Text(message,style=MaterialTheme.typography.bodySmall,color=MaterialTheme.colorScheme.primary)
+        if(visible.isEmpty()) Notice("No matching fixtures","Try another search or status filter, or refresh the fixture feed.")
+        visible.forEach { fx ->
+            val status=fx.optString("status","NS").uppercase()
+            Card(Modifier.fillMaxWidth().clickable { onSelect(fx) },shape=RoundedCornerShape(18.dp)) {
+                Column(Modifier.fillMaxWidth().padding(14.dp),verticalArrangement=Arrangement.spacedBy(10.dp)) {
+                    Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween,verticalAlignment=Alignment.CenterVertically) {
+                        Text(fx.optString("competition",fx.optString("country","Football")),modifier=Modifier.weight(1f),
+                            style=MaterialTheme.typography.labelSmall,color=MaterialTheme.colorScheme.onSurfaceVariant,maxLines=1)
+                        StatusPill(status)
+                    }
+                    Row(Modifier.fillMaxWidth(),verticalAlignment=Alignment.CenterVertically) {
+                        Column(Modifier.weight(1f),verticalArrangement=Arrangement.spacedBy(3.dp)) {
+                            Text(fx.optString("home","Home"),fontWeight=FontWeight.Bold,style=MaterialTheme.typography.titleMedium)
+                            Text(fx.optString("away","Away"),fontWeight=FontWeight.Bold,style=MaterialTheme.typography.titleMedium)
+                        }
+                        Column(horizontalAlignment=Alignment.End,verticalArrangement=Arrangement.spacedBy(4.dp)) {
+                            if(!fx.isNull("home_score")&&!fx.isNull("away_score"))
+                                Text("${fx.optInt("home_score")} - ${fx.optInt("away_score")}",style=MaterialTheme.typography.titleLarge,fontWeight=FontWeight.ExtraBold)
+                            else Text(formatKickoff(fx.optString("kickoff")),style=MaterialTheme.typography.labelMedium,fontWeight=FontWeight.SemiBold)
+                            Text("View match  ›",style=MaterialTheme.typography.labelSmall,color=MaterialTheme.colorScheme.primary)
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+@Composable
+private fun StatusPill(status:String) {
+    val live=status in listOf("1H","2H","HT","LIVE","ET","P")
+    Surface(color=if(live) Color(0xFFE3F7EB) else MaterialTheme.colorScheme.surfaceVariant,shape=RoundedCornerShape(50)) {
+        Text(status.ifBlank { "NS" },modifier=Modifier.padding(horizontal=9.dp,vertical=5.dp),
+            style=MaterialTheme.typography.labelSmall,fontWeight=FontWeight.Bold,
+            color=if(live) Color(0xFF167A45) else MaterialTheme.colorScheme.onSurfaceVariant)
+    }
+}
+private fun formatKickoff(value:String):String = runCatching {
+    java.time.OffsetDateTime.parse(value).format(java.time.format.DateTimeFormatter.ofPattern("EEE d MMM · HH:mm"))
+}.getOrElse { value.replace("T"," ").take(16) }
+private fun marketTitle(item:JSONObject):String {
+    val market=item.optString("market"); val selection=item.optString("selection")
+    val line=if(item.isNull("line")) "" else item.optString("line")
+    return when(market) {
+        "team_corners_over" -> "${selection.replaceFirstChar { it.uppercase() }} team corners · Over ${line.ifBlank { "line unavailable" }}"
+        "match_corners_over" -> "Total match corners · Over ${line.ifBlank { "line unavailable" }}"
+        "match_bookings_over" -> "Total match bookings · Over ${line.ifBlank { "line unavailable" }}"
+        "team_bookings_over" -> "${selection.replaceFirstChar { it.uppercase() }} team bookings · Over ${line.ifBlank { "line unavailable" }}"
+        "match_over_2_5" -> "Total goals · Over 2.5"
+        "btts_yes" -> "Both teams to score · Yes"
+        "match_winner" -> "1X2 · ${selection.replaceFirstChar { it.uppercase() }}"
+        else -> market.replace("_"," ").replaceFirstChar { it.uppercase() }
+    }
+}
+@Composable
+private fun FixtureDetailsScreen(
+    modifier:Modifier,fixture:JSONObject?,recommendations:List<JSONObject>,onBack:()->Unit,onSelect:(JSONObject)->Unit
+) {
+    ScreenColumn(modifier) {
+        TextButton(onClick=onBack) { Text("‹  All fixtures") }
+        if(fixture==null) Notice("No fixture selected","Return to the fixtures list and select a match.")
+        else {
+            val picks=recommendations.filter { it.optString("fixture_id")==fixture.optString("id") }
+            Card(colors=CardDefaults.cardColors(containerColor=Navy),shape=RoundedCornerShape(22.dp)) {
+                Column(Modifier.fillMaxWidth().padding(20.dp),verticalArrangement=Arrangement.spacedBy(10.dp)) {
+                    Text(fixture.optString("competition","Football").uppercase(),color=Color(0xFFB8D2F2),style=MaterialTheme.typography.labelSmall)
+                    Text(fixture.optString("home"),color=Color.White,style=MaterialTheme.typography.headlineSmall,fontWeight=FontWeight.Bold)
+                    Text("VS",color=Color(0xFF9CB7D9),style=MaterialTheme.typography.labelSmall)
+                    Text(fixture.optString("away"),color=Color.White,style=MaterialTheme.typography.headlineSmall,fontWeight=FontWeight.Bold)
+                    if(!fixture.isNull("home_score")&&!fixture.isNull("away_score"))
+                        Text("${fixture.optInt("home_score")} - ${fixture.optInt("away_score")}",color=Color.White,style=MaterialTheme.typography.headlineMedium,fontWeight=FontWeight.ExtraBold)
+                    else Text(formatKickoff(fixture.optString("kickoff")),color=Color(0xFFD1DEEF))
+                    Text("${fixture.optString("country")} · ${fixture.optString("status","NS")}",color=Color(0xFFD1DEEF),style=MaterialTheme.typography.bodySmall)
+                }
+            }
+            Heading("Available model selections","${picks.size} published selections for this match")
+            if(picks.isEmpty()) Notice("No qualifying selections published","This fixture did not meet the scanner's data and probability filters. That does not mean the match has no betting markets.")
+            picks.forEach { pick ->
+                Card(Modifier.fillMaxWidth().clickable { onSelect(pick) },shape=RoundedCornerShape(16.dp)) {
+                    Row(Modifier.fillMaxWidth().padding(14.dp),verticalAlignment=Alignment.CenterVertically) {
+                        Column(Modifier.weight(1f),verticalArrangement=Arrangement.spacedBy(5.dp)) {
+                            Text(marketTitle(pick),fontWeight=FontWeight.Bold)
+                            Text("Model estimate ${(pick.optDouble("estimated_probability")*100).toInt()}%  ·  ${if(pick.isNull("odds")) "Odds unavailable" else "Odds "+String.format("%.2f",pick.optDouble("odds"))}",
+                                style=MaterialTheme.typography.bodySmall,color=MaterialTheme.colorScheme.onSurfaceVariant)
+                        }
+                        Text("›",style=MaterialTheme.typography.titleLarge,color=MaterialTheme.colorScheme.primary)
+                    }
+                }
+            }
+            Notice("About the data","Only markets with sufficient historical information appear here. A missing estimate is not treated as zero, and bookmaker odds do not determine the model probability.")
+        }
     }
 }
 @Composable
