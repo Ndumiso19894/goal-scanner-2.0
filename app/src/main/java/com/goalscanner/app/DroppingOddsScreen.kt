@@ -74,8 +74,12 @@ private fun oddsMovementTitle(item:JSONObject):String {
     val line=parts.firstOrNull()?.takeIf { it.toDoubleOrNull()!=null }
     val outcome=parts.getOrNull(1)?.lowercase()
     val side=when(market) {
-        "home_corners","home_cards","home_team_goals" -> "Home team"
-        "away_corners","away_cards","away_team_goals" -> "Away team"
+        "home_corners" -> "Home team corners"
+        "away_corners" -> "Away team corners"
+        "home_cards" -> "Home team bookings (yellow + red)"
+        "away_cards" -> "Away team bookings (yellow + red)"
+        "home_team_goals" -> "Home team goals"
+        "away_team_goals" -> "Away team goals"
         "match_corners" -> "Total match corners"
         "match_cards" -> "Total match bookings (yellow + red)"
         "match_total_goals" -> "Total goals"
