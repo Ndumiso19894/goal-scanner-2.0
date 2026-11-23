@@ -84,7 +84,7 @@ private fun GoalScannerApp(prefs: android.content.SharedPreferences) {
     var busy by remember { mutableStateOf(false) }
     var scannerView by rememberSaveable { mutableStateOf("Recommended") }
     var minimum by rememberSaveable { mutableFloatStateOf(prefs.getFloat("minimum",60f)) }
-    var markets by remember { mutableStateOf(prefs.getStringSet("markets",MarketIds.toSet())?.toSet() ?: MarketIds.toSet()) }
+    var markets by remember { mutableStateOf((prefs.getStringSet("markets",null)?.intersect(MarketIds.toSet())?.takeIf { it.isNotEmpty() } ?: MarketIds.toSet()).toSet()) }
     var recommendations by remember { mutableStateOf(emptyList<JSONObject>()) }
     var scanSummary by rememberSaveable { mutableStateOf("No scan has been run yet.") }
     var selectedRecommendation by remember { mutableStateOf<JSONObject?>(null) }
