@@ -71,6 +71,10 @@ class Fixture:
     half_home_score: int | None = None
     half_away_score: int | None = None
     retrieved_at: str = ""
+    home_team_id: str = ""
+    away_team_id: str = ""
+    home_badge_path: str = ""
+    away_badge_path: str = ""
 
 class LiveScoreProvider:
     """LiveScore public app JSON feed; unofficial and keyless."""
@@ -91,7 +95,9 @@ class LiveScoreProvider:
         return Fixture("livescore", str(event.get("Eid") or ""), kickoff.isoformat(),
             str(home["Nm"]), str(away["Nm"]), str(stage.get("Snm") or ""), str(stage.get("Cnm") or ""),
             str(event.get("Eps") or ""), _int(event.get("Tr1")), _int(event.get("Tr2")),
-            _int(event.get("Trh1")), _int(event.get("Trh2")), datetime.now(timezone.utc).isoformat())
+            _int(event.get("Trh1")), _int(event.get("Trh2")), datetime.now(timezone.utc).isoformat(),
+            str(home.get("ID") or ""), str(away.get("ID") or ""),
+            str(home.get("Img") or ""), str(away.get("Img") or ""))
     def fetch_day(self, day: date, utc_offset_hours: int = 2) -> list[Fixture]:
         payload = self._get(f"date/soccer/{day:%Y%m%d}/{int(utc_offset_hours)}?MD=1")
         return [fx for stage in payload.get("Stages") or [] for event in stage.get("Events") or []
