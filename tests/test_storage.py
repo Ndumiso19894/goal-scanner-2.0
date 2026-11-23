@@ -63,3 +63,26 @@ def test_dropping_odds_requires_two_snapshots_and_measures_price_fall(tmp_path):
     assert movements[0]["current_odds"] == 1.8
     assert movements[0]["drop_pct"] == 5.26
     assert movements[0]["samples"] == 2
+
+def test_corner_and_booking_predictions_settle_from_full_time_stats(tmp_path):
+    store = Store(str(tmp_path / "count-markets.sqlite3"))
+    base = {
+        "fixture_id": "ls-counts", "kickoff": "2026-12-01T18:00:00+02:00",
+        "home": "A", "away": "B", "competition": "League",
+        "estimated_probability": 0.65, "odds": 1.9, "expected_value": 0.235,
+        "rank_score": 0.7, "data_quality": 0.8,
+        "model_version": "counts-v2", "calibration": "uncalibrated_baseline",
+    }
+    store.save_prediction({**base,"market":"team_corners_over","selection":"home","line":4.5})
+    store.save_prediction({**base,"market":"match_corners_over","selection":"over","line":8.5})
+    store.save_prediction({**base,"market":"team_bookings_over","selection":"away","line":1.5})
+    store.save_prediction({**base,"market":"match_bookings_over","selection":"over","line":3.5})
+    assert store.settle_fixture("ls-counts",2,1,"FT") == 0
+    stats = {
+        "home":{"corners":6,"yellow_cards":2,"red_cards":0},
+        "away":{"corners":4,"yellow_cards":2,"red_cards":0},
+    }
+    assert store.settle_fixture("ls-counts",2,1,"FT",statistics=stats) == 4
+    rows = store.list_predictions(limit=10)
+    assert all(row["status"]=="WON" for row in rows)
+    assert store.results_summary()["settled"] == 4
