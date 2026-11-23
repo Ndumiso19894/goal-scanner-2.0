@@ -2,44 +2,52 @@
 
 Independent, evidence-led football analysis engine with an Android application.
 
+## How the app receives data
+
+Goal Scanner Pro uses a **GitHub-only static data feed**. It does not require a separately hosted API server, database service or paid hosting account.
+
+GitHub Actions runs the scanner, refreshes verified scores and publishes three public JSON snapshots:
+
+- `docs/data/latest.json` — upcoming selections and their analysis.
+- `docs/data/fixtures.json` — upcoming fixtures.
+- `docs/data/results.json` — prediction history and settled performance.
+
+The Android app downloads these files directly from this repository. The publisher is configured for a four-hour schedule and can also run after changes to the scanner branch or by manual workflow dispatch. Scheduled GitHub Actions workflows become active after this workflow is merged into the repository's default branch. Until then, the existing published snapshot can be read, but automatic scheduled refresh is not yet active.
+
+The repository and published JSON are public. Do not put private information, credentials or API tokens in the feeds.
+
 ## Android app
-The Android client is a native Kotlin + Jetpack Compose app with adaptive light/dark mode, blue accent styling, Home, Fixtures, Scanner, Analysis, Results and Settings screens. It includes both Recommended and Full Scanner views, configurable market filters, server-backed prediction history and a configurable connection to this repository's FastAPI service.
 
-Build locally with Android Studio or run the **Android APK** GitHub Actions workflow. The debug APK is uploaded as a workflow artifact. The API URL is configured in the app; no public backend URL is assumed or bundled. Until a reachable API is configured and a fixture-level recommendation service is available, the app clearly shows connection/data status rather than inventing fixtures or predictions.
+The native Kotlin + Jetpack Compose app includes Home, Fixtures, Scanner, Analysis, Results and Settings screens, with adaptive light/dark styling. It reads the GitHub JSON feed; the Scanner screen filters the latest published scan on the device. It does not launch a new remote scan on demand.
 
-## Backend install
-```bash
-python -m venv .venv
-. .venv/bin/activate
-pip install -e ".[dev,api]"
-pytest -q
-uvicorn goal_scanner.api:app --host 0.0.0.0 --port 8000
-```
-Windows PowerShell: `.venv\\Scripts\\Activate.ps1`.
+Build locally with Android Studio or run the **Android APK** GitHub Actions workflow. The debug APK is uploaded as a workflow artifact.
 
-## Goal markets
-The independent-Poisson baseline exposes probabilities for home/away team Over 0.5 and Over 1.5, match Over 1.5 and Over 2.5, 1X2, double chance (1X/X2/12) and BTTS Yes. The estimator requires positive home and away goal expectations. It does not yet provide a trained fixture-level lambda estimator or calibrated recommendations. Do not present its output as a validated betting edge.
+## Scanner and markets
 
-Corner and booking market identifiers remain reserved; their market-specific calibrated models and event-data adapters are not implemented. Contextual features must not affect probabilities until chronological out-of-sample validation and ablation demonstrate improvement.
+The fixture-level scanner estimates home and away expected goals from completed Football-Data.co.uk results using venue splits and a shrinkage baseline. It supports:
 
-## Fixture-level scanner and results
+- Home team Over 0.5 and Over 1.5 goals
+- Away team Over 0.5 and Over 1.5 goals
+- Match Over 1.5 and Over 2.5 goals
+- Match winner, double chance and BTTS Yes
 
-The Android Scanner now calls `POST /scanner/run`. The backend derives expected goals from completed historical results using home/away venue splits, applies the selected nine market families and saves only displayed recommendations as timestamped prediction records. The initial minimum estimated probability is 60%; Recommended mode ranks the top ten using probability, sample quality and available price value.
+The initial minimum estimated probability is 60%. Recommended mode ranks a shortlist using estimated probability, sample quality and available price value. Full mode publishes qualifying selections from the supported competitions.
 
-`GET /predictions` exposes prediction history, `GET /results` exposes settled performance, and `POST /results/refresh` settles pending records only when LiveScore returns a recognised full-time status and both scores. See [docs/SCANNER_API.md](docs/SCANNER_API.md) for request fields and model boundaries, and [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md) for secure server deployment and persistent storage.
+The initial fixture model is an **uncalibrated historical-rate baseline**, not a validated betting edge. It requires at least four prior home matches for the home team, four prior away matches for the away team and twelve prior completed league matches. Same-day and future results are excluded. Insufficient samples produce no recommendation. Probabilities are not guarantees.
 
-The initial fixture model is an uncalibrated historical-rate baseline. It requires at least four home matches for the home team, four away matches for the away team and twelve prior completed league matches. It excludes same-day and future results. Insufficient samples produce no recommendation. Probabilities are not guarantees or evidence of a validated betting edge.
+Bookmaker prices from SportyBet are attached after probability calculation and are not model inputs. Missing odds remain missing.
 
 ## Data providers
-The four read-only Mr2Odds-compatible sources are integrated in `goal_scanner/providers.py`:
-- LiveScore: fixtures, scores, incidents and published statistics.
-- Football-Data.co.uk: historical results and team-level data.
-- SportyBet ZA: odds only, strictly after model probabilities.
-- Transfermarkt: squad context only, not a probability input.
 
-See `docs/data-sources.md` for provenance, freshness and modelling boundaries. Providers are unofficial public feeds, may change or fail, and do not guarantee complete competition coverage. Missing data remains missing; no fabricated lineups, injuries, xG or odds.
+- LiveScore: fixtures, scores, incidents and available match statistics.
+- Football-Data.co.uk: historical results and available team-level data.
+- SportyBet ZA: odds for comparison only.
+- Transfermarkt: squad context only, excluded from probability calculation.
 
-## Safety and evaluation
-Predictions should be saved as immutable timestamped snapshots. Live scanner performance must be measured separately from manually recorded bets and historical backtests. Settlement must use verified final scores, with a manual correction path. Track accuracy, Brier score, log loss and ROI only where the necessary outcomes and odds were recorded.
+These are unofficial public feeds and may change, be rate-limited or become unavailable. Missing data remains missing; the scanner does not fabricate lineups, injuries, xG or odds.
+
+## Evaluation
+
+Predictions are stored as timestamped snapshots in the GitHub Actions cache and published as public results data. Settlement uses recognised full-time statuses and final scores from LiveScore. Track accuracy, Brier score and ROI only where the required outcomes and recorded odds exist. Overlapping markets may be correlated.
 
 This is decision-support software, not a guarantee of profit. **NO BET is a valid result.**
