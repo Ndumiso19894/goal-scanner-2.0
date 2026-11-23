@@ -7,7 +7,8 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
@@ -27,6 +28,8 @@ fun DroppingOddsScreen(
     updatedAt: String,
     onRefresh: () -> Unit
 ) {
+    var sort by rememberSaveable { mutableStateOf("Drop %") }
+    val sortedMovements = when(sort) { "Kick-off" -> movements.sortedBy { it.optString("kickoff") }; "Match A-Z" -> movements.sortedBy { it.optString("home") + " " + it.optString("away") }; "League" -> movements.sortedBy { it.optString("competition") }; else -> movements.sortedByDescending { it.optDouble("drop_pct") } }
     Column(
         modifier.fillMaxSize().background(OddsBg).verticalScroll(rememberScrollState())
             .padding(horizontal=17.dp,vertical=18.dp),
@@ -69,7 +72,8 @@ fun DroppingOddsScreen(
         } else {
             Text("${movements.size} PRICE MOVEMENTS DETECTED",style=MaterialTheme.typography.labelLarge,
                 color=OddsAccent,fontWeight=FontWeight.Bold,letterSpacing=0.7.sp)
-            movements.forEach { item ->
+            Row(horizontalArrangement=Arrangement.spacedBy(6.dp)) { listOf("Drop %","Kick-off","League","Match A-Z").forEach { value -> FilterChip(selected=sort==value,onClick={sort=value},label={Text(value)}) } }
+            sortedMovements.forEach { item ->
                 Card(shape=RoundedCornerShape(20.dp),colors=CardDefaults.cardColors(containerColor=OddsPanel),
                     border=BorderStroke(1.dp,Color(0xFF263541))) {
                     Column(Modifier.fillMaxWidth().padding(15.dp),verticalArrangement=Arrangement.spacedBy(10.dp)) {

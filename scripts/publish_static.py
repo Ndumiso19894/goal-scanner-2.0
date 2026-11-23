@@ -8,7 +8,7 @@ from pathlib import Path
 from urllib.request import Request, urlopen
 
 from goal_scanner import api
-from goal_scanner.providers import FootballDataProvider, LiveScoreProvider, ProviderError, team_similarity
+from goal_scanner.providers import FootballDataProvider, LiveScoreProvider, ProviderError, TransfermarktProvider, team_similarity
 
 # Football-Data.co.uk division codes and the corresponding LiveScore competition names.
 # Only competitions with a matching historical results feed are included.
@@ -94,7 +94,7 @@ def _team_pre_match_stats(rows: list[dict], team: str, kickoff: str, venue: str)
         cards = sum((stats.get(k) or 0) for k in (("HY", "HR") if is_home else ("AY", "AR")))
         has_cards = any(stats.get(k) is not None for k in (("HY", "HR") if is_home else ("AY", "AR")))
         matches.append({"time": match_time, "gf": gf, "ga": ga, "result": result,
-                        "corners": corners, "cards": cards if has_cards else None})
+                        "corners": corners, "cards": cards if has_cards else None, "opponent": row.get("away" if is_home else "home", ""), "venue": "H" if is_home else "A", "shots": (row.get("statistics") or {}).get("HS" if is_home else "AS"), "shots_on_target": (row.get("statistics") or {}).get("HST" if is_home else "AST"), "xg": (row.get("statistics") or {}).get("HxG" if is_home else "AxG")})
     matches.sort(key=lambda item: item["time"], reverse=True)
     if not matches:
         return None
@@ -116,6 +116,11 @@ def _team_pre_match_stats(rows: list[dict], team: str, kickoff: str, venue: str)
         "bookings_avg": round(sum(x["cards"] for x in matches if x["cards"] is not None) /
                               max(1, sum(x["cards"] is not None for x in matches)), 2)
                         if any(x["cards"] is not None for x in matches) else None,
+        "shots_avg": round(sum(x["shots"] for x in matches if x["shots"] is not None) / max(1, sum(x["shots"] is not None for x in matches)), 2) if any(x["shots"] is not None for x in matches) else None,
+        "shots_on_target_avg": round(sum(x["shots_on_target"] for x in matches if x["shots_on_target"] is not None) / max(1, sum(x["shots_on_target"] is not None for x in matches)), 2) if any(x["shots_on_target"] is not None for x in matches) else None,
+        "xg_avg": round(sum(x["xg"] for x in matches if x["xg"] is not None) / max(1, sum(x["xg"] is not None for x in matches)), 2) if any(x["xg"] is not None for x in matches) else None,
+        "recent_matches": [{"date": x["time"].date().isoformat(), "opponent": x["opponent"], "venue": x["venue"], "score": str(x["gf"]) + "-" + str(x["ga"]), "result": x["result"], "goals": x["gf"] + x["ga"], "shots": x["shots"], "shots_on_target": x["shots_on_target"], "xg": x["xg"]} for x in recent[:10]],
+        "recent_trends": {"last5_wins": sum(x["result"] == "W" for x in recent[:5]), "last5_draws": sum(x["result"] == "D" for x in recent[:5]), "last5_losses": sum(x["result"] == "L" for x in recent[:5]), "last5_goals_for": sum(x["gf"] for x in recent[:5]), "last5_goals_against": sum(x["ga"] for x in recent[:5])},
         "source": "Football-Data.co.uk", "scope": "home matches" if venue == "home" else "away matches",
     }
 
@@ -144,9 +149,76 @@ def _head_to_head(rows: list[dict], home: str, away: str, kickoff: str) -> dict 
         "draws": sum(h == a for _, h, a in matches),
         "away_wins": sum(h < a for _, h, a in matches),
         "recent_scores": [f"{h}-{a}" for _, h, a in matches[:5]],
+        "recent_meetings": [{"date": stamp.date().isoformat(), "score": str(h) + "-" + str(a), "home_team_score": h, "away_team_score": a} for stamp, h, a in matches[:10]],
         "source": "Football-Data.co.uk",
     }
 
+
+
+def _league_table(rows: list[dict], as_of: date) -> list[dict]:
+    """Build a reproducible table from completed results before the current date."""
+    table: dict[str, dict] = {}
+    for row in rows:
+        try:
+            played = date.fromisoformat(str(row.get("date") or ""))
+            hg, ag = row.get("home_goals"), row.get("away_goals")
+            if played >= as_of or hg is None or ag is None:
+                continue
+            hg, ag = int(hg), int(ag)
+        except (TypeError, ValueError):
+            continue
+        home, away = str(row.get("home") or ""), str(row.get("away") or "")
+        if not home or not away:
+            continue
+        for name in (home, away):
+            table.setdefault(name, {"team": name, "played": 0, "won": 0, "drawn": 0, "lost": 0, "gf": 0, "ga": 0, "points": 0, "home": {"played": 0, "won": 0, "drawn": 0, "lost": 0, "gf": 0, "ga": 0, "points": 0}, "away": {"played": 0, "won": 0, "drawn": 0, "lost": 0, "gf": 0, "ga": 0, "points": 0}, "_form": []})
+        for name, gf, ga, venue in ((home, hg, ag, "home"), (away, ag, hg, "away")):
+            item, split = table[name], table[name][venue]
+            result = "W" if gf > ga else "D" if gf == ga else "L"
+            pts = 3 if result == "W" else 1 if result == "D" else 0
+            for target in (item, split):
+                target["played"] += 1
+                target["gf"] += gf
+                target["ga"] += ga
+                target["won"] += int(result == "W")
+                target["drawn"] += int(result == "D")
+                target["lost"] += int(result == "L")
+                target["points"] += pts
+            item["_form"].append((played, result))
+    result = []
+    for item in table.values():
+        item["gd"] = item["gf"] - item["ga"]
+        item["form"] = "".join(v for _, v in sorted(item.pop("_form"))[-5:])
+        for split in ("home", "away"):
+            item[split]["gd"] = item[split]["gf"] - item[split]["ga"]
+        result.append(item)
+    result.sort(key=lambda x: (x["points"], x["gd"], x["gf"], x["team"]), reverse=True)
+    for position, item in enumerate(result, 1):
+        item["position"] = position
+    return result
+
+def _rest_days(rows: list[dict], team: str, kickoff: str) -> int | None:
+    target = _parse_time(kickoff)
+    if target is None: return None
+    previous = []
+    for row in rows:
+        if row.get("home_goals") is None or row.get("away_goals") is None: continue
+        stamp = _parse_time(row.get("kickoff") or row.get("date"))
+        if stamp is None or stamp >= target: continue
+        if max(team_similarity(team, row.get("home", "")), team_similarity(team, row.get("away", ""))) >= .88: previous.append(stamp)
+    return (target.date() - max(previous).date()).days if previous else None
+
+def _league_context(rows: list[dict], kickoff: str) -> dict:
+    target = _parse_time(kickoff)
+    eligible = []
+    for row in rows:
+        stamp = _parse_time(row.get("kickoff") or row.get("date"))
+        if stamp is None or target is None or stamp >= target or row.get("home_goals") is None: continue
+        eligible.append(row)
+    def avg(key: str):
+        values = [float((r.get("statistics") or {}).get(key)) for r in eligible if (r.get("statistics") or {}).get(key) is not None]
+        return round(sum(values) / len(values), 2) if values else None
+    return {"matches_sampled": len(eligible), "home_shots_avg": avg("HS"), "away_shots_avg": avg("AS"), "home_shots_on_target_avg": avg("HST"), "away_shots_on_target_avg": avg("AST"), "home_xg_avg": avg("HxG"), "away_xg_avg": avg("AxG"), "source": "Football-Data.co.uk"}
 
 def _download_club_crests(fixtures: list[dict]) -> int:
     """Save LiveScore team crests in the repository so the app can reuse cached assets."""
@@ -277,7 +349,29 @@ def main() -> None:
             history_by_competition[competition] = FootballDataProvider().fetch_season(season, division)
         except (ProviderError, ValueError):
             history_by_competition[competition] = []
+    # Use prior seasons for team form and H2H; league tables remain current-season only.
+    context_history_by_competition = {name: list(rows) for name, rows in history_by_competition.items()}
+    season_start = today.year if today.month >= 7 else today.year - 1
+    prior_seasons = [f"{(season_start - offset) % 100:02d}{(season_start - offset + 1) % 100:02d}" for offset in (1, 2)]
+    active_competitions = {COMPETITION_ALIASES.get(x.get("competition", ""), x.get("competition", "")) for x in fixture_rows}
+    for division, competition in LEAGUES:
+        if competition not in active_competitions:
+            continue
+        for prior_season in prior_seasons:
+            try:
+                context_history_by_competition[competition].extend(FootballDataProvider().fetch_season(prior_season, division))
+            except (ProviderError, ValueError):
+                continue
     crest_downloads = _download_club_crests(fixture_rows)
+    divisions_by_competition = {competition: division for division, competition in LEAGUES}
+    squads_by_competition = {}
+    squad_provider = TransfermarktProvider()
+    for competition in sorted({COMPETITION_ALIASES.get(x.get("competition", ""), x.get("competition", "")) for x in fixture_rows}):
+        division = divisions_by_competition.get(competition)
+        if division:
+            try: squads_by_competition[competition] = squad_provider.fetch_division_squads(division)
+            except (ProviderError, ValueError): squads_by_competition[competition] = []
+    league_tables = [{"division": division, "competition": competition, "table": _league_table(history_by_competition.get(competition, []), today), "source": "Football-Data.co.uk"} for division, competition in LEAGUES]
     for fixture in fixture_rows:
         fixture["home_crest_url"] = (
             f"https://raw.githubusercontent.com/Ndumiso19894/goal-scanner-2.0/main/docs/assets/crests/{fixture['home_team_id']}.png"
@@ -286,13 +380,15 @@ def main() -> None:
             f"https://raw.githubusercontent.com/Ndumiso19894/goal-scanner-2.0/main/docs/assets/crests/{fixture['away_team_id']}.png"
             if fixture.get("away_team_id") else None)
         canonical_competition = COMPETITION_ALIASES.get(fixture.get("competition", ""), fixture.get("competition", ""))
-        history = history_by_competition.get(canonical_competition, [])
+        history = context_history_by_competition.get(canonical_competition, [])
+        home_name, away_name, kickoff = fixture.get("home", ""), fixture.get("away", ""), fixture.get("kickoff", "")
+        squad_pool = squads_by_competition.get(canonical_competition, [])
         fixture["pre_match_stats"] = {
-            "home": _team_pre_match_stats(history, fixture.get("home", ""), fixture.get("kickoff", ""), "home"),
-            "away": _team_pre_match_stats(history, fixture.get("away", ""), fixture.get("kickoff", ""), "away"),
-            "head_to_head": _head_to_head(history, fixture.get("home", ""), fixture.get("away", ""), fixture.get("kickoff", "")),
-            "source": "Football-Data.co.uk",
-            "available": bool(history),
+            "home": _team_pre_match_stats(history, home_name, kickoff, "home"),
+            "away": _team_pre_match_stats(history, away_name, kickoff, "away"),
+            "head_to_head": _head_to_head(history, home_name, away_name, kickoff),
+            "context": {"home_rest_days": _rest_days(history, home_name, kickoff), "away_rest_days": _rest_days(history, away_name, kickoff), "home_squad": TransfermarktProvider.match_team(home_name, squad_pool), "away_squad": TransfermarktProvider.match_team(away_name, squad_pool), "league_performance_baseline": _league_context(history, kickoff)},
+            "source": "Football-Data.co.uk (up to three seasons) and Transfermarkt", "history_seasons": 3, "available": bool(history),
         }
 
     generated_at = datetime.now(timezone.utc).isoformat()
@@ -316,8 +412,13 @@ def main() -> None:
             "Only fixtures with sufficient prior home/away history are eligible.",
         ],
     })
+    write_json("league-tables.json", {
+        "schema_version": 1, "updated_at": generated_at,
+        "source": "Football-Data.co.uk completed results; current season only",
+        "leagues": league_tables,
+    })
     write_json("fixtures.json", {
-        "schema_version": 2, "updated_at": generated_at,
+        "schema_version": 3, "updated_at": generated_at,
         "count": len(fixture_rows), "fixtures": fixture_rows, "errors": fixture_errors,
         "club_crests_downloaded_this_run": crest_downloads,
         "pre_match_stats_source": "Football-Data.co.uk; only completed matches before each fixture are included",

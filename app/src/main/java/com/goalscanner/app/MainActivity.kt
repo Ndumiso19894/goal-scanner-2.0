@@ -6,6 +6,7 @@ import android.content.pm.PackageManager
 import android.os.Build
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -24,6 +25,7 @@ import androidx.compose.material.icons.filled.TrendingDown
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.saveable.rememberSaveableStateHolder
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -93,8 +95,13 @@ private data class NavItem(val label: String, val icon: ImageVector)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun GoalScannerApp(prefs: android.content.SharedPreferences) {
-    var tab by rememberSaveable { mutableStateOf("Home") }
+    var backStack by rememberSaveable { mutableStateOf(listOf("Home")) }
+    val tab = backStack.lastOrNull() ?: "Home"
+    val saveableStateHolder = rememberSaveableStateHolder()
+    fun navigate(route: String) { if (backStack.lastOrNull() != route) backStack = backStack + route }
+    fun goBack() { if (backStack.size > 1) backStack = backStack.dropLast(1) else backStack = listOf("Home") }
     var settings by rememberSaveable { mutableStateOf(false) }
+    BackHandler(enabled = settings || backStack.size > 1 || tab != "Home") { if (settings) settings = false else goBack() }
     var apiUrl by rememberSaveable { mutableStateOf((prefs.getString("api_url",DEFAULT_DATA_URL) ?: DEFAULT_DATA_URL).replace("feature/android-goal-scanner-pro","main").ifBlank { DEFAULT_DATA_URL }) }
     var apiToken by rememberSaveable { mutableStateOf(prefs.getString("api_token","") ?: "") }
     var season by rememberSaveable { mutableStateOf((prefs.getString("season","2627") ?: "2627").ifBlank { "2627" }) }
@@ -103,6 +110,7 @@ private fun GoalScannerApp(prefs: android.content.SharedPreferences) {
     var providers by rememberSaveable { mutableStateOf("Waiting for published data") }
     var fixtureSummary by rememberSaveable { mutableStateOf("Loading published fixtures…") }
     var fixtureRows by remember { mutableStateOf(emptyList<JSONObject>()) }
+    var leagueRows by remember { mutableStateOf(emptyList<JSONObject>()) }
     var selectedFixture by remember { mutableStateOf<JSONObject?>(null) }
     var message by rememberSaveable { mutableStateOf("") }
     var busy by remember { mutableStateOf(false) }
@@ -132,6 +140,11 @@ private fun GoalScannerApp(prefs: android.content.SharedPreferences) {
                 val fixtureFeed = apiRequest(apiUrl, "docs/data/fixtures.json?ts=$stamp")
                 val fixtureArray = fixtureFeed.optJSONArray("fixtures")
                 fixtureRows = if (fixtureArray == null) emptyList() else (0 until fixtureArray.length()).mapNotNull { fixtureArray.optJSONObject(it) }
+                try {
+                    val leagueFeed = apiRequest(apiUrl, "docs/data/league-tables.json?ts=$stamp")
+                    val leagueArray = leagueFeed.optJSONArray("leagues")
+                    leagueRows = if (leagueArray == null) emptyList() else (0 until leagueArray.length()).mapNotNull { leagueArray.optJSONObject(it) }
+                } catch (_: Exception) { leagueRows = emptyList() }
                 fixtureSummary = "${fixtureRows.size} fixtures · updated " + fixtureFeed.optString("updated_at", "not run yet")
                 val oddsFeed = apiRequest(apiUrl, "docs/data/odds-movements.json?ts=$stamp")
                 val movementArray = oddsFeed.optJSONArray("movements")
@@ -174,10 +187,10 @@ private fun GoalScannerApp(prefs: android.content.SharedPreferences) {
                 containerColor=Color(0xFF111A23),contentColor=Color(0xFFF2F5F0),tonalElevation=0.dp
             ) {
                 listOf(NavItem("Home",Icons.Default.Home),NavItem("Fixtures",Icons.Default.CalendarMonth),
-                    NavItem("Scanner",Icons.Default.SportsSoccer),NavItem("Results",Icons.Default.QueryStats),
-                    NavItem("Odds",Icons.Default.TrendingDown)).forEach { item ->
+                    NavItem("Picks",Icons.Default.QueryStats),NavItem("Scanner",Icons.Default.SportsSoccer),
+                    NavItem("More",Icons.Default.Analytics)).forEach { item ->
                     NavigationBarItem(
-                        selected=tab==item.label,onClick={tab=item.label},
+                        selected=tab==item.label,onClick={backStack=listOf(item.label)},
                         icon={Icon(item.icon,item.label)},
                         label={Text(item.label,fontSize=10.sp,fontWeight=if(tab==item.label) FontWeight.Bold else FontWeight.Normal)},
                         colors=NavigationBarItemDefaults.colors(
@@ -214,11 +227,11 @@ private fun GoalScannerApp(prefs: android.content.SharedPreferences) {
                 },
                 onBack={settings=false}
             )
-        } else when(tab) {
+        } else saveableStateHolder.SaveableStateProvider(tab) { when(tab) {
             "Home" -> HomeScreen(Modifier.padding(padding),connection,providers,fixtureSummary,fixtureRows,
-                {tab="Scanner"},{tab="Fixtures"})
+                {navigate("Scanner")},{navigate("Fixtures")})
             "Fixtures" -> FixturesScreen(Modifier.padding(padding),fixtureSummary,
-                fixtureRows,busy,message,onSelect={ fixture -> selectedFixture=fixture; tab="Match" }) {
+                fixtureRows,busy,message,onSelect={ fixture -> selectedFixture=fixture; navigate("Match") }) {
                 scope.launch {
                     busy=true; message=""
                     try {
@@ -256,7 +269,7 @@ private fun GoalScannerApp(prefs: android.content.SharedPreferences) {
                                 val teamOk=teamQuery.isBlank() || (item.optString("home")+" "+item.optString("away")).contains(teamQuery,true)
                                 val odds=if(item.isNull("odds")) null else item.optDouble("odds")
                                 val oddsOk=(minOdds==null || (odds!=null && odds>=minOdds)) && (maxOdds==null || (odds!=null && odds<=maxOdds))
-                                dateOk && competitionOk && teamOk && oddsOk && item.optDouble("estimated_probability")>=minimum/100.0 && marketSelectionId(item) in markets
+                                dateOk && competitionOk && teamOk && oddsOk && odds!=null && odds>1.0 && item.optString("odds_status")=="available" && item.optDouble("estimated_probability")>=minimum/100.0 && marketSelectionId(item) in markets
                             }.let { if(scannerView=="Recommended") it.take(10) else it }
                             scanSummary="${response.optString("status","unknown")} · ${response.optInt("fixture_count")} fixtures · ${allRows.size} published selections · updated ${response.optString("updated_at","unknown")}"
                             message=if(recommendations.isEmpty()) "No published selections match these filters. The next scheduled scan will refresh the feed." else "Latest published selections loaded. Select a match to inspect its summary."
@@ -264,12 +277,16 @@ private fun GoalScannerApp(prefs: android.content.SharedPreferences) {
                         finally { busy=false }
                     }
                 },
-                onSelect={candidate -> selectedRecommendation=candidate; tab="Analysis"})
+                onSelect={candidate -> selectedRecommendation=candidate; navigate("Analysis")})
             "Match" -> FixtureDetailsScreen(Modifier.padding(padding),selectedFixture,recommendations,
-                onBack={tab="Fixtures"},onSelect={ candidate -> selectedRecommendation=candidate; tab="Analysis" })
+                onBack={goBack()},onSelect={ candidate -> selectedRecommendation=candidate; navigate("Analysis") })
             "Analysis" -> AnalysisScreen(Modifier.padding(padding),selectedRecommendation,
                 recommendations.filter { it.optString("fixture_id")==selectedRecommendation?.optString("fixture_id") },
                 fixtureRows.firstOrNull { it.optString("id")==selectedRecommendation?.optString("fixture_id") })
+            "Picks" -> FinalPicksScreen(Modifier.padding(padding),recommendations,fixtureRows,
+                onSelect={ candidate -> selectedRecommendation=candidate; navigate("Analysis") })
+            "League Tables" -> LeagueTablesScreen(Modifier.padding(padding),leagueRows)
+            "More" -> MoreScreen(Modifier.padding(padding),::navigate)
             "Odds" -> DroppingOddsScreen(Modifier.padding(padding),oddsMovementRows,oddsMovementUpdated) {
                 scope.launch {
                     busy=true
@@ -282,7 +299,7 @@ private fun GoalScannerApp(prefs: android.content.SharedPreferences) {
                     finally { busy=false }
                 }
             }
-            else -> ResultsScreen(Modifier.padding(padding),resultSummary,resultRows,busy) {
+            "Results" -> ResultsScreen(Modifier.padding(padding),resultSummary,resultRows,busy) {
                 scope.launch {
                     busy=true
                     try {
@@ -293,6 +310,108 @@ private fun GoalScannerApp(prefs: android.content.SharedPreferences) {
                         message="Scores and prediction history refreshed."
                     } catch(e:Exception) { message=e.message ?: "Could not refresh results." }
                     finally { busy=false }
+                }
+            }
+        } }
+    }
+}
+
+@Composable
+private fun MoreScreen(modifier: Modifier, navigate: (String) -> Unit) {
+    ScreenColumn(modifier) {
+        Heading("More tools", "Competition intelligence, performance history and market movement.")
+        listOf(Triple("League tables", "Standings with home and away records", "League Tables"), Triple("Results & performance", "Settled picks and historical performance", "Results"), Triple("Odds movement", "Observed SportyBet price changes", "Odds")).forEach { item ->
+            Card(Modifier.fillMaxWidth().clickable { navigate(item.third) }, colors=CardDefaults.cardColors(containerColor=Color(0xFF14212B)), border=androidx.compose.foundation.BorderStroke(1.dp,Color(0xFF30414E))) {
+                Row(Modifier.fillMaxWidth().padding(17.dp), verticalAlignment=Alignment.CenterVertically) {
+                    Column(Modifier.weight(1f), verticalArrangement=Arrangement.spacedBy(4.dp)) {
+                        Text(item.first, fontWeight=FontWeight.Bold, color=Color.White, style=MaterialTheme.typography.titleMedium)
+                        Text(item.second, color=Color(0xFF9EADB9), style=MaterialTheme.typography.bodySmall)
+                    }
+                    Text("OPEN  ›", color=Color(0xFFB7F36B), fontWeight=FontWeight.Bold, style=MaterialTheme.typography.labelSmall)
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun FinalPicksScreen(modifier: Modifier, recommendations: List<JSONObject>, fixtures: List<JSONObject>, onSelect: (JSONObject) -> Unit) {
+    var sort by rememberSaveable { mutableStateOf("Kick-off") }
+    var showAll by rememberSaveable { mutableStateOf(false) }
+    val today = LocalDate.now()
+    val eligible = recommendations.filter { item -> marketSelectionId(item) in MarketIds && item.optString("odds_status") == "available" && item.optDouble("odds",0.0) > 1.0 }
+    val todays = eligible.filter { runCatching { LocalDate.parse(it.optString("kickoff").take(10)) == today }.getOrDefault(false) }
+    val source = if (showAll) eligible else todays
+    val sorted = when(sort) { "Probability" -> source.sortedByDescending { it.optDouble("estimated_probability") }; "Odds" -> source.sortedByDescending { it.optDouble("odds") }; "League" -> source.sortedBy { it.optString("competition") }; "Match A-Z" -> source.sortedBy { it.optString("home") + " " + it.optString("away") }; else -> source.sortedBy { it.optString("kickoff") } }
+    ScreenColumn(modifier) {
+        Heading("Final picks of the day", "Shortlist of approved markets with an actual SportyBet price. Not a guarantee of outcome.")
+        Row(horizontalArrangement=Arrangement.spacedBy(8.dp)) {
+            FilterChip(selected=!showAll,onClick={showAll=false},label={Text("Today (${todays.size})")})
+            FilterChip(selected=showAll,onClick={showAll=true},label={Text("All upcoming (${eligible.size})")})
+        }
+        Row(horizontalArrangement=Arrangement.spacedBy(6.dp)) { listOf("Kick-off","Probability","Odds","League","Match A-Z").forEach { value -> FilterChip(selected=sort==value,onClick={sort=value},label={Text(value)}) } }
+        Card(colors=CardDefaults.cardColors(containerColor=Color(0xFF18252D)),border=androidx.compose.foundation.BorderStroke(1.dp,Color(0xFF30434A))) {
+            Row(Modifier.fillMaxWidth().padding(15.dp),horizontalArrangement=Arrangement.SpaceBetween,verticalAlignment=Alignment.CenterVertically) {
+                Column { Text("PRICED SELECTIONS",color=Color(0xFF9EADB9),style=MaterialTheme.typography.labelSmall); Text(sorted.size.toString(),color=Color(0xFFB7F36B),style=MaterialTheme.typography.headlineMedium,fontWeight=FontWeight.ExtraBold) }
+                Text("SportyBet odds verified",color=Color(0xFFB7F36B),style=MaterialTheme.typography.labelSmall,fontWeight=FontWeight.Bold)
+            }
+        }
+        if(sorted.isEmpty()) Notice("No priced picks for this view", "Only exact markets and lines with a live SportyBet price above 1.00 are shown. Try All upcoming or check after the next data refresh.")
+        sorted.forEach { item ->
+            val fixture=fixtures.firstOrNull { it.optString("id")==item.optString("fixture_id") }
+            Card(Modifier.fillMaxWidth().clickable { onSelect(item) },colors=CardDefaults.cardColors(containerColor=Color(0xFF121F29)),border=androidx.compose.foundation.BorderStroke(1.dp,Color(0xFF2B3D49))) {
+                Column(Modifier.fillMaxWidth().padding(15.dp),verticalArrangement=Arrangement.spacedBy(9.dp)) {
+                    Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween) { Text(item.optString("competition").uppercase(),color=Color(0xFF9EADB9),style=MaterialTheme.typography.labelSmall); Text(formatKickoff(item.optString("kickoff")),color=Color(0xFFB7F36B),style=MaterialTheme.typography.labelSmall) }
+                    Row(Modifier.fillMaxWidth(),verticalAlignment=Alignment.CenterVertically) { TeamCrest(item.optString("home"),fixture?.optString("home_crest_url").orEmpty(),38.dp); Text(item.optString("home"),Modifier.weight(1f).padding(horizontal=7.dp),color=Color.White,fontWeight=FontWeight.Bold,maxLines=2); Text("VS",color=Color(0xFF8193A0),style=MaterialTheme.typography.labelSmall); Text(item.optString("away"),Modifier.weight(1f).padding(horizontal=7.dp),color=Color.White,fontWeight=FontWeight.Bold,maxLines=2,textAlign=androidx.compose.ui.text.style.TextAlign.End); TeamCrest(item.optString("away"),fixture?.optString("away_crest_url").orEmpty(),38.dp) }
+                    Text(marketTitle(item),color=Color.White,fontWeight=FontWeight.Bold)
+                    Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween,verticalAlignment=Alignment.CenterVertically) {
+                        Column { Text("MODEL",color=Color(0xFF9EADB9),style=MaterialTheme.typography.labelSmall); Text("${(item.optDouble("estimated_probability")*100).toInt()}%",color=Color(0xFFB7F36B),fontWeight=FontWeight.ExtraBold,style=MaterialTheme.typography.titleLarge) }
+                        Column(horizontalAlignment=Alignment.End) { Text("SPORTYBET",color=Color(0xFF9EADB9),style=MaterialTheme.typography.labelSmall); Text(String.format("%.2f",item.optDouble("odds")),color=Color.White,fontWeight=FontWeight.ExtraBold,style=MaterialTheme.typography.titleLarge) }
+                    }
+                    LinearProgressIndicator(progress={(item.optDouble("estimated_probability")).toFloat().coerceIn(0f,1f)},modifier=Modifier.fillMaxWidth().height(5.dp),color=Color(0xFFB7F36B),trackColor=Color(0xFF344452))
+                    Text("OPEN FULL ANALYSIS  ›",color=Color(0xFFB7F36B),fontWeight=FontWeight.Bold,style=MaterialTheme.typography.labelSmall)
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun LeagueTablesScreen(modifier: Modifier, leagues: List<JSONObject>) {
+    var query by rememberSaveable { mutableStateOf("") }
+    var sort by rememberSaveable { mutableStateOf("Position") }
+    var selected by rememberSaveable { mutableStateOf("") }
+    val filtered = leagues.filter { it.optString("competition").contains(query,true) || query.isBlank() }.sortedBy { it.optString("competition") }
+    val active = filtered.firstOrNull { it.optString("competition")==selected } ?: filtered.firstOrNull()
+    ScreenColumn(modifier) {
+        Heading("League tables", "Current-season standings built from completed league results. Select a competition to inspect its table.")
+        OutlinedTextField(query,{query=it},modifier=Modifier.fillMaxWidth(),singleLine=true,label={Text("Search leagues")})
+        Row(horizontalArrangement=Arrangement.spacedBy(6.dp)) { FilterChip(selected=sort=="Position",onClick={sort="Position"},label={Text("Table order")}); FilterChip(selected=sort=="Team",onClick={sort="Team"},label={Text("Team A-Z")}) }
+        if(filtered.isEmpty()) Notice("No league tables available", "The data feed has no current-season table for this competition yet.")
+        filtered.forEach { league -> FilterChip(selected=active?.optString("competition")==league.optString("competition"),onClick={selected=league.optString("competition")},label={Text(league.optString("competition"))}) }
+        if(active!=null) {
+            val table=active.optJSONArray("table")
+            Heading(active.optString("competition"), "${table?.length() ?: 0} teams · ${active.optString("source","Historical results")}")
+            if(table==null || table.length()==0) Notice("Standings not yet available", "No completed results have been published for this league.")
+            else {
+                val rows=(0 until table.length()).mapNotNull { table.optJSONObject(it) }.let { list -> if(sort=="Team") list.sortedBy { it.optString("team") } else list.sortedBy { it.optInt("position") } }
+                rows.forEach { team ->
+                    var expanded by remember(team.optString("team")) { mutableStateOf(false) }
+                    Card(Modifier.fillMaxWidth().clickable { expanded=!expanded },colors=CardDefaults.cardColors(containerColor=Color(0xFF121F29)),border=androidx.compose.foundation.BorderStroke(1.dp,Color(0xFF2B3D49))) {
+                        Column(Modifier.fillMaxWidth().padding(12.dp),verticalArrangement=Arrangement.spacedBy(7.dp)) {
+                            Row(Modifier.fillMaxWidth(),verticalAlignment=Alignment.CenterVertically) {
+                                Text(team.optInt("position").toString(),Modifier.width(25.dp),color=Color(0xFFB7F36B),fontWeight=FontWeight.ExtraBold)
+                                Text(team.optString("team"),Modifier.weight(1f),color=Color.White,fontWeight=FontWeight.Bold,maxLines=1)
+                                Text(team.optInt("played").toString(),Modifier.width(28.dp),color=Color(0xFF9EADB9),textAlign=androidx.compose.ui.text.style.TextAlign.Center)
+                                Text(team.optInt("gd").toString(),Modifier.width(35.dp),color=Color(0xFF9EADB9),textAlign=androidx.compose.ui.text.style.TextAlign.Center)
+                                Text(team.optInt("points").toString(),Modifier.width(34.dp),color=Color(0xFFB7F36B),fontWeight=FontWeight.ExtraBold,textAlign=androidx.compose.ui.text.style.TextAlign.End)
+                            }
+                            Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween) { Text("Pld",color=Color(0xFF718391),style=MaterialTheme.typography.labelSmall); Text("GD",color=Color(0xFF718391),style=MaterialTheme.typography.labelSmall); Text("Pts",color=Color(0xFF718391),style=MaterialTheme.typography.labelSmall); Text("FORM  ${team.optString("form")}",color=Color(0xFFB7F36B),style=MaterialTheme.typography.labelSmall,fontWeight=FontWeight.Bold) }
+                            if(expanded) {
+                                listOf("Home" to team.optJSONObject("home"),"Away" to team.optJSONObject("away")).forEach { (label,split) -> if(split!=null) Text("$label: ${split.optInt("played")} played · ${split.optInt("won")}W ${split.optInt("drawn")}D ${split.optInt("lost")}L · ${split.optInt("gf")}:${split.optInt("ga")} · ${split.optInt("points")} pts",color=Color(0xFF9EADB9),style=MaterialTheme.typography.bodySmall) }
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -359,9 +478,26 @@ private fun TeamFormPanel(modifier:Modifier,name:String,stats:JSONObject?,venueL
             if(stats==null) Text("Historical stats unavailable",style=MaterialTheme.typography.bodySmall,color=Color(0xFF9EADB9))
             else {
                 FormStrip(stats.optString("form"))
+                val trend=stats.optJSONObject("recent_trends")
+                if(trend!=null) Text("Last five: ${trend.optInt("last5_wins")}W ${trend.optInt("last5_draws")}D ${trend.optInt("last5_losses")}L  ·  Goals ${trend.optInt("last5_goals_for")}-${trend.optInt("last5_goals_against")}",style=MaterialTheme.typography.labelSmall,color=Color(0xFFB7F36B))
                 Text("${stats.optInt("wins")}W  ${stats.optInt("draws")}D  ${stats.optInt("losses")}L",
                     style=MaterialTheme.typography.labelSmall,color=Color(0xFFCDD6DC))
                 Text("${stats.optInt("played")} matches in sample",style=MaterialTheme.typography.labelSmall,color=Color(0xFF8797A4))
+                val shots=stats.optDouble("shots_avg",-1.0); val target=stats.optDouble("shots_on_target_avg",-1.0); val xg=stats.optDouble("xg_avg",-1.0)
+                if(shots>=0 || target>=0 || xg>=0) Text(listOfNotNull(if(shots>=0) "Shots %.1f".format(shots) else null,if(target>=0) "On target %.1f".format(target) else null,if(xg>=0) "xG %.2f".format(xg) else null).joinToString("  · "),style=MaterialTheme.typography.labelSmall,color=Color(0xFFB7F36B))
+                val recent=stats.optJSONArray("recent_matches")
+                if(recent!=null && recent.length()>0) {
+                    HorizontalDivider(color=Color(0xFF30414E))
+                    Text("RECENT HOME/AWAY MATCHES",style=MaterialTheme.typography.labelSmall,color=Color(0xFF8FA0AD),fontWeight=FontWeight.Bold)
+                    (0 until minOf(5,recent.length())).forEach { i ->
+                        val match=recent.optJSONObject(i) ?: JSONObject()
+                        Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween,verticalAlignment=Alignment.CenterVertically) {
+                            Column(Modifier.weight(1f)) { Text("${match.optString("date")}  ${match.optString("venue")}",style=MaterialTheme.typography.labelSmall,color=Color(0xFF8495A2)); Text(match.optString("opponent"),style=MaterialTheme.typography.bodySmall,color=Color.White,maxLines=1) }
+                            Text(match.optString("score"),color=Color.White,fontWeight=FontWeight.Bold)
+                            Text(match.optString("result"),modifier=Modifier.padding(start=8.dp),color=when(match.optString("result")){"W"->Color(0xFF67C58B);"D"->Color(0xFF9EADB9);else->Color(0xFFE18A83)},fontWeight=FontWeight.ExtraBold)
+                        }
+                    }
+                }
             }
         }
     }
@@ -417,8 +553,32 @@ private fun PreMatchStats(stats:JSONObject?) {
                 Text("${h2h.optInt("played")} meetings  ·  ${h2h.optInt("home_wins")} home wins  ·  ${h2h.optInt("draws")} draws  ·  ${h2h.optInt("away_wins")} away wins",
                     color=Color(0xFFF2F5F0),fontWeight=FontWeight.Bold,style=MaterialTheme.typography.bodySmall)
                 val scores=h2h.optJSONArray("recent_scores")
-                if(scores!=null && scores.length()>0) Text("Recent scores: "+(0 until scores.length()).joinToString("  ·  ") { scores.optString(it) },
-                    color=Color(0xFF9EADB9),style=MaterialTheme.typography.labelSmall)
+                val meetings=h2h.optJSONArray("recent_meetings")
+                if(meetings!=null && meetings.length()>0) {
+                    HorizontalDivider(color=Color(0xFF30414E))
+                    Text("PREVIOUS MEETINGS",color=Color(0xFF9EADB9),style=MaterialTheme.typography.labelSmall,fontWeight=FontWeight.Bold)
+                    (0 until minOf(10,meetings.length())).forEach { i ->
+                        val match=meetings.optJSONObject(i) ?: JSONObject()
+                        Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween) { Text(match.optString("date"),color=Color(0xFF8495A2),style=MaterialTheme.typography.labelSmall); Text(match.optString("score"),color=Color.White,fontWeight=FontWeight.Bold) }
+                    }
+                } else if(scores!=null && scores.length()>0) Text("Recent scores: "+(0 until scores.length()).joinToString("  ·  ") { scores.optString(it) }, color=Color(0xFF9EADB9),style=MaterialTheme.typography.labelSmall)
+            }
+        }
+    }
+    val context=stats?.optJSONObject("context")
+    if(context!=null) {
+        Heading("Beyond the scoreline","Schedule and squad context from separate public data sources")
+        Card(colors=CardDefaults.cardColors(containerColor=Color(0xFF121F29)),border=androidx.compose.foundation.BorderStroke(1.dp,Color(0xFF2B3D49))) {
+            Column(Modifier.fillMaxWidth().padding(14.dp),verticalArrangement=Arrangement.spacedBy(9.dp)) {
+                val homeRest=context.optInt("home_rest_days",-1); val awayRest=context.optInt("away_rest_days",-1)
+                Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.spacedBy(8.dp)) { Box(Modifier.weight(1f)) { Metric("Home rest",if(homeRest>=0) "$homeRest days" else "—","Since last recorded match") }; Box(Modifier.weight(1f)) { Metric("Away rest",if(awayRest>=0) "$awayRest days" else "—","Since last recorded match") } }
+                listOf("Home squad" to context.optJSONObject("home_squad"),"Away squad" to context.optJSONObject("away_squad")).forEach { (label,squad) -> if(squad!=null) {
+                    val value=squad.optDouble("market_value_eur",-1.0)
+                    Text("$label · ${squad.optString("name")}",color=Color.White,fontWeight=FontWeight.Bold)
+                    Text(listOfNotNull(if(squad.optDouble("average_age",-1.0)>=0) "Average age %.1f".format(squad.optDouble("average_age")) else null,if(squad.optInt("squad_size")>0) "${squad.optInt("squad_size")} players" else null,if(value>=0) "Market value €%.1fm".format(value/1000000.0) else null).joinToString("  · ").ifBlank { "Squad profile unavailable" },color=Color(0xFF9EADB9),style=MaterialTheme.typography.bodySmall)
+                } }
+                val baseline=context.optJSONObject("league_performance_baseline")
+                if(baseline!=null) { Heading("League environment","Historical baseline · ${baseline.optInt("matches_sampled")} matches"); Text(listOfNotNull(if(baseline.optDouble("home_shots_avg",-1.0)>=0) "Home shots %.1f".format(baseline.optDouble("home_shots_avg")) else null,if(baseline.optDouble("away_shots_avg",-1.0)>=0) "Away shots %.1f".format(baseline.optDouble("away_shots_avg")) else null,if(baseline.optDouble("home_xg_avg",-1.0)>=0) "Home xG %.2f".format(baseline.optDouble("home_xg_avg")) else null,if(baseline.optDouble("away_xg_avg",-1.0)>=0) "Away xG %.2f".format(baseline.optDouble("away_xg_avg")) else null).joinToString("  · "),color=Color(0xFF9EADB9),style=MaterialTheme.typography.bodySmall) }
             }
         }
     }
@@ -543,6 +703,7 @@ private fun FixturesScreen(
 ) {
     var query by rememberSaveable { mutableStateOf("") }
     var filter by rememberSaveable { mutableStateOf("Upcoming") }
+    var sort by rememberSaveable { mutableStateOf("Time") }
     val visible=fixtures.filter { fx ->
         val text=(fx.optString("home")+" "+fx.optString("away")+" "+fx.optString("competition")).lowercase()
         val status=fx.optString("status","NS").uppercase()
@@ -554,7 +715,7 @@ private fun FixturesScreen(
             else -> true
         }
         queryOk && statusOk
-    }.sortedBy { it.optString("kickoff") }
+    }.let { rows -> when(sort) { "Match A-Z" -> rows.sortedBy { it.optString("home") + " " + it.optString("away") }; "League A-Z" -> rows.sortedBy { it.optString("competition") }; else -> rows.sortedBy { it.optString("kickoff") } } }
     ScreenColumn(modifier) {
         Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween,verticalAlignment=Alignment.CenterVertically) {
             Column(Modifier.weight(1f)) {
@@ -575,6 +736,7 @@ private fun FixturesScreen(
                 FilterChip(selected=filter==item,onClick={filter=item},label={Text(item)})
             }
         }
+        Row(horizontalArrangement=Arrangement.spacedBy(6.dp)) { listOf("Time","Match A-Z","League A-Z").forEach { item -> FilterChip(selected=sort==item,onClick={sort=item},label={Text(item)}) } }
         if(message.isNotBlank()) Text(message,style=MaterialTheme.typography.bodySmall,color=MaterialTheme.colorScheme.primary)
         if(visible.isEmpty()) Notice("No matching fixtures","Try another search or status filter, or refresh the fixture feed.")
         visible.forEach { fx ->
@@ -728,6 +890,8 @@ private fun ScannerScreen(
     var team by rememberSaveable { mutableStateOf("") }
     var minOdds by rememberSaveable { mutableStateOf("") }
     var maxOdds by rememberSaveable { mutableStateOf("") }
+    var sort by rememberSaveable { mutableStateOf("Kick-off") }
+    val sortedRecommendations = when(sort) { "Probability" -> recommendations.sortedByDescending { it.optDouble("estimated_probability") }; "Odds" -> recommendations.sortedByDescending { it.optDouble("odds") }; "Match A-Z" -> recommendations.sortedBy { it.optString("home") + " " + it.optString("away") }; "League" -> recommendations.sortedBy { it.optString("competition") }; else -> recommendations.sortedBy { it.optString("kickoff") } }
     ScreenColumn(modifier) {
         Heading("Goal Scanner","Balanced recommendations and detailed statistical search.")
         Row(Modifier.fillMaxWidth().background(MaterialTheme.colorScheme.surfaceVariant,RoundedCornerShape(14.dp)).padding(4.dp)) {
@@ -791,7 +955,8 @@ private fun ScannerScreen(
         if(recommendations.isNotEmpty()) {
             Heading(if(view=="Recommended") "Balanced shortlist" else "All qualifying selections",
                 "${recommendations.size} recorded candidates · tap one for match analysis")
-            recommendations.forEach { item ->
+            Row(horizontalArrangement=Arrangement.spacedBy(6.dp)) { listOf("Kick-off","Probability","Odds","League","Match A-Z").forEach { value -> FilterChip(selected=sort==value,onClick={sort=value},label={Text(value)}) } }
+            sortedRecommendations.forEach { item ->
                 val estimate=(item.optDouble("estimated_probability")*100).toInt()
                 Card(Modifier.fillMaxWidth().clickable { onSelect(item) },shape=RoundedCornerShape(20.dp),
                     colors=CardDefaults.cardColors(containerColor=Color(0xFF111A23)),
@@ -944,6 +1109,8 @@ private fun ResultsScreen(
 ) {
     val settled=summary.optInt("settled",0)
     val accuracy=if(summary.isNull("accuracy")) "—" else "${(summary.optDouble("accuracy")*100).toInt()}%"
+    var sort by rememberSaveable { mutableStateOf("Newest") }
+    val sortedRows=when(sort) { "Match A-Z" -> rows.sortedBy { it.optString("home") + " " + it.optString("away") }; "League" -> rows.sortedBy { it.optString("competition") }; "Odds" -> rows.sortedByDescending { it.optDouble("odds") }; else -> rows.sortedByDescending { it.optString("kickoff") } }
     ScreenColumn(modifier) {
         Heading("Results & performance","Recorded scanner predictions, settled only against verified full-time scores.")
         Row(horizontalArrangement=Arrangement.spacedBy(9.dp)) {
@@ -960,7 +1127,8 @@ private fun ResultsScreen(
         if(rows.isEmpty()) Notice("No prediction history yet","Run the scanner to save prediction snapshots. Final scores are matched to the original fixture IDs.")
         else {
             Heading("Prediction history","${rows.size} recent records")
-            rows.forEach { item ->
+            Row(horizontalArrangement=Arrangement.spacedBy(6.dp)) { listOf("Newest","Match A-Z","League","Odds").forEach { value -> FilterChip(selected=sort==value,onClick={sort=value},label={Text(value)}) } }
+            sortedRows.forEach { item ->
                 Card(shape=RoundedCornerShape(18.dp),colors=CardDefaults.cardColors(containerColor=Color(0xFF111A23)),
                     border=androidx.compose.foundation.BorderStroke(1.dp,Color(0xFF263541))) {
                     Column(Modifier.padding(14.dp),verticalArrangement=Arrangement.spacedBy(6.dp)) {
