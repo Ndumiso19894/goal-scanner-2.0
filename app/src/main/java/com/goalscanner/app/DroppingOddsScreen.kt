@@ -11,15 +11,16 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.json.JSONObject
 
-private val OddsBg = Color(0xFF080D13)
-private val OddsPanel = Color(0xFF111A23)
+private val OddsBg = Color(0xFF070C14)
+private val OddsPanel = Color(0xFF111E2C)
 private val OddsAccent = Color(0xFFB7F36B)
-private val OddsMuted = Color(0xFF9EADB9)
+private val OddsMuted = Color(0xFF91A2B3)
 
 @Composable
 fun DroppingOddsScreen(
@@ -31,7 +32,7 @@ fun DroppingOddsScreen(
     var sort by rememberSaveable { mutableStateOf("Drop %") }
     val sortedMovements = when(sort) { "Kick-off" -> movements.sortedBy { it.optString("kickoff") }; "Match A-Z" -> movements.sortedBy { it.optString("home") + " " + it.optString("away") }; "League" -> movements.sortedBy { it.optString("competition") }; else -> movements.sortedByDescending { it.optDouble("drop_pct") } }
     Column(
-        modifier.fillMaxSize().background(OddsBg).verticalScroll(rememberScrollState())
+        modifier.fillMaxSize().background(Brush.verticalGradient(listOf(Color(0xFF070C14),Color(0xFF0A1420),Color(0xFF080F19)))).verticalScroll(rememberScrollState())
             .padding(horizontal=17.dp,vertical=18.dp),
         verticalArrangement=Arrangement.spacedBy(16.dp)
     ) {
@@ -43,9 +44,9 @@ fun DroppingOddsScreen(
             Text("Track bookmaker prices that have shortened across recorded snapshots.",
                 style=MaterialTheme.typography.bodySmall,color=OddsMuted)
         }
-        Card(shape=RoundedCornerShape(23.dp),colors=CardDefaults.cardColors(containerColor=Color(0xFF18252D)),
-            border=BorderStroke(1.dp,Color(0xFF30434A))) {
-            Column(Modifier.fillMaxWidth().padding(17.dp),verticalArrangement=Arrangement.spacedBy(9.dp)) {
+        Card(shape=RoundedCornerShape(25.dp),colors=CardDefaults.cardColors(containerColor=Color.Transparent),
+            border=BorderStroke(1.dp,Color(0xFF36516A))) {
+            Column(Modifier.fillMaxWidth().background(Brush.linearGradient(listOf(Color(0xFF183A43),Color(0xFF17283A))),RoundedCornerShape(25.dp)).padding(18.dp),verticalArrangement=Arrangement.spacedBy(9.dp)) {
                 Text("24-HOUR PRICE TRACKER",style=MaterialTheme.typography.labelSmall,color=OddsAccent,
                     fontWeight=FontWeight.Bold,letterSpacing=1.sp)
                 Text("3% minimum recorded drop",style=MaterialTheme.typography.titleLarge,color=Color.White,
@@ -74,8 +75,8 @@ fun DroppingOddsScreen(
                 color=OddsAccent,fontWeight=FontWeight.Bold,letterSpacing=0.7.sp)
             Row(horizontalArrangement=Arrangement.spacedBy(6.dp)) { listOf("Drop %","Kick-off","League","Match A-Z").forEach { value -> FilterChip(selected=sort==value,onClick={sort=value},label={Text(value)}) } }
             sortedMovements.forEach { item ->
-                Card(shape=RoundedCornerShape(20.dp),colors=CardDefaults.cardColors(containerColor=OddsPanel),
-                    border=BorderStroke(1.dp,Color(0xFF263541))) {
+                Card(shape=RoundedCornerShape(21.dp),colors=CardDefaults.cardColors(containerColor=OddsPanel),
+                    border=BorderStroke(1.dp,Color(0xFF2D4356))) {
                     Column(Modifier.fillMaxWidth().padding(15.dp),verticalArrangement=Arrangement.spacedBy(10.dp)) {
                         Text("${item.optString("home")}  vs  ${item.optString("away")}",
                             fontWeight=FontWeight.ExtraBold,color=Color(0xFFF2F5F0),
