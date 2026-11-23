@@ -2,7 +2,7 @@ name: Publish Goal Scanner data
 
 on:
   push:
-    branches: [feature/android-goal-scanner-pro]
+    branches: [main]
     paths-ignore:
       - "docs/data/**"
   schedule:
@@ -24,7 +24,7 @@ jobs:
       - name: Check out scanner branch
         uses: actions/checkout@v4
         with:
-          ref: feature/android-goal-scanner-pro
+          ref: main
           fetch-depth: 0
 
       - name: Set up Python
@@ -64,7 +64,7 @@ jobs:
             echo "Published feeds have not changed."
           else
             git commit -m "chore: refresh Goal Scanner public data"
-            git fetch origin feature/android-goal-scanner-pro
+            git fetch origin main
             git rebase origin/feature/android-goal-scanner-pro
-            git push origin HEAD:feature/android-goal-scanner-pro
+            git push origin HEAD:main
           fi
