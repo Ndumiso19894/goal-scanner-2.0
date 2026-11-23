@@ -334,7 +334,7 @@ private fun MoreScreen(modifier: Modifier, navigate: (String) -> Unit) {
                 Row(Modifier.fillMaxWidth().padding(17.dp), verticalAlignment=Alignment.CenterVertically) {
                     Column(Modifier.weight(1f), verticalArrangement=Arrangement.spacedBy(4.dp)) {
                         Text(item.first, fontWeight=FontWeight.Bold, color=Color.White, style=MaterialTheme.typography.titleMedium)
-                        Text(item.second, color=Color(0xFF9EADB9), style=MaterialTheme.typography.bodySmall)
+                        Text(item.second, color=Color(0xFF91A2B3), style=MaterialTheme.typography.bodySmall)
                     }
                     Text("OPEN  ›", color=Color(0xFFB7F36B), fontWeight=FontWeight.Bold, style=MaterialTheme.typography.labelSmall)
                 }
@@ -418,13 +418,13 @@ private fun LeagueTablesScreen(modifier: Modifier, leagues: List<JSONObject>) {
                             Row(Modifier.fillMaxWidth(),verticalAlignment=Alignment.CenterVertically) {
                                 Surface(shape=RoundedCornerShape(8.dp),color=if(team.optInt("position")<=4) Color(0xFF1C443B) else Color(0xFF1B2A39)) { Text(team.optInt("position").toString(),Modifier.width(28.dp).padding(vertical=5.dp),color=if(team.optInt("position")<=4) Color(0xFF8BE0B5) else Color(0xFF9FB0BF),fontWeight=FontWeight.ExtraBold,textAlign=androidx.compose.ui.text.style.TextAlign.Center) }
                                 Text(team.optString("team"),Modifier.weight(1f).padding(start=7.dp),color=Color.White,fontWeight=FontWeight.Bold,maxLines=1)
-                                Text(team.optInt("played").toString(),Modifier.width(28.dp),color=Color(0xFF9EADB9),textAlign=androidx.compose.ui.text.style.TextAlign.Center)
-                                Text(team.optInt("gd").toString(),Modifier.width(35.dp),color=Color(0xFF9EADB9),textAlign=androidx.compose.ui.text.style.TextAlign.Center)
+                                Text(team.optInt("played").toString(),Modifier.width(28.dp),color=Color(0xFF91A2B3),textAlign=androidx.compose.ui.text.style.TextAlign.Center)
+                                Text(team.optInt("gd").toString(),Modifier.width(35.dp),color=Color(0xFF91A2B3),textAlign=androidx.compose.ui.text.style.TextAlign.Center)
                                 Text(team.optInt("points").toString(),Modifier.width(34.dp),color=Color(0xFFB7F36B),fontWeight=FontWeight.ExtraBold,textAlign=androidx.compose.ui.text.style.TextAlign.End)
                             }
                             Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween,verticalAlignment=Alignment.CenterVertically) { Text("FORM",color=Color(0xFF71899B),style=MaterialTheme.typography.labelSmall,fontWeight=FontWeight.Bold); FormStrip(team.optString("form")); Text("HOME / AWAY  ${if(expanded) "−" else "+"}",color=Color(0xFF55D6C2),style=MaterialTheme.typography.labelSmall,fontWeight=FontWeight.Bold) }
                             if(expanded) {
-                                listOf("Home" to team.optJSONObject("home"),"Away" to team.optJSONObject("away")).forEach { (label,split) -> if(split!=null) Text("$label: ${split.optInt("played")} played · ${split.optInt("won")}W ${split.optInt("drawn")}D ${split.optInt("lost")}L · ${split.optInt("gf")}:${split.optInt("ga")} · ${split.optInt("points")} pts",color=Color(0xFF9EADB9),style=MaterialTheme.typography.bodySmall) }
+                                listOf("Home" to team.optJSONObject("home"),"Away" to team.optJSONObject("away")).forEach { (label,split) -> if(split!=null) Text("$label: ${split.optInt("played")} played · ${split.optInt("won")}W ${split.optInt("drawn")}D ${split.optInt("lost")}L · ${split.optInt("gf")}:${split.optInt("ga")} · ${split.optInt("points")} pts",color=Color(0xFF91A2B3),style=MaterialTheme.typography.bodySmall) }
                             }
                         }
                     }
@@ -472,7 +472,7 @@ private fun TeamCrest(name:String,url:String,size:Dp=54.dp) {
 @Composable
 private fun FormStrip(form:String) {
     Row(horizontalArrangement=Arrangement.spacedBy(5.dp)) {
-        if(form.isBlank()) Text("No form data",style=MaterialTheme.typography.labelSmall,color=Color(0xFF9EADB9))
+        if(form.isBlank()) Text("No form data",style=MaterialTheme.typography.labelSmall,color=Color(0xFF91A2B3))
         form.takeLast(5).forEach { result ->
             val tint=when(result) { 'W' -> Color(0xFF3D8B5C); 'D' -> Color(0xFF657482); else -> Color(0xFFB65353) }
             Surface(shape=RoundedCornerShape(7.dp),color=tint) {
@@ -517,13 +517,13 @@ private fun RecentGoalsGraph(recent: org.json.JSONArray?) {
 @Composable
 private fun TeamFormPanel(modifier:Modifier,name:String,stats:JSONObject?,venueLabel:String) {
     Card(modifier=modifier,shape=RoundedCornerShape(18.dp),
-        colors=CardDefaults.cardColors(containerColor=Color(0xFF121D27)),
+        colors=CardDefaults.cardColors(containerColor=Color(0xFF142436)),
         border=androidx.compose.foundation.BorderStroke(1.dp,Color(0xFF2B3A46))) {
         Column(Modifier.fillMaxWidth().padding(12.dp),verticalArrangement=Arrangement.spacedBy(8.dp)) {
             Text(name,fontWeight=FontWeight.Bold,color=Color(0xFFF2F5F0),maxLines=2,
                 style=MaterialTheme.typography.titleSmall)
             Text(venueLabel.uppercase(),style=MaterialTheme.typography.labelSmall,color=Color(0xFF8FA0AD))
-            if(stats==null) Text("Historical stats unavailable",style=MaterialTheme.typography.bodySmall,color=Color(0xFF9EADB9))
+            if(stats==null) Text("Historical stats unavailable",style=MaterialTheme.typography.bodySmall,color=Color(0xFF91A2B3))
             else {
                 FormStrip(stats.optString("form"))
                 val trend=stats.optJSONObject("recent_trends")
@@ -543,7 +543,7 @@ private fun TeamFormPanel(modifier:Modifier,name:String,stats:JSONObject?,venueL
                         Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween,verticalAlignment=Alignment.CenterVertically) {
                             Column(Modifier.weight(1f)) { Text("${match.optString("date")}  ${match.optString("venue")}",style=MaterialTheme.typography.labelSmall,color=Color(0xFF8495A2)); Text(match.optString("opponent"),style=MaterialTheme.typography.bodySmall,color=Color.White,maxLines=1) }
                             Text(match.optString("score"),color=Color.White,fontWeight=FontWeight.Bold)
-                            Text(match.optString("result"),modifier=Modifier.padding(start=8.dp),color=when(match.optString("result")){"W"->Color(0xFF67C58B);"D"->Color(0xFF9EADB9);else->Color(0xFFE18A83)},fontWeight=FontWeight.ExtraBold)
+                            Text(match.optString("result"),modifier=Modifier.padding(start=8.dp),color=when(match.optString("result")){"W"->Color(0xFF67C58B);"D"->Color(0xFF91A2B3);else->Color(0xFFE18A83)},fontWeight=FontWeight.ExtraBold)
                         }
                     }
                 }
@@ -579,7 +579,7 @@ private fun PreMatchStats(stats:JSONObject?) {
             Column(verticalArrangement=Arrangement.spacedBy(5.dp)) {
                 Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween) {
                     Text(if(percent) "${h.toInt()}%" else "%.2f".format(h),fontWeight=FontWeight.Bold,color=Color(0xFFF2F5F0))
-                    Text(label,style=MaterialTheme.typography.labelSmall,color=Color(0xFF9EADB9))
+                    Text(label,style=MaterialTheme.typography.labelSmall,color=Color(0xFF91A2B3))
                     Text(if(percent) "${a.toInt()}%" else "%.2f".format(a),fontWeight=FontWeight.Bold,color=Color(0xFFF2F5F0))
                 }
                 LinearProgressIndicator(progress={(h/total).toFloat().coerceIn(0f,1f)},
@@ -596,7 +596,7 @@ private fun PreMatchStats(stats:JSONObject?) {
     val h2h=stats?.optJSONObject("head_to_head")
     if(h2h!=null) {
         Heading("Head-to-head","Previous meetings before this fixture")
-        Card(shape=RoundedCornerShape(17.dp),colors=CardDefaults.cardColors(containerColor=Color(0xFF121D27)),
+        Card(shape=RoundedCornerShape(17.dp),colors=CardDefaults.cardColors(containerColor=Color(0xFF142436)),
             border=androidx.compose.foundation.BorderStroke(1.dp,Color(0xFF2B3A46))) {
             Column(Modifier.fillMaxWidth().padding(14.dp),verticalArrangement=Arrangement.spacedBy(5.dp)) {
                 Text("${h2h.optInt("played")} meetings  ·  ${h2h.optInt("home_wins")} home wins  ·  ${h2h.optInt("draws")} draws  ·  ${h2h.optInt("away_wins")} away wins",
@@ -605,12 +605,12 @@ private fun PreMatchStats(stats:JSONObject?) {
                 val meetings=h2h.optJSONArray("recent_meetings")
                 if(meetings!=null && meetings.length()>0) {
                     HorizontalDivider(color=Color(0xFF30414E))
-                    Text("PREVIOUS MEETINGS",color=Color(0xFF9EADB9),style=MaterialTheme.typography.labelSmall,fontWeight=FontWeight.Bold)
+                    Text("PREVIOUS MEETINGS",color=Color(0xFF91A2B3),style=MaterialTheme.typography.labelSmall,fontWeight=FontWeight.Bold)
                     (0 until minOf(10,meetings.length())).forEach { i ->
                         val match=meetings.optJSONObject(i) ?: JSONObject()
                         Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween) { Text(match.optString("date"),color=Color(0xFF8495A2),style=MaterialTheme.typography.labelSmall); Text(match.optString("score"),color=Color.White,fontWeight=FontWeight.Bold) }
                     }
-                } else if(scores!=null && scores.length()>0) Text("Recent scores: "+(0 until scores.length()).joinToString("  ·  ") { scores.optString(it) }, color=Color(0xFF9EADB9),style=MaterialTheme.typography.labelSmall)
+                } else if(scores!=null && scores.length()>0) Text("Recent scores: "+(0 until scores.length()).joinToString("  ·  ") { scores.optString(it) }, color=Color(0xFF91A2B3),style=MaterialTheme.typography.labelSmall)
             }
         }
     }
@@ -624,10 +624,10 @@ private fun PreMatchStats(stats:JSONObject?) {
                 listOf("Home squad" to context.optJSONObject("home_squad"),"Away squad" to context.optJSONObject("away_squad")).forEach { (label,squad) -> if(squad!=null) {
                     val value=squad.optDouble("market_value_eur",-1.0)
                     Text("$label · ${squad.optString("name")}",color=Color.White,fontWeight=FontWeight.Bold)
-                    Text(listOfNotNull(if(squad.optDouble("average_age",-1.0)>=0) "Average age %.1f".format(squad.optDouble("average_age")) else null,if(squad.optInt("squad_size")>0) "${squad.optInt("squad_size")} players" else null,if(value>=0) "Market value €%.1fm".format(value/1000000.0) else null).joinToString("  · ").ifBlank { "Squad profile unavailable" },color=Color(0xFF9EADB9),style=MaterialTheme.typography.bodySmall)
+                    Text(listOfNotNull(if(squad.optDouble("average_age",-1.0)>=0) "Average age %.1f".format(squad.optDouble("average_age")) else null,if(squad.optInt("squad_size")>0) "${squad.optInt("squad_size")} players" else null,if(value>=0) "Market value €%.1fm".format(value/1000000.0) else null).joinToString("  · ").ifBlank { "Squad profile unavailable" },color=Color(0xFF91A2B3),style=MaterialTheme.typography.bodySmall)
                 } }
                 val baseline=context.optJSONObject("league_performance_baseline")
-                if(baseline!=null) { Heading("League environment","Historical baseline · ${baseline.optInt("matches_sampled")} matches"); Text(listOfNotNull(if(baseline.optDouble("home_shots_avg",-1.0)>=0) "Home shots %.1f".format(baseline.optDouble("home_shots_avg")) else null,if(baseline.optDouble("away_shots_avg",-1.0)>=0) "Away shots %.1f".format(baseline.optDouble("away_shots_avg")) else null,if(baseline.optDouble("home_xg_avg",-1.0)>=0) "Home xG %.2f".format(baseline.optDouble("home_xg_avg")) else null,if(baseline.optDouble("away_xg_avg",-1.0)>=0) "Away xG %.2f".format(baseline.optDouble("away_xg_avg")) else null).joinToString("  · "),color=Color(0xFF9EADB9),style=MaterialTheme.typography.bodySmall) }
+                if(baseline!=null) { Heading("League environment","Historical baseline · ${baseline.optInt("matches_sampled")} matches"); Text(listOfNotNull(if(baseline.optDouble("home_shots_avg",-1.0)>=0) "Home shots %.1f".format(baseline.optDouble("home_shots_avg")) else null,if(baseline.optDouble("away_shots_avg",-1.0)>=0) "Away shots %.1f".format(baseline.optDouble("away_shots_avg")) else null,if(baseline.optDouble("home_xg_avg",-1.0)>=0) "Home xG %.2f".format(baseline.optDouble("home_xg_avg")) else null,if(baseline.optDouble("away_xg_avg",-1.0)>=0) "Away xG %.2f".format(baseline.optDouble("away_xg_avg")) else null).joinToString("  · "),color=Color(0xFF91A2B3),style=MaterialTheme.typography.bodySmall) }
             }
         }
     }
@@ -783,7 +783,7 @@ private fun FixturesScreen(
             }
             FilledTonalButton(onClick=onCollect,enabled=!busy) { Text(if(busy) "Loading…" else "Refresh") }
         }
-        Card(shape=RoundedCornerShape(18.dp),colors=CardDefaults.cardColors(containerColor=Color(0xFF111A23)),border=androidx.compose.foundation.BorderStroke(1.dp,Color(0xFF24313D))) {
+        Card(shape=RoundedCornerShape(18.dp),colors=CardDefaults.cardColors(containerColor=Color(0xFF111E2C)),border=androidx.compose.foundation.BorderStroke(1.dp,Color(0xFF24313D))) {
             Column(Modifier.padding(14.dp),verticalArrangement=Arrangement.spacedBy(4.dp)) {
                 Text("${fixtures.size} matches available",fontWeight=FontWeight.Bold,color=Color(0xFFF2F5F0))
                 Text(summary,style=MaterialTheme.typography.bodySmall,color=MaterialTheme.colorScheme.onSurfaceVariant)
@@ -813,7 +813,7 @@ private fun FixturesScreen(
 private fun StatusPill(status:String) {
     val live=status in listOf("1H","2H","HT","LIVE","ET","P")
     val finished=status in listOf("FT","AET","PEN","FINISHED")
-    val tint=when { live -> Color(0xFFB7F36B); finished -> Color(0xFF9EADB9); else -> Color(0xFF9AB7D3) }
+    val tint=when { live -> Color(0xFFB7F36B); finished -> Color(0xFF91A2B3); else -> Color(0xFF9AB7D3) }
     Surface(color=when { live -> Color(0xFF263B20); finished -> Color(0xFF26313A); else -> Color(0xFF1B2B37) },
         shape=RoundedCornerShape(50)) {
         Text(status.ifBlank { "NS" },modifier=Modifier.padding(horizontal=10.dp,vertical=6.dp),
@@ -910,8 +910,8 @@ private fun FixtureDetailsScreen(
             if(picks.isEmpty()) Notice("No qualifying selections published","This fixture did not meet the scanner's data and probability filters. That does not mean the match has no betting markets.")
             picks.forEach { pick ->
                 Card(Modifier.fillMaxWidth().clickable { onSelect(pick) },shape=RoundedCornerShape(18.dp),
-                    colors=CardDefaults.cardColors(containerColor=Color(0xFF111A23)),
-                    border=androidx.compose.foundation.BorderStroke(1.dp,Color(0xFF263541))) {
+                    colors=CardDefaults.cardColors(containerColor=Color(0xFF111E2C)),
+                    border=androidx.compose.foundation.BorderStroke(1.dp,Color(0xFF2D4356))) {
                     Row(Modifier.fillMaxWidth().padding(15.dp),verticalAlignment=Alignment.CenterVertically) {
                         Column(Modifier.weight(1f),verticalArrangement=Arrangement.spacedBy(7.dp)) {
                             Text(marketTitle(pick),fontWeight=FontWeight.Bold,color=Color(0xFFF2F5F0))
@@ -1007,12 +1007,12 @@ private fun ScannerScreen(
             sortedRecommendations.forEach { item ->
                 val estimate=(item.optDouble("estimated_probability")*100).toInt()
                 Card(Modifier.fillMaxWidth().clickable { onSelect(item) },shape=RoundedCornerShape(20.dp),
-                    colors=CardDefaults.cardColors(containerColor=Color(0xFF111A23)),
-                    border=androidx.compose.foundation.BorderStroke(1.dp,Color(0xFF293944))) {
+                    colors=CardDefaults.cardColors(containerColor=Color(0xFF111E2C)),
+                    border=androidx.compose.foundation.BorderStroke(1.dp,Color(0xFF2D4356))) {
                     Column(Modifier.fillMaxWidth().padding(15.dp),verticalArrangement=Arrangement.spacedBy(10.dp)) {
                         Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween,verticalAlignment=Alignment.CenterVertically) {
                             Text(item.optString("competition","FOOTBALL").uppercase(),Modifier.weight(1f),
-                                style=MaterialTheme.typography.labelSmall,color=Color(0xFF9EADB9),maxLines=1)
+                                style=MaterialTheme.typography.labelSmall,color=Color(0xFF91A2B3),maxLines=1)
                             Surface(color=Color(0xFF263B20),shape=RoundedCornerShape(50)) {
                                 Text("MODEL PICK",Modifier.padding(horizontal=9.dp,vertical=5.dp),
                                     style=MaterialTheme.typography.labelSmall,color=Color(0xFFB7F36B),fontWeight=FontWeight.Bold)
@@ -1029,7 +1029,7 @@ private fun ScannerScreen(
                                 textAlign=androidx.compose.ui.text.style.TextAlign.End,maxLines=2)
                             TeamCrest(item.optString("away"),fixture?.optString("away_crest_url").orEmpty(),42.dp)
                         }
-                        Text(formatKickoff(item.optString("kickoff")),style=MaterialTheme.typography.labelSmall,color=Color(0xFF9EADB9))
+                        Text(formatKickoff(item.optString("kickoff")),style=MaterialTheme.typography.labelSmall,color=Color(0xFF91A2B3))
                         Surface(color=Color(0xFF1B2931),shape=RoundedCornerShape(12.dp)) {
                             Column(Modifier.fillMaxWidth().padding(11.dp),verticalArrangement=Arrangement.spacedBy(4.dp)) {
                                 Text("SELECTED MARKET",style=MaterialTheme.typography.labelSmall,color=Color(0xFF91A0AC),letterSpacing=0.8.sp)
@@ -1051,7 +1051,7 @@ private fun ScannerScreen(
                             color=Color(0xFFB7F36B),trackColor=Color(0xFF34434B))
                         Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween) {
                             Text("Data quality ${(item.optDouble("data_quality")*100).toInt()}%",
-                                style=MaterialTheme.typography.labelSmall,color=Color(0xFF9EADB9))
+                                style=MaterialTheme.typography.labelSmall,color=Color(0xFF91A2B3))
                             Text("VIEW ANALYSIS  ›",style=MaterialTheme.typography.labelSmall,
                                 color=Color(0xFFB7F36B),fontWeight=FontWeight.Bold)
                         }
@@ -1083,8 +1083,8 @@ private fun AnalysisScreen(modifier:Modifier,candidate:JSONObject?,related:List<
         else {
             val home=candidate.optString("home"); val away=candidate.optString("away")
             val probability=(candidate.optDouble("estimated_probability")*100).toInt()
-            Card(colors=CardDefaults.cardColors(containerColor=Color(0xFF18252D)),shape=RoundedCornerShape(25.dp),
-                border=androidx.compose.foundation.BorderStroke(1.dp,Color(0xFF30434A))) {
+            Card(colors=CardDefaults.cardColors(containerColor=Color(0xFF152B3A)),shape=RoundedCornerShape(25.dp),
+                border=androidx.compose.foundation.BorderStroke(1.dp,Color(0xFF36516A))) {
                 Column(Modifier.fillMaxWidth().padding(19.dp),verticalArrangement=Arrangement.spacedBy(11.dp)) {
                     Text(candidate.optString("competition","Competition unavailable").uppercase(),
                         color=Color(0xFFB7F36B),style=MaterialTheme.typography.labelSmall,letterSpacing=1.sp,fontWeight=FontWeight.Bold)
@@ -1103,7 +1103,7 @@ private fun AnalysisScreen(modifier:Modifier,candidate:JSONObject?,related:List<
                     }
                     Text(formatKickoff(candidate.optString("kickoff")),color=Color(0xFFB9C5CC),style=MaterialTheme.typography.bodySmall)
                     HorizontalDivider(color=Color(0xFF40515C))
-                    Text("SELECTED MARKET",color=Color(0xFF9EADB9),style=MaterialTheme.typography.labelSmall,letterSpacing=1.sp)
+                    Text("SELECTED MARKET",color=Color(0xFF91A2B3),style=MaterialTheme.typography.labelSmall,letterSpacing=1.sp)
                     Text(marketTitle(candidate),color=Color.White,fontWeight=FontWeight.ExtraBold,style=MaterialTheme.typography.titleLarge)
                     Row(Modifier.fillMaxWidth(),verticalAlignment=Alignment.CenterVertically,horizontalArrangement=Arrangement.spacedBy(17.dp)) {
                         ProbabilityGauge(probability)
@@ -1142,13 +1142,13 @@ private fun AnalysisScreen(modifier:Modifier,candidate:JSONObject?,related:List<
             marketRows.forEach { item ->
                 val isSelected=item.optString("prediction_id")==candidate.optString("prediction_id")
                 Card(shape=RoundedCornerShape(17.dp),colors=CardDefaults.cardColors(
-                    containerColor=if(isSelected) Color(0xFF20331E) else Color(0xFF111A23)),
-                    border=androidx.compose.foundation.BorderStroke(1.dp,if(isSelected) Color(0xFF668A42) else Color(0xFF263541))) {
+                    containerColor=if(isSelected) Color(0xFF20331E) else Color(0xFF111E2C)),
+                    border=androidx.compose.foundation.BorderStroke(1.dp,if(isSelected) Color(0xFF668A42) else Color(0xFF2D4356))) {
                     Row(Modifier.fillMaxWidth().padding(14.dp),verticalAlignment=Alignment.CenterVertically) {
                         Column(Modifier.weight(1f),verticalArrangement=Arrangement.spacedBy(5.dp)) {
                             Text(marketTitle(item),fontWeight=FontWeight.Bold,color=Color(0xFFF2F5F0))
                             Text("Probability ${(item.optDouble("estimated_probability")*100).toInt()}%  ·  ${if(item.isNull("odds")) "Odds unavailable" else "Odds "+String.format("%.2f",item.optDouble("odds"))}",
-                                style=MaterialTheme.typography.bodySmall,color=Color(0xFF9EADB9))
+                                style=MaterialTheme.typography.bodySmall,color=Color(0xFF91A2B3))
                             if(!item.isNull("expected_value")) Text("Model price value: ${String.format("%+.1f%%",item.optDouble("expected_value")*100)}",
                                 style=MaterialTheme.typography.labelSmall,color=Color(0xFFB7F36B))
                         }
@@ -1158,7 +1158,7 @@ private fun AnalysisScreen(modifier:Modifier,candidate:JSONObject?,related:List<
             }
             Heading("Model notes")
             Text("Data quality ${(candidate.optDouble("data_quality")*100).toInt()}% · ${candidate.optString("model_version")}",
-                style=MaterialTheme.typography.bodySmall,color=Color(0xFF9EADB9))
+                style=MaterialTheme.typography.bodySmall,color=Color(0xFF91A2B3))
             Notice("Important limitation","These are uncalibrated historical-rate estimates, not proven betting edges. Corner and booking markets appear only when sufficient historical statistics exist. Bookmaker prices are displayed separately and do not determine model probabilities.")
         }
     }
@@ -1189,8 +1189,8 @@ private fun ResultsScreen(
             Heading("Prediction history","${rows.size} recent records")
             Row(horizontalArrangement=Arrangement.spacedBy(6.dp)) { listOf("Newest","Match A-Z","League","Odds").forEach { value -> FilterChip(selected=sort==value,onClick={sort=value},label={Text(value)}) } }
             sortedRows.forEach { item ->
-                Card(shape=RoundedCornerShape(18.dp),colors=CardDefaults.cardColors(containerColor=Color(0xFF111A23)),
-                    border=androidx.compose.foundation.BorderStroke(1.dp,Color(0xFF263541))) {
+                Card(shape=RoundedCornerShape(18.dp),colors=CardDefaults.cardColors(containerColor=Color(0xFF111E2C)),
+                    border=androidx.compose.foundation.BorderStroke(1.dp,Color(0xFF2D4356))) {
                     Column(Modifier.padding(14.dp),verticalArrangement=Arrangement.spacedBy(6.dp)) {
                         Text("${item.optString("home")}  vs  ${item.optString("away")}",fontWeight=FontWeight.ExtraBold,color=Color(0xFFF2F5F0))
                         val detail=item.optJSONObject("payload") ?: JSONObject().apply {
@@ -1235,7 +1235,7 @@ private fun SettingsScreen(modifier:Modifier,apiUrl:String,onApiUrl:(String)->Un
         }
         if(message.isNotBlank()) Text(message,style=MaterialTheme.typography.bodySmall)
         Heading("App appearance")
-        Card(colors=CardDefaults.cardColors(containerColor=Color(0xFF111A23))) {
+        Card(colors=CardDefaults.cardColors(containerColor=Color(0xFF111E2C))) {
             Text("Premium dark interface · electric green accent",Modifier.padding(14.dp))
         }
         Heading("Scanner defaults")
