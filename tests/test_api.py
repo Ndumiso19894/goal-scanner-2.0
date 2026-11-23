@@ -42,7 +42,8 @@ def test_scanner_api_saves_a_real_fixture_prediction(monkeypatch, tmp_path):
         def __init__(self, *args, **kwargs):
             pass
         def fetch_upcoming(self, **kwargs):
-            return []
+            return [{"source_id":"sportybet-1","kickoff":kickoff,"home":"Home FC","away":"Away FC",
+                     "odds":{"match_total_goals":{"2.5":{"over":1.9,"under":1.9}}}}]
 
     monkeypatch.setattr(api, "LiveScoreProvider", Live)
     monkeypatch.setattr(api, "FootballDataProvider", Football)
