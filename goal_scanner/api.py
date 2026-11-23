@@ -93,6 +93,8 @@ def _fixture_dict(item) -> dict:
         "kickoff": item.kickoff, "home": item.home, "away": item.away,
         "competition": item.competition, "country": item.country, "status": item.status,
         "home_score": item.home_score, "away_score": item.away_score,
+        "home_team_id": item.home_team_id, "away_team_id": item.away_team_id,
+        "home_badge_path": item.home_badge_path, "away_badge_path": item.away_badge_path,
         "retrieved_at": item.retrieved_at,
     }
 
