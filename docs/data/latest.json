@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-23T07:08:58.963775+00:00",
+  "updated_at": "2026-11-23T07:25:45.795365+00:00",
   "season": "2627",
   "status": "ok",
   "recommendation_count": 20,
@@ -308,7 +308,7 @@
         "home_home_matches": 5
       },
       "selection": "over",
-      "prediction_id": "f7ad887e82574d4696d033301914d10f",
+      "prediction_id": "67ee9f6066b24d0b818d0138797bed6c",
       "status": "PENDING"
     },
     {
@@ -517,7 +517,7 @@
         "home_home_matches": 6
       },
       "selection": "home",
-      "prediction_id": "2f8eef2b08f0466c83ee67d93a37c52a",
+      "prediction_id": "2e4db0f7a57d41488dcea8ec815b203b",
       "status": "PENDING"
     },
     {
@@ -658,7 +658,7 @@
         "home_home_matches": 6
       },
       "selection": "over",
-      "prediction_id": "b745b2973d4d4aba97c07aa1e16c9e39",
+      "prediction_id": "c2cd140090c74a2fa816264b649dc6ca",
       "status": "PENDING"
     },
     {
@@ -909,7 +909,7 @@
         "home_home_matches": 8
       },
       "selection": "home",
-      "prediction_id": "078268552a4e43a49c8561517179fc84",
+      "prediction_id": "6c2ce0013ba646809903085f431018a1",
       "status": "PENDING"
     },
     {
@@ -1214,7 +1214,7 @@
         "home_home_matches": 5
       },
       "selection": "yes",
-      "prediction_id": "7f100570fa5242b5ad88ee73807d6ec7",
+      "prediction_id": "07880dee666a487fbd434abc5817a6c6",
       "status": "PENDING"
     },
     {
@@ -1355,7 +1355,7 @@
         "home_home_matches": 8
       },
       "selection": "over",
-      "prediction_id": "3d60719e7c21440095e84f3ed52126f8",
+      "prediction_id": "cacd4f87165943e5b48a96cda3441594",
       "status": "PENDING"
     },
     {
@@ -1606,7 +1606,7 @@
         "home_home_matches": 8
       },
       "selection": "home",
-      "prediction_id": "5a93ef6c6f8d42a9bdf41f09434b308b",
+      "prediction_id": "1205b53b984e45ef840565583179b6a5",
       "status": "PENDING"
     },
     {
@@ -1747,7 +1747,7 @@
         "home_home_matches": 6
       },
       "selection": "away",
-      "prediction_id": "2cac1bde4f9d449a91f303df8eab9886",
+      "prediction_id": "462be59008b9447c9e2935401740430d",
       "status": "PENDING"
     },
     {
@@ -1856,7 +1856,7 @@
         "home_home_matches": 4
       },
       "selection": "over",
-      "prediction_id": "4c31b5fd1ddc46e3aee8a3189d11ddcd",
+      "prediction_id": "d66d23ae17964e00861cc53e65a82780",
       "status": "PENDING"
     },
     {
@@ -2065,7 +2065,7 @@
         "home_home_matches": 6
       },
       "selection": "away",
-      "prediction_id": "2aa9d35c101d411ea5280d9d9f5b0cc3",
+      "prediction_id": "861f037c1823402684b549cbd110915b",
       "status": "PENDING"
     },
     {
@@ -2316,7 +2316,7 @@
         "home_home_matches": 8
       },
       "selection": "over",
-      "prediction_id": "a840c1194dc1444287b60db59987a867",
+      "prediction_id": "f48adc25de764f66899af68b61509a7e",
       "status": "PENDING"
     },
     {
@@ -2621,7 +2621,7 @@
         "home_home_matches": 5
       },
       "selection": "home",
-      "prediction_id": "5ce87fc9569c4a81be4fd2c34e12555d",
+      "prediction_id": "e2ba9f8369404578a8c9bbb32fdf66f7",
       "status": "PENDING"
     },
     {
@@ -2762,7 +2762,7 @@
         "home_home_matches": 8
       },
       "selection": "yes",
-      "prediction_id": "fc5ad80dbb04495f9827053018fb13c1",
+      "prediction_id": "28d36e59bcf54987b0d5111e463f9625",
       "status": "PENDING"
     },
     {
@@ -2903,7 +2903,7 @@
         "home_home_matches": 6
       },
       "selection": "yes",
-      "prediction_id": "3b3eb1f131af450a9650c85f6ce57b46",
+      "prediction_id": "356d032e44754b7c8af519411d8e5461",
       "status": "PENDING"
     },
     {
@@ -3208,7 +3208,7 @@
         "home_home_matches": 5
       },
       "selection": "over",
-      "prediction_id": "154b717d45874226bf1ce13f458b2eef",
+      "prediction_id": "275d34b999634870bdb8f21432d2e40a",
       "status": "PENDING"
     },
     {
@@ -3459,7 +3459,7 @@
         "home_home_matches": 7
       },
       "selection": "away",
-      "prediction_id": "d59eec2f3537405ab0683534d94a7367",
+      "prediction_id": "4eb9067d23344e4cb4433f773532738e",
       "status": "PENDING"
     },
     {
@@ -3568,7 +3568,7 @@
         "home_home_matches": 4
       },
       "selection": "home",
-      "prediction_id": "86b0fd8f746d4fcbab931d03f7743b69",
+      "prediction_id": "0b32870393244afaa05cd01511084a37",
       "status": "PENDING"
     },
     {
@@ -3873,7 +3873,7 @@
         "home_home_matches": 5
       },
       "selection": "away",
-      "prediction_id": "43a50ca4c0fd4168880048c400d7cb56",
+      "prediction_id": "b3e5ea78ec0e4655bb72acdb1b7dcd97",
       "status": "PENDING"
     },
     {
@@ -4178,7 +4178,7 @@
         "home_home_matches": 5
       },
       "selection": "over",
-      "prediction_id": "7c4203e0adf84df38721088a3acbb3b2",
+      "prediction_id": "ebf029441c0c4a5f8079db8e8be7efbe",
       "status": "PENDING"
     },
     {
@@ -4483,7 +4483,7 @@
         "home_home_matches": 5
       },
       "selection": "over",
-      "prediction_id": "315898bd88d7483693077a233e294f06",
+      "prediction_id": "6633668b1e684d7eb7682ff6427a31e0",
       "status": "PENDING"
     }
   ],
@@ -4509,7 +4509,7 @@
           },
           "sportybet": {
             "status": "ok",
-            "events": 264,
+            "events": 265,
             "role": "odds_only"
           }
         }
@@ -4532,7 +4532,7 @@
           },
           "sportybet": {
             "status": "ok",
-            "events": 264,
+            "events": 265,
             "role": "odds_only"
           }
         }
@@ -4555,7 +4555,7 @@
           },
           "sportybet": {
             "status": "ok",
-            "events": 264,
+            "events": 265,
             "role": "odds_only"
           }
         }
@@ -4578,7 +4578,7 @@
           },
           "sportybet": {
             "status": "ok",
-            "events": 264,
+            "events": 265,
             "role": "odds_only"
           }
         }
@@ -4601,7 +4601,7 @@
           },
           "sportybet": {
             "status": "ok",
-            "events": 264,
+            "events": 265,
             "role": "odds_only"
           }
         }
@@ -4624,7 +4624,7 @@
           },
           "sportybet": {
             "status": "ok",
-            "events": 264,
+            "events": 265,
             "role": "odds_only"
           }
         }
@@ -4647,7 +4647,7 @@
           },
           "sportybet": {
             "status": "ok",
-            "events": 264,
+            "events": 265,
             "role": "odds_only"
           }
         }
@@ -4670,7 +4670,7 @@
           },
           "sportybet": {
             "status": "ok",
-            "events": 264,
+            "events": 265,
             "role": "odds_only"
           }
         }
@@ -4693,7 +4693,7 @@
           },
           "sportybet": {
             "status": "ok",
-            "events": 264,
+            "events": 265,
             "role": "odds_only"
           }
         }
@@ -4716,7 +4716,7 @@
           },
           "sportybet": {
             "status": "ok",
-            "events": 264,
+            "events": 265,
             "role": "odds_only"
           }
         }
@@ -4739,7 +4739,7 @@
           },
           "sportybet": {
             "status": "ok",
-            "events": 264,
+            "events": 265,
             "role": "odds_only"
           }
         }
@@ -4762,7 +4762,7 @@
           },
           "sportybet": {
             "status": "ok",
-            "events": 264,
+            "events": 265,
             "role": "odds_only"
           }
         }
@@ -4785,7 +4785,7 @@
           },
           "sportybet": {
             "status": "ok",
-            "events": 264,
+            "events": 265,
             "role": "odds_only"
           }
         }
