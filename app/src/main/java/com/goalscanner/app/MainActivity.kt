@@ -717,7 +717,10 @@ private fun SettingsScreen(modifier:Modifier,apiUrl:String,onApiUrl:(String)->Un
         Card { Text("Automatic light/dark appearance · Blue accent",Modifier.padding(14.dp)) }
         Heading("Scanner defaults")
         Card { Text("Balanced shortlist · 60% initial probability threshold · Exclude insufficient data",Modifier.padding(14.dp)) }
-        Card { Text("Goal Scanner Pro · Version 1.0.0",Modifier.padding(14.dp)) }
+        Card { Column(Modifier.padding(14.dp),verticalArrangement=Arrangement.spacedBy(4.dp)) {
+            Text("Goal Scanner Pro · Version 1.1.0",fontWeight=FontWeight.Bold)
+            Text("Automatic release checks run when the app opens and every 12 hours. If a new signed version is published, you will receive a notification. Android will ask you to confirm installation.",style=MaterialTheme.typography.bodySmall,color=MaterialTheme.colorScheme.onSurfaceVariant)
+        } }
     }
 }
 @Composable
