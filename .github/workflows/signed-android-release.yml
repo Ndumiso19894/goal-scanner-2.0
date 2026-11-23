@@ -1,0 +1,76 @@
+name: Signed Android Release
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: "8.9"
+
+      - name: Install Android SDK
+        shell: bash
+        run: |
+          set -euo pipefail
+          export ANDROID_HOME="$RUNNER_TEMP/android-sdk"
+          mkdir -p "$ANDROID_HOME/cmdline-tools" "$RUNNER_TEMP/android-tools"
+          curl -fsSL "https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip" -o "$RUNNER_TEMP/android-tools.zip"
+          unzip -q "$RUNNER_TEMP/android-tools.zip" -d "$RUNNER_TEMP/android-tools"
+          mv "$RUNNER_TEMP/android-tools/cmdline-tools" "$ANDROID_HOME/cmdline-tools/latest"
+          echo "ANDROID_HOME=$ANDROID_HOME" >> "$GITHUB_ENV"
+          echo "ANDROID_SDK_ROOT=$ANDROID_HOME" >> "$GITHUB_ENV"
+          echo "$ANDROID_HOME/cmdline-tools/latest/bin" >> "$GITHUB_PATH"
+          echo "$ANDROID_HOME/platform-tools" >> "$GITHUB_PATH"
+          yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --sdk_root="$ANDROID_HOME" --licenses || true
+          "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --sdk_root="$ANDROID_HOME" "platform-tools" "platforms;android-35" "build-tools;35.0.0"
+
+      - name: Restore release signing key
+        env:
+          KEYSTORE_BASE64: ${{ secrets.GOAL_SCANNER_KEYSTORE_BASE64 }}
+          STORE_PASSWORD: ${{ secrets.GOAL_SCANNER_STORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.GOAL_SCANNER_KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.GOAL_SCANNER_KEY_PASSWORD }}
+        run: |
+          set -euo pipefail
+          test -n "$KEYSTORE_BASE64"
+          test -n "$STORE_PASSWORD"
+          test -n "$KEY_ALIAS"
+          test -n "$KEY_PASSWORD"
+          echo "$KEYSTORE_BASE64" | base64 --decode > "$RUNNER_TEMP/goal-scanner-release.jks"
+          echo "GOAL_SCANNER_KEYSTORE=$RUNNER_TEMP/goal-scanner-release.jks" >> "$GITHUB_ENV"
+          echo "GOAL_SCANNER_STORE_PASSWORD=$STORE_PASSWORD" >> "$GITHUB_ENV"
+          echo "GOAL_SCANNER_KEY_ALIAS=$KEY_ALIAS" >> "$GITHUB_ENV"
+          echo "GOAL_SCANNER_KEY_PASSWORD=$KEY_PASSWORD" >> "$GITHUB_ENV"
+
+      - name: Build signed release APK
+        run: gradle --no-daemon assembleRelease
+
+      - name: Verify APK signature
+        run: |
+          "$ANDROID_HOME/build-tools/35.0.0/apksigner" verify --verbose app/build/outputs/apk/release/app-release.apk
+
+      - name: Publish release APK
+        uses: softprops/action-gh-release@v2
+        with:
+          name: Goal Scanner Pro ${{ github.ref_name }}
+          generate_release_notes: true
+          files: app/build/outputs/apk/release/app-release.apk
