@@ -8,6 +8,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
@@ -29,6 +30,9 @@ import androidx.compose.runtime.saveable.rememberSaveableStateHolder
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.Dp
@@ -51,7 +55,10 @@ import java.net.URL
 import java.time.LocalDate
 
 private val Blue = Color(0xFFB7F36B)
-private val Navy = Color(0xFF111A23)
+private val Navy = Color(0xFF101A27)
+private val AccentTeal = Color(0xFF55D6C2)
+private val MutedText = Color(0xFF91A2B3)
+private val PanelBorder = Color(0xFF26384A)
 private const val DEFAULT_DATA_URL = "https://raw.githubusercontent.com/Ndumiso19894/goal-scanner-2.0/main"
 private val MarketIds = listOf("team_corners_over","match_corners_over","match_bookings_over","team_bookings_over","match_over_2_5","btts_yes","match_winner_home","match_winner_draw","match_winner_away")
 private val MarketNames = listOf("Team corners · Over 4.5+","Total corners · Over 8.5+","Match bookings · Over 3.5+","Team bookings · Over 1.5+","Total goals · Over 2.5","Both teams to score · Yes","1X2 · Home","1X2 · Draw","1X2 · Away")
@@ -69,13 +76,13 @@ class MainActivity : ComponentActivity() {
         work.enqueue(OneTimeWorkRequestBuilder<ReleaseUpdateWorker>().build())
         setContent {
             val scheme = darkColorScheme(
-                primary=Color(0xFFB7F36B), onPrimary=Color(0xFF17220A),
-                secondary=Color(0xFF9EDB63), onSecondary=Color(0xFF15220A),
-                background=Color(0xFF080D13), onBackground=Color(0xFFF2F5F0),
-                surface=Color(0xFF111A23), onSurface=Color(0xFFF2F5F0),
-                surfaceVariant=Color(0xFF1B2732), onSurfaceVariant=Color(0xFFA5B2BE),
-                secondaryContainer=Color(0xFF24351D), onSecondaryContainer=Color(0xFFE4F4D3),
-                outline=Color(0xFF344452)
+                primary=Color(0xFFB7F36B), onPrimary=Color(0xFF111A17),
+                secondary=Color(0xFF55D6C2), onSecondary=Color(0xFF071B1A),
+                background=Color(0xFF070C14), onBackground=Color(0xFFF4F7FA),
+                surface=Color(0xFF101A27), onSurface=Color(0xFFF4F7FA),
+                surfaceVariant=Color(0xFF1A2938), onSurfaceVariant=Color(0xFF9AAABB),
+                secondaryContainer=Color(0xFF183A38), onSecondaryContainer=Color(0xFFDDF8F3),
+                outline=Color(0xFF304456)
             )
             MaterialTheme(
                 colorScheme=scheme,
@@ -162,7 +169,7 @@ private fun GoalScannerApp(prefs: android.content.SharedPreferences) {
     }
 
     Scaffold(
-        containerColor=Color(0xFF080D13),
+        containerColor=Color(0xFF070C14),
         topBar = {
             TopAppBar(
                 colors=TopAppBarDefaults.topAppBarColors(
@@ -170,10 +177,12 @@ private fun GoalScannerApp(prefs: android.content.SharedPreferences) {
                     titleContentColor=Color(0xFFF2F5F0),
                     actionIconContentColor=Color(0xFFF2F5F0)
                 ),
-                title = { Column(verticalArrangement=Arrangement.spacedBy(1.dp)) {
-                    Text("GOAL SCANNER",fontWeight=FontWeight.ExtraBold,fontSize=18.sp,letterSpacing=1.1.sp)
-                    Text("PRO  ·  FOOTBALL INTELLIGENCE",style=MaterialTheme.typography.labelSmall,
-                        color=Color(0xFF9EADB9),letterSpacing=1.05.sp)
+                title = { Row(verticalAlignment=Alignment.CenterVertically,horizontalArrangement=Arrangement.spacedBy(10.dp)) {
+                    Box(Modifier.size(37.dp).background(Brush.linearGradient(listOf(Color(0xFFB7F36B),Color(0xFF55D6C2))),RoundedCornerShape(12.dp)),contentAlignment=Alignment.Center) { Text("GS",color=Color(0xFF0A1720),fontWeight=FontWeight.Black,style=MaterialTheme.typography.titleSmall) }
+                    Column(verticalArrangement=Arrangement.spacedBy(1.dp)) {
+                        Text("GOAL SCANNER",fontWeight=FontWeight.ExtraBold,fontSize=17.sp,letterSpacing=1.05.sp)
+                        Text("PRO  /  MATCH INTELLIGENCE",style=MaterialTheme.typography.labelSmall,color=Color(0xFF91A2B3),letterSpacing=.85.sp)
+                    }
                 } },
                 actions = {
                     IconButton(onClick={settings=!settings}) {
@@ -184,7 +193,7 @@ private fun GoalScannerApp(prefs: android.content.SharedPreferences) {
         },
         bottomBar = {
             if (!settings && tab!="Match") NavigationBar(
-                containerColor=Color(0xFF111A23),contentColor=Color(0xFFF2F5F0),tonalElevation=0.dp
+                containerColor=Color(0xFF0D1723),contentColor=Color(0xFFF4F7FA),tonalElevation=0.dp
             ) {
                 listOf(NavItem("Home",Icons.Default.Home),NavItem("Fixtures",Icons.Default.CalendarMonth),
                     NavItem("Picks",Icons.Default.QueryStats),NavItem("Scanner",Icons.Default.SportsSoccer),
@@ -195,7 +204,7 @@ private fun GoalScannerApp(prefs: android.content.SharedPreferences) {
                         label={Text(item.label,fontSize=10.sp,fontWeight=if(tab==item.label) FontWeight.Bold else FontWeight.Normal)},
                         colors=NavigationBarItemDefaults.colors(
                             selectedIconColor=Color(0xFFB7F36B),selectedTextColor=Color(0xFFB7F36B),
-                            indicatorColor=Color(0xFF293B21),unselectedIconColor=Color(0xFF8493A0),
+                            indicatorColor=Color(0xFF1B3A38),unselectedIconColor=Color(0xFF7F93A5),
                             unselectedTextColor=Color(0xFF8493A0)
                         )
                     )
@@ -229,7 +238,7 @@ private fun GoalScannerApp(prefs: android.content.SharedPreferences) {
             )
         } else saveableStateHolder.SaveableStateProvider(tab) { when(tab) {
             "Home" -> HomeScreen(Modifier.padding(padding),connection,providers,fixtureSummary,fixtureRows,
-                {navigate("Scanner")},{navigate("Fixtures")})
+                {navigate("Scanner")},{navigate("Fixtures")},{navigate("Picks")},{ fx -> selectedFixture=fx; navigate("Match") })
             "Fixtures" -> FixturesScreen(Modifier.padding(padding),fixtureSummary,
                 fixtureRows,busy,message,onSelect={ fixture -> selectedFixture=fixture; navigate("Match") }) {
                 scope.launch {
@@ -325,7 +334,7 @@ private fun MoreScreen(modifier: Modifier, navigate: (String) -> Unit) {
                 Row(Modifier.fillMaxWidth().padding(17.dp), verticalAlignment=Alignment.CenterVertically) {
                     Column(Modifier.weight(1f), verticalArrangement=Arrangement.spacedBy(4.dp)) {
                         Text(item.first, fontWeight=FontWeight.Bold, color=Color.White, style=MaterialTheme.typography.titleMedium)
-                        Text(item.second, color=Color(0xFF9EADB9), style=MaterialTheme.typography.bodySmall)
+                        Text(item.second, color=Color(0xFF91A2B3), style=MaterialTheme.typography.bodySmall)
                     }
                     Text("OPEN  ›", color=Color(0xFFB7F36B), fontWeight=FontWeight.Bold, style=MaterialTheme.typography.labelSmall)
                 }
@@ -344,29 +353,29 @@ private fun FinalPicksScreen(modifier: Modifier, recommendations: List<JSONObjec
     val source = if (showAll) eligible else todays
     val sorted = when(sort) { "Probability" -> source.sortedByDescending { it.optDouble("estimated_probability") }; "Odds" -> source.sortedByDescending { it.optDouble("odds") }; "League" -> source.sortedBy { it.optString("competition") }; "Match A-Z" -> source.sortedBy { it.optString("home") + " " + it.optString("away") }; else -> source.sortedBy { it.optString("kickoff") } }
     ScreenColumn(modifier) {
-        Heading("Final picks of the day", "Shortlist of approved markets with an actual SportyBet price. Not a guarantee of outcome.")
+        Heading("Final picks of the day", "A clean shortlist of approved markets with an actual SportyBet price. Prices and estimates are displayed separately.")
         Row(horizontalArrangement=Arrangement.spacedBy(8.dp)) {
             FilterChip(selected=!showAll,onClick={showAll=false},label={Text("Today (${todays.size})")})
             FilterChip(selected=showAll,onClick={showAll=true},label={Text("All upcoming (${eligible.size})")})
         }
         Row(horizontalArrangement=Arrangement.spacedBy(6.dp)) { listOf("Kick-off","Probability","Odds","League","Match A-Z").forEach { value -> FilterChip(selected=sort==value,onClick={sort=value},label={Text(value)}) } }
-        Card(colors=CardDefaults.cardColors(containerColor=Color(0xFF18252D)),border=androidx.compose.foundation.BorderStroke(1.dp,Color(0xFF30434A))) {
-            Row(Modifier.fillMaxWidth().padding(15.dp),horizontalArrangement=Arrangement.SpaceBetween,verticalAlignment=Alignment.CenterVertically) {
-                Column { Text("PRICED SELECTIONS",color=Color(0xFF9EADB9),style=MaterialTheme.typography.labelSmall); Text(sorted.size.toString(),color=Color(0xFFB7F36B),style=MaterialTheme.typography.headlineMedium,fontWeight=FontWeight.ExtraBold) }
-                Text("SportyBet odds verified",color=Color(0xFFB7F36B),style=MaterialTheme.typography.labelSmall,fontWeight=FontWeight.Bold)
+        Card(shape=RoundedCornerShape(24.dp),colors=CardDefaults.cardColors(containerColor=Color.Transparent),border=androidx.compose.foundation.BorderStroke(1.dp,Color(0xFF36516A))) {
+            Row(Modifier.fillMaxWidth().background(Brush.linearGradient(listOf(Color(0xFF183A43),Color(0xFF17283A))),RoundedCornerShape(24.dp)).padding(18.dp),horizontalArrangement=Arrangement.SpaceBetween,verticalAlignment=Alignment.CenterVertically) {
+                Column(verticalArrangement=Arrangement.spacedBy(3.dp)) { Text("VERIFIED SPORTYBET PRICES",color=Color(0xFF9CB3C2),style=MaterialTheme.typography.labelSmall,fontWeight=FontWeight.Bold,letterSpacing=.8.sp); Text(sorted.size.toString(),color=Color(0xFFB7F36B),style=MaterialTheme.typography.displaySmall,fontWeight=FontWeight.ExtraBold); Text(if(showAll) "Upcoming selections" else "Today's shortlist",color=Color(0xFFB8C9D5),style=MaterialTheme.typography.bodySmall) }
+                Column(horizontalAlignment=Alignment.End,verticalArrangement=Arrangement.spacedBy(5.dp)) { Text(today.toString(),color=Color.White,fontWeight=FontWeight.Bold); Surface(shape=RoundedCornerShape(50),color=Color(0xFF1B443A)) { Text("PRICE CHECKED",Modifier.padding(horizontal=10.dp,vertical=7.dp),color=Color(0xFF83E0B7),fontWeight=FontWeight.ExtraBold,style=MaterialTheme.typography.labelSmall) } }
             }
         }
         if(sorted.isEmpty()) Notice("No priced picks for this view", "Only exact markets and lines with a live SportyBet price above 1.00 are shown. Try All upcoming or check after the next data refresh.")
         sorted.forEach { item ->
             val fixture=fixtures.firstOrNull { it.optString("id")==item.optString("fixture_id") }
-            Card(Modifier.fillMaxWidth().clickable { onSelect(item) },colors=CardDefaults.cardColors(containerColor=Color(0xFF121F29)),border=androidx.compose.foundation.BorderStroke(1.dp,Color(0xFF2B3D49))) {
+            Card(Modifier.fillMaxWidth().clickable { onSelect(item) },shape=RoundedCornerShape(22.dp),colors=CardDefaults.cardColors(containerColor=Color(0xFF111E2C)),border=androidx.compose.foundation.BorderStroke(1.dp,Color(0xFF2D4356))) {
                 Column(Modifier.fillMaxWidth().padding(15.dp),verticalArrangement=Arrangement.spacedBy(9.dp)) {
-                    Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween) { Text(item.optString("competition").uppercase(),color=Color(0xFF9EADB9),style=MaterialTheme.typography.labelSmall); Text(formatKickoff(item.optString("kickoff")),color=Color(0xFFB7F36B),style=MaterialTheme.typography.labelSmall) }
+                    Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween,verticalAlignment=Alignment.CenterVertically) { Text(item.optString("competition").uppercase(),color=Color(0xFF91A2B3),style=MaterialTheme.typography.labelSmall,fontWeight=FontWeight.Bold,letterSpacing=.7.sp); Surface(shape=RoundedCornerShape(50),color=Color(0xFF193A37)) { Text(formatKickoff(item.optString("kickoff")),Modifier.padding(horizontal=9.dp,vertical=5.dp),color=Color(0xFF76DCCB),style=MaterialTheme.typography.labelSmall,fontWeight=FontWeight.Bold) } }
                     Row(Modifier.fillMaxWidth(),verticalAlignment=Alignment.CenterVertically) { TeamCrest(item.optString("home"),fixture?.optString("home_crest_url").orEmpty(),38.dp); Text(item.optString("home"),Modifier.weight(1f).padding(horizontal=7.dp),color=Color.White,fontWeight=FontWeight.Bold,maxLines=2); Text("VS",color=Color(0xFF8193A0),style=MaterialTheme.typography.labelSmall); Text(item.optString("away"),Modifier.weight(1f).padding(horizontal=7.dp),color=Color.White,fontWeight=FontWeight.Bold,maxLines=2,textAlign=androidx.compose.ui.text.style.TextAlign.End); TeamCrest(item.optString("away"),fixture?.optString("away_crest_url").orEmpty(),38.dp) }
-                    Text(marketTitle(item),color=Color.White,fontWeight=FontWeight.Bold)
+                    Surface(shape=RoundedCornerShape(12.dp),color=Color(0xFF1A2B3B)) { Column(Modifier.fillMaxWidth().padding(11.dp),verticalArrangement=Arrangement.spacedBy(4.dp)) { Text("SELECTED MARKET",color=Color(0xFF7F95A7),style=MaterialTheme.typography.labelSmall,fontWeight=FontWeight.Bold,letterSpacing=.8.sp); Text(marketTitle(item),color=Color.White,fontWeight=FontWeight.ExtraBold,style=MaterialTheme.typography.titleSmall) } }
                     Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween,verticalAlignment=Alignment.CenterVertically) {
-                        Column { Text("MODEL",color=Color(0xFF9EADB9),style=MaterialTheme.typography.labelSmall); Text("${(item.optDouble("estimated_probability")*100).toInt()}%",color=Color(0xFFB7F36B),fontWeight=FontWeight.ExtraBold,style=MaterialTheme.typography.titleLarge) }
-                        Column(horizontalAlignment=Alignment.End) { Text("SPORTYBET",color=Color(0xFF9EADB9),style=MaterialTheme.typography.labelSmall); Text(String.format("%.2f",item.optDouble("odds")),color=Color.White,fontWeight=FontWeight.ExtraBold,style=MaterialTheme.typography.titleLarge) }
+                        Column(verticalArrangement=Arrangement.spacedBy(2.dp)) { Text("MODEL ESTIMATE",color=Color(0xFF91A2B3),style=MaterialTheme.typography.labelSmall,fontWeight=FontWeight.Bold); Text("${(item.optDouble("estimated_probability")*100).toInt()}%",color=Color(0xFFB7F36B),fontWeight=FontWeight.ExtraBold,style=MaterialTheme.typography.headlineMedium) }
+                        Column(horizontalAlignment=Alignment.End,verticalArrangement=Arrangement.spacedBy(2.dp)) { Text("SPORTYBET PRICE",color=Color(0xFF91A2B3),style=MaterialTheme.typography.labelSmall,fontWeight=FontWeight.Bold); Text(String.format("%.2f",item.optDouble("odds")),color=Color.White,fontWeight=FontWeight.ExtraBold,style=MaterialTheme.typography.headlineMedium) }
                     }
                     LinearProgressIndicator(progress={(item.optDouble("estimated_probability")).toFloat().coerceIn(0f,1f)},modifier=Modifier.fillMaxWidth().height(5.dp),color=Color(0xFFB7F36B),trackColor=Color(0xFF344452))
                     Text("OPEN FULL ANALYSIS  ›",color=Color(0xFFB7F36B),fontWeight=FontWeight.Bold,style=MaterialTheme.typography.labelSmall)
@@ -395,20 +404,27 @@ private fun LeagueTablesScreen(modifier: Modifier, leagues: List<JSONObject>) {
             if(table==null || table.length()==0) Notice("Standings not yet available", "No completed results have been published for this league.")
             else {
                 val rows=(0 until table.length()).mapNotNull { table.optJSONObject(it) }.let { list -> if(sort=="Team") list.sortedBy { it.optString("team") } else list.sortedBy { it.optInt("position") } }
+                Row(Modifier.fillMaxWidth().background(Color(0xFF172638),RoundedCornerShape(10.dp)).padding(horizontal=10.dp,vertical=9.dp),verticalAlignment=Alignment.CenterVertically) {
+                    Text("POS",Modifier.width(32.dp),color=Color(0xFF8297A9),style=MaterialTheme.typography.labelSmall,fontWeight=FontWeight.Bold)
+                    Text("CLUB",Modifier.weight(1f),color=Color(0xFF8297A9),style=MaterialTheme.typography.labelSmall,fontWeight=FontWeight.Bold)
+                    Text("P",Modifier.width(28.dp),color=Color(0xFF8297A9),style=MaterialTheme.typography.labelSmall,textAlign=androidx.compose.ui.text.style.TextAlign.Center)
+                    Text("GD",Modifier.width(35.dp),color=Color(0xFF8297A9),style=MaterialTheme.typography.labelSmall,textAlign=androidx.compose.ui.text.style.TextAlign.Center)
+                    Text("PTS",Modifier.width(34.dp),color=Color(0xFFB7F36B),style=MaterialTheme.typography.labelSmall,fontWeight=FontWeight.Bold,textAlign=androidx.compose.ui.text.style.TextAlign.End)
+                }
                 rows.forEach { team ->
                     var expanded by remember(team.optString("team")) { mutableStateOf(false) }
                     Card(Modifier.fillMaxWidth().clickable { expanded=!expanded },colors=CardDefaults.cardColors(containerColor=Color(0xFF121F29)),border=androidx.compose.foundation.BorderStroke(1.dp,Color(0xFF2B3D49))) {
                         Column(Modifier.fillMaxWidth().padding(12.dp),verticalArrangement=Arrangement.spacedBy(7.dp)) {
                             Row(Modifier.fillMaxWidth(),verticalAlignment=Alignment.CenterVertically) {
-                                Text(team.optInt("position").toString(),Modifier.width(25.dp),color=Color(0xFFB7F36B),fontWeight=FontWeight.ExtraBold)
-                                Text(team.optString("team"),Modifier.weight(1f),color=Color.White,fontWeight=FontWeight.Bold,maxLines=1)
-                                Text(team.optInt("played").toString(),Modifier.width(28.dp),color=Color(0xFF9EADB9),textAlign=androidx.compose.ui.text.style.TextAlign.Center)
-                                Text(team.optInt("gd").toString(),Modifier.width(35.dp),color=Color(0xFF9EADB9),textAlign=androidx.compose.ui.text.style.TextAlign.Center)
+                                Surface(shape=RoundedCornerShape(8.dp),color=if(team.optInt("position")<=4) Color(0xFF1C443B) else Color(0xFF1B2A39)) { Text(team.optInt("position").toString(),Modifier.width(28.dp).padding(vertical=5.dp),color=if(team.optInt("position")<=4) Color(0xFF8BE0B5) else Color(0xFF9FB0BF),fontWeight=FontWeight.ExtraBold,textAlign=androidx.compose.ui.text.style.TextAlign.Center) }
+                                Text(team.optString("team"),Modifier.weight(1f).padding(start=7.dp),color=Color.White,fontWeight=FontWeight.Bold,maxLines=1)
+                                Text(team.optInt("played").toString(),Modifier.width(28.dp),color=Color(0xFF91A2B3),textAlign=androidx.compose.ui.text.style.TextAlign.Center)
+                                Text(team.optInt("gd").toString(),Modifier.width(35.dp),color=Color(0xFF91A2B3),textAlign=androidx.compose.ui.text.style.TextAlign.Center)
                                 Text(team.optInt("points").toString(),Modifier.width(34.dp),color=Color(0xFFB7F36B),fontWeight=FontWeight.ExtraBold,textAlign=androidx.compose.ui.text.style.TextAlign.End)
                             }
-                            Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween) { Text("Pld",color=Color(0xFF718391),style=MaterialTheme.typography.labelSmall); Text("GD",color=Color(0xFF718391),style=MaterialTheme.typography.labelSmall); Text("Pts",color=Color(0xFF718391),style=MaterialTheme.typography.labelSmall); Text("FORM  ${team.optString("form")}",color=Color(0xFFB7F36B),style=MaterialTheme.typography.labelSmall,fontWeight=FontWeight.Bold) }
+                            Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween,verticalAlignment=Alignment.CenterVertically) { Text("FORM",color=Color(0xFF71899B),style=MaterialTheme.typography.labelSmall,fontWeight=FontWeight.Bold); FormStrip(team.optString("form")); Text("HOME / AWAY  ${if(expanded) "−" else "+"}",color=Color(0xFF55D6C2),style=MaterialTheme.typography.labelSmall,fontWeight=FontWeight.Bold) }
                             if(expanded) {
-                                listOf("Home" to team.optJSONObject("home"),"Away" to team.optJSONObject("away")).forEach { (label,split) -> if(split!=null) Text("$label: ${split.optInt("played")} played · ${split.optInt("won")}W ${split.optInt("drawn")}D ${split.optInt("lost")}L · ${split.optInt("gf")}:${split.optInt("ga")} · ${split.optInt("points")} pts",color=Color(0xFF9EADB9),style=MaterialTheme.typography.bodySmall) }
+                                listOf("Home" to team.optJSONObject("home"),"Away" to team.optJSONObject("away")).forEach { (label,split) -> if(split!=null) Text("$label: ${split.optInt("played")} played · ${split.optInt("won")}W ${split.optInt("drawn")}D ${split.optInt("lost")}L · ${split.optInt("gf")}:${split.optInt("ga")} · ${split.optInt("points")} pts",color=Color(0xFF91A2B3),style=MaterialTheme.typography.bodySmall) }
                             }
                         }
                     }
@@ -456,7 +472,7 @@ private fun TeamCrest(name:String,url:String,size:Dp=54.dp) {
 @Composable
 private fun FormStrip(form:String) {
     Row(horizontalArrangement=Arrangement.spacedBy(5.dp)) {
-        if(form.isBlank()) Text("No form data",style=MaterialTheme.typography.labelSmall,color=Color(0xFF9EADB9))
+        if(form.isBlank()) Text("No form data",style=MaterialTheme.typography.labelSmall,color=Color(0xFF91A2B3))
         form.takeLast(5).forEach { result ->
             val tint=when(result) { 'W' -> Color(0xFF3D8B5C); 'D' -> Color(0xFF657482); else -> Color(0xFFB65353) }
             Surface(shape=RoundedCornerShape(7.dp),color=tint) {
@@ -467,15 +483,47 @@ private fun FormStrip(form:String) {
     }
 }
 @Composable
+private fun RecentGoalsGraph(recent: org.json.JSONArray?) {
+    if(recent==null || recent.length()==0) return
+    val values=(0 until minOf(5,recent.length())).mapNotNull { i ->
+        val score=(recent.optJSONObject(i)?.optString("score") ?: "").split("-")
+        val gf=score.getOrNull(0)?.trim()?.toFloatOrNull(); val ga=score.getOrNull(1)?.trim()?.toFloatOrNull()
+        if(gf==null||ga==null) null else gf to ga
+    }
+    if(values.isEmpty()) return
+    Column(verticalArrangement=Arrangement.spacedBy(5.dp)) {
+        Text("GOALS FOR / AGAINST · LAST ${values.size}",color=Color(0xFF8296A7),style=MaterialTheme.typography.labelSmall,fontWeight=FontWeight.Bold,letterSpacing=.7.sp)
+        Canvas(Modifier.fillMaxWidth().height(76.dp)) {
+            val maxGoals=(values.maxOf { maxOf(it.first,it.second) }).coerceAtLeast(1f)
+            val group=size.width/values.size
+            val base=size.height-5.dp.toPx()
+            val available=size.height-14.dp.toPx()
+            values.forEachIndexed { index,pair ->
+                val bar=group*.22f
+                val gap=group*.08f
+                val x=group*index+group*.24f
+                val homeH=available*(pair.first/maxGoals)
+                val awayH=available*(pair.second/maxGoals)
+                drawRect(Color(0xFFB7F36B),Offset(x,base-homeH),androidx.compose.ui.geometry.Size(bar,homeH))
+                drawRect(Color(0xFF55D6C2),Offset(x+bar+gap,base-awayH),androidx.compose.ui.geometry.Size(bar,awayH))
+            }
+        }
+        Row(horizontalArrangement=Arrangement.spacedBy(13.dp)) {
+            Row(verticalAlignment=Alignment.CenterVertically,horizontalArrangement=Arrangement.spacedBy(5.dp)) { Box(Modifier.size(7.dp).background(Color(0xFFB7F36B),RoundedCornerShape(2.dp))); Text("Scored",color=Color(0xFF8296A7),style=MaterialTheme.typography.labelSmall) }
+            Row(verticalAlignment=Alignment.CenterVertically,horizontalArrangement=Arrangement.spacedBy(5.dp)) { Box(Modifier.size(7.dp).background(Color(0xFF55D6C2),RoundedCornerShape(2.dp))); Text("Conceded",color=Color(0xFF8296A7),style=MaterialTheme.typography.labelSmall) }
+        }
+    }
+}
+@Composable
 private fun TeamFormPanel(modifier:Modifier,name:String,stats:JSONObject?,venueLabel:String) {
     Card(modifier=modifier,shape=RoundedCornerShape(18.dp),
-        colors=CardDefaults.cardColors(containerColor=Color(0xFF121D27)),
+        colors=CardDefaults.cardColors(containerColor=Color(0xFF142436)),
         border=androidx.compose.foundation.BorderStroke(1.dp,Color(0xFF2B3A46))) {
         Column(Modifier.fillMaxWidth().padding(12.dp),verticalArrangement=Arrangement.spacedBy(8.dp)) {
             Text(name,fontWeight=FontWeight.Bold,color=Color(0xFFF2F5F0),maxLines=2,
                 style=MaterialTheme.typography.titleSmall)
             Text(venueLabel.uppercase(),style=MaterialTheme.typography.labelSmall,color=Color(0xFF8FA0AD))
-            if(stats==null) Text("Historical stats unavailable",style=MaterialTheme.typography.bodySmall,color=Color(0xFF9EADB9))
+            if(stats==null) Text("Historical stats unavailable",style=MaterialTheme.typography.bodySmall,color=Color(0xFF91A2B3))
             else {
                 FormStrip(stats.optString("form"))
                 val trend=stats.optJSONObject("recent_trends")
@@ -486,6 +534,7 @@ private fun TeamFormPanel(modifier:Modifier,name:String,stats:JSONObject?,venueL
                 val shots=stats.optDouble("shots_avg",-1.0); val target=stats.optDouble("shots_on_target_avg",-1.0); val xg=stats.optDouble("xg_avg",-1.0)
                 if(shots>=0 || target>=0 || xg>=0) Text(listOfNotNull(if(shots>=0) "Shots %.1f".format(shots) else null,if(target>=0) "On target %.1f".format(target) else null,if(xg>=0) "xG %.2f".format(xg) else null).joinToString("  · "),style=MaterialTheme.typography.labelSmall,color=Color(0xFFB7F36B))
                 val recent=stats.optJSONArray("recent_matches")
+                RecentGoalsGraph(recent)
                 if(recent!=null && recent.length()>0) {
                     HorizontalDivider(color=Color(0xFF30414E))
                     Text("RECENT HOME/AWAY MATCHES",style=MaterialTheme.typography.labelSmall,color=Color(0xFF8FA0AD),fontWeight=FontWeight.Bold)
@@ -494,7 +543,7 @@ private fun TeamFormPanel(modifier:Modifier,name:String,stats:JSONObject?,venueL
                         Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween,verticalAlignment=Alignment.CenterVertically) {
                             Column(Modifier.weight(1f)) { Text("${match.optString("date")}  ${match.optString("venue")}",style=MaterialTheme.typography.labelSmall,color=Color(0xFF8495A2)); Text(match.optString("opponent"),style=MaterialTheme.typography.bodySmall,color=Color.White,maxLines=1) }
                             Text(match.optString("score"),color=Color.White,fontWeight=FontWeight.Bold)
-                            Text(match.optString("result"),modifier=Modifier.padding(start=8.dp),color=when(match.optString("result")){"W"->Color(0xFF67C58B);"D"->Color(0xFF9EADB9);else->Color(0xFFE18A83)},fontWeight=FontWeight.ExtraBold)
+                            Text(match.optString("result"),modifier=Modifier.padding(start=8.dp),color=when(match.optString("result")){"W"->Color(0xFF67C58B);"D"->Color(0xFF91A2B3);else->Color(0xFFE18A83)},fontWeight=FontWeight.ExtraBold)
                         }
                     }
                 }
@@ -530,7 +579,7 @@ private fun PreMatchStats(stats:JSONObject?) {
             Column(verticalArrangement=Arrangement.spacedBy(5.dp)) {
                 Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween) {
                     Text(if(percent) "${h.toInt()}%" else "%.2f".format(h),fontWeight=FontWeight.Bold,color=Color(0xFFF2F5F0))
-                    Text(label,style=MaterialTheme.typography.labelSmall,color=Color(0xFF9EADB9))
+                    Text(label,style=MaterialTheme.typography.labelSmall,color=Color(0xFF91A2B3))
                     Text(if(percent) "${a.toInt()}%" else "%.2f".format(a),fontWeight=FontWeight.Bold,color=Color(0xFFF2F5F0))
                 }
                 LinearProgressIndicator(progress={(h/total).toFloat().coerceIn(0f,1f)},
@@ -547,7 +596,7 @@ private fun PreMatchStats(stats:JSONObject?) {
     val h2h=stats?.optJSONObject("head_to_head")
     if(h2h!=null) {
         Heading("Head-to-head","Previous meetings before this fixture")
-        Card(shape=RoundedCornerShape(17.dp),colors=CardDefaults.cardColors(containerColor=Color(0xFF121D27)),
+        Card(shape=RoundedCornerShape(17.dp),colors=CardDefaults.cardColors(containerColor=Color(0xFF142436)),
             border=androidx.compose.foundation.BorderStroke(1.dp,Color(0xFF2B3A46))) {
             Column(Modifier.fillMaxWidth().padding(14.dp),verticalArrangement=Arrangement.spacedBy(5.dp)) {
                 Text("${h2h.optInt("played")} meetings  ·  ${h2h.optInt("home_wins")} home wins  ·  ${h2h.optInt("draws")} draws  ·  ${h2h.optInt("away_wins")} away wins",
@@ -556,12 +605,12 @@ private fun PreMatchStats(stats:JSONObject?) {
                 val meetings=h2h.optJSONArray("recent_meetings")
                 if(meetings!=null && meetings.length()>0) {
                     HorizontalDivider(color=Color(0xFF30414E))
-                    Text("PREVIOUS MEETINGS",color=Color(0xFF9EADB9),style=MaterialTheme.typography.labelSmall,fontWeight=FontWeight.Bold)
+                    Text("PREVIOUS MEETINGS",color=Color(0xFF91A2B3),style=MaterialTheme.typography.labelSmall,fontWeight=FontWeight.Bold)
                     (0 until minOf(10,meetings.length())).forEach { i ->
                         val match=meetings.optJSONObject(i) ?: JSONObject()
                         Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween) { Text(match.optString("date"),color=Color(0xFF8495A2),style=MaterialTheme.typography.labelSmall); Text(match.optString("score"),color=Color.White,fontWeight=FontWeight.Bold) }
                     }
-                } else if(scores!=null && scores.length()>0) Text("Recent scores: "+(0 until scores.length()).joinToString("  ·  ") { scores.optString(it) }, color=Color(0xFF9EADB9),style=MaterialTheme.typography.labelSmall)
+                } else if(scores!=null && scores.length()>0) Text("Recent scores: "+(0 until scores.length()).joinToString("  ·  ") { scores.optString(it) }, color=Color(0xFF91A2B3),style=MaterialTheme.typography.labelSmall)
             }
         }
     }
@@ -575,10 +624,10 @@ private fun PreMatchStats(stats:JSONObject?) {
                 listOf("Home squad" to context.optJSONObject("home_squad"),"Away squad" to context.optJSONObject("away_squad")).forEach { (label,squad) -> if(squad!=null) {
                     val value=squad.optDouble("market_value_eur",-1.0)
                     Text("$label · ${squad.optString("name")}",color=Color.White,fontWeight=FontWeight.Bold)
-                    Text(listOfNotNull(if(squad.optDouble("average_age",-1.0)>=0) "Average age %.1f".format(squad.optDouble("average_age")) else null,if(squad.optInt("squad_size")>0) "${squad.optInt("squad_size")} players" else null,if(value>=0) "Market value €%.1fm".format(value/1000000.0) else null).joinToString("  · ").ifBlank { "Squad profile unavailable" },color=Color(0xFF9EADB9),style=MaterialTheme.typography.bodySmall)
+                    Text(listOfNotNull(if(squad.optDouble("average_age",-1.0)>=0) "Average age %.1f".format(squad.optDouble("average_age")) else null,if(squad.optInt("squad_size")>0) "${squad.optInt("squad_size")} players" else null,if(value>=0) "Market value €%.1fm".format(value/1000000.0) else null).joinToString("  · ").ifBlank { "Squad profile unavailable" },color=Color(0xFF91A2B3),style=MaterialTheme.typography.bodySmall)
                 } }
                 val baseline=context.optJSONObject("league_performance_baseline")
-                if(baseline!=null) { Heading("League environment","Historical baseline · ${baseline.optInt("matches_sampled")} matches"); Text(listOfNotNull(if(baseline.optDouble("home_shots_avg",-1.0)>=0) "Home shots %.1f".format(baseline.optDouble("home_shots_avg")) else null,if(baseline.optDouble("away_shots_avg",-1.0)>=0) "Away shots %.1f".format(baseline.optDouble("away_shots_avg")) else null,if(baseline.optDouble("home_xg_avg",-1.0)>=0) "Home xG %.2f".format(baseline.optDouble("home_xg_avg")) else null,if(baseline.optDouble("away_xg_avg",-1.0)>=0) "Away xG %.2f".format(baseline.optDouble("away_xg_avg")) else null).joinToString("  · "),color=Color(0xFF9EADB9),style=MaterialTheme.typography.bodySmall) }
+                if(baseline!=null) { Heading("League environment","Historical baseline · ${baseline.optInt("matches_sampled")} matches"); Text(listOfNotNull(if(baseline.optDouble("home_shots_avg",-1.0)>=0) "Home shots %.1f".format(baseline.optDouble("home_shots_avg")) else null,if(baseline.optDouble("away_shots_avg",-1.0)>=0) "Away shots %.1f".format(baseline.optDouble("away_shots_avg")) else null,if(baseline.optDouble("home_xg_avg",-1.0)>=0) "Home xG %.2f".format(baseline.optDouble("home_xg_avg")) else null,if(baseline.optDouble("away_xg_avg",-1.0)>=0) "Away xG %.2f".format(baseline.optDouble("away_xg_avg")) else null).joinToString("  · "),color=Color(0xFF91A2B3),style=MaterialTheme.typography.bodySmall) }
             }
         }
     }
@@ -588,112 +637,122 @@ private fun PreMatchStats(stats:JSONObject?) {
 
 @Composable
 private fun ScreenColumn(modifier:Modifier=Modifier,content:@Composable ColumnScope.()->Unit) {
-    Column(modifier.fillMaxSize().background(Color(0xFF080D13))
-        .verticalScroll(rememberScrollState()).padding(horizontal=17.dp,vertical=18.dp),
-        verticalArrangement=Arrangement.spacedBy(16.dp),content=content)
+    Column(modifier.fillMaxSize().background(Brush.verticalGradient(listOf(Color(0xFF070C14),Color(0xFF0A1420),Color(0xFF080F19))))
+        .verticalScroll(rememberScrollState()).padding(horizontal=18.dp,vertical=20.dp),
+        verticalArrangement=Arrangement.spacedBy(18.dp),content=content)
 }
 @Composable
 private fun Heading(title:String,subtitle:String?=null) {
-    Column(verticalArrangement=Arrangement.spacedBy(4.dp)) {
-        Text(title,style=MaterialTheme.typography.titleLarge,fontWeight=FontWeight.ExtraBold,color=Color(0xFFF2F5F0))
-        if(subtitle!=null) Text(subtitle,style=MaterialTheme.typography.bodySmall,color=Color(0xFF9EADB9),lineHeight=18.sp)
+    Row(verticalAlignment=Alignment.Top,horizontalArrangement=Arrangement.spacedBy(10.dp)) {
+        Box(Modifier.padding(top=3.dp).width(3.dp).height(if(subtitle==null) 23.dp else 38.dp).background(Brush.verticalGradient(listOf(Color(0xFFB7F36B),Color(0xFF55D6C2))),RoundedCornerShape(50)))
+        Column(verticalArrangement=Arrangement.spacedBy(4.dp)) {
+            Text(title,style=MaterialTheme.typography.titleLarge,fontWeight=FontWeight.ExtraBold,color=Color(0xFFF4F7FA),letterSpacing=(-0.35).sp)
+            if(subtitle!=null) Text(subtitle,style=MaterialTheme.typography.bodySmall,color=Color(0xFF91A2B3),lineHeight=18.sp)
+        }
     }
 }
 @Composable
 private fun Metric(title:String,value:String,detail:String) {
-    Card(shape=RoundedCornerShape(19.dp),colors=CardDefaults.cardColors(containerColor=Color(0xFF111A23)),
-        border=androidx.compose.foundation.BorderStroke(1.dp,Color(0xFF24313D))) {
+    Card(shape=RoundedCornerShape(19.dp),colors=CardDefaults.cardColors(containerColor=Color(0xFF111D2B)),
+        border=androidx.compose.foundation.BorderStroke(1.dp,Color(0xFF26384A))) {
         Column(Modifier.fillMaxWidth().padding(14.dp),verticalArrangement=Arrangement.spacedBy(6.dp)) {
-            Text(title.uppercase(),style=MaterialTheme.typography.labelSmall,color=Color(0xFF91A0AC),letterSpacing=0.8.sp)
+            Text(title.uppercase(),style=MaterialTheme.typography.labelSmall,color=Color(0xFF91A2B3),letterSpacing=1.sp,fontWeight=FontWeight.Bold)
             Text(value,style=MaterialTheme.typography.headlineSmall,fontWeight=FontWeight.ExtraBold,color=Color(0xFFB7F36B))
-            Text(detail,style=MaterialTheme.typography.labelSmall,color=Color(0xFF9EADB9),maxLines=2)
+            Text(detail,style=MaterialTheme.typography.labelSmall,color=Color(0xFF91A2B3),maxLines=2,lineHeight=15.sp)
         }
     }
 }
 @Composable
+private fun MatchdayFixtureCard(fx: JSONObject, onClick: () -> Unit) {
+    val status=fx.optString("status","NS").uppercase()
+    Card(Modifier.fillMaxWidth().clickable { onClick() },shape=RoundedCornerShape(22.dp),
+        colors=CardDefaults.cardColors(containerColor=Color(0xFF111E2C)),
+        border=androidx.compose.foundation.BorderStroke(1.dp,Color(0xFF2B4053))) {
+        Column(Modifier.fillMaxWidth().padding(14.dp),verticalArrangement=Arrangement.spacedBy(11.dp)) {
+            Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween,verticalAlignment=Alignment.CenterVertically) {
+                Column(Modifier.weight(1f),verticalArrangement=Arrangement.spacedBy(3.dp)) {
+                    Text(fx.optString("competition","Football").uppercase(),color=Color(0xFF91A2B3),style=MaterialTheme.typography.labelSmall,fontWeight=FontWeight.Bold,letterSpacing=0.8.sp,maxLines=1)
+                    Text(fx.optString("country"),color=Color(0xFF64798B),style=MaterialTheme.typography.labelSmall)
+                }
+                Column(horizontalAlignment=Alignment.End,verticalArrangement=Arrangement.spacedBy(4.dp)) {
+                    Text(formatKickoff(fx.optString("kickoff")).substringAfter("·").trim(),color=Color(0xFFB7F36B),fontWeight=FontWeight.ExtraBold,style=MaterialTheme.typography.titleSmall)
+                    StatusPill(status)
+                }
+            }
+            Row(Modifier.fillMaxWidth(),verticalAlignment=Alignment.CenterVertically) {
+                TeamCrest(fx.optString("home"),fx.optString("home_crest_url"),44.dp)
+                Text(fx.optString("home","Home"),Modifier.weight(1f).padding(horizontal=9.dp),color=Color(0xFFF4F7FA),fontWeight=FontWeight.Bold,style=MaterialTheme.typography.titleSmall,maxLines=2)
+                Text(if(!fx.isNull("home_score")&&!fx.isNull("away_score")) "${fx.optInt("home_score")} : ${fx.optInt("away_score")}" else "VS",color=Color(0xFF55D6C2),fontWeight=FontWeight.ExtraBold,style=MaterialTheme.typography.titleSmall)
+                Text(fx.optString("away","Away"),Modifier.weight(1f).padding(horizontal=9.dp),color=Color(0xFFF4F7FA),fontWeight=FontWeight.Bold,style=MaterialTheme.typography.titleSmall,maxLines=2,textAlign=androidx.compose.ui.text.style.TextAlign.End)
+                TeamCrest(fx.optString("away"),fx.optString("away_crest_url"),44.dp)
+            }
+            HorizontalDivider(color=Color(0xFF26384A))
+            Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween,verticalAlignment=Alignment.CenterVertically) {
+                Text(formatKickoff(fx.optString("kickoff")),color=Color(0xFF91A2B3),style=MaterialTheme.typography.labelSmall)
+                Text("MATCH CENTRE  →",color=Color(0xFF55D6C2),fontWeight=FontWeight.ExtraBold,style=MaterialTheme.typography.labelSmall,letterSpacing=0.5.sp)
+            }
+        }
+    }
+}
+
+@Composable
 private fun HomeScreen(modifier:Modifier,connection:String,providers:String,fixtures:String,
-    fixtureRows:List<JSONObject>,onScanner:()->Unit,onFixtures:()->Unit) {
+    fixtureRows:List<JSONObject>,onScanner:()->Unit,onFixtures:()->Unit,onPicks:()->Unit,onSelect:(JSONObject)->Unit) {
+    var sort by rememberSaveable { mutableStateOf("Kick-off") }
     val upcoming=fixtureRows.filter { it.optString("status","NS").uppercase() in listOf("NS","TBD","SCHEDULED","") }
-        .sortedBy { it.optString("kickoff") }.take(3)
+        .let { rows -> if(sort=="Match A-Z") rows.sortedBy { it.optString("home")+it.optString("away") } else rows.sortedBy { it.optString("kickoff") } }.take(4)
+    val competitions=fixtureRows.map { it.optString("competition") }.filter { it.isNotBlank() }.distinct().size
     ScreenColumn(modifier) {
-        Column(verticalArrangement=Arrangement.spacedBy(3.dp)) {
-            Text("MATCHDAY INTELLIGENCE",style=MaterialTheme.typography.labelSmall,color=Color(0xFFB7F36B),
-                letterSpacing=1.4.sp,fontWeight=FontWeight.Bold)
-            Text("Your football desk",style=MaterialTheme.typography.headlineMedium,color=Color(0xFFF2F5F0),
-                fontWeight=FontWeight.ExtraBold)
+        Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween,verticalAlignment=Alignment.CenterVertically) {
+            Column(verticalArrangement=Arrangement.spacedBy(3.dp)) {
+                Text("GOAL SCANNER PRO",color=Color(0xFF55D6C2),style=MaterialTheme.typography.labelSmall,fontWeight=FontWeight.ExtraBold,letterSpacing=1.5.sp)
+                Text("Matchday briefing",color=Color(0xFFF4F7FA),style=MaterialTheme.typography.headlineSmall,fontWeight=FontWeight.ExtraBold)
+            }
+            Surface(shape=RoundedCornerShape(50),color=if(connection.startsWith("Connected")) Color(0xFF193A32) else Color(0xFF3B3022)) {
+                Text(if(connection.startsWith("Connected")) "● LIVE FEED" else "● OFFLINE",Modifier.padding(horizontal=11.dp,vertical=8.dp),color=if(connection.startsWith("Connected")) Color(0xFF73E1B5) else Color(0xFFE9B86D),style=MaterialTheme.typography.labelSmall,fontWeight=FontWeight.Bold)
+            }
         }
-        Card(shape=RoundedCornerShape(26.dp),colors=CardDefaults.cardColors(containerColor=Color(0xFF18252D)),
-            border=androidx.compose.foundation.BorderStroke(1.dp,Color(0xFF30434A))) {
-            Column(Modifier.fillMaxWidth().padding(20.dp),verticalArrangement=Arrangement.spacedBy(13.dp)) {
-                Text("THE EDGE IS IN THE DETAIL",color=Color(0xFFB7F36B),style=MaterialTheme.typography.labelSmall,
-                    fontWeight=FontWeight.Bold,letterSpacing=1.25.sp)
-                Text("Read the match.\nUnderstand the numbers.",color=Color.White,
-                    style=MaterialTheme.typography.headlineMedium,fontWeight=FontWeight.ExtraBold,lineHeight=34.sp)
-                Text("Historical performance, market thresholds and probability estimates in one place.",
-                    color=Color(0xFFB9C5CC),style=MaterialTheme.typography.bodyMedium,lineHeight=21.sp)
-                Button(onClick=onScanner,modifier=Modifier.fillMaxWidth(),shape=RoundedCornerShape(14.dp),
-                    colors=ButtonDefaults.buttonColors(containerColor=Color(0xFFB7F36B),contentColor=Color(0xFF17220A))) {
-                    Text("OPEN MATCH SCANNER",fontWeight=FontWeight.ExtraBold,letterSpacing=0.6.sp)
+        Card(shape=RoundedCornerShape(28.dp),colors=CardDefaults.cardColors(containerColor=Color.Transparent),border=androidx.compose.foundation.BorderStroke(1.dp,Color(0xFF36516A))) {
+            Box(Modifier.fillMaxWidth().background(Brush.linearGradient(listOf(Color(0xFF173A43),Color(0xFF17283A),Color(0xFF172235))),RoundedCornerShape(28.dp)).padding(20.dp)) {
+                Canvas(Modifier.size(150.dp).align(Alignment.CenterEnd)) {
+                    val c=Color.White.copy(alpha=.08f)
+                    drawCircle(c,radius=size.minDimension*.47f,style=androidx.compose.ui.graphics.drawscope.Stroke(width=2.dp.toPx()))
+                    drawCircle(c,radius=size.minDimension*.25f,style=androidx.compose.ui.graphics.drawscope.Stroke(width=2.dp.toPx()))
+                    drawLine(c,Offset(size.width*.5f,0f),Offset(size.width*.5f,size.height),2.dp.toPx())
+                    drawLine(c,Offset(0f,size.height*.5f),Offset(size.width,size.height*.5f),2.dp.toPx())
+                }
+                Column(Modifier.fillMaxWidth(.88f),verticalArrangement=Arrangement.spacedBy(12.dp)) {
+                    Text("THE GAME, READ PROPERLY",color=Color(0xFFB7F36B),style=MaterialTheme.typography.labelSmall,fontWeight=FontWeight.ExtraBold,letterSpacing=1.2.sp)
+                    Text("See beyond\nthe scoreline.",color=Color.White,style=MaterialTheme.typography.headlineLarge,fontWeight=FontWeight.ExtraBold,lineHeight=35.sp)
+                    Text("Form, head-to-head, squad context, league position and verified market prices in one match centre.",color=Color(0xFFC0D0DC),style=MaterialTheme.typography.bodySmall,lineHeight=18.sp)
+                    Row(horizontalArrangement=Arrangement.spacedBy(8.dp)) {
+                        Button(onClick=onPicks,shape=RoundedCornerShape(13.dp),colors=ButtonDefaults.buttonColors(containerColor=Color(0xFFB7F36B),contentColor=Color(0xFF111A17))) { Text("TODAY’S PICKS",fontWeight=FontWeight.ExtraBold,style=MaterialTheme.typography.labelMedium) }
+                        OutlinedButton(onClick=onScanner,shape=RoundedCornerShape(13.dp),colors=ButtonDefaults.outlinedButtonColors(contentColor=Color.White)) { Text("SCAN MATCHES",fontWeight=FontWeight.Bold,style=MaterialTheme.typography.labelMedium) }
+                    }
                 }
             }
         }
-        Heading("Next kick-offs","Tap to open the full match centre")
+        Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.spacedBy(9.dp)) {
+            Box(Modifier.weight(1f)) { Metric("Fixtures",fixtures.substringBefore(" ").takeIf { it.toIntOrNull()!=null } ?: fixtureRows.size.toString(),"In the current feed") }
+            Box(Modifier.weight(1f)) { Metric("Leagues",competitions.toString(),"Competitions covered") }
+            Box(Modifier.weight(1f)) { Metric("Feed",if(connection.startsWith("Connected")) "Ready" else "Wait","${providers.take(22)}") }
+        }
+        Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween,verticalAlignment=Alignment.CenterVertically) {
+            Heading("Next on the pitch","Select a fixture to open its match centre")
+            TextButton(onClick=onFixtures) { Text("ALL MATCHES  →",color=Color(0xFF55D6C2),fontWeight=FontWeight.Bold,style=MaterialTheme.typography.labelSmall) }
+        }
+        Row(horizontalArrangement=Arrangement.spacedBy(7.dp)) { listOf("Kick-off","Match A-Z").forEach { value -> FilterChip(selected=sort==value,onClick={sort=value},label={Text(value)},colors=FilterChipDefaults.filterChipColors(selectedContainerColor=Color(0xFF1C3B3B),selectedLabelColor=Color(0xFF73E1D1))) } }
         if(upcoming.isEmpty()) Notice("No upcoming fixtures published","The next scheduled data refresh will update this list.")
-        upcoming.forEach { fx ->
-            Card(Modifier.fillMaxWidth().clickable { onFixtures() },shape=RoundedCornerShape(20.dp),
-                colors=CardDefaults.cardColors(containerColor=Color(0xFF111A23)),
-                border=androidx.compose.foundation.BorderStroke(1.dp,Color(0xFF293944))) {
-                Column(Modifier.fillMaxWidth().padding(13.dp),verticalArrangement=Arrangement.spacedBy(10.dp)) {
-                    Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween,verticalAlignment=Alignment.CenterVertically) {
-                        Text(fx.optString("competition","Football").uppercase(),style=MaterialTheme.typography.labelSmall,
-                            color=Color(0xFF9EADB9),maxLines=1,modifier=Modifier.weight(1f))
-                        Text(formatKickoff(fx.optString("kickoff")),style=MaterialTheme.typography.labelSmall,
-                            color=Color(0xFFB7F36B),fontWeight=FontWeight.Bold)
-                    }
-                    Row(Modifier.fillMaxWidth(),verticalAlignment=Alignment.CenterVertically) {
-                        TeamCrest(fx.optString("home"),fx.optString("home_crest_url"),38.dp)
-                        Text(fx.optString("home"),Modifier.weight(1f).padding(horizontal=7.dp),maxLines=2,
-                            style=MaterialTheme.typography.titleSmall,color=Color(0xFFF2F5F0),fontWeight=FontWeight.Bold)
-                        Text("VS",style=MaterialTheme.typography.labelSmall,color=Color(0xFF8496A4))
-                        Text(fx.optString("away"),Modifier.weight(1f).padding(horizontal=7.dp),maxLines=2,
-                            style=MaterialTheme.typography.titleSmall,color=Color(0xFFF2F5F0),fontWeight=FontWeight.Bold,
-                            textAlign=androidx.compose.ui.text.style.TextAlign.End)
-                        TeamCrest(fx.optString("away"),fx.optString("away_crest_url"),38.dp)
-                    }
-                }
+        upcoming.forEach { fx -> MatchdayFixtureCard(fx) { onSelect(fx) } }
+        Card(shape=RoundedCornerShape(22.dp),colors=CardDefaults.cardColors(containerColor=Color(0xFF111D2B)),border=androidx.compose.foundation.BorderStroke(1.dp,Color(0xFF26384A))) {
+            Column(Modifier.fillMaxWidth().padding(16.dp),verticalArrangement=Arrangement.spacedBy(11.dp)) {
+                Text("INTELLIGENCE LAYERS",color=Color(0xFF55D6C2),style=MaterialTheme.typography.labelSmall,fontWeight=FontWeight.ExtraBold,letterSpacing=1.sp)
+                Text("A fuller picture of every match",color=Color.White,style=MaterialTheme.typography.titleMedium,fontWeight=FontWeight.Bold)
+                Row(horizontalArrangement=Arrangement.spacedBy(7.dp)) { listOf("HOME / AWAY FORM","H2H HISTORY","SQUAD CONTEXT").forEach { label -> Surface(shape=RoundedCornerShape(8.dp),color=Color(0xFF1B2C3B)) { Text(label,Modifier.padding(horizontal=9.dp,vertical=7.dp),color=Color(0xFFB6C6D2),style=MaterialTheme.typography.labelSmall,fontWeight=FontWeight.Bold) } } }
+                Text("Every recommendation remains separate from the bookmaker price. Only the approved markets with an actual SportyBet quote are eligible.",color=Color(0xFF91A2B3),style=MaterialTheme.typography.bodySmall,lineHeight=18.sp)
             }
         }
-        Heading("Today at a glance","Published data from the Goal Scanner feed")
-        Row(horizontalArrangement=Arrangement.spacedBy(10.dp)) {
-            Box(Modifier.weight(1f)) { Metric("Fixtures",fixtures.substringBefore(" ").takeIf { it.toIntOrNull()!=null } ?: "—",fixtures) }
-            Box(Modifier.weight(1f)) { Metric("Feed",if(connection.startsWith("Connected")) "Online" else "Offline",providers) }
-        }
-        Card(colors=CardDefaults.cardColors(containerColor=Color(0xFF111A23)),
-            border=androidx.compose.foundation.BorderStroke(1.dp,Color(0xFF24313D))) {
-            Column(Modifier.fillMaxWidth().padding(16.dp),verticalArrangement=Arrangement.spacedBy(8.dp)) {
-                Row(verticalAlignment=Alignment.CenterVertically,horizontalArrangement=Arrangement.spacedBy(8.dp)) {
-                    Icon(Icons.Default.Analytics,null,tint=Color(0xFFB7F36B))
-                    Text("Analysis built around evidence",fontWeight=FontWeight.Bold,color=Color(0xFFF2F5F0))
-                }
-                Text("Model estimates and bookmaker odds are kept separate. Missing statistics are not filled with invented numbers.",
-                    style=MaterialTheme.typography.bodySmall,color=Color(0xFF9EADB9),lineHeight=18.sp)
-            }
-        }
-        Heading("Explore Goal Scanner")
-        Row(horizontalArrangement=Arrangement.spacedBy(10.dp)) {
-            Button(onClick=onFixtures,modifier=Modifier.weight(1f),shape=RoundedCornerShape(14.dp),
-                colors=ButtonDefaults.buttonColors(containerColor=Color(0xFF243B22),contentColor=Color(0xFFB7F36B))) {
-                Icon(Icons.Default.CalendarMonth,null); Spacer(Modifier.width(7.dp)); Text("Fixtures")
-            }
-            OutlinedButton(onClick=onScanner,modifier=Modifier.weight(1f),shape=RoundedCornerShape(14.dp)) {
-                Icon(Icons.Default.SportsSoccer,null); Spacer(Modifier.width(7.dp)); Text("Scanner")
-            }
-        }
-        Surface(shape=RoundedCornerShape(50),color=if(connection.startsWith("Connected")) Color(0xFF243B22) else Color(0xFF342B20)) {
-            Text(if(connection.startsWith("Connected")) "●  DATA FEED CONNECTED" else "●  DATA FEED NOT CONNECTED",
-                Modifier.padding(horizontal=12.dp,vertical=8.dp),style=MaterialTheme.typography.labelSmall,
-                fontWeight=FontWeight.Bold,color=if(connection.startsWith("Connected")) Color(0xFFB7F36B) else Color(0xFFE4B36B))
-        }
+        Text("DATA STATUS  ·  $providers",color=Color(0xFF657B8D),style=MaterialTheme.typography.labelSmall)
     }
 }
 @Composable
@@ -724,7 +783,7 @@ private fun FixturesScreen(
             }
             FilledTonalButton(onClick=onCollect,enabled=!busy) { Text(if(busy) "Loading…" else "Refresh") }
         }
-        Card(shape=RoundedCornerShape(18.dp),colors=CardDefaults.cardColors(containerColor=Color(0xFF111A23)),border=androidx.compose.foundation.BorderStroke(1.dp,Color(0xFF24313D))) {
+        Card(shape=RoundedCornerShape(18.dp),colors=CardDefaults.cardColors(containerColor=Color(0xFF111E2C)),border=androidx.compose.foundation.BorderStroke(1.dp,Color(0xFF24313D))) {
             Column(Modifier.padding(14.dp),verticalArrangement=Arrangement.spacedBy(4.dp)) {
                 Text("${fixtures.size} matches available",fontWeight=FontWeight.Bold,color=Color(0xFFF2F5F0))
                 Text(summary,style=MaterialTheme.typography.bodySmall,color=MaterialTheme.colorScheme.onSurfaceVariant)
@@ -739,40 +798,14 @@ private fun FixturesScreen(
         Row(horizontalArrangement=Arrangement.spacedBy(6.dp)) { listOf("Time","Match A-Z","League A-Z").forEach { item -> FilterChip(selected=sort==item,onClick={sort=item},label={Text(item)}) } }
         if(message.isNotBlank()) Text(message,style=MaterialTheme.typography.bodySmall,color=MaterialTheme.colorScheme.primary)
         if(visible.isEmpty()) Notice("No matching fixtures","Try another search or status filter, or refresh the fixture feed.")
+        var currentDay = ""
         visible.forEach { fx ->
-            val status=fx.optString("status","NS").uppercase()
-            Card(Modifier.fillMaxWidth().clickable { onSelect(fx) },shape=RoundedCornerShape(19.dp),colors=CardDefaults.cardColors(containerColor=Color(0xFF111A23)),border=androidx.compose.foundation.BorderStroke(1.dp,Color(0xFF263541))) {
-                Column(Modifier.fillMaxWidth().padding(14.dp),verticalArrangement=Arrangement.spacedBy(10.dp)) {
-                    Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween,verticalAlignment=Alignment.CenterVertically) {
-                        Text(fx.optString("competition",fx.optString("country","Football")).uppercase(),modifier=Modifier.weight(1f),
-                            style=MaterialTheme.typography.labelSmall,color=Color(0xFF9EADB9),maxLines=1,letterSpacing=0.7.sp)
-                        StatusPill(status)
-                    }
-                    Row(Modifier.fillMaxWidth(),verticalAlignment=Alignment.CenterVertically,horizontalArrangement=Arrangement.SpaceEvenly) {
-                        Column(Modifier.weight(1f),horizontalAlignment=Alignment.CenterHorizontally,verticalArrangement=Arrangement.spacedBy(7.dp)) {
-                            TeamCrest(fx.optString("home"),fx.optString("home_crest_url"),52.dp)
-                            Text(fx.optString("home","Home"),fontWeight=FontWeight.Bold,style=MaterialTheme.typography.titleSmall,
-                                color=Color(0xFFF2F5F0),maxLines=2,textAlign=androidx.compose.ui.text.style.TextAlign.Center)
-                        }
-                        Column(horizontalAlignment=Alignment.CenterHorizontally,verticalArrangement=Arrangement.spacedBy(5.dp)) {
-                            Text("VS",style=MaterialTheme.typography.labelSmall,color=Color(0xFF8496A4),fontWeight=FontWeight.Bold)
-                            if(!fx.isNull("home_score")&&!fx.isNull("away_score"))
-                                Text("${fx.optInt("home_score")} : ${fx.optInt("away_score")}",style=MaterialTheme.typography.titleLarge,fontWeight=FontWeight.ExtraBold)
-                            else Text(formatKickoff(fx.optString("kickoff")).substringAfter("·").trim(),style=MaterialTheme.typography.titleSmall,
-                                fontWeight=FontWeight.ExtraBold,color=Color(0xFFB7F36B))
-                        }
-                        Column(Modifier.weight(1f),horizontalAlignment=Alignment.CenterHorizontally,verticalArrangement=Arrangement.spacedBy(7.dp)) {
-                            TeamCrest(fx.optString("away"),fx.optString("away_crest_url"),52.dp)
-                            Text(fx.optString("away","Away"),fontWeight=FontWeight.Bold,style=MaterialTheme.typography.titleSmall,
-                                color=Color(0xFFF2F5F0),maxLines=2,textAlign=androidx.compose.ui.text.style.TextAlign.Center)
-                        }
-                    }
-                    Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween,verticalAlignment=Alignment.CenterVertically) {
-                        Text(formatKickoff(fx.optString("kickoff")),style=MaterialTheme.typography.labelSmall,color=Color(0xFF9EADB9))
-                        Text("MATCH CENTRE  ›",style=MaterialTheme.typography.labelSmall,color=Color(0xFFB7F36B),fontWeight=FontWeight.Bold)
-                    }
-                }
+            val day=fx.optString("kickoff").take(10)
+            if(day!=currentDay) {
+                currentDay=day
+                Text(day,modifier=Modifier.padding(top=5.dp),color=Color(0xFF55D6C2),fontWeight=FontWeight.ExtraBold,style=MaterialTheme.typography.labelLarge,letterSpacing=0.8.sp)
             }
+            MatchdayFixtureCard(fx) { onSelect(fx) }
         }
     }
 }
@@ -780,7 +813,7 @@ private fun FixturesScreen(
 private fun StatusPill(status:String) {
     val live=status in listOf("1H","2H","HT","LIVE","ET","P")
     val finished=status in listOf("FT","AET","PEN","FINISHED")
-    val tint=when { live -> Color(0xFFB7F36B); finished -> Color(0xFF9EADB9); else -> Color(0xFF9AB7D3) }
+    val tint=when { live -> Color(0xFFB7F36B); finished -> Color(0xFF91A2B3); else -> Color(0xFF9AB7D3) }
     Surface(color=when { live -> Color(0xFF263B20); finished -> Color(0xFF26313A); else -> Color(0xFF1B2B37) },
         shape=RoundedCornerShape(50)) {
         Text(status.ifBlank { "NS" },modifier=Modifier.padding(horizontal=10.dp,vertical=6.dp),
@@ -818,6 +851,51 @@ private fun marketTitle(item:JSONObject):String {
     }
 }
 @Composable
+private fun PremiumMatchHeader(fixture: JSONObject) {
+    val home=fixture.optString("home"); val away=fixture.optString("away")
+    Card(shape=RoundedCornerShape(28.dp),colors=CardDefaults.cardColors(containerColor=Color.Transparent),
+        border=androidx.compose.foundation.BorderStroke(1.dp,Color(0xFF36516A))) {
+        Box(Modifier.fillMaxWidth().background(Brush.linearGradient(listOf(Color(0xFF193D48),Color(0xFF172A3D),Color(0xFF142033))),RoundedCornerShape(28.dp)).padding(18.dp)) {
+            Canvas(Modifier.size(175.dp).align(Alignment.Center)) {
+                val c=Color.White.copy(alpha=.055f)
+                drawCircle(c,radius=size.minDimension*.46f,style=androidx.compose.ui.graphics.drawscope.Stroke(width=2.dp.toPx()))
+                drawCircle(c,radius=size.minDimension*.24f,style=androidx.compose.ui.graphics.drawscope.Stroke(width=2.dp.toPx()))
+                drawLine(c,Offset(size.width*.5f,0f),Offset(size.width*.5f,size.height),2.dp.toPx())
+            }
+            Column(Modifier.fillMaxWidth(),verticalArrangement=Arrangement.spacedBy(17.dp)) {
+                Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween,verticalAlignment=Alignment.CenterVertically) {
+                    Column(Modifier.weight(1f),verticalArrangement=Arrangement.spacedBy(3.dp)) {
+                        Text(fixture.optString("competition","Football").uppercase(),color=Color(0xFFB7F36B),fontWeight=FontWeight.ExtraBold,style=MaterialTheme.typography.labelSmall,letterSpacing=1.sp)
+                        Text(fixture.optString("country"),color=Color(0xFF91A2B3),style=MaterialTheme.typography.labelSmall)
+                    }
+                    StatusPill(fixture.optString("status","NS").uppercase())
+                }
+                Row(Modifier.fillMaxWidth(),verticalAlignment=Alignment.CenterVertically) {
+                    Column(Modifier.weight(1f),horizontalAlignment=Alignment.CenterHorizontally,verticalArrangement=Arrangement.spacedBy(9.dp)) {
+                        TeamCrest(home,fixture.optString("home_crest_url"),76.dp)
+                        Text(home,color=Color.White,style=MaterialTheme.typography.titleMedium,fontWeight=FontWeight.ExtraBold,textAlign=androidx.compose.ui.text.style.TextAlign.Center,maxLines=2)
+                        Text("HOME",color=Color(0xFF91A2B3),style=MaterialTheme.typography.labelSmall,fontWeight=FontWeight.Bold,letterSpacing=1.sp)
+                    }
+                    Column(horizontalAlignment=Alignment.CenterHorizontally,verticalArrangement=Arrangement.spacedBy(5.dp)) {
+                        Text(if(!fixture.isNull("home_score")&&!fixture.isNull("away_score")) "${fixture.optInt("home_score")} : ${fixture.optInt("away_score")}" else "VS",color=Color.White,fontWeight=FontWeight.ExtraBold,style=MaterialTheme.typography.headlineMedium)
+                        Text(if(fixture.optString("status").uppercase() in listOf("FT","AET","PEN","FINISHED")) "FULL TIME" else "KICK-OFF",color=Color(0xFF55D6C2),style=MaterialTheme.typography.labelSmall,fontWeight=FontWeight.Bold,letterSpacing=.8.sp)
+                    }
+                    Column(Modifier.weight(1f),horizontalAlignment=Alignment.CenterHorizontally,verticalArrangement=Arrangement.spacedBy(9.dp)) {
+                        TeamCrest(away,fixture.optString("away_crest_url"),76.dp)
+                        Text(away,color=Color.White,style=MaterialTheme.typography.titleMedium,fontWeight=FontWeight.ExtraBold,textAlign=androidx.compose.ui.text.style.TextAlign.Center,maxLines=2)
+                        Text("AWAY",color=Color(0xFF91A2B3),style=MaterialTheme.typography.labelSmall,fontWeight=FontWeight.Bold,letterSpacing=1.sp)
+                    }
+                }
+                HorizontalDivider(color=Color.White.copy(alpha=.12f))
+                Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween,verticalAlignment=Alignment.CenterVertically) {
+                    Text(formatKickoff(fixture.optString("kickoff")),color=Color(0xFFD1DEE9),style=MaterialTheme.typography.labelMedium,fontWeight=FontWeight.SemiBold)
+                    Text("MATCH CENTRE",color=Color(0xFFB7F36B),style=MaterialTheme.typography.labelSmall,fontWeight=FontWeight.ExtraBold,letterSpacing=1.sp)
+                }
+            }
+        }
+    }
+}
+@Composable
 private fun FixtureDetailsScreen(
     modifier:Modifier,fixture:JSONObject?,recommendations:List<JSONObject>,onBack:()->Unit,onSelect:(JSONObject)->Unit
 ) {
@@ -826,44 +904,14 @@ private fun FixtureDetailsScreen(
         if(fixture==null) Notice("No fixture selected","Return to the fixtures list and select a match.")
         else {
             val picks=recommendations.filter { it.optString("fixture_id")==fixture.optString("id") }
-            Card(colors=CardDefaults.cardColors(containerColor=Color(0xFF18252D)),shape=RoundedCornerShape(25.dp),
-                border=androidx.compose.foundation.BorderStroke(1.dp,Color(0xFF30434A))) {
-                Column(Modifier.fillMaxWidth().padding(20.dp),verticalArrangement=Arrangement.spacedBy(12.dp)) {
-                    Text(fixture.optString("competition","Football").uppercase(),color=Color(0xFFB7F36B),
-                        style=MaterialTheme.typography.labelSmall,letterSpacing=1.sp,fontWeight=FontWeight.Bold)
-                    Row(Modifier.fillMaxWidth(),verticalAlignment=Alignment.CenterVertically) {
-                        Column(Modifier.weight(1f),horizontalAlignment=Alignment.CenterHorizontally,verticalArrangement=Arrangement.spacedBy(8.dp)) {
-                            TeamCrest(fixture.optString("home"),fixture.optString("home_crest_url"),70.dp)
-                            Text(fixture.optString("home"),color=Color.White,style=MaterialTheme.typography.titleMedium,fontWeight=FontWeight.ExtraBold,
-                                textAlign=androidx.compose.ui.text.style.TextAlign.Center)
-                            Text("HOME",color=Color(0xFF91A0AC),style=MaterialTheme.typography.labelSmall)
-                        }
-                        Text("VS",color=Color(0xFFB7F36B),fontWeight=FontWeight.ExtraBold)
-                        Column(Modifier.weight(1f),horizontalAlignment=Alignment.CenterHorizontally,verticalArrangement=Arrangement.spacedBy(8.dp)) {
-                            TeamCrest(fixture.optString("away"),fixture.optString("away_crest_url"),70.dp)
-                            Text(fixture.optString("away"),color=Color.White,style=MaterialTheme.typography.titleMedium,fontWeight=FontWeight.ExtraBold,
-                                textAlign=androidx.compose.ui.text.style.TextAlign.Center)
-                            Text("AWAY",color=Color(0xFF91A0AC),style=MaterialTheme.typography.labelSmall)
-                        }
-                    }
-                    if(!fixture.isNull("home_score")&&!fixture.isNull("away_score"))
-                        Text("${fixture.optInt("home_score")}  -  ${fixture.optInt("away_score")}",modifier=Modifier.fillMaxWidth(),
-                            color=Color.White,style=MaterialTheme.typography.displaySmall,fontWeight=FontWeight.ExtraBold,
-                            textAlign=androidx.compose.ui.text.style.TextAlign.Center)
-                    else Text(formatKickoff(fixture.optString("kickoff")),modifier=Modifier.fillMaxWidth(),
-                        color=Color(0xFFD1DEEF),textAlign=androidx.compose.ui.text.style.TextAlign.Center)
-                    Text("${fixture.optString("country")}  ·  ${fixture.optString("status","NS")}",modifier=Modifier.fillMaxWidth(),
-                        color=Color(0xFF9EADB9),style=MaterialTheme.typography.bodySmall,
-                        textAlign=androidx.compose.ui.text.style.TextAlign.Center)
-                }
-            }
+            PremiumMatchHeader(fixture)
             PreMatchStats(fixture.optJSONObject("pre_match_stats"))
             Heading("Model selections","${picks.size} published selections for this match")
             if(picks.isEmpty()) Notice("No qualifying selections published","This fixture did not meet the scanner's data and probability filters. That does not mean the match has no betting markets.")
             picks.forEach { pick ->
                 Card(Modifier.fillMaxWidth().clickable { onSelect(pick) },shape=RoundedCornerShape(18.dp),
-                    colors=CardDefaults.cardColors(containerColor=Color(0xFF111A23)),
-                    border=androidx.compose.foundation.BorderStroke(1.dp,Color(0xFF263541))) {
+                    colors=CardDefaults.cardColors(containerColor=Color(0xFF111E2C)),
+                    border=androidx.compose.foundation.BorderStroke(1.dp,Color(0xFF2D4356))) {
                     Row(Modifier.fillMaxWidth().padding(15.dp),verticalAlignment=Alignment.CenterVertically) {
                         Column(Modifier.weight(1f),verticalArrangement=Arrangement.spacedBy(7.dp)) {
                             Text(marketTitle(pick),fontWeight=FontWeight.Bold,color=Color(0xFFF2F5F0))
@@ -959,12 +1007,12 @@ private fun ScannerScreen(
             sortedRecommendations.forEach { item ->
                 val estimate=(item.optDouble("estimated_probability")*100).toInt()
                 Card(Modifier.fillMaxWidth().clickable { onSelect(item) },shape=RoundedCornerShape(20.dp),
-                    colors=CardDefaults.cardColors(containerColor=Color(0xFF111A23)),
-                    border=androidx.compose.foundation.BorderStroke(1.dp,Color(0xFF293944))) {
+                    colors=CardDefaults.cardColors(containerColor=Color(0xFF111E2C)),
+                    border=androidx.compose.foundation.BorderStroke(1.dp,Color(0xFF2D4356))) {
                     Column(Modifier.fillMaxWidth().padding(15.dp),verticalArrangement=Arrangement.spacedBy(10.dp)) {
                         Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween,verticalAlignment=Alignment.CenterVertically) {
                             Text(item.optString("competition","FOOTBALL").uppercase(),Modifier.weight(1f),
-                                style=MaterialTheme.typography.labelSmall,color=Color(0xFF9EADB9),maxLines=1)
+                                style=MaterialTheme.typography.labelSmall,color=Color(0xFF91A2B3),maxLines=1)
                             Surface(color=Color(0xFF263B20),shape=RoundedCornerShape(50)) {
                                 Text("MODEL PICK",Modifier.padding(horizontal=9.dp,vertical=5.dp),
                                     style=MaterialTheme.typography.labelSmall,color=Color(0xFFB7F36B),fontWeight=FontWeight.Bold)
@@ -981,7 +1029,7 @@ private fun ScannerScreen(
                                 textAlign=androidx.compose.ui.text.style.TextAlign.End,maxLines=2)
                             TeamCrest(item.optString("away"),fixture?.optString("away_crest_url").orEmpty(),42.dp)
                         }
-                        Text(formatKickoff(item.optString("kickoff")),style=MaterialTheme.typography.labelSmall,color=Color(0xFF9EADB9))
+                        Text(formatKickoff(item.optString("kickoff")),style=MaterialTheme.typography.labelSmall,color=Color(0xFF91A2B3))
                         Surface(color=Color(0xFF1B2931),shape=RoundedCornerShape(12.dp)) {
                             Column(Modifier.fillMaxWidth().padding(11.dp),verticalArrangement=Arrangement.spacedBy(4.dp)) {
                                 Text("SELECTED MARKET",style=MaterialTheme.typography.labelSmall,color=Color(0xFF91A0AC),letterSpacing=0.8.sp)
@@ -1003,7 +1051,7 @@ private fun ScannerScreen(
                             color=Color(0xFFB7F36B),trackColor=Color(0xFF34434B))
                         Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween) {
                             Text("Data quality ${(item.optDouble("data_quality")*100).toInt()}%",
-                                style=MaterialTheme.typography.labelSmall,color=Color(0xFF9EADB9))
+                                style=MaterialTheme.typography.labelSmall,color=Color(0xFF91A2B3))
                             Text("VIEW ANALYSIS  ›",style=MaterialTheme.typography.labelSmall,
                                 color=Color(0xFFB7F36B),fontWeight=FontWeight.Bold)
                         }
@@ -1014,6 +1062,20 @@ private fun ScannerScreen(
     }
 }
 @Composable
+private fun ProbabilityGauge(value: Int) {
+    Box(Modifier.size(112.dp),contentAlignment=Alignment.Center) {
+        Canvas(Modifier.fillMaxSize()) {
+            val stroke=11.dp.toPx()
+            drawArc(Color(0xFF2A3D50),startAngle=135f,sweepAngle=270f,useCenter=false,style=androidx.compose.ui.graphics.drawscope.Stroke(width=stroke,cap=StrokeCap.Round))
+            drawArc(Color(0xFFB7F36B),startAngle=135f,sweepAngle=270f*(value/100f).coerceIn(0f,1f),useCenter=false,style=androidx.compose.ui.graphics.drawscope.Stroke(width=stroke,cap=StrokeCap.Round))
+        }
+        Column(horizontalAlignment=Alignment.CenterHorizontally,verticalArrangement=Arrangement.spacedBy(0.dp)) {
+            Text("$value%",color=Color.White,fontWeight=FontWeight.ExtraBold,style=MaterialTheme.typography.headlineMedium)
+            Text("MODEL",color=Color(0xFF91A2B3),fontWeight=FontWeight.Bold,style=MaterialTheme.typography.labelSmall,letterSpacing=.8.sp)
+        }
+    }
+}
+@Composable
 private fun AnalysisScreen(modifier:Modifier,candidate:JSONObject?,related:List<JSONObject>,fixture:JSONObject?) {
     ScreenColumn(modifier) {
         Heading("Match analysis","The exact market threshold, model estimate and supporting historical data.")
@@ -1021,8 +1083,8 @@ private fun AnalysisScreen(modifier:Modifier,candidate:JSONObject?,related:List<
         else {
             val home=candidate.optString("home"); val away=candidate.optString("away")
             val probability=(candidate.optDouble("estimated_probability")*100).toInt()
-            Card(colors=CardDefaults.cardColors(containerColor=Color(0xFF18252D)),shape=RoundedCornerShape(25.dp),
-                border=androidx.compose.foundation.BorderStroke(1.dp,Color(0xFF30434A))) {
+            Card(colors=CardDefaults.cardColors(containerColor=Color(0xFF152B3A)),shape=RoundedCornerShape(25.dp),
+                border=androidx.compose.foundation.BorderStroke(1.dp,Color(0xFF36516A))) {
                 Column(Modifier.fillMaxWidth().padding(19.dp),verticalArrangement=Arrangement.spacedBy(11.dp)) {
                     Text(candidate.optString("competition","Competition unavailable").uppercase(),
                         color=Color(0xFFB7F36B),style=MaterialTheme.typography.labelSmall,letterSpacing=1.sp,fontWeight=FontWeight.Bold)
@@ -1041,18 +1103,16 @@ private fun AnalysisScreen(modifier:Modifier,candidate:JSONObject?,related:List<
                     }
                     Text(formatKickoff(candidate.optString("kickoff")),color=Color(0xFFB9C5CC),style=MaterialTheme.typography.bodySmall)
                     HorizontalDivider(color=Color(0xFF40515C))
-                    Text("SELECTED MARKET",color=Color(0xFF9EADB9),style=MaterialTheme.typography.labelSmall,letterSpacing=1.sp)
+                    Text("SELECTED MARKET",color=Color(0xFF91A2B3),style=MaterialTheme.typography.labelSmall,letterSpacing=1.sp)
                     Text(marketTitle(candidate),color=Color.White,fontWeight=FontWeight.ExtraBold,style=MaterialTheme.typography.titleLarge)
-                    Row(verticalAlignment=Alignment.Bottom,horizontalArrangement=Arrangement.spacedBy(9.dp)) {
-                        Text("$probability%",style=MaterialTheme.typography.displayMedium,color=Color(0xFFB7F36B),fontWeight=FontWeight.ExtraBold)
-                        Text("MODEL ESTIMATE",color=Color(0xFFB9C5CC),modifier=Modifier.padding(bottom=9.dp),
-                            style=MaterialTheme.typography.labelSmall,fontWeight=FontWeight.Bold)
+                    Row(Modifier.fillMaxWidth(),verticalAlignment=Alignment.CenterVertically,horizontalArrangement=Arrangement.spacedBy(17.dp)) {
+                        ProbabilityGauge(probability)
+                        Column(Modifier.weight(1f),verticalArrangement=Arrangement.spacedBy(7.dp)) {
+                            Text("MODEL PROBABILITY",color=Color(0xFF91A2B3),style=MaterialTheme.typography.labelSmall,fontWeight=FontWeight.Bold,letterSpacing=.8.sp)
+                            Text(if(candidate.isNull("odds")) "Price unavailable" else "SportyBet  ${String.format("%.2f",candidate.optDouble("odds"))}",color=Color.White,fontWeight=FontWeight.ExtraBold,style=MaterialTheme.typography.titleLarge)
+                            Text("The model estimate and bookmaker quote are separate measures.",color=Color(0xFF9FB0BE),style=MaterialTheme.typography.bodySmall,lineHeight=17.sp)
+                        }
                     }
-                    LinearProgressIndicator(progress={probability/100f},modifier=Modifier.fillMaxWidth().height(7.dp),
-                        color=Color(0xFFB7F36B),trackColor=Color(0xFF34434B))
-                    Text(if(candidate.isNull("odds")) "Bookmaker odds: unavailable" else
-                        "Observed bookmaker odds: "+String.format("%.2f",candidate.optDouble("odds")),
-                        color=Color(0xFFB9C5CC),style=MaterialTheme.typography.bodySmall)
                 }
             }
             if(fixture!=null) PreMatchStats(fixture.optJSONObject("pre_match_stats"))
@@ -1082,13 +1142,13 @@ private fun AnalysisScreen(modifier:Modifier,candidate:JSONObject?,related:List<
             marketRows.forEach { item ->
                 val isSelected=item.optString("prediction_id")==candidate.optString("prediction_id")
                 Card(shape=RoundedCornerShape(17.dp),colors=CardDefaults.cardColors(
-                    containerColor=if(isSelected) Color(0xFF20331E) else Color(0xFF111A23)),
-                    border=androidx.compose.foundation.BorderStroke(1.dp,if(isSelected) Color(0xFF668A42) else Color(0xFF263541))) {
+                    containerColor=if(isSelected) Color(0xFF20331E) else Color(0xFF111E2C)),
+                    border=androidx.compose.foundation.BorderStroke(1.dp,if(isSelected) Color(0xFF668A42) else Color(0xFF2D4356))) {
                     Row(Modifier.fillMaxWidth().padding(14.dp),verticalAlignment=Alignment.CenterVertically) {
                         Column(Modifier.weight(1f),verticalArrangement=Arrangement.spacedBy(5.dp)) {
                             Text(marketTitle(item),fontWeight=FontWeight.Bold,color=Color(0xFFF2F5F0))
                             Text("Probability ${(item.optDouble("estimated_probability")*100).toInt()}%  ·  ${if(item.isNull("odds")) "Odds unavailable" else "Odds "+String.format("%.2f",item.optDouble("odds"))}",
-                                style=MaterialTheme.typography.bodySmall,color=Color(0xFF9EADB9))
+                                style=MaterialTheme.typography.bodySmall,color=Color(0xFF91A2B3))
                             if(!item.isNull("expected_value")) Text("Model price value: ${String.format("%+.1f%%",item.optDouble("expected_value")*100)}",
                                 style=MaterialTheme.typography.labelSmall,color=Color(0xFFB7F36B))
                         }
@@ -1098,7 +1158,7 @@ private fun AnalysisScreen(modifier:Modifier,candidate:JSONObject?,related:List<
             }
             Heading("Model notes")
             Text("Data quality ${(candidate.optDouble("data_quality")*100).toInt()}% · ${candidate.optString("model_version")}",
-                style=MaterialTheme.typography.bodySmall,color=Color(0xFF9EADB9))
+                style=MaterialTheme.typography.bodySmall,color=Color(0xFF91A2B3))
             Notice("Important limitation","These are uncalibrated historical-rate estimates, not proven betting edges. Corner and booking markets appear only when sufficient historical statistics exist. Bookmaker prices are displayed separately and do not determine model probabilities.")
         }
     }
@@ -1129,8 +1189,8 @@ private fun ResultsScreen(
             Heading("Prediction history","${rows.size} recent records")
             Row(horizontalArrangement=Arrangement.spacedBy(6.dp)) { listOf("Newest","Match A-Z","League","Odds").forEach { value -> FilterChip(selected=sort==value,onClick={sort=value},label={Text(value)}) } }
             sortedRows.forEach { item ->
-                Card(shape=RoundedCornerShape(18.dp),colors=CardDefaults.cardColors(containerColor=Color(0xFF111A23)),
-                    border=androidx.compose.foundation.BorderStroke(1.dp,Color(0xFF263541))) {
+                Card(shape=RoundedCornerShape(18.dp),colors=CardDefaults.cardColors(containerColor=Color(0xFF111E2C)),
+                    border=androidx.compose.foundation.BorderStroke(1.dp,Color(0xFF2D4356))) {
                     Column(Modifier.padding(14.dp),verticalArrangement=Arrangement.spacedBy(6.dp)) {
                         Text("${item.optString("home")}  vs  ${item.optString("away")}",fontWeight=FontWeight.ExtraBold,color=Color(0xFFF2F5F0))
                         val detail=item.optJSONObject("payload") ?: JSONObject().apply {
@@ -1175,7 +1235,7 @@ private fun SettingsScreen(modifier:Modifier,apiUrl:String,onApiUrl:(String)->Un
         }
         if(message.isNotBlank()) Text(message,style=MaterialTheme.typography.bodySmall)
         Heading("App appearance")
-        Card(colors=CardDefaults.cardColors(containerColor=Color(0xFF111A23))) {
+        Card(colors=CardDefaults.cardColors(containerColor=Color(0xFF111E2C))) {
             Text("Premium dark interface · electric green accent",Modifier.padding(14.dp))
         }
         Heading("Scanner defaults")
