@@ -80,7 +80,7 @@ class MainActivity : ComponentActivity() {
                     medium=RoundedCornerShape(16.dp),
                     small=RoundedCornerShape(12.dp)
                 )
-            ) { GoalScannerApp(prefs) }            MaterialTheme(colorScheme=scheme) { GoalScannerApp(prefs) }
+            ) { GoalScannerApp(prefs) }
         }
     }
 }
@@ -424,9 +424,9 @@ private fun FixturesScreen(
             }
             FilledTonalButton(onClick=onCollect,enabled=!busy) { Text(if(busy) "Loading…" else "Refresh") }
         }
-        Card(shape=RoundedCornerShape(18.dp)) {
+        Card(shape=RoundedCornerShape(18.dp),colors=CardDefaults.cardColors(containerColor=Color(0xFF111A23)),border=androidx.compose.foundation.BorderStroke(1.dp,Color(0xFF24313D))) {
             Column(Modifier.padding(14.dp),verticalArrangement=Arrangement.spacedBy(4.dp)) {
-                Text("${fixtures.size} matches available",fontWeight=FontWeight.Bold)
+                Text("${fixtures.size} matches available",fontWeight=FontWeight.Bold,color=Color(0xFFF2F5F0))
                 Text(summary,style=MaterialTheme.typography.bodySmall,color=MaterialTheme.colorScheme.onSurfaceVariant)
             }
         }
@@ -440,23 +440,23 @@ private fun FixturesScreen(
         if(visible.isEmpty()) Notice("No matching fixtures","Try another search or status filter, or refresh the fixture feed.")
         visible.forEach { fx ->
             val status=fx.optString("status","NS").uppercase()
-            Card(Modifier.fillMaxWidth().clickable { onSelect(fx) },shape=RoundedCornerShape(18.dp)) {
+            Card(Modifier.fillMaxWidth().clickable { onSelect(fx) },shape=RoundedCornerShape(19.dp),colors=CardDefaults.cardColors(containerColor=Color(0xFF111A23)),border=androidx.compose.foundation.BorderStroke(1.dp,Color(0xFF263541))) {
                 Column(Modifier.fillMaxWidth().padding(14.dp),verticalArrangement=Arrangement.spacedBy(10.dp)) {
                     Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween,verticalAlignment=Alignment.CenterVertically) {
-                        Text(fx.optString("competition",fx.optString("country","Football")),modifier=Modifier.weight(1f),
-                            style=MaterialTheme.typography.labelSmall,color=MaterialTheme.colorScheme.onSurfaceVariant,maxLines=1)
+                        Text(fx.optString("competition",fx.optString("country","Football")).uppercase(),modifier=Modifier.weight(1f),
+                            style=MaterialTheme.typography.labelSmall,color=Color(0xFF9EADB9),maxLines=1,letterSpacing=0.7.sp)
                         StatusPill(status)
                     }
                     Row(Modifier.fillMaxWidth(),verticalAlignment=Alignment.CenterVertically) {
                         Column(Modifier.weight(1f),verticalArrangement=Arrangement.spacedBy(3.dp)) {
-                            Text(fx.optString("home","Home"),fontWeight=FontWeight.Bold,style=MaterialTheme.typography.titleMedium)
-                            Text(fx.optString("away","Away"),fontWeight=FontWeight.Bold,style=MaterialTheme.typography.titleMedium)
+                            Text(fx.optString("home","Home"),fontWeight=FontWeight.Bold,style=MaterialTheme.typography.titleMedium,color=Color(0xFFF2F5F0))
+                            Text(fx.optString("away","Away"),fontWeight=FontWeight.Bold,style=MaterialTheme.typography.titleMedium,color=Color(0xFFF2F5F0))
                         }
                         Column(horizontalAlignment=Alignment.End,verticalArrangement=Arrangement.spacedBy(4.dp)) {
                             if(!fx.isNull("home_score")&&!fx.isNull("away_score"))
                                 Text("${fx.optInt("home_score")} - ${fx.optInt("away_score")}",style=MaterialTheme.typography.titleLarge,fontWeight=FontWeight.ExtraBold)
                             else Text(formatKickoff(fx.optString("kickoff")),style=MaterialTheme.typography.labelMedium,fontWeight=FontWeight.SemiBold)
-                            Text("View match  ›",style=MaterialTheme.typography.labelSmall,color=MaterialTheme.colorScheme.primary)
+                            Text("OPEN MATCH  ›",style=MaterialTheme.typography.labelSmall,color=Color(0xFFB7F36B),fontWeight=FontWeight.Bold)
                         }
                     }
                 }
@@ -792,7 +792,7 @@ private fun SettingsScreen(modifier:Modifier,apiUrl:String,onApiUrl:(String)->Un
         }
         if(message.isNotBlank()) Text(message,style=MaterialTheme.typography.bodySmall)
         Heading("App appearance")
-        Card { Text("Automatic light/dark appearance · Blue accent",Modifier.padding(14.dp)) }
+        Card { Text("Premium dark appearance · electric green accent",Modifier.padding(14.dp)) }
         Heading("Scanner defaults")
         Card { Text("Balanced shortlist · 60% initial probability threshold · Exclude insufficient data",Modifier.padding(14.dp)) }
         Card { Column(Modifier.padding(14.dp),verticalArrangement=Arrangement.spacedBy(4.dp)) {
