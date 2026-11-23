@@ -166,7 +166,7 @@ private fun GoalScannerApp(prefs: android.content.SharedPreferences) {
             )
         },
         bottomBar = {
-            if (!settings && tab!="Match" && tab!="Analysis") NavigationBar(
+            if (!settings && tab!="Match") NavigationBar(
                 containerColor=Color(0xFF111A23),contentColor=Color(0xFFF2F5F0),tonalElevation=0.dp
             ) {
                 listOf(NavItem("Home",Icons.Default.Home),NavItem("Fixtures",Icons.Default.CalendarMonth),
@@ -366,7 +366,7 @@ private fun HomeScreen(modifier:Modifier,connection:String,providers:String,fixt
         }
         Heading("Today at a glance","Published data from the Goal Scanner feed")
         Row(horizontalArrangement=Arrangement.spacedBy(10.dp)) {
-            Box(Modifier.weight(1f)) { Metric("Fixtures","—",fixtures) }
+            Box(Modifier.weight(1f)) { Metric("Fixtures",fixtures.substringBefore(" ").takeIf { it.toIntOrNull()!=null } ?: "—",fixtures) }
             Box(Modifier.weight(1f)) { Metric("Feed",if(connection.startsWith("Connected")) "Online" else "Offline",providers) }
         }
         Card(colors=CardDefaults.cardColors(containerColor=Color(0xFF111A23)),
@@ -625,17 +625,47 @@ private fun ScannerScreen(
             Heading(if(view=="Recommended") "Balanced shortlist" else "All qualifying selections",
                 "${recommendations.size} recorded candidates · tap one for match analysis")
             recommendations.forEach { item ->
-                Card(Modifier.fillMaxWidth().clickable { onSelect(item) },shape=RoundedCornerShape(16.dp)) {
-                    Column(Modifier.padding(14.dp),verticalArrangement=Arrangement.spacedBy(5.dp)) {
-                        Text("${item.optString("home")} vs ${item.optString("away")}",fontWeight=FontWeight.Bold)
-                        Text(marketTitle(item),style=MaterialTheme.typography.labelMedium,color=MaterialTheme.colorScheme.primary)
-                        Row(horizontalArrangement=Arrangement.spacedBy(12.dp)) {
-                            Text("Estimate ${(item.optDouble("estimated_probability")*100).toInt()}%",fontWeight=FontWeight.Bold)
-                            Text(if(item.isNull("odds")) "Odds unavailable" else "Odds ${item.optDouble("odds")}",
-                                color=MaterialTheme.colorScheme.onSurfaceVariant)
+                val estimate=(item.optDouble("estimated_probability")*100).toInt()
+                Card(Modifier.fillMaxWidth().clickable { onSelect(item) },shape=RoundedCornerShape(20.dp),
+                    colors=CardDefaults.cardColors(containerColor=Color(0xFF111A23)),
+                    border=androidx.compose.foundation.BorderStroke(1.dp,Color(0xFF293944))) {
+                    Column(Modifier.fillMaxWidth().padding(15.dp),verticalArrangement=Arrangement.spacedBy(10.dp)) {
+                        Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween,verticalAlignment=Alignment.CenterVertically) {
+                            Text(item.optString("competition","FOOTBALL").uppercase(),Modifier.weight(1f),
+                                style=MaterialTheme.typography.labelSmall,color=Color(0xFF9EADB9),maxLines=1)
+                            Surface(color=Color(0xFF263B20),shape=RoundedCornerShape(50)) {
+                                Text("MODEL PICK",Modifier.padding(horizontal=9.dp,vertical=5.dp),
+                                    style=MaterialTheme.typography.labelSmall,color=Color(0xFFB7F36B),fontWeight=FontWeight.Bold)
+                            }
                         }
-                        Text("Data quality ${(item.optDouble("data_quality")*100).toInt()}% · rank ${(item.optDouble("rank_score")*100).toInt()}",
-                            style=MaterialTheme.typography.bodySmall,color=MaterialTheme.colorScheme.onSurfaceVariant)
+                        Text("${item.optString("home")}  vs  ${item.optString("away")}",
+                            style=MaterialTheme.typography.titleMedium,color=Color(0xFFF2F5F0),fontWeight=FontWeight.ExtraBold)
+                        Text(formatKickoff(item.optString("kickoff")),style=MaterialTheme.typography.labelSmall,color=Color(0xFF9EADB9))
+                        Surface(color=Color(0xFF1B2931),shape=RoundedCornerShape(12.dp)) {
+                            Column(Modifier.fillMaxWidth().padding(11.dp),verticalArrangement=Arrangement.spacedBy(4.dp)) {
+                                Text("SELECTED MARKET",style=MaterialTheme.typography.labelSmall,color=Color(0xFF91A0AC),letterSpacing=0.8.sp)
+                                Text(marketTitle(item),style=MaterialTheme.typography.bodyMedium,color=Color(0xFFF2F5F0),fontWeight=FontWeight.Bold)
+                            }
+                        }
+                        Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween,verticalAlignment=Alignment.CenterVertically) {
+                            Column(verticalArrangement=Arrangement.spacedBy(2.dp)) {
+                                Text("MODEL PROBABILITY",style=MaterialTheme.typography.labelSmall,color=Color(0xFF91A0AC))
+                                Text("$estimate%",style=MaterialTheme.typography.headlineSmall,color=Color(0xFFB7F36B),fontWeight=FontWeight.ExtraBold)
+                            }
+                            Column(horizontalAlignment=Alignment.End,verticalArrangement=Arrangement.spacedBy(2.dp)) {
+                                Text("BOOKMAKER ODDS",style=MaterialTheme.typography.labelSmall,color=Color(0xFF91A0AC))
+                                Text(if(item.isNull("odds")) "Unavailable" else String.format("%.2f",item.optDouble("odds")),
+                                    style=MaterialTheme.typography.titleLarge,color=Color(0xFFF2F5F0),fontWeight=FontWeight.Bold)
+                            }
+                        }
+                        LinearProgressIndicator(progress={estimate/100f},modifier=Modifier.fillMaxWidth().height(5.dp),
+                            color=Color(0xFFB7F36B),trackColor=Color(0xFF34434B))
+                        Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween) {
+                            Text("Data quality ${(item.optDouble("data_quality")*100).toInt()}%",
+                                style=MaterialTheme.typography.labelSmall,color=Color(0xFF9EADB9))
+                            Text("VIEW ANALYSIS  ›",style=MaterialTheme.typography.labelSmall,
+                                color=Color(0xFFB7F36B),fontWeight=FontWeight.Bold)
+                        }
                     }
                 }
             }
@@ -747,9 +777,10 @@ private fun ResultsScreen(
         else {
             Heading("Prediction history","${rows.size} recent records")
             rows.forEach { item ->
-                Card {
-                    Column(Modifier.padding(13.dp),verticalArrangement=Arrangement.spacedBy(4.dp)) {
-                        Text("${item.optString("home")} vs ${item.optString("away")}",fontWeight=FontWeight.Bold)
+                Card(shape=RoundedCornerShape(18.dp),colors=CardDefaults.cardColors(containerColor=Color(0xFF111A23)),
+                    border=androidx.compose.foundation.BorderStroke(1.dp,Color(0xFF263541))) {
+                    Column(Modifier.padding(14.dp),verticalArrangement=Arrangement.spacedBy(6.dp)) {
+                        Text("${item.optString("home")}  vs  ${item.optString("away")}",fontWeight=FontWeight.ExtraBold,color=Color(0xFFF2F5F0))
                         val detail=item.optJSONObject("payload") ?: JSONObject().apply {
                             put("market",item.optString("market"))
                             put("selection",item.optString("selection"))
@@ -792,7 +823,9 @@ private fun SettingsScreen(modifier:Modifier,apiUrl:String,onApiUrl:(String)->Un
         }
         if(message.isNotBlank()) Text(message,style=MaterialTheme.typography.bodySmall)
         Heading("App appearance")
-        Card { Text("Premium dark appearance · electric green accent",Modifier.padding(14.dp)) }
+        Card(colors=CardDefaults.cardColors(containerColor=Color(0xFF111A23))) {
+            Text("Premium dark interface · electric green accent",Modifier.padding(14.dp))
+        }
         Heading("Scanner defaults")
         Card { Text("Balanced shortlist · 60% initial probability threshold · Exclude insufficient data",Modifier.padding(14.dp)) }
         Card { Column(Modifier.padding(14.dp),verticalArrangement=Arrangement.spacedBy(4.dp)) {
