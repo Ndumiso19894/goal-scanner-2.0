@@ -6,6 +6,7 @@ import android.content.pm.PackageManager
 import android.os.Build
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -93,8 +94,13 @@ private data class NavItem(val label: String, val icon: ImageVector)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun GoalScannerApp(prefs: android.content.SharedPreferences) {
-    var tab by rememberSaveable { mutableStateOf("Home") }
+    var backStack by rememberSaveable { mutableStateOf(listOf("Home")) }
+    val tab = backStack.lastOrNull() ?: "Home"
+    val saveableStateHolder = rememberSaveableStateHolder()
+    fun navigate(route: String) { if (backStack.lastOrNull() != route) backStack = backStack + route }
+    fun goBack() { if (backStack.size > 1) backStack = backStack.dropLast(1) else backStack = listOf("Home") }
     var settings by rememberSaveable { mutableStateOf(false) }
+    BackHandler(enabled = settings || backStack.size > 1 || tab != "Home") { if (settings) settings = false else goBack() }
     var apiUrl by rememberSaveable { mutableStateOf((prefs.getString("api_url",DEFAULT_DATA_URL) ?: DEFAULT_DATA_URL).replace("feature/android-goal-scanner-pro","main").ifBlank { DEFAULT_DATA_URL }) }
     var apiToken by rememberSaveable { mutableStateOf(prefs.getString("api_token","") ?: "") }
     var season by rememberSaveable { mutableStateOf((prefs.getString("season","2627") ?: "2627").ifBlank { "2627" }) }
@@ -103,6 +109,7 @@ private fun GoalScannerApp(prefs: android.content.SharedPreferences) {
     var providers by rememberSaveable { mutableStateOf("Waiting for published data") }
     var fixtureSummary by rememberSaveable { mutableStateOf("Loading published fixtures…") }
     var fixtureRows by remember { mutableStateOf(emptyList<JSONObject>()) }
+    var leagueRows by remember { mutableStateOf(emptyList<JSONObject>()) }
     var selectedFixture by remember { mutableStateOf<JSONObject?>(null) }
     var message by rememberSaveable { mutableStateOf("") }
     var busy by remember { mutableStateOf(false) }
@@ -132,6 +139,9 @@ private fun GoalScannerApp(prefs: android.content.SharedPreferences) {
                 val fixtureFeed = apiRequest(apiUrl, "docs/data/fixtures.json?ts=$stamp")
                 val fixtureArray = fixtureFeed.optJSONArray("fixtures")
                 fixtureRows = if (fixtureArray == null) emptyList() else (0 until fixtureArray.length()).mapNotNull { fixtureArray.optJSONObject(it) }
+                val leagueFeed = apiRequest(apiUrl, "docs/data/league-tables.json?ts=$stamp")
+                val leagueArray = leagueFeed.optJSONArray("leagues")
+                leagueRows = if (leagueArray == null) emptyList() else (0 until leagueArray.length()).mapNotNull { leagueArray.optJSONObject(it) }
                 fixtureSummary = "${fixtureRows.size} fixtures · updated " + fixtureFeed.optString("updated_at", "not run yet")
                 val oddsFeed = apiRequest(apiUrl, "docs/data/odds-movements.json?ts=$stamp")
                 val movementArray = oddsFeed.optJSONArray("movements")
@@ -174,10 +184,10 @@ private fun GoalScannerApp(prefs: android.content.SharedPreferences) {
                 containerColor=Color(0xFF111A23),contentColor=Color(0xFFF2F5F0),tonalElevation=0.dp
             ) {
                 listOf(NavItem("Home",Icons.Default.Home),NavItem("Fixtures",Icons.Default.CalendarMonth),
-                    NavItem("Scanner",Icons.Default.SportsSoccer),NavItem("Results",Icons.Default.QueryStats),
-                    NavItem("Odds",Icons.Default.TrendingDown)).forEach { item ->
+                    NavItem("Picks",Icons.Default.EmojiEvents),NavItem("Scanner",Icons.Default.SportsSoccer),
+                    NavItem("More",Icons.Default.Analytics)).forEach { item ->
                     NavigationBarItem(
-                        selected=tab==item.label,onClick={tab=item.label},
+                        selected=tab==item.label,onClick={backStack=listOf(item.label)},
                         icon={Icon(item.icon,item.label)},
                         label={Text(item.label,fontSize=10.sp,fontWeight=if(tab==item.label) FontWeight.Bold else FontWeight.Normal)},
                         colors=NavigationBarItemDefaults.colors(
@@ -214,11 +224,11 @@ private fun GoalScannerApp(prefs: android.content.SharedPreferences) {
                 },
                 onBack={settings=false}
             )
-        } else when(tab) {
+        } else saveableStateHolder.SaveableStateProvider(tab) { when(tab) {
             "Home" -> HomeScreen(Modifier.padding(padding),connection,providers,fixtureSummary,fixtureRows,
-                {tab="Scanner"},{tab="Fixtures"})
+                {navigate("Scanner")},{navigate("Fixtures")})
             "Fixtures" -> FixturesScreen(Modifier.padding(padding),fixtureSummary,
-                fixtureRows,busy,message,onSelect={ fixture -> selectedFixture=fixture; tab="Match" }) {
+                fixtureRows,busy,message,onSelect={ fixture -> selectedFixture=fixture; navigate("Match") }) {
                 scope.launch {
                     busy=true; message=""
                     try {
@@ -264,12 +274,16 @@ private fun GoalScannerApp(prefs: android.content.SharedPreferences) {
                         finally { busy=false }
                     }
                 },
-                onSelect={candidate -> selectedRecommendation=candidate; tab="Analysis"})
+                onSelect={candidate -> selectedRecommendation=candidate; navigate("Analysis")})
             "Match" -> FixtureDetailsScreen(Modifier.padding(padding),selectedFixture,recommendations,
-                onBack={tab="Fixtures"},onSelect={ candidate -> selectedRecommendation=candidate; tab="Analysis" })
+                onBack={goBack},onSelect={ candidate -> selectedRecommendation=candidate; navigate("Analysis") })
             "Analysis" -> AnalysisScreen(Modifier.padding(padding),selectedRecommendation,
                 recommendations.filter { it.optString("fixture_id")==selectedRecommendation?.optString("fixture_id") },
                 fixtureRows.firstOrNull { it.optString("id")==selectedRecommendation?.optString("fixture_id") })
+            "Picks" -> FinalPicksScreen(Modifier.padding(padding),recommendations,fixtureRows,
+                onSelect={ candidate -> selectedRecommendation=candidate; navigate("Analysis") })
+            "League Tables" -> LeagueTablesScreen(Modifier.padding(padding),leagueRows)
+            "More" -> MoreScreen(Modifier.padding(padding),navigate)
             "Odds" -> DroppingOddsScreen(Modifier.padding(padding),oddsMovementRows,oddsMovementUpdated) {
                 scope.launch {
                     busy=true
@@ -282,7 +296,7 @@ private fun GoalScannerApp(prefs: android.content.SharedPreferences) {
                     finally { busy=false }
                 }
             }
-            else -> ResultsScreen(Modifier.padding(padding),resultSummary,resultRows,busy) {
+            "Results" -> ResultsScreen(Modifier.padding(padding),resultSummary,resultRows,busy) {
                 scope.launch {
                     busy=true
                     try {
@@ -295,7 +309,7 @@ private fun GoalScannerApp(prefs: android.content.SharedPreferences) {
                     finally { busy=false }
                 }
             }
-        }
+        } }
     }
 }
 
