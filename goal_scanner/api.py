@@ -267,17 +267,24 @@ def refresh_results():
             fixtures.extend(_fixture_dict(item) for item in provider.fetch_day(day, utc_offset_hours=2))
         except ProviderError as exc:
             errors.append(str(exc))
+    pending_fixture_ids = {
+        str(row.get("fixture_id") or "")
+        for row in STORE.list_predictions(limit=500, status="PENDING")
+    }
     finished = []
     for item in fixtures:
         if not (is_finished_status(item.get("status", ""))
                 and item.get("home_score") is not None and item.get("away_score") is not None):
             continue
         completed = dict(item)
-        try:
-            completed["statistics"] = provider.fetch_statistics(str(item.get("id") or ""))
-        except ProviderError as exc:
+        if str(item.get("id") or "") in pending_fixture_ids:
+            try:
+                completed["statistics"] = provider.fetch_statistics(str(item.get("id") or ""))
+            except ProviderError as exc:
+                completed["statistics"] = {}
+                errors.append(f"Statistics unavailable for {item.get('id')}: {exc}")
+        else:
             completed["statistics"] = {}
-            errors.append(f"Statistics unavailable for {item.get('id')}: {exc}")
         finished.append(completed)
     settled = STORE.settle_many(finished)
     return {
