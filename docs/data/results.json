@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-23T04:13:53.801727+00:00",
+  "updated_at": "2026-11-23T04:18:39.194273+00:00",
   "summary": {
-    "predictions": 307,
-    "pending": 275,
+    "predictions": 417,
+    "pending": 385,
     "settled": 32,
     "wins": 26,
     "losses": 6,
@@ -16,7 +16,7 @@
   },
   "recent": [
     {
-      "id": "5fbecb3a2faf4f558ca1bc297fbcf555",
+      "id": "4d9d3f5b2bd14130b06932881467e40f",
       "fixture_id": "1836632",
       "kickoff": "2026-11-23T17:00:00+02:00",
       "home": "Asteras Tripolis",
@@ -45,6 +45,22 @@
         "home_lambda": 1.3444,
         "kickoff": "2026-11-23T17:00:00+02:00",
         "market": "away_over_0_5",
+        "market_odds": {},
+        "market_probabilities": {
+          "away_over_0_5": 0.6306091568629469,
+          "away_over_1_5": 0.2627328161827558,
+          "away_win": 0.2773326396739889,
+          "btts_yes": 0.46621182254506083,
+          "double_chance_12": 0.7246238848433718,
+          "double_chance_1x": 0.7226673603260108,
+          "double_chance_x2": 0.5527087548306167,
+          "draw": 0.2753761151566278,
+          "home_over_0_5": 0.7393039214087802,
+          "home_over_1_5": 0.3888241133507442,
+          "home_win": 0.4472912451693829,
+          "match_over_1_5": 0.6783333045037819,
+          "match_over_2_5": 0.41461899638032396
+        },
         "model_version": "venue-poisson-baseline-1",
         "odds": null,
         "odds_status": "unavailable",
@@ -60,7 +76,7 @@
         },
         "selection": "over"
       },
-      "created_at": "2026-11-23T04:13:51.817654+00:00",
+      "created_at": "2026-11-23T04:18:36.898063+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -68,7 +84,7 @@
       "settlement_source": null
     },
     {
-      "id": "9cec2bbc4f3a4546a71e9e5750ddb939",
+      "id": "bdad4d1b82c54a8a92f80c51b9b0d14e",
       "fixture_id": "1836632",
       "kickoff": "2026-11-23T17:00:00+02:00",
       "home": "Asteras Tripolis",
@@ -97,6 +113,22 @@
         "home_lambda": 1.3444,
         "kickoff": "2026-11-23T17:00:00+02:00",
         "market": "match_over_1_5",
+        "market_odds": {},
+        "market_probabilities": {
+          "away_over_0_5": 0.6306091568629469,
+          "away_over_1_5": 0.2627328161827558,
+          "away_win": 0.2773326396739889,
+          "btts_yes": 0.46621182254506083,
+          "double_chance_12": 0.7246238848433718,
+          "double_chance_1x": 0.7226673603260108,
+          "double_chance_x2": 0.5527087548306167,
+          "draw": 0.2753761151566278,
+          "home_over_0_5": 0.7393039214087802,
+          "home_over_1_5": 0.3888241133507442,
+          "home_win": 0.4472912451693829,
+          "match_over_1_5": 0.6783333045037819,
+          "match_over_2_5": 0.41461899638032396
+        },
         "model_version": "venue-poisson-baseline-1",
         "odds": null,
         "odds_status": "unavailable",
@@ -112,7 +144,7 @@
         },
         "selection": "over"
       },
-      "created_at": "2026-11-23T04:13:51.814270+00:00",
+      "created_at": "2026-11-23T04:18:36.896942+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -120,7 +152,7 @@
       "settlement_source": null
     },
     {
-      "id": "c791c5b202ac48be8953a87837e6fdba",
+      "id": "ba55ec3a45b24fdca9a98281ef20720d",
       "fixture_id": "1836632",
       "kickoff": "2026-11-23T17:00:00+02:00",
       "home": "Asteras Tripolis",
@@ -149,6 +181,22 @@
         "home_lambda": 1.3444,
         "kickoff": "2026-11-23T17:00:00+02:00",
         "market": "double_chance",
+        "market_odds": {},
+        "market_probabilities": {
+          "away_over_0_5": 0.6306091568629469,
+          "away_over_1_5": 0.2627328161827558,
+          "away_win": 0.2773326396739889,
+          "btts_yes": 0.46621182254506083,
+          "double_chance_12": 0.7246238848433718,
+          "double_chance_1x": 0.7226673603260108,
+          "double_chance_x2": 0.5527087548306167,
+          "draw": 0.2753761151566278,
+          "home_over_0_5": 0.7393039214087802,
+          "home_over_1_5": 0.3888241133507442,
+          "home_win": 0.4472912451693829,
+          "match_over_1_5": 0.6783333045037819,
+          "match_over_2_5": 0.41461899638032396
+        },
         "model_version": "venue-poisson-baseline-1",
         "odds": null,
         "odds_status": "unavailable",
@@ -164,7 +212,7 @@
         },
         "selection": "1X"
       },
-      "created_at": "2026-11-23T04:13:51.809657+00:00",
+      "created_at": "2026-11-23T04:18:36.896031+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -172,7 +220,7 @@
       "settlement_source": null
     },
     {
-      "id": "669a2c3032634852ba1f8d82e3dced03",
+      "id": "1614d86cec5c469e8d437eb4cdce2958",
       "fixture_id": "1836632",
       "kickoff": "2026-11-23T17:00:00+02:00",
       "home": "Asteras Tripolis",
@@ -201,6 +249,22 @@
         "home_lambda": 1.3444,
         "kickoff": "2026-11-23T17:00:00+02:00",
         "market": "double_chance",
+        "market_odds": {},
+        "market_probabilities": {
+          "away_over_0_5": 0.6306091568629469,
+          "away_over_1_5": 0.2627328161827558,
+          "away_win": 0.2773326396739889,
+          "btts_yes": 0.46621182254506083,
+          "double_chance_12": 0.7246238848433718,
+          "double_chance_1x": 0.7226673603260108,
+          "double_chance_x2": 0.5527087548306167,
+          "draw": 0.2753761151566278,
+          "home_over_0_5": 0.7393039214087802,
+          "home_over_1_5": 0.3888241133507442,
+          "home_win": 0.4472912451693829,
+          "match_over_1_5": 0.6783333045037819,
+          "match_over_2_5": 0.41461899638032396
+        },
         "model_version": "venue-poisson-baseline-1",
         "odds": null,
         "odds_status": "unavailable",
@@ -216,7 +280,7 @@
         },
         "selection": "12"
       },
-      "created_at": "2026-11-23T04:13:51.808095+00:00",
+      "created_at": "2026-11-23T04:18:36.894926+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -224,7 +288,7 @@
       "settlement_source": null
     },
     {
-      "id": "a5ebd0706002467293b207fc383a1142",
+      "id": "780fa64abe904a6e9115a8b87b33ae88",
       "fixture_id": "1836632",
       "kickoff": "2026-11-23T17:00:00+02:00",
       "home": "Asteras Tripolis",
@@ -253,6 +317,22 @@
         "home_lambda": 1.3444,
         "kickoff": "2026-11-23T17:00:00+02:00",
         "market": "home_over_0_5",
+        "market_odds": {},
+        "market_probabilities": {
+          "away_over_0_5": 0.6306091568629469,
+          "away_over_1_5": 0.2627328161827558,
+          "away_win": 0.2773326396739889,
+          "btts_yes": 0.46621182254506083,
+          "double_chance_12": 0.7246238848433718,
+          "double_chance_1x": 0.7226673603260108,
+          "double_chance_x2": 0.5527087548306167,
+          "draw": 0.2753761151566278,
+          "home_over_0_5": 0.7393039214087802,
+          "home_over_1_5": 0.3888241133507442,
+          "home_win": 0.4472912451693829,
+          "match_over_1_5": 0.6783333045037819,
+          "match_over_2_5": 0.41461899638032396
+        },
         "model_version": "venue-poisson-baseline-1",
         "odds": null,
         "odds_status": "unavailable",
@@ -268,7 +348,7 @@
         },
         "selection": "over"
       },
-      "created_at": "2026-11-23T04:13:51.806427+00:00",
+      "created_at": "2026-11-23T04:18:36.893900+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -276,7 +356,7 @@
       "settlement_source": null
     },
     {
-      "id": "b8fa568d331b47988179b4a7a293584d",
+      "id": "d0e52d8ce17b486d80b2b68b2d1669f0",
       "fixture_id": "1810741",
       "kickoff": "2026-11-23T22:00:00+02:00",
       "home": "Levante",
@@ -305,6 +385,127 @@
         "home_lambda": 1.6648,
         "kickoff": "2026-11-23T22:00:00+02:00",
         "market": "home_over_0_5",
+        "market_odds": {
+          "1X2": {
+            "away": 3.3,
+            "draw": 3.7,
+            "home": 2.25
+          },
+          "away_team_goals": {
+            "0.5": {
+              "over": 1.31,
+              "under": 3.5
+            },
+            "1.5": {
+              "over": 2.45,
+              "under": 1.56
+            },
+            "2.5": {
+              "over": 5.7,
+              "under": 1.14
+            },
+            "3.5": {
+              "over": 13.0,
+              "under": 1.03
+            },
+            "4.5": {
+              "over": 19.0,
+              "under": 1.01
+            }
+          },
+          "btts": {
+            "no": 2.35,
+            "yes": 1.59
+          },
+          "double_chance": {
+            "12": 1.3,
+            "1X": 1.35,
+            "X2": 1.66
+          },
+          "home_team_goals": {
+            "0.5": {
+              "over": 1.2,
+              "under": 4.6
+            },
+            "1.5": {
+              "over": 1.94,
+              "under": 1.88
+            },
+            "2.5": {
+              "over": 3.9,
+              "under": 1.26
+            },
+            "3.5": {
+              "over": 8.7,
+              "under": 1.07
+            },
+            "4.5": {
+              "over": 16.0,
+              "under": 1.01
+            }
+          },
+          "match_total_goals": {
+            "0.5": {
+              "over": 1.04,
+              "under": 12.5
+            },
+            "1.0": {
+              "over": 1.05,
+              "under": 11.0
+            },
+            "1.5": {
+              "over": 1.22,
+              "under": 4.5
+            },
+            "2.0": {
+              "over": 1.32,
+              "under": 3.6
+            },
+            "2.5": {
+              "over": 1.7,
+              "under": 2.2
+            },
+            "3.0": {
+              "over": 2.1,
+              "under": 1.76
+            },
+            "3.5": {
+              "over": 2.7,
+              "under": 1.5
+            },
+            "4.0": {
+              "over": 4.2,
+              "under": 1.25
+            },
+            "4.5": {
+              "over": 4.9,
+              "under": 1.19
+            },
+            "5.0": {
+              "over": 8.7,
+              "under": 1.08
+            },
+            "5.5": {
+              "over": 9.4,
+              "under": 1.07
+            }
+          }
+        },
+        "market_probabilities": {
+          "away_over_0_5": 0.9075604165728999,
+          "away_over_1_5": 0.6874432805162891,
+          "away_win": 0.5379024607992301,
+          "btts_yes": 0.7358241203782181,
+          "double_chance_12": 0.8053404924091507,
+          "double_chance_1x": 0.4620975392007693,
+          "double_chance_x2": 0.7325619683900787,
+          "draw": 0.1946595075908486,
+          "home_over_0_5": 0.8107715001023561,
+          "home_over_1_5": 0.4957438934727587,
+          "home_win": 0.2674380316099207,
+          "match_over_1_5": 0.9117343401142923,
+          "match_over_2_5": 0.7685596382564813
+        },
         "model_version": "venue-poisson-baseline-1",
         "odds": 1.2,
         "odds_status": "available",
@@ -320,7 +521,7 @@
         },
         "selection": "over"
       },
-      "created_at": "2026-11-23T04:12:56.020138+00:00",
+      "created_at": "2026-11-23T04:17:37.706902+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -328,7 +529,7 @@
       "settlement_source": null
     },
     {
-      "id": "c50bbe7754a144cfb0d47db2d28e2886",
+      "id": "224c3b52ded34da39cc24ceaf6e4b662",
       "fixture_id": "1810741",
       "kickoff": "2026-11-23T22:00:00+02:00",
       "home": "Levante",
@@ -357,6 +558,127 @@
         "home_lambda": 1.6648,
         "kickoff": "2026-11-23T22:00:00+02:00",
         "market": "double_chance",
+        "market_odds": {
+          "1X2": {
+            "away": 3.3,
+            "draw": 3.7,
+            "home": 2.25
+          },
+          "away_team_goals": {
+            "0.5": {
+              "over": 1.31,
+              "under": 3.5
+            },
+            "1.5": {
+              "over": 2.45,
+              "under": 1.56
+            },
+            "2.5": {
+              "over": 5.7,
+              "under": 1.14
+            },
+            "3.5": {
+              "over": 13.0,
+              "under": 1.03
+            },
+            "4.5": {
+              "over": 19.0,
+              "under": 1.01
+            }
+          },
+          "btts": {
+            "no": 2.35,
+            "yes": 1.59
+          },
+          "double_chance": {
+            "12": 1.3,
+            "1X": 1.35,
+            "X2": 1.66
+          },
+          "home_team_goals": {
+            "0.5": {
+              "over": 1.2,
+              "under": 4.6
+            },
+            "1.5": {
+              "over": 1.94,
+              "under": 1.88
+            },
+            "2.5": {
+              "over": 3.9,
+              "under": 1.26
+            },
+            "3.5": {
+              "over": 8.7,
+              "under": 1.07
+            },
+            "4.5": {
+              "over": 16.0,
+              "under": 1.01
+            }
+          },
+          "match_total_goals": {
+            "0.5": {
+              "over": 1.04,
+              "under": 12.5
+            },
+            "1.0": {
+              "over": 1.05,
+              "under": 11.0
+            },
+            "1.5": {
+              "over": 1.22,
+              "under": 4.5
+            },
+            "2.0": {
+              "over": 1.32,
+              "under": 3.6
+            },
+            "2.5": {
+              "over": 1.7,
+              "under": 2.2
+            },
+            "3.0": {
+              "over": 2.1,
+              "under": 1.76
+            },
+            "3.5": {
+              "over": 2.7,
+              "under": 1.5
+            },
+            "4.0": {
+              "over": 4.2,
+              "under": 1.25
+            },
+            "4.5": {
+              "over": 4.9,
+              "under": 1.19
+            },
+            "5.0": {
+              "over": 8.7,
+              "under": 1.08
+            },
+            "5.5": {
+              "over": 9.4,
+              "under": 1.07
+            }
+          }
+        },
+        "market_probabilities": {
+          "away_over_0_5": 0.9075604165728999,
+          "away_over_1_5": 0.6874432805162891,
+          "away_win": 0.5379024607992301,
+          "btts_yes": 0.7358241203782181,
+          "double_chance_12": 0.8053404924091507,
+          "double_chance_1x": 0.4620975392007693,
+          "double_chance_x2": 0.7325619683900787,
+          "draw": 0.1946595075908486,
+          "home_over_0_5": 0.8107715001023561,
+          "home_over_1_5": 0.4957438934727587,
+          "home_win": 0.2674380316099207,
+          "match_over_1_5": 0.9117343401142923,
+          "match_over_2_5": 0.7685596382564813
+        },
         "model_version": "venue-poisson-baseline-1",
         "odds": 1.3,
         "odds_status": "available",
@@ -372,7 +694,7 @@
         },
         "selection": "12"
       },
-      "created_at": "2026-11-23T04:12:56.018209+00:00",
+      "created_at": "2026-11-23T04:17:37.705549+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -380,7 +702,7 @@
       "settlement_source": null
     },
     {
-      "id": "3a4e027ee2a24cbeb661ad141c3e67cd",
+      "id": "457acc0746ef4adf87fdd4499e049a2f",
       "fixture_id": "1810741",
       "kickoff": "2026-11-23T22:00:00+02:00",
       "home": "Levante",
@@ -409,6 +731,127 @@
         "home_lambda": 1.6648,
         "kickoff": "2026-11-23T22:00:00+02:00",
         "market": "away_over_1_5",
+        "market_odds": {
+          "1X2": {
+            "away": 3.3,
+            "draw": 3.7,
+            "home": 2.25
+          },
+          "away_team_goals": {
+            "0.5": {
+              "over": 1.31,
+              "under": 3.5
+            },
+            "1.5": {
+              "over": 2.45,
+              "under": 1.56
+            },
+            "2.5": {
+              "over": 5.7,
+              "under": 1.14
+            },
+            "3.5": {
+              "over": 13.0,
+              "under": 1.03
+            },
+            "4.5": {
+              "over": 19.0,
+              "under": 1.01
+            }
+          },
+          "btts": {
+            "no": 2.35,
+            "yes": 1.59
+          },
+          "double_chance": {
+            "12": 1.3,
+            "1X": 1.35,
+            "X2": 1.66
+          },
+          "home_team_goals": {
+            "0.5": {
+              "over": 1.2,
+              "under": 4.6
+            },
+            "1.5": {
+              "over": 1.94,
+              "under": 1.88
+            },
+            "2.5": {
+              "over": 3.9,
+              "under": 1.26
+            },
+            "3.5": {
+              "over": 8.7,
+              "under": 1.07
+            },
+            "4.5": {
+              "over": 16.0,
+              "under": 1.01
+            }
+          },
+          "match_total_goals": {
+            "0.5": {
+              "over": 1.04,
+              "under": 12.5
+            },
+            "1.0": {
+              "over": 1.05,
+              "under": 11.0
+            },
+            "1.5": {
+              "over": 1.22,
+              "under": 4.5
+            },
+            "2.0": {
+              "over": 1.32,
+              "under": 3.6
+            },
+            "2.5": {
+              "over": 1.7,
+              "under": 2.2
+            },
+            "3.0": {
+              "over": 2.1,
+              "under": 1.76
+            },
+            "3.5": {
+              "over": 2.7,
+              "under": 1.5
+            },
+            "4.0": {
+              "over": 4.2,
+              "under": 1.25
+            },
+            "4.5": {
+              "over": 4.9,
+              "under": 1.19
+            },
+            "5.0": {
+              "over": 8.7,
+              "under": 1.08
+            },
+            "5.5": {
+              "over": 9.4,
+              "under": 1.07
+            }
+          }
+        },
+        "market_probabilities": {
+          "away_over_0_5": 0.9075604165728999,
+          "away_over_1_5": 0.6874432805162891,
+          "away_win": 0.5379024607992301,
+          "btts_yes": 0.7358241203782181,
+          "double_chance_12": 0.8053404924091507,
+          "double_chance_1x": 0.4620975392007693,
+          "double_chance_x2": 0.7325619683900787,
+          "draw": 0.1946595075908486,
+          "home_over_0_5": 0.8107715001023561,
+          "home_over_1_5": 0.4957438934727587,
+          "home_win": 0.2674380316099207,
+          "match_over_1_5": 0.9117343401142923,
+          "match_over_2_5": 0.7685596382564813
+        },
         "model_version": "venue-poisson-baseline-1",
         "odds": 2.45,
         "odds_status": "available",
@@ -424,7 +867,7 @@
         },
         "selection": "over"
       },
-      "created_at": "2026-11-23T04:12:56.016609+00:00",
+      "created_at": "2026-11-23T04:17:37.704216+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -432,7 +875,7 @@
       "settlement_source": null
     },
     {
-      "id": "ba27c54d7cdd411b852e84827ebd3a00",
+      "id": "2bcb071d0b57477f9fab7691efc80fa0",
       "fixture_id": "1810741",
       "kickoff": "2026-11-23T22:00:00+02:00",
       "home": "Levante",
@@ -461,6 +904,127 @@
         "home_lambda": 1.6648,
         "kickoff": "2026-11-23T22:00:00+02:00",
         "market": "btts_yes",
+        "market_odds": {
+          "1X2": {
+            "away": 3.3,
+            "draw": 3.7,
+            "home": 2.25
+          },
+          "away_team_goals": {
+            "0.5": {
+              "over": 1.31,
+              "under": 3.5
+            },
+            "1.5": {
+              "over": 2.45,
+              "under": 1.56
+            },
+            "2.5": {
+              "over": 5.7,
+              "under": 1.14
+            },
+            "3.5": {
+              "over": 13.0,
+              "under": 1.03
+            },
+            "4.5": {
+              "over": 19.0,
+              "under": 1.01
+            }
+          },
+          "btts": {
+            "no": 2.35,
+            "yes": 1.59
+          },
+          "double_chance": {
+            "12": 1.3,
+            "1X": 1.35,
+            "X2": 1.66
+          },
+          "home_team_goals": {
+            "0.5": {
+              "over": 1.2,
+              "under": 4.6
+            },
+            "1.5": {
+              "over": 1.94,
+              "under": 1.88
+            },
+            "2.5": {
+              "over": 3.9,
+              "under": 1.26
+            },
+            "3.5": {
+              "over": 8.7,
+              "under": 1.07
+            },
+            "4.5": {
+              "over": 16.0,
+              "under": 1.01
+            }
+          },
+          "match_total_goals": {
+            "0.5": {
+              "over": 1.04,
+              "under": 12.5
+            },
+            "1.0": {
+              "over": 1.05,
+              "under": 11.0
+            },
+            "1.5": {
+              "over": 1.22,
+              "under": 4.5
+            },
+            "2.0": {
+              "over": 1.32,
+              "under": 3.6
+            },
+            "2.5": {
+              "over": 1.7,
+              "under": 2.2
+            },
+            "3.0": {
+              "over": 2.1,
+              "under": 1.76
+            },
+            "3.5": {
+              "over": 2.7,
+              "under": 1.5
+            },
+            "4.0": {
+              "over": 4.2,
+              "under": 1.25
+            },
+            "4.5": {
+              "over": 4.9,
+              "under": 1.19
+            },
+            "5.0": {
+              "over": 8.7,
+              "under": 1.08
+            },
+            "5.5": {
+              "over": 9.4,
+              "under": 1.07
+            }
+          }
+        },
+        "market_probabilities": {
+          "away_over_0_5": 0.9075604165728999,
+          "away_over_1_5": 0.6874432805162891,
+          "away_win": 0.5379024607992301,
+          "btts_yes": 0.7358241203782181,
+          "double_chance_12": 0.8053404924091507,
+          "double_chance_1x": 0.4620975392007693,
+          "double_chance_x2": 0.7325619683900787,
+          "draw": 0.1946595075908486,
+          "home_over_0_5": 0.8107715001023561,
+          "home_over_1_5": 0.4957438934727587,
+          "home_win": 0.2674380316099207,
+          "match_over_1_5": 0.9117343401142923,
+          "match_over_2_5": 0.7685596382564813
+        },
         "model_version": "venue-poisson-baseline-1",
         "odds": 1.59,
         "odds_status": "available",
@@ -476,7 +1040,7 @@
         },
         "selection": "yes"
       },
-      "created_at": "2026-11-23T04:12:56.015087+00:00",
+      "created_at": "2026-11-23T04:17:37.703019+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -484,7 +1048,7 @@
       "settlement_source": null
     },
     {
-      "id": "9435f83aeb16492eb7a5e34d9b98b183",
+      "id": "852f41b4a3294f6389740ca355456859",
       "fixture_id": "1810741",
       "kickoff": "2026-11-23T22:00:00+02:00",
       "home": "Levante",
@@ -513,6 +1077,127 @@
         "home_lambda": 1.6648,
         "kickoff": "2026-11-23T22:00:00+02:00",
         "market": "double_chance",
+        "market_odds": {
+          "1X2": {
+            "away": 3.3,
+            "draw": 3.7,
+            "home": 2.25
+          },
+          "away_team_goals": {
+            "0.5": {
+              "over": 1.31,
+              "under": 3.5
+            },
+            "1.5": {
+              "over": 2.45,
+              "under": 1.56
+            },
+            "2.5": {
+              "over": 5.7,
+              "under": 1.14
+            },
+            "3.5": {
+              "over": 13.0,
+              "under": 1.03
+            },
+            "4.5": {
+              "over": 19.0,
+              "under": 1.01
+            }
+          },
+          "btts": {
+            "no": 2.35,
+            "yes": 1.59
+          },
+          "double_chance": {
+            "12": 1.3,
+            "1X": 1.35,
+            "X2": 1.66
+          },
+          "home_team_goals": {
+            "0.5": {
+              "over": 1.2,
+              "under": 4.6
+            },
+            "1.5": {
+              "over": 1.94,
+              "under": 1.88
+            },
+            "2.5": {
+              "over": 3.9,
+              "under": 1.26
+            },
+            "3.5": {
+              "over": 8.7,
+              "under": 1.07
+            },
+            "4.5": {
+              "over": 16.0,
+              "under": 1.01
+            }
+          },
+          "match_total_goals": {
+            "0.5": {
+              "over": 1.04,
+              "under": 12.5
+            },
+            "1.0": {
+              "over": 1.05,
+              "under": 11.0
+            },
+            "1.5": {
+              "over": 1.22,
+              "under": 4.5
+            },
+            "2.0": {
+              "over": 1.32,
+              "under": 3.6
+            },
+            "2.5": {
+              "over": 1.7,
+              "under": 2.2
+            },
+            "3.0": {
+              "over": 2.1,
+              "under": 1.76
+            },
+            "3.5": {
+              "over": 2.7,
+              "under": 1.5
+            },
+            "4.0": {
+              "over": 4.2,
+              "under": 1.25
+            },
+            "4.5": {
+              "over": 4.9,
+              "under": 1.19
+            },
+            "5.0": {
+              "over": 8.7,
+              "under": 1.08
+            },
+            "5.5": {
+              "over": 9.4,
+              "under": 1.07
+            }
+          }
+        },
+        "market_probabilities": {
+          "away_over_0_5": 0.9075604165728999,
+          "away_over_1_5": 0.6874432805162891,
+          "away_win": 0.5379024607992301,
+          "btts_yes": 0.7358241203782181,
+          "double_chance_12": 0.8053404924091507,
+          "double_chance_1x": 0.4620975392007693,
+          "double_chance_x2": 0.7325619683900787,
+          "draw": 0.1946595075908486,
+          "home_over_0_5": 0.8107715001023561,
+          "home_over_1_5": 0.4957438934727587,
+          "home_win": 0.2674380316099207,
+          "match_over_1_5": 0.9117343401142923,
+          "match_over_2_5": 0.7685596382564813
+        },
         "model_version": "venue-poisson-baseline-1",
         "odds": 1.66,
         "odds_status": "available",
@@ -528,7 +1213,7 @@
         },
         "selection": "X2"
       },
-      "created_at": "2026-11-23T04:12:56.011772+00:00",
+      "created_at": "2026-11-23T04:17:37.701346+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -536,7 +1221,7 @@
       "settlement_source": null
     },
     {
-      "id": "d63de49063744aa4b5262d103eb3efd5",
+      "id": "2a9a78188daf4fac8a2223e30a0ef8e0",
       "fixture_id": "1810741",
       "kickoff": "2026-11-23T22:00:00+02:00",
       "home": "Levante",
@@ -565,6 +1250,127 @@
         "home_lambda": 1.6648,
         "kickoff": "2026-11-23T22:00:00+02:00",
         "market": "match_over_2_5",
+        "market_odds": {
+          "1X2": {
+            "away": 3.3,
+            "draw": 3.7,
+            "home": 2.25
+          },
+          "away_team_goals": {
+            "0.5": {
+              "over": 1.31,
+              "under": 3.5
+            },
+            "1.5": {
+              "over": 2.45,
+              "under": 1.56
+            },
+            "2.5": {
+              "over": 5.7,
+              "under": 1.14
+            },
+            "3.5": {
+              "over": 13.0,
+              "under": 1.03
+            },
+            "4.5": {
+              "over": 19.0,
+              "under": 1.01
+            }
+          },
+          "btts": {
+            "no": 2.35,
+            "yes": 1.59
+          },
+          "double_chance": {
+            "12": 1.3,
+            "1X": 1.35,
+            "X2": 1.66
+          },
+          "home_team_goals": {
+            "0.5": {
+              "over": 1.2,
+              "under": 4.6
+            },
+            "1.5": {
+              "over": 1.94,
+              "under": 1.88
+            },
+            "2.5": {
+              "over": 3.9,
+              "under": 1.26
+            },
+            "3.5": {
+              "over": 8.7,
+              "under": 1.07
+            },
+            "4.5": {
+              "over": 16.0,
+              "under": 1.01
+            }
+          },
+          "match_total_goals": {
+            "0.5": {
+              "over": 1.04,
+              "under": 12.5
+            },
+            "1.0": {
+              "over": 1.05,
+              "under": 11.0
+            },
+            "1.5": {
+              "over": 1.22,
+              "under": 4.5
+            },
+            "2.0": {
+              "over": 1.32,
+              "under": 3.6
+            },
+            "2.5": {
+              "over": 1.7,
+              "under": 2.2
+            },
+            "3.0": {
+              "over": 2.1,
+              "under": 1.76
+            },
+            "3.5": {
+              "over": 2.7,
+              "under": 1.5
+            },
+            "4.0": {
+              "over": 4.2,
+              "under": 1.25
+            },
+            "4.5": {
+              "over": 4.9,
+              "under": 1.19
+            },
+            "5.0": {
+              "over": 8.7,
+              "under": 1.08
+            },
+            "5.5": {
+              "over": 9.4,
+              "under": 1.07
+            }
+          }
+        },
+        "market_probabilities": {
+          "away_over_0_5": 0.9075604165728999,
+          "away_over_1_5": 0.6874432805162891,
+          "away_win": 0.5379024607992301,
+          "btts_yes": 0.7358241203782181,
+          "double_chance_12": 0.8053404924091507,
+          "double_chance_1x": 0.4620975392007693,
+          "double_chance_x2": 0.7325619683900787,
+          "draw": 0.1946595075908486,
+          "home_over_0_5": 0.8107715001023561,
+          "home_over_1_5": 0.4957438934727587,
+          "home_win": 0.2674380316099207,
+          "match_over_1_5": 0.9117343401142923,
+          "match_over_2_5": 0.7685596382564813
+        },
         "model_version": "venue-poisson-baseline-1",
         "odds": 1.7,
         "odds_status": "available",
@@ -580,7 +1386,7 @@
         },
         "selection": "over"
       },
-      "created_at": "2026-11-23T04:12:56.007259+00:00",
+      "created_at": "2026-11-23T04:17:37.699934+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -588,7 +1394,7 @@
       "settlement_source": null
     },
     {
-      "id": "3c44ac615bc64edd9e48b170e9146536",
+      "id": "090997ecd29f4acb96da3a22f455ca26",
       "fixture_id": "1810741",
       "kickoff": "2026-11-23T22:00:00+02:00",
       "home": "Levante",
@@ -617,6 +1423,127 @@
         "home_lambda": 1.6648,
         "kickoff": "2026-11-23T22:00:00+02:00",
         "market": "match_over_1_5",
+        "market_odds": {
+          "1X2": {
+            "away": 3.3,
+            "draw": 3.7,
+            "home": 2.25
+          },
+          "away_team_goals": {
+            "0.5": {
+              "over": 1.31,
+              "under": 3.5
+            },
+            "1.5": {
+              "over": 2.45,
+              "under": 1.56
+            },
+            "2.5": {
+              "over": 5.7,
+              "under": 1.14
+            },
+            "3.5": {
+              "over": 13.0,
+              "under": 1.03
+            },
+            "4.5": {
+              "over": 19.0,
+              "under": 1.01
+            }
+          },
+          "btts": {
+            "no": 2.35,
+            "yes": 1.59
+          },
+          "double_chance": {
+            "12": 1.3,
+            "1X": 1.35,
+            "X2": 1.66
+          },
+          "home_team_goals": {
+            "0.5": {
+              "over": 1.2,
+              "under": 4.6
+            },
+            "1.5": {
+              "over": 1.94,
+              "under": 1.88
+            },
+            "2.5": {
+              "over": 3.9,
+              "under": 1.26
+            },
+            "3.5": {
+              "over": 8.7,
+              "under": 1.07
+            },
+            "4.5": {
+              "over": 16.0,
+              "under": 1.01
+            }
+          },
+          "match_total_goals": {
+            "0.5": {
+              "over": 1.04,
+              "under": 12.5
+            },
+            "1.0": {
+              "over": 1.05,
+              "under": 11.0
+            },
+            "1.5": {
+              "over": 1.22,
+              "under": 4.5
+            },
+            "2.0": {
+              "over": 1.32,
+              "under": 3.6
+            },
+            "2.5": {
+              "over": 1.7,
+              "under": 2.2
+            },
+            "3.0": {
+              "over": 2.1,
+              "under": 1.76
+            },
+            "3.5": {
+              "over": 2.7,
+              "under": 1.5
+            },
+            "4.0": {
+              "over": 4.2,
+              "under": 1.25
+            },
+            "4.5": {
+              "over": 4.9,
+              "under": 1.19
+            },
+            "5.0": {
+              "over": 8.7,
+              "under": 1.08
+            },
+            "5.5": {
+              "over": 9.4,
+              "under": 1.07
+            }
+          }
+        },
+        "market_probabilities": {
+          "away_over_0_5": 0.9075604165728999,
+          "away_over_1_5": 0.6874432805162891,
+          "away_win": 0.5379024607992301,
+          "btts_yes": 0.7358241203782181,
+          "double_chance_12": 0.8053404924091507,
+          "double_chance_1x": 0.4620975392007693,
+          "double_chance_x2": 0.7325619683900787,
+          "draw": 0.1946595075908486,
+          "home_over_0_5": 0.8107715001023561,
+          "home_over_1_5": 0.4957438934727587,
+          "home_win": 0.2674380316099207,
+          "match_over_1_5": 0.9117343401142923,
+          "match_over_2_5": 0.7685596382564813
+        },
         "model_version": "venue-poisson-baseline-1",
         "odds": 1.22,
         "odds_status": "available",
@@ -632,7 +1559,7 @@
         },
         "selection": "over"
       },
-      "created_at": "2026-11-23T04:12:56.005720+00:00",
+      "created_at": "2026-11-23T04:17:37.698561+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -640,7 +1567,7 @@
       "settlement_source": null
     },
     {
-      "id": "9cee1ca360944b6f962ec744343319bf",
+      "id": "572a0870e224488fabe975574af68b9c",
       "fixture_id": "1810741",
       "kickoff": "2026-11-23T22:00:00+02:00",
       "home": "Levante",
@@ -669,6 +1596,127 @@
         "home_lambda": 1.6648,
         "kickoff": "2026-11-23T22:00:00+02:00",
         "market": "away_over_0_5",
+        "market_odds": {
+          "1X2": {
+            "away": 3.3,
+            "draw": 3.7,
+            "home": 2.25
+          },
+          "away_team_goals": {
+            "0.5": {
+              "over": 1.31,
+              "under": 3.5
+            },
+            "1.5": {
+              "over": 2.45,
+              "under": 1.56
+            },
+            "2.5": {
+              "over": 5.7,
+              "under": 1.14
+            },
+            "3.5": {
+              "over": 13.0,
+              "under": 1.03
+            },
+            "4.5": {
+              "over": 19.0,
+              "under": 1.01
+            }
+          },
+          "btts": {
+            "no": 2.35,
+            "yes": 1.59
+          },
+          "double_chance": {
+            "12": 1.3,
+            "1X": 1.35,
+            "X2": 1.66
+          },
+          "home_team_goals": {
+            "0.5": {
+              "over": 1.2,
+              "under": 4.6
+            },
+            "1.5": {
+              "over": 1.94,
+              "under": 1.88
+            },
+            "2.5": {
+              "over": 3.9,
+              "under": 1.26
+            },
+            "3.5": {
+              "over": 8.7,
+              "under": 1.07
+            },
+            "4.5": {
+              "over": 16.0,
+              "under": 1.01
+            }
+          },
+          "match_total_goals": {
+            "0.5": {
+              "over": 1.04,
+              "under": 12.5
+            },
+            "1.0": {
+              "over": 1.05,
+              "under": 11.0
+            },
+            "1.5": {
+              "over": 1.22,
+              "under": 4.5
+            },
+            "2.0": {
+              "over": 1.32,
+              "under": 3.6
+            },
+            "2.5": {
+              "over": 1.7,
+              "under": 2.2
+            },
+            "3.0": {
+              "over": 2.1,
+              "under": 1.76
+            },
+            "3.5": {
+              "over": 2.7,
+              "under": 1.5
+            },
+            "4.0": {
+              "over": 4.2,
+              "under": 1.25
+            },
+            "4.5": {
+              "over": 4.9,
+              "under": 1.19
+            },
+            "5.0": {
+              "over": 8.7,
+              "under": 1.08
+            },
+            "5.5": {
+              "over": 9.4,
+              "under": 1.07
+            }
+          }
+        },
+        "market_probabilities": {
+          "away_over_0_5": 0.9075604165728999,
+          "away_over_1_5": 0.6874432805162891,
+          "away_win": 0.5379024607992301,
+          "btts_yes": 0.7358241203782181,
+          "double_chance_12": 0.8053404924091507,
+          "double_chance_1x": 0.4620975392007693,
+          "double_chance_x2": 0.7325619683900787,
+          "draw": 0.1946595075908486,
+          "home_over_0_5": 0.8107715001023561,
+          "home_over_1_5": 0.4957438934727587,
+          "home_win": 0.2674380316099207,
+          "match_over_1_5": 0.9117343401142923,
+          "match_over_2_5": 0.7685596382564813
+        },
         "model_version": "venue-poisson-baseline-1",
         "odds": 1.31,
         "odds_status": "available",
@@ -684,7 +1732,7 @@
         },
         "selection": "over"
       },
-      "created_at": "2026-11-23T04:12:56.003896+00:00",
+      "created_at": "2026-11-23T04:17:37.697002+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -692,7 +1740,7 @@
       "settlement_source": null
     },
     {
-      "id": "8ae70b37a5794f31aabd4c3eb1ef9fad",
+      "id": "f9d1b8f769904a3e9af826394f4d1d2c",
       "fixture_id": "1785426",
       "kickoff": "2026-11-23T21:45:00+02:00",
       "home": "Monza",
@@ -721,6 +1769,22 @@
         "home_lambda": 2.2641,
         "kickoff": "2026-11-23T21:45:00+02:00",
         "market": "away_over_1_5",
+        "market_odds": {},
+        "market_probabilities": {
+          "away_over_0_5": 0.869280307470014,
+          "away_over_1_5": 0.6033049490792513,
+          "away_win": 0.3582845769800676,
+          "btts_yes": 0.7789416348905694,
+          "double_chance_12": 0.8020094480860525,
+          "double_chance_1x": 0.6417154230199323,
+          "double_chance_x2": 0.5562751288940151,
+          "draw": 0.19799055191394754,
+          "home_over_0_5": 0.8960764763643342,
+          "home_over_1_5": 0.6607832265008231,
+          "home_win": 0.4437248711059848,
+          "match_over_1_5": 0.9280165912229466,
+          "match_over_2_5": 0.802494731257794
+        },
         "model_version": "venue-poisson-baseline-1",
         "odds": null,
         "odds_status": "unavailable",
@@ -736,7 +1800,7 @@
         },
         "selection": "over"
       },
-      "created_at": "2026-11-23T04:12:47.365082+00:00",
+      "created_at": "2026-11-23T04:17:26.735999+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -744,7 +1808,7 @@
       "settlement_source": null
     },
     {
-      "id": "ce9da11bd6474b2999b25dee6024cb60",
+      "id": "d21a59f586224f0ca2c1aa680724eb68",
       "fixture_id": "1785426",
       "kickoff": "2026-11-23T21:45:00+02:00",
       "home": "Monza",
@@ -773,6 +1837,22 @@
         "home_lambda": 2.2641,
         "kickoff": "2026-11-23T21:45:00+02:00",
         "market": "double_chance",
+        "market_odds": {},
+        "market_probabilities": {
+          "away_over_0_5": 0.869280307470014,
+          "away_over_1_5": 0.6033049490792513,
+          "away_win": 0.3582845769800676,
+          "btts_yes": 0.7789416348905694,
+          "double_chance_12": 0.8020094480860525,
+          "double_chance_1x": 0.6417154230199323,
+          "double_chance_x2": 0.5562751288940151,
+          "draw": 0.19799055191394754,
+          "home_over_0_5": 0.8960764763643342,
+          "home_over_1_5": 0.6607832265008231,
+          "home_win": 0.4437248711059848,
+          "match_over_1_5": 0.9280165912229466,
+          "match_over_2_5": 0.802494731257794
+        },
         "model_version": "venue-poisson-baseline-1",
         "odds": null,
         "odds_status": "unavailable",
@@ -788,7 +1868,7 @@
         },
         "selection": "1X"
       },
-      "created_at": "2026-11-23T04:12:47.363154+00:00",
+      "created_at": "2026-11-23T04:17:26.734837+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -796,7 +1876,7 @@
       "settlement_source": null
     },
     {
-      "id": "1e8d545335f74ae39ba1ebb097425a76",
+      "id": "61d01ca27640433983049ffb65d7d3a5",
       "fixture_id": "1785426",
       "kickoff": "2026-11-23T21:45:00+02:00",
       "home": "Monza",
@@ -825,6 +1905,22 @@
         "home_lambda": 2.2641,
         "kickoff": "2026-11-23T21:45:00+02:00",
         "market": "home_over_1_5",
+        "market_odds": {},
+        "market_probabilities": {
+          "away_over_0_5": 0.869280307470014,
+          "away_over_1_5": 0.6033049490792513,
+          "away_win": 0.3582845769800676,
+          "btts_yes": 0.7789416348905694,
+          "double_chance_12": 0.8020094480860525,
+          "double_chance_1x": 0.6417154230199323,
+          "double_chance_x2": 0.5562751288940151,
+          "draw": 0.19799055191394754,
+          "home_over_0_5": 0.8960764763643342,
+          "home_over_1_5": 0.6607832265008231,
+          "home_win": 0.4437248711059848,
+          "match_over_1_5": 0.9280165912229466,
+          "match_over_2_5": 0.802494731257794
+        },
         "model_version": "venue-poisson-baseline-1",
         "odds": null,
         "odds_status": "unavailable",
@@ -840,7 +1936,7 @@
         },
         "selection": "over"
       },
-      "created_at": "2026-11-23T04:12:47.361356+00:00",
+      "created_at": "2026-11-23T04:17:26.733831+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -848,7 +1944,7 @@
       "settlement_source": null
     },
     {
-      "id": "ae3b2f5e0ce6467195f4c9b665414075",
+      "id": "dd16bdf37596473a8642156067692d03",
       "fixture_id": "1785426",
       "kickoff": "2026-11-23T21:45:00+02:00",
       "home": "Monza",
@@ -877,6 +1973,22 @@
         "home_lambda": 2.2641,
         "kickoff": "2026-11-23T21:45:00+02:00",
         "market": "btts_yes",
+        "market_odds": {},
+        "market_probabilities": {
+          "away_over_0_5": 0.869280307470014,
+          "away_over_1_5": 0.6033049490792513,
+          "away_win": 0.3582845769800676,
+          "btts_yes": 0.7789416348905694,
+          "double_chance_12": 0.8020094480860525,
+          "double_chance_1x": 0.6417154230199323,
+          "double_chance_x2": 0.5562751288940151,
+          "draw": 0.19799055191394754,
+          "home_over_0_5": 0.8960764763643342,
+          "home_over_1_5": 0.6607832265008231,
+          "home_win": 0.4437248711059848,
+          "match_over_1_5": 0.9280165912229466,
+          "match_over_2_5": 0.802494731257794
+        },
         "model_version": "venue-poisson-baseline-1",
         "odds": null,
         "odds_status": "unavailable",
@@ -892,7 +2004,7 @@
         },
         "selection": "yes"
       },
-      "created_at": "2026-11-23T04:12:47.359674+00:00",
+      "created_at": "2026-11-23T04:17:26.732697+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -900,7 +2012,7 @@
       "settlement_source": null
     },
     {
-      "id": "c38857ff7f8e4819a338eb3ae43e70e2",
+      "id": "064dac973ebc4982abfa398f34c4de56",
       "fixture_id": "1785426",
       "kickoff": "2026-11-23T21:45:00+02:00",
       "home": "Monza",
@@ -929,6 +2041,22 @@
         "home_lambda": 2.2641,
         "kickoff": "2026-11-23T21:45:00+02:00",
         "market": "double_chance",
+        "market_odds": {},
+        "market_probabilities": {
+          "away_over_0_5": 0.869280307470014,
+          "away_over_1_5": 0.6033049490792513,
+          "away_win": 0.3582845769800676,
+          "btts_yes": 0.7789416348905694,
+          "double_chance_12": 0.8020094480860525,
+          "double_chance_1x": 0.6417154230199323,
+          "double_chance_x2": 0.5562751288940151,
+          "draw": 0.19799055191394754,
+          "home_over_0_5": 0.8960764763643342,
+          "home_over_1_5": 0.6607832265008231,
+          "home_win": 0.4437248711059848,
+          "match_over_1_5": 0.9280165912229466,
+          "match_over_2_5": 0.802494731257794
+        },
         "model_version": "venue-poisson-baseline-1",
         "odds": null,
         "odds_status": "unavailable",
@@ -944,7 +2072,7 @@
         },
         "selection": "12"
       },
-      "created_at": "2026-11-23T04:12:47.345096+00:00",
+      "created_at": "2026-11-23T04:17:26.731785+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -952,7 +2080,7 @@
       "settlement_source": null
     },
     {
-      "id": "0894097b7c5e490784867287e15d641e",
+      "id": "bbd0d66a13c541f8a47e675bb841be59",
       "fixture_id": "1785426",
       "kickoff": "2026-11-23T21:45:00+02:00",
       "home": "Monza",
@@ -981,6 +2109,22 @@
         "home_lambda": 2.2641,
         "kickoff": "2026-11-23T21:45:00+02:00",
         "market": "match_over_2_5",
+        "market_odds": {},
+        "market_probabilities": {
+          "away_over_0_5": 0.869280307470014,
+          "away_over_1_5": 0.6033049490792513,
+          "away_win": 0.3582845769800676,
+          "btts_yes": 0.7789416348905694,
+          "double_chance_12": 0.8020094480860525,
+          "double_chance_1x": 0.6417154230199323,
+          "double_chance_x2": 0.5562751288940151,
+          "draw": 0.19799055191394754,
+          "home_over_0_5": 0.8960764763643342,
+          "home_over_1_5": 0.6607832265008231,
+          "home_win": 0.4437248711059848,
+          "match_over_1_5": 0.9280165912229466,
+          "match_over_2_5": 0.802494731257794
+        },
         "model_version": "venue-poisson-baseline-1",
         "odds": null,
         "odds_status": "unavailable",
@@ -996,7 +2140,7 @@
         },
         "selection": "over"
       },
-      "created_at": "2026-11-23T04:12:47.343363+00:00",
+      "created_at": "2026-11-23T04:17:26.730683+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -1004,7 +2148,7 @@
       "settlement_source": null
     },
     {
-      "id": "922c574cebc8448c9195ce7d63cab4da",
+      "id": "1f7b7d42f03a4ae1bdf8632d4418477b",
       "fixture_id": "1785426",
       "kickoff": "2026-11-23T21:45:00+02:00",
       "home": "Monza",
@@ -1033,6 +2177,22 @@
         "home_lambda": 2.2641,
         "kickoff": "2026-11-23T21:45:00+02:00",
         "market": "away_over_0_5",
+        "market_odds": {},
+        "market_probabilities": {
+          "away_over_0_5": 0.869280307470014,
+          "away_over_1_5": 0.6033049490792513,
+          "away_win": 0.3582845769800676,
+          "btts_yes": 0.7789416348905694,
+          "double_chance_12": 0.8020094480860525,
+          "double_chance_1x": 0.6417154230199323,
+          "double_chance_x2": 0.5562751288940151,
+          "draw": 0.19799055191394754,
+          "home_over_0_5": 0.8960764763643342,
+          "home_over_1_5": 0.6607832265008231,
+          "home_win": 0.4437248711059848,
+          "match_over_1_5": 0.9280165912229466,
+          "match_over_2_5": 0.802494731257794
+        },
         "model_version": "venue-poisson-baseline-1",
         "odds": null,
         "odds_status": "unavailable",
@@ -1048,7 +2208,7 @@
         },
         "selection": "over"
       },
-      "created_at": "2026-11-23T04:12:47.341736+00:00",
+      "created_at": "2026-11-23T04:17:26.729784+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -1056,7 +2216,7 @@
       "settlement_source": null
     },
     {
-      "id": "e61e1930420f46458434c8b91498ed98",
+      "id": "81f5c5d2a55a4d0b841e5c5521cae7d3",
       "fixture_id": "1785426",
       "kickoff": "2026-11-23T21:45:00+02:00",
       "home": "Monza",
@@ -1085,6 +2245,22 @@
         "home_lambda": 2.2641,
         "kickoff": "2026-11-23T21:45:00+02:00",
         "market": "home_over_0_5",
+        "market_odds": {},
+        "market_probabilities": {
+          "away_over_0_5": 0.869280307470014,
+          "away_over_1_5": 0.6033049490792513,
+          "away_win": 0.3582845769800676,
+          "btts_yes": 0.7789416348905694,
+          "double_chance_12": 0.8020094480860525,
+          "double_chance_1x": 0.6417154230199323,
+          "double_chance_x2": 0.5562751288940151,
+          "draw": 0.19799055191394754,
+          "home_over_0_5": 0.8960764763643342,
+          "home_over_1_5": 0.6607832265008231,
+          "home_win": 0.4437248711059848,
+          "match_over_1_5": 0.9280165912229466,
+          "match_over_2_5": 0.802494731257794
+        },
         "model_version": "venue-poisson-baseline-1",
         "odds": null,
         "odds_status": "unavailable",
@@ -1100,7 +2276,7 @@
         },
         "selection": "over"
       },
-      "created_at": "2026-11-23T04:12:47.340245+00:00",
+      "created_at": "2026-11-23T04:17:26.728496+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -1108,7 +2284,7 @@
       "settlement_source": null
     },
     {
-      "id": "8d43c7c157ba4d5c9e1ed87b8c6c61f0",
+      "id": "a13905ae2e6c4f169d4ad6dabedd2d2b",
       "fixture_id": "1785426",
       "kickoff": "2026-11-23T21:45:00+02:00",
       "home": "Monza",
@@ -1137,6 +2313,22 @@
         "home_lambda": 2.2641,
         "kickoff": "2026-11-23T21:45:00+02:00",
         "market": "match_over_1_5",
+        "market_odds": {},
+        "market_probabilities": {
+          "away_over_0_5": 0.869280307470014,
+          "away_over_1_5": 0.6033049490792513,
+          "away_win": 0.3582845769800676,
+          "btts_yes": 0.7789416348905694,
+          "double_chance_12": 0.8020094480860525,
+          "double_chance_1x": 0.6417154230199323,
+          "double_chance_x2": 0.5562751288940151,
+          "draw": 0.19799055191394754,
+          "home_over_0_5": 0.8960764763643342,
+          "home_over_1_5": 0.6607832265008231,
+          "home_win": 0.4437248711059848,
+          "match_over_1_5": 0.9280165912229466,
+          "match_over_2_5": 0.802494731257794
+        },
         "model_version": "venue-poisson-baseline-1",
         "odds": null,
         "odds_status": "unavailable",
@@ -1152,7 +2344,7 @@
         },
         "selection": "over"
       },
-      "created_at": "2026-11-23T04:12:47.338585+00:00",
+      "created_at": "2026-11-23T04:17:26.721588+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -1160,7 +2352,7 @@
       "settlement_source": null
     },
     {
-      "id": "49cda9c6131342c7aa9e77f660fc8d81",
+      "id": "09811908a235435690a81d60d28b5f82",
       "fixture_id": "1834796",
       "kickoff": "2026-11-23T19:00:00+02:00",
       "home": "Bayern Munich W",
@@ -1189,6 +2381,63 @@
         "home_lambda": 3.8955,
         "kickoff": "2026-11-23T19:00:00+02:00",
         "market": "btts_yes",
+        "market_odds": {
+          "1X2": {
+            "away": 20.0,
+            "draw": 12.0,
+            "home": 1.03
+          },
+          "double_chance": {
+            "12": 1.01,
+            "1X": 1.01,
+            "X2": 5.0
+          },
+          "match_total_goals": {
+            "0.5": {
+              "over": 1.01,
+              "under": 11.0
+            },
+            "1.5": {
+              "over": 1.03,
+              "under": 8.1
+            },
+            "2.5": {
+              "over": 1.16,
+              "under": 4.4
+            },
+            "3.5": {
+              "over": 1.45,
+              "under": 2.5
+            },
+            "4.5": {
+              "over": 1.99,
+              "under": 1.7
+            },
+            "5.5": {
+              "over": 3.0,
+              "under": 1.32
+            },
+            "6.5": {
+              "over": 4.75,
+              "under": 1.14
+            }
+          }
+        },
+        "market_probabilities": {
+          "away_over_0_5": 0.6674616210055413,
+          "away_over_1_5": 0.3013368657326423,
+          "away_win": 0.05923427724001698,
+          "btts_yes": 0.6538899867428334,
+          "double_chance_12": 0.9135828935420958,
+          "double_chance_1x": 0.940765722759983,
+          "double_chance_x2": 0.1456513836979212,
+          "draw": 0.0864171064579042,
+          "home_over_0_5": 0.979666794695566,
+          "home_over_1_5": 0.900458793432143,
+          "home_win": 0.8543486163020788,
+          "match_over_1_5": 0.9594542387087727,
+          "match_over_2_5": 0.8750528848144057
+        },
         "model_version": "venue-poisson-baseline-1",
         "odds": null,
         "odds_status": "unavailable",
@@ -1204,7 +2453,7 @@
         },
         "selection": "yes"
       },
-      "created_at": "2026-11-23T04:12:38.313457+00:00",
+      "created_at": "2026-11-23T04:17:14.579947+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -1212,7 +2461,7 @@
       "settlement_source": null
     },
     {
-      "id": "2277d69161b046598b17c2dd0b00b50b",
+      "id": "c9322c0bb33e404a8941813a549702cf",
       "fixture_id": "1834796",
       "kickoff": "2026-11-23T19:00:00+02:00",
       "home": "Bayern Munich W",
@@ -1241,6 +2490,63 @@
         "home_lambda": 3.8955,
         "kickoff": "2026-11-23T19:00:00+02:00",
         "market": "away_over_0_5",
+        "market_odds": {
+          "1X2": {
+            "away": 20.0,
+            "draw": 12.0,
+            "home": 1.03
+          },
+          "double_chance": {
+            "12": 1.01,
+            "1X": 1.01,
+            "X2": 5.0
+          },
+          "match_total_goals": {
+            "0.5": {
+              "over": 1.01,
+              "under": 11.0
+            },
+            "1.5": {
+              "over": 1.03,
+              "under": 8.1
+            },
+            "2.5": {
+              "over": 1.16,
+              "under": 4.4
+            },
+            "3.5": {
+              "over": 1.45,
+              "under": 2.5
+            },
+            "4.5": {
+              "over": 1.99,
+              "under": 1.7
+            },
+            "5.5": {
+              "over": 3.0,
+              "under": 1.32
+            },
+            "6.5": {
+              "over": 4.75,
+              "under": 1.14
+            }
+          }
+        },
+        "market_probabilities": {
+          "away_over_0_5": 0.6674616210055413,
+          "away_over_1_5": 0.3013368657326423,
+          "away_win": 0.05923427724001698,
+          "btts_yes": 0.6538899867428334,
+          "double_chance_12": 0.9135828935420958,
+          "double_chance_1x": 0.940765722759983,
+          "double_chance_x2": 0.1456513836979212,
+          "draw": 0.0864171064579042,
+          "home_over_0_5": 0.979666794695566,
+          "home_over_1_5": 0.900458793432143,
+          "home_win": 0.8543486163020788,
+          "match_over_1_5": 0.9594542387087727,
+          "match_over_2_5": 0.8750528848144057
+        },
         "model_version": "venue-poisson-baseline-1",
         "odds": null,
         "odds_status": "unavailable",
@@ -1256,7 +2562,7 @@
         },
         "selection": "over"
       },
-      "created_at": "2026-11-23T04:12:38.298962+00:00",
+      "created_at": "2026-11-23T04:17:14.579031+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -1264,7 +2570,7 @@
       "settlement_source": null
     },
     {
-      "id": "c737b0b2218b4188b737fd7fc80cefe6",
+      "id": "9f105f52329a45c180f3970a0c531cfc",
       "fixture_id": "1834796",
       "kickoff": "2026-11-23T19:00:00+02:00",
       "home": "Bayern Munich W",
@@ -1293,6 +2599,63 @@
         "home_lambda": 3.8955,
         "kickoff": "2026-11-23T19:00:00+02:00",
         "market": "match_winner",
+        "market_odds": {
+          "1X2": {
+            "away": 20.0,
+            "draw": 12.0,
+            "home": 1.03
+          },
+          "double_chance": {
+            "12": 1.01,
+            "1X": 1.01,
+            "X2": 5.0
+          },
+          "match_total_goals": {
+            "0.5": {
+              "over": 1.01,
+              "under": 11.0
+            },
+            "1.5": {
+              "over": 1.03,
+              "under": 8.1
+            },
+            "2.5": {
+              "over": 1.16,
+              "under": 4.4
+            },
+            "3.5": {
+              "over": 1.45,
+              "under": 2.5
+            },
+            "4.5": {
+              "over": 1.99,
+              "under": 1.7
+            },
+            "5.5": {
+              "over": 3.0,
+              "under": 1.32
+            },
+            "6.5": {
+              "over": 4.75,
+              "under": 1.14
+            }
+          }
+        },
+        "market_probabilities": {
+          "away_over_0_5": 0.6674616210055413,
+          "away_over_1_5": 0.3013368657326423,
+          "away_win": 0.05923427724001698,
+          "btts_yes": 0.6538899867428334,
+          "double_chance_12": 0.9135828935420958,
+          "double_chance_1x": 0.940765722759983,
+          "double_chance_x2": 0.1456513836979212,
+          "draw": 0.0864171064579042,
+          "home_over_0_5": 0.979666794695566,
+          "home_over_1_5": 0.900458793432143,
+          "home_win": 0.8543486163020788,
+          "match_over_1_5": 0.9594542387087727,
+          "match_over_2_5": 0.8750528848144057
+        },
         "model_version": "venue-poisson-baseline-1",
         "odds": 1.03,
         "odds_status": "available",
@@ -1308,7 +2671,7 @@
         },
         "selection": "home"
       },
-      "created_at": "2026-11-23T04:12:38.297114+00:00",
+      "created_at": "2026-11-23T04:17:14.577300+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -1316,7 +2679,7 @@
       "settlement_source": null
     },
     {
-      "id": "9dde4be34511411592cc0cf41ae258e5",
+      "id": "18802d1bb0734c51aa2be9bf630b8227",
       "fixture_id": "1834796",
       "kickoff": "2026-11-23T19:00:00+02:00",
       "home": "Bayern Munich W",
@@ -1345,6 +2708,63 @@
         "home_lambda": 3.8955,
         "kickoff": "2026-11-23T19:00:00+02:00",
         "market": "double_chance",
+        "market_odds": {
+          "1X2": {
+            "away": 20.0,
+            "draw": 12.0,
+            "home": 1.03
+          },
+          "double_chance": {
+            "12": 1.01,
+            "1X": 1.01,
+            "X2": 5.0
+          },
+          "match_total_goals": {
+            "0.5": {
+              "over": 1.01,
+              "under": 11.0
+            },
+            "1.5": {
+              "over": 1.03,
+              "under": 8.1
+            },
+            "2.5": {
+              "over": 1.16,
+              "under": 4.4
+            },
+            "3.5": {
+              "over": 1.45,
+              "under": 2.5
+            },
+            "4.5": {
+              "over": 1.99,
+              "under": 1.7
+            },
+            "5.5": {
+              "over": 3.0,
+              "under": 1.32
+            },
+            "6.5": {
+              "over": 4.75,
+              "under": 1.14
+            }
+          }
+        },
+        "market_probabilities": {
+          "away_over_0_5": 0.6674616210055413,
+          "away_over_1_5": 0.3013368657326423,
+          "away_win": 0.05923427724001698,
+          "btts_yes": 0.6538899867428334,
+          "double_chance_12": 0.9135828935420958,
+          "double_chance_1x": 0.940765722759983,
+          "double_chance_x2": 0.1456513836979212,
+          "draw": 0.0864171064579042,
+          "home_over_0_5": 0.979666794695566,
+          "home_over_1_5": 0.900458793432143,
+          "home_win": 0.8543486163020788,
+          "match_over_1_5": 0.9594542387087727,
+          "match_over_2_5": 0.8750528848144057
+        },
         "model_version": "venue-poisson-baseline-1",
         "odds": 1.01,
         "odds_status": "available",
@@ -1360,7 +2780,7 @@
         },
         "selection": "12"
       },
-      "created_at": "2026-11-23T04:12:38.295124+00:00",
+      "created_at": "2026-11-23T04:17:14.576438+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -1368,7 +2788,7 @@
       "settlement_source": null
     },
     {
-      "id": "3e83fa0076bb4eac88a34bb8a616e165",
+      "id": "ea2ab0bcc0324285ad56e5695888f002",
       "fixture_id": "1834796",
       "kickoff": "2026-11-23T19:00:00+02:00",
       "home": "Bayern Munich W",
@@ -1397,6 +2817,63 @@
         "home_lambda": 3.8955,
         "kickoff": "2026-11-23T19:00:00+02:00",
         "market": "match_over_2_5",
+        "market_odds": {
+          "1X2": {
+            "away": 20.0,
+            "draw": 12.0,
+            "home": 1.03
+          },
+          "double_chance": {
+            "12": 1.01,
+            "1X": 1.01,
+            "X2": 5.0
+          },
+          "match_total_goals": {
+            "0.5": {
+              "over": 1.01,
+              "under": 11.0
+            },
+            "1.5": {
+              "over": 1.03,
+              "under": 8.1
+            },
+            "2.5": {
+              "over": 1.16,
+              "under": 4.4
+            },
+            "3.5": {
+              "over": 1.45,
+              "under": 2.5
+            },
+            "4.5": {
+              "over": 1.99,
+              "under": 1.7
+            },
+            "5.5": {
+              "over": 3.0,
+              "under": 1.32
+            },
+            "6.5": {
+              "over": 4.75,
+              "under": 1.14
+            }
+          }
+        },
+        "market_probabilities": {
+          "away_over_0_5": 0.6674616210055413,
+          "away_over_1_5": 0.3013368657326423,
+          "away_win": 0.05923427724001698,
+          "btts_yes": 0.6538899867428334,
+          "double_chance_12": 0.9135828935420958,
+          "double_chance_1x": 0.940765722759983,
+          "double_chance_x2": 0.1456513836979212,
+          "draw": 0.0864171064579042,
+          "home_over_0_5": 0.979666794695566,
+          "home_over_1_5": 0.900458793432143,
+          "home_win": 0.8543486163020788,
+          "match_over_1_5": 0.9594542387087727,
+          "match_over_2_5": 0.8750528848144057
+        },
         "model_version": "venue-poisson-baseline-1",
         "odds": 1.16,
         "odds_status": "available",
@@ -1412,7 +2889,7 @@
         },
         "selection": "over"
       },
-      "created_at": "2026-11-23T04:12:38.293068+00:00",
+      "created_at": "2026-11-23T04:17:14.575315+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -1420,7 +2897,7 @@
       "settlement_source": null
     },
     {
-      "id": "a2789af973414004b92162f6b6bc978a",
+      "id": "40a6389def4347ae8e30c9caf920199a",
       "fixture_id": "1834796",
       "kickoff": "2026-11-23T19:00:00+02:00",
       "home": "Bayern Munich W",
@@ -1449,6 +2926,63 @@
         "home_lambda": 3.8955,
         "kickoff": "2026-11-23T19:00:00+02:00",
         "market": "double_chance",
+        "market_odds": {
+          "1X2": {
+            "away": 20.0,
+            "draw": 12.0,
+            "home": 1.03
+          },
+          "double_chance": {
+            "12": 1.01,
+            "1X": 1.01,
+            "X2": 5.0
+          },
+          "match_total_goals": {
+            "0.5": {
+              "over": 1.01,
+              "under": 11.0
+            },
+            "1.5": {
+              "over": 1.03,
+              "under": 8.1
+            },
+            "2.5": {
+              "over": 1.16,
+              "under": 4.4
+            },
+            "3.5": {
+              "over": 1.45,
+              "under": 2.5
+            },
+            "4.5": {
+              "over": 1.99,
+              "under": 1.7
+            },
+            "5.5": {
+              "over": 3.0,
+              "under": 1.32
+            },
+            "6.5": {
+              "over": 4.75,
+              "under": 1.14
+            }
+          }
+        },
+        "market_probabilities": {
+          "away_over_0_5": 0.6674616210055413,
+          "away_over_1_5": 0.3013368657326423,
+          "away_win": 0.05923427724001698,
+          "btts_yes": 0.6538899867428334,
+          "double_chance_12": 0.9135828935420958,
+          "double_chance_1x": 0.940765722759983,
+          "double_chance_x2": 0.1456513836979212,
+          "draw": 0.0864171064579042,
+          "home_over_0_5": 0.979666794695566,
+          "home_over_1_5": 0.900458793432143,
+          "home_win": 0.8543486163020788,
+          "match_over_1_5": 0.9594542387087727,
+          "match_over_2_5": 0.8750528848144057
+        },
         "model_version": "venue-poisson-baseline-1",
         "odds": 1.01,
         "odds_status": "available",
@@ -1464,7 +2998,7 @@
         },
         "selection": "1X"
       },
-      "created_at": "2026-11-23T04:12:38.291407+00:00",
+      "created_at": "2026-11-23T04:17:14.574383+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -1472,7 +3006,7 @@
       "settlement_source": null
     },
     {
-      "id": "614ebd5abda644e79ee897a7dd75513c",
+      "id": "7d33f955ff08424da5d963212e010506",
       "fixture_id": "1834796",
       "kickoff": "2026-11-23T19:00:00+02:00",
       "home": "Bayern Munich W",
@@ -1501,6 +3035,63 @@
         "home_lambda": 3.8955,
         "kickoff": "2026-11-23T19:00:00+02:00",
         "market": "home_over_1_5",
+        "market_odds": {
+          "1X2": {
+            "away": 20.0,
+            "draw": 12.0,
+            "home": 1.03
+          },
+          "double_chance": {
+            "12": 1.01,
+            "1X": 1.01,
+            "X2": 5.0
+          },
+          "match_total_goals": {
+            "0.5": {
+              "over": 1.01,
+              "under": 11.0
+            },
+            "1.5": {
+              "over": 1.03,
+              "under": 8.1
+            },
+            "2.5": {
+              "over": 1.16,
+              "under": 4.4
+            },
+            "3.5": {
+              "over": 1.45,
+              "under": 2.5
+            },
+            "4.5": {
+              "over": 1.99,
+              "under": 1.7
+            },
+            "5.5": {
+              "over": 3.0,
+              "under": 1.32
+            },
+            "6.5": {
+              "over": 4.75,
+              "under": 1.14
+            }
+          }
+        },
+        "market_probabilities": {
+          "away_over_0_5": 0.6674616210055413,
+          "away_over_1_5": 0.3013368657326423,
+          "away_win": 0.05923427724001698,
+          "btts_yes": 0.6538899867428334,
+          "double_chance_12": 0.9135828935420958,
+          "double_chance_1x": 0.940765722759983,
+          "double_chance_x2": 0.1456513836979212,
+          "draw": 0.0864171064579042,
+          "home_over_0_5": 0.979666794695566,
+          "home_over_1_5": 0.900458793432143,
+          "home_win": 0.8543486163020788,
+          "match_over_1_5": 0.9594542387087727,
+          "match_over_2_5": 0.8750528848144057
+        },
         "model_version": "venue-poisson-baseline-1",
         "odds": null,
         "odds_status": "unavailable",
@@ -1516,7 +3107,7 @@
         },
         "selection": "over"
       },
-      "created_at": "2026-11-23T04:12:38.289787+00:00",
+      "created_at": "2026-11-23T04:17:14.573324+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -1524,7 +3115,7 @@
       "settlement_source": null
     },
     {
-      "id": "4aac33a3a4144227aa95309adda9ba55",
+      "id": "295401080d514f0b9ba6dd85e76fb0a0",
       "fixture_id": "1834796",
       "kickoff": "2026-11-23T19:00:00+02:00",
       "home": "Bayern Munich W",
@@ -1553,6 +3144,63 @@
         "home_lambda": 3.8955,
         "kickoff": "2026-11-23T19:00:00+02:00",
         "market": "match_over_1_5",
+        "market_odds": {
+          "1X2": {
+            "away": 20.0,
+            "draw": 12.0,
+            "home": 1.03
+          },
+          "double_chance": {
+            "12": 1.01,
+            "1X": 1.01,
+            "X2": 5.0
+          },
+          "match_total_goals": {
+            "0.5": {
+              "over": 1.01,
+              "under": 11.0
+            },
+            "1.5": {
+              "over": 1.03,
+              "under": 8.1
+            },
+            "2.5": {
+              "over": 1.16,
+              "under": 4.4
+            },
+            "3.5": {
+              "over": 1.45,
+              "under": 2.5
+            },
+            "4.5": {
+              "over": 1.99,
+              "under": 1.7
+            },
+            "5.5": {
+              "over": 3.0,
+              "under": 1.32
+            },
+            "6.5": {
+              "over": 4.75,
+              "under": 1.14
+            }
+          }
+        },
+        "market_probabilities": {
+          "away_over_0_5": 0.6674616210055413,
+          "away_over_1_5": 0.3013368657326423,
+          "away_win": 0.05923427724001698,
+          "btts_yes": 0.6538899867428334,
+          "double_chance_12": 0.9135828935420958,
+          "double_chance_1x": 0.940765722759983,
+          "double_chance_x2": 0.1456513836979212,
+          "draw": 0.0864171064579042,
+          "home_over_0_5": 0.979666794695566,
+          "home_over_1_5": 0.900458793432143,
+          "home_win": 0.8543486163020788,
+          "match_over_1_5": 0.9594542387087727,
+          "match_over_2_5": 0.8750528848144057
+        },
         "model_version": "venue-poisson-baseline-1",
         "odds": 1.03,
         "odds_status": "available",
@@ -1568,7 +3216,7 @@
         },
         "selection": "over"
       },
-      "created_at": "2026-11-23T04:12:38.288078+00:00",
+      "created_at": "2026-11-23T04:17:14.572391+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -1576,7 +3224,7 @@
       "settlement_source": null
     },
     {
-      "id": "fe6d0608006443e893ec824237a31b6d",
+      "id": "e9dfda5ceb0041fabe5c4ed2ee10d7c9",
       "fixture_id": "1834796",
       "kickoff": "2026-11-23T19:00:00+02:00",
       "home": "Bayern Munich W",
@@ -1605,6 +3253,63 @@
         "home_lambda": 3.8955,
         "kickoff": "2026-11-23T19:00:00+02:00",
         "market": "home_over_0_5",
+        "market_odds": {
+          "1X2": {
+            "away": 20.0,
+            "draw": 12.0,
+            "home": 1.03
+          },
+          "double_chance": {
+            "12": 1.01,
+            "1X": 1.01,
+            "X2": 5.0
+          },
+          "match_total_goals": {
+            "0.5": {
+              "over": 1.01,
+              "under": 11.0
+            },
+            "1.5": {
+              "over": 1.03,
+              "under": 8.1
+            },
+            "2.5": {
+              "over": 1.16,
+              "under": 4.4
+            },
+            "3.5": {
+              "over": 1.45,
+              "under": 2.5
+            },
+            "4.5": {
+              "over": 1.99,
+              "under": 1.7
+            },
+            "5.5": {
+              "over": 3.0,
+              "under": 1.32
+            },
+            "6.5": {
+              "over": 4.75,
+              "under": 1.14
+            }
+          }
+        },
+        "market_probabilities": {
+          "away_over_0_5": 0.6674616210055413,
+          "away_over_1_5": 0.3013368657326423,
+          "away_win": 0.05923427724001698,
+          "btts_yes": 0.6538899867428334,
+          "double_chance_12": 0.9135828935420958,
+          "double_chance_1x": 0.940765722759983,
+          "double_chance_x2": 0.1456513836979212,
+          "draw": 0.0864171064579042,
+          "home_over_0_5": 0.979666794695566,
+          "home_over_1_5": 0.900458793432143,
+          "home_win": 0.8543486163020788,
+          "match_over_1_5": 0.9594542387087727,
+          "match_over_2_5": 0.8750528848144057
+        },
         "model_version": "venue-poisson-baseline-1",
         "odds": null,
         "odds_status": "unavailable",
@@ -1620,7 +3325,7 @@
         },
         "selection": "over"
       },
-      "created_at": "2026-11-23T04:12:38.285913+00:00",
+      "created_at": "2026-11-23T04:17:14.571163+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -1628,7 +3333,7 @@
       "settlement_source": null
     },
     {
-      "id": "b853aa7a60284374ab6aecd47cb28e8c",
+      "id": "4dc04bec61aa40d1acd19b5812cd28c7",
       "fixture_id": "1792833",
       "kickoff": "2026-11-24T21:45:00+02:00",
       "home": "Hibernian",
@@ -1657,6 +3362,119 @@
         "home_lambda": 0.9796,
         "kickoff": "2026-11-24T21:45:00+02:00",
         "market": "home_over_0_5",
+        "market_odds": {
+          "1X2": {
+            "away": 4.9,
+            "draw": 4.3,
+            "home": 1.63
+          },
+          "away_team_goals": {
+            "0.5": {
+              "over": 1.45,
+              "under": 2.6
+            },
+            "1.5": {
+              "over": 3.1,
+              "under": 1.34
+            },
+            "2.5": {
+              "over": 7.5,
+              "under": 1.07
+            }
+          },
+          "btts": {
+            "no": 2.15,
+            "yes": 1.66
+          },
+          "double_chance": {
+            "12": 1.22,
+            "1X": 1.18,
+            "X2": 2.1
+          },
+          "home_team_goals": {
+            "0.5": {
+              "over": 1.11,
+              "under": 5.8
+            },
+            "1.5": {
+              "over": 1.58,
+              "under": 2.3
+            },
+            "2.5": {
+              "over": 2.75,
+              "under": 1.42
+            },
+            "3.5": {
+              "over": 5.4,
+              "under": 1.13
+            },
+            "4.5": {
+              "over": 10.0,
+              "under": 1.03
+            }
+          },
+          "match_total_goals": {
+            "0.5": {
+              "over": 1.03,
+              "under": 11.5
+            },
+            "1.0": {
+              "over": 1.04,
+              "under": 10.5
+            },
+            "1.5": {
+              "over": 1.19,
+              "under": 4.5
+            },
+            "2.0": {
+              "over": 1.27,
+              "under": 3.7
+            },
+            "2.5": {
+              "over": 1.61,
+              "under": 2.3
+            },
+            "3.0": {
+              "over": 1.97,
+              "under": 1.81
+            },
+            "3.5": {
+              "over": 2.5,
+              "under": 1.52
+            },
+            "4.0": {
+              "over": 3.7,
+              "under": 1.27
+            },
+            "4.5": {
+              "over": 4.3,
+              "under": 1.21
+            },
+            "5.0": {
+              "over": 7.25,
+              "under": 1.08
+            },
+            "5.5": {
+              "over": 7.9,
+              "under": 1.07
+            }
+          }
+        },
+        "market_probabilities": {
+          "away_over_0_5": 0.779421138608051,
+          "away_over_1_5": 0.44601618961411993,
+          "away_win": 0.4958809409738514,
+          "btts_yes": 0.4867787010423018,
+          "double_chance_12": 0.74096022165513,
+          "double_chance_1x": 0.5041190590261485,
+          "double_chance_x2": 0.7549207193187213,
+          "draw": 0.2590397783448699,
+          "home_over_0_5": 0.6245387466801683,
+          "home_over_1_5": 0.25673690292806106,
+          "home_win": 0.24507928068127857,
+          "match_over_1_5": 0.7108712323209222,
+          "match_over_2_5": 0.4539018717007438
+        },
         "model_version": "venue-poisson-baseline-1",
         "odds": 1.11,
         "odds_status": "available",
@@ -1672,7 +3490,7 @@
         },
         "selection": "over"
       },
-      "created_at": "2026-11-23T04:12:29.528476+00:00",
+      "created_at": "2026-11-23T04:17:06.141043+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -1680,7 +3498,7 @@
       "settlement_source": null
     },
     {
-      "id": "604a89cd6b7e45e29558478f4e3b0253",
+      "id": "22687818aa9b46ee8bd11a7e27765169",
       "fixture_id": "1792830",
       "kickoff": "2026-11-24T22:00:00+02:00",
       "home": "Rangers",
@@ -1709,6 +3527,22 @@
         "home_lambda": 2.0489,
         "kickoff": "2026-11-24T22:00:00+02:00",
         "market": "home_over_1_5",
+        "market_odds": {},
+        "market_probabilities": {
+          "away_over_0_5": 0.5937554659195893,
+          "away_over_1_5": 0.22781038961995526,
+          "away_win": 0.15644534194226903,
+          "btts_yes": 0.517234286240388,
+          "double_chance_12": 0.7961486325040038,
+          "double_chance_1x": 0.8435546580577309,
+          "double_chance_x2": 0.3602967094382651,
+          "draw": 0.20385136749599608,
+          "home_over_0_5": 0.871123410105067,
+          "home_over_1_5": 0.6070681650693388,
+          "home_win": 0.6397032905617348,
+          "match_over_1_5": 0.7932118362708948,
+          "match_over_2_5": 0.5654466897516637
+        },
         "model_version": "venue-poisson-baseline-1",
         "odds": null,
         "odds_status": "unavailable",
@@ -1724,7 +3558,7 @@
         },
         "selection": "over"
       },
-      "created_at": "2026-11-23T04:12:29.526851+00:00",
+      "created_at": "2026-11-23T04:17:06.139884+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -1732,7 +3566,7 @@
       "settlement_source": null
     },
     {
-      "id": "509c99ab6a9c4a8b900acd9288dcd3f9",
+      "id": "0c78b5442b5d4b1a82d74326327f471b",
       "fixture_id": "1792833",
       "kickoff": "2026-11-24T21:45:00+02:00",
       "home": "Hibernian",
@@ -1761,6 +3595,119 @@
         "home_lambda": 0.9796,
         "kickoff": "2026-11-24T21:45:00+02:00",
         "market": "match_over_1_5",
+        "market_odds": {
+          "1X2": {
+            "away": 4.9,
+            "draw": 4.3,
+            "home": 1.63
+          },
+          "away_team_goals": {
+            "0.5": {
+              "over": 1.45,
+              "under": 2.6
+            },
+            "1.5": {
+              "over": 3.1,
+              "under": 1.34
+            },
+            "2.5": {
+              "over": 7.5,
+              "under": 1.07
+            }
+          },
+          "btts": {
+            "no": 2.15,
+            "yes": 1.66
+          },
+          "double_chance": {
+            "12": 1.22,
+            "1X": 1.18,
+            "X2": 2.1
+          },
+          "home_team_goals": {
+            "0.5": {
+              "over": 1.11,
+              "under": 5.8
+            },
+            "1.5": {
+              "over": 1.58,
+              "under": 2.3
+            },
+            "2.5": {
+              "over": 2.75,
+              "under": 1.42
+            },
+            "3.5": {
+              "over": 5.4,
+              "under": 1.13
+            },
+            "4.5": {
+              "over": 10.0,
+              "under": 1.03
+            }
+          },
+          "match_total_goals": {
+            "0.5": {
+              "over": 1.03,
+              "under": 11.5
+            },
+            "1.0": {
+              "over": 1.04,
+              "under": 10.5
+            },
+            "1.5": {
+              "over": 1.19,
+              "under": 4.5
+            },
+            "2.0": {
+              "over": 1.27,
+              "under": 3.7
+            },
+            "2.5": {
+              "over": 1.61,
+              "under": 2.3
+            },
+            "3.0": {
+              "over": 1.97,
+              "under": 1.81
+            },
+            "3.5": {
+              "over": 2.5,
+              "under": 1.52
+            },
+            "4.0": {
+              "over": 3.7,
+              "under": 1.27
+            },
+            "4.5": {
+              "over": 4.3,
+              "under": 1.21
+            },
+            "5.0": {
+              "over": 7.25,
+              "under": 1.08
+            },
+            "5.5": {
+              "over": 7.9,
+              "under": 1.07
+            }
+          }
+        },
+        "market_probabilities": {
+          "away_over_0_5": 0.779421138608051,
+          "away_over_1_5": 0.44601618961411993,
+          "away_win": 0.4958809409738514,
+          "btts_yes": 0.4867787010423018,
+          "double_chance_12": 0.74096022165513,
+          "double_chance_1x": 0.5041190590261485,
+          "double_chance_x2": 0.7549207193187213,
+          "draw": 0.2590397783448699,
+          "home_over_0_5": 0.6245387466801683,
+          "home_over_1_5": 0.25673690292806106,
+          "home_win": 0.24507928068127857,
+          "match_over_1_5": 0.7108712323209222,
+          "match_over_2_5": 0.4539018717007438
+        },
         "model_version": "venue-poisson-baseline-1",
         "odds": 1.19,
         "odds_status": "available",
@@ -1776,7 +3723,7 @@
         },
         "selection": "over"
       },
-      "created_at": "2026-11-23T04:12:29.525347+00:00",
+      "created_at": "2026-11-23T04:17:06.138881+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -1784,7 +3731,7 @@
       "settlement_source": null
     },
     {
-      "id": "b1c2abdce8724ce5b054b7284c08280e",
+      "id": "335ba7428ded4aa0a6716b52e676881f",
       "fixture_id": "1792830",
       "kickoff": "2026-11-24T22:00:00+02:00",
       "home": "Rangers",
@@ -1813,6 +3760,22 @@
         "home_lambda": 2.0489,
         "kickoff": "2026-11-24T22:00:00+02:00",
         "market": "match_winner",
+        "market_odds": {},
+        "market_probabilities": {
+          "away_over_0_5": 0.5937554659195893,
+          "away_over_1_5": 0.22781038961995526,
+          "away_win": 0.15644534194226903,
+          "btts_yes": 0.517234286240388,
+          "double_chance_12": 0.7961486325040038,
+          "double_chance_1x": 0.8435546580577309,
+          "double_chance_x2": 0.3602967094382651,
+          "draw": 0.20385136749599608,
+          "home_over_0_5": 0.871123410105067,
+          "home_over_1_5": 0.6070681650693388,
+          "home_win": 0.6397032905617348,
+          "match_over_1_5": 0.7932118362708948,
+          "match_over_2_5": 0.5654466897516637
+        },
         "model_version": "venue-poisson-baseline-1",
         "odds": null,
         "odds_status": "unavailable",
@@ -1828,7 +3791,7 @@
         },
         "selection": "home"
       },
-      "created_at": "2026-11-23T04:12:29.523648+00:00",
+      "created_at": "2026-11-23T04:17:06.137681+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -1836,7 +3799,7 @@
       "settlement_source": null
     },
     {
-      "id": "97c2be815c1e4ce49164c230c0c660a5",
+      "id": "377acf9c3f1f4bf482e3f040721147da",
       "fixture_id": "1792833",
       "kickoff": "2026-11-24T21:45:00+02:00",
       "home": "Hibernian",
@@ -1865,6 +3828,119 @@
         "home_lambda": 0.9796,
         "kickoff": "2026-11-24T21:45:00+02:00",
         "market": "double_chance",
+        "market_odds": {
+          "1X2": {
+            "away": 4.9,
+            "draw": 4.3,
+            "home": 1.63
+          },
+          "away_team_goals": {
+            "0.5": {
+              "over": 1.45,
+              "under": 2.6
+            },
+            "1.5": {
+              "over": 3.1,
+              "under": 1.34
+            },
+            "2.5": {
+              "over": 7.5,
+              "under": 1.07
+            }
+          },
+          "btts": {
+            "no": 2.15,
+            "yes": 1.66
+          },
+          "double_chance": {
+            "12": 1.22,
+            "1X": 1.18,
+            "X2": 2.1
+          },
+          "home_team_goals": {
+            "0.5": {
+              "over": 1.11,
+              "under": 5.8
+            },
+            "1.5": {
+              "over": 1.58,
+              "under": 2.3
+            },
+            "2.5": {
+              "over": 2.75,
+              "under": 1.42
+            },
+            "3.5": {
+              "over": 5.4,
+              "under": 1.13
+            },
+            "4.5": {
+              "over": 10.0,
+              "under": 1.03
+            }
+          },
+          "match_total_goals": {
+            "0.5": {
+              "over": 1.03,
+              "under": 11.5
+            },
+            "1.0": {
+              "over": 1.04,
+              "under": 10.5
+            },
+            "1.5": {
+              "over": 1.19,
+              "under": 4.5
+            },
+            "2.0": {
+              "over": 1.27,
+              "under": 3.7
+            },
+            "2.5": {
+              "over": 1.61,
+              "under": 2.3
+            },
+            "3.0": {
+              "over": 1.97,
+              "under": 1.81
+            },
+            "3.5": {
+              "over": 2.5,
+              "under": 1.52
+            },
+            "4.0": {
+              "over": 3.7,
+              "under": 1.27
+            },
+            "4.5": {
+              "over": 4.3,
+              "under": 1.21
+            },
+            "5.0": {
+              "over": 7.25,
+              "under": 1.08
+            },
+            "5.5": {
+              "over": 7.9,
+              "under": 1.07
+            }
+          }
+        },
+        "market_probabilities": {
+          "away_over_0_5": 0.779421138608051,
+          "away_over_1_5": 0.44601618961411993,
+          "away_win": 0.4958809409738514,
+          "btts_yes": 0.4867787010423018,
+          "double_chance_12": 0.74096022165513,
+          "double_chance_1x": 0.5041190590261485,
+          "double_chance_x2": 0.7549207193187213,
+          "draw": 0.2590397783448699,
+          "home_over_0_5": 0.6245387466801683,
+          "home_over_1_5": 0.25673690292806106,
+          "home_win": 0.24507928068127857,
+          "match_over_1_5": 0.7108712323209222,
+          "match_over_2_5": 0.4539018717007438
+        },
         "model_version": "venue-poisson-baseline-1",
         "odds": 1.22,
         "odds_status": "available",
@@ -1880,7 +3956,7 @@
         },
         "selection": "12"
       },
-      "created_at": "2026-11-23T04:12:29.521937+00:00",
+      "created_at": "2026-11-23T04:17:06.136704+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -1888,7 +3964,7 @@
       "settlement_source": null
     },
     {
-      "id": "105daf406e6a4c34bd994b51dadfee58",
+      "id": "bf30a349574441c0ab68692637e4858b",
       "fixture_id": "1792830",
       "kickoff": "2026-11-24T22:00:00+02:00",
       "home": "Rangers",
@@ -1917,6 +3993,22 @@
         "home_lambda": 2.0489,
         "kickoff": "2026-11-24T22:00:00+02:00",
         "market": "match_over_1_5",
+        "market_odds": {},
+        "market_probabilities": {
+          "away_over_0_5": 0.5937554659195893,
+          "away_over_1_5": 0.22781038961995526,
+          "away_win": 0.15644534194226903,
+          "btts_yes": 0.517234286240388,
+          "double_chance_12": 0.7961486325040038,
+          "double_chance_1x": 0.8435546580577309,
+          "double_chance_x2": 0.3602967094382651,
+          "draw": 0.20385136749599608,
+          "home_over_0_5": 0.871123410105067,
+          "home_over_1_5": 0.6070681650693388,
+          "home_win": 0.6397032905617348,
+          "match_over_1_5": 0.7932118362708948,
+          "match_over_2_5": 0.5654466897516637
+        },
         "model_version": "venue-poisson-baseline-1",
         "odds": null,
         "odds_status": "unavailable",
@@ -1932,7 +4024,7 @@
         },
         "selection": "over"
       },
-      "created_at": "2026-11-23T04:12:29.520446+00:00",
+      "created_at": "2026-11-23T04:17:06.135586+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -1940,7 +4032,7 @@
       "settlement_source": null
     },
     {
-      "id": "ee9017af49cd426faa65445e52e444f6",
+      "id": "c498854719d24463b35f1afb4c484e79",
       "fixture_id": "1792830",
       "kickoff": "2026-11-24T22:00:00+02:00",
       "home": "Rangers",
@@ -1969,6 +4061,22 @@
         "home_lambda": 2.0489,
         "kickoff": "2026-11-24T22:00:00+02:00",
         "market": "double_chance",
+        "market_odds": {},
+        "market_probabilities": {
+          "away_over_0_5": 0.5937554659195893,
+          "away_over_1_5": 0.22781038961995526,
+          "away_win": 0.15644534194226903,
+          "btts_yes": 0.517234286240388,
+          "double_chance_12": 0.7961486325040038,
+          "double_chance_1x": 0.8435546580577309,
+          "double_chance_x2": 0.3602967094382651,
+          "draw": 0.20385136749599608,
+          "home_over_0_5": 0.871123410105067,
+          "home_over_1_5": 0.6070681650693388,
+          "home_win": 0.6397032905617348,
+          "match_over_1_5": 0.7932118362708948,
+          "match_over_2_5": 0.5654466897516637
+        },
         "model_version": "venue-poisson-baseline-1",
         "odds": null,
         "odds_status": "unavailable",
@@ -1984,7 +4092,7 @@
         },
         "selection": "12"
       },
-      "created_at": "2026-11-23T04:12:29.518899+00:00",
+      "created_at": "2026-11-23T04:17:06.134419+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -1992,7 +4100,7 @@
       "settlement_source": null
     },
     {
-      "id": "ba2b7fb960144df1a1771ac0c77b1c8c",
+      "id": "35840cef18194c4abeb68ac23d1570c3",
       "fixture_id": "1792830",
       "kickoff": "2026-11-24T22:00:00+02:00",
       "home": "Rangers",
@@ -2021,6 +4129,22 @@
         "home_lambda": 2.0489,
         "kickoff": "2026-11-24T22:00:00+02:00",
         "market": "double_chance",
+        "market_odds": {},
+        "market_probabilities": {
+          "away_over_0_5": 0.5937554659195893,
+          "away_over_1_5": 0.22781038961995526,
+          "away_win": 0.15644534194226903,
+          "btts_yes": 0.517234286240388,
+          "double_chance_12": 0.7961486325040038,
+          "double_chance_1x": 0.8435546580577309,
+          "double_chance_x2": 0.3602967094382651,
+          "draw": 0.20385136749599608,
+          "home_over_0_5": 0.871123410105067,
+          "home_over_1_5": 0.6070681650693388,
+          "home_win": 0.6397032905617348,
+          "match_over_1_5": 0.7932118362708948,
+          "match_over_2_5": 0.5654466897516637
+        },
         "model_version": "venue-poisson-baseline-1",
         "odds": null,
         "odds_status": "unavailable",
@@ -2036,7 +4160,7 @@
         },
         "selection": "1X"
       },
-      "created_at": "2026-11-23T04:12:29.516732+00:00",
+      "created_at": "2026-11-23T04:17:06.133280+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -2044,7 +4168,7 @@
       "settlement_source": null
     },
     {
-      "id": "b1615c03df744669a689ad871bbb98b2",
+      "id": "f91df3872ccb47b692674c553aedca56",
       "fixture_id": "1792830",
       "kickoff": "2026-11-24T22:00:00+02:00",
       "home": "Rangers",
@@ -2073,6 +4197,22 @@
         "home_lambda": 2.0489,
         "kickoff": "2026-11-24T22:00:00+02:00",
         "market": "home_over_0_5",
+        "market_odds": {},
+        "market_probabilities": {
+          "away_over_0_5": 0.5937554659195893,
+          "away_over_1_5": 0.22781038961995526,
+          "away_win": 0.15644534194226903,
+          "btts_yes": 0.517234286240388,
+          "double_chance_12": 0.7961486325040038,
+          "double_chance_1x": 0.8435546580577309,
+          "double_chance_x2": 0.3602967094382651,
+          "draw": 0.20385136749599608,
+          "home_over_0_5": 0.871123410105067,
+          "home_over_1_5": 0.6070681650693388,
+          "home_win": 0.6397032905617348,
+          "match_over_1_5": 0.7932118362708948,
+          "match_over_2_5": 0.5654466897516637
+        },
         "model_version": "venue-poisson-baseline-1",
         "odds": null,
         "odds_status": "unavailable",
@@ -2088,7 +4228,7 @@
         },
         "selection": "over"
       },
-      "created_at": "2026-11-23T04:12:29.515044+00:00",
+      "created_at": "2026-11-23T04:17:06.132253+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -2096,7 +4236,7 @@
       "settlement_source": null
     },
     {
-      "id": "585f96cbbbda4956a70748179a83b47a",
+      "id": "d6673f90a11b4d7e80b6f5686d1e68c3",
       "fixture_id": "1792833",
       "kickoff": "2026-11-24T21:45:00+02:00",
       "home": "Hibernian",
@@ -2125,6 +4265,119 @@
         "home_lambda": 0.9796,
         "kickoff": "2026-11-24T21:45:00+02:00",
         "market": "away_over_0_5",
+        "market_odds": {
+          "1X2": {
+            "away": 4.9,
+            "draw": 4.3,
+            "home": 1.63
+          },
+          "away_team_goals": {
+            "0.5": {
+              "over": 1.45,
+              "under": 2.6
+            },
+            "1.5": {
+              "over": 3.1,
+              "under": 1.34
+            },
+            "2.5": {
+              "over": 7.5,
+              "under": 1.07
+            }
+          },
+          "btts": {
+            "no": 2.15,
+            "yes": 1.66
+          },
+          "double_chance": {
+            "12": 1.22,
+            "1X": 1.18,
+            "X2": 2.1
+          },
+          "home_team_goals": {
+            "0.5": {
+              "over": 1.11,
+              "under": 5.8
+            },
+            "1.5": {
+              "over": 1.58,
+              "under": 2.3
+            },
+            "2.5": {
+              "over": 2.75,
+              "under": 1.42
+            },
+            "3.5": {
+              "over": 5.4,
+              "under": 1.13
+            },
+            "4.5": {
+              "over": 10.0,
+              "under": 1.03
+            }
+          },
+          "match_total_goals": {
+            "0.5": {
+              "over": 1.03,
+              "under": 11.5
+            },
+            "1.0": {
+              "over": 1.04,
+              "under": 10.5
+            },
+            "1.5": {
+              "over": 1.19,
+              "under": 4.5
+            },
+            "2.0": {
+              "over": 1.27,
+              "under": 3.7
+            },
+            "2.5": {
+              "over": 1.61,
+              "under": 2.3
+            },
+            "3.0": {
+              "over": 1.97,
+              "under": 1.81
+            },
+            "3.5": {
+              "over": 2.5,
+              "under": 1.52
+            },
+            "4.0": {
+              "over": 3.7,
+              "under": 1.27
+            },
+            "4.5": {
+              "over": 4.3,
+              "under": 1.21
+            },
+            "5.0": {
+              "over": 7.25,
+              "under": 1.08
+            },
+            "5.5": {
+              "over": 7.9,
+              "under": 1.07
+            }
+          }
+        },
+        "market_probabilities": {
+          "away_over_0_5": 0.779421138608051,
+          "away_over_1_5": 0.44601618961411993,
+          "away_win": 0.4958809409738514,
+          "btts_yes": 0.4867787010423018,
+          "double_chance_12": 0.74096022165513,
+          "double_chance_1x": 0.5041190590261485,
+          "double_chance_x2": 0.7549207193187213,
+          "draw": 0.2590397783448699,
+          "home_over_0_5": 0.6245387466801683,
+          "home_over_1_5": 0.25673690292806106,
+          "home_win": 0.24507928068127857,
+          "match_over_1_5": 0.7108712323209222,
+          "match_over_2_5": 0.4539018717007438
+        },
         "model_version": "venue-poisson-baseline-1",
         "odds": 1.45,
         "odds_status": "available",
@@ -2140,7 +4393,7 @@
         },
         "selection": "over"
       },
-      "created_at": "2026-11-23T04:12:29.513535+00:00",
+      "created_at": "2026-11-23T04:17:06.130608+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -2148,7 +4401,7 @@
       "settlement_source": null
     },
     {
-      "id": "71fd664f2bce49b680decceaa198dcfd",
+      "id": "97b2d7f55775436ca9cd0a6012a70454",
       "fixture_id": "1792833",
       "kickoff": "2026-11-24T21:45:00+02:00",
       "home": "Hibernian",
@@ -2177,6 +4430,119 @@
         "home_lambda": 0.9796,
         "kickoff": "2026-11-24T21:45:00+02:00",
         "market": "double_chance",
+        "market_odds": {
+          "1X2": {
+            "away": 4.9,
+            "draw": 4.3,
+            "home": 1.63
+          },
+          "away_team_goals": {
+            "0.5": {
+              "over": 1.45,
+              "under": 2.6
+            },
+            "1.5": {
+              "over": 3.1,
+              "under": 1.34
+            },
+            "2.5": {
+              "over": 7.5,
+              "under": 1.07
+            }
+          },
+          "btts": {
+            "no": 2.15,
+            "yes": 1.66
+          },
+          "double_chance": {
+            "12": 1.22,
+            "1X": 1.18,
+            "X2": 2.1
+          },
+          "home_team_goals": {
+            "0.5": {
+              "over": 1.11,
+              "under": 5.8
+            },
+            "1.5": {
+              "over": 1.58,
+              "under": 2.3
+            },
+            "2.5": {
+              "over": 2.75,
+              "under": 1.42
+            },
+            "3.5": {
+              "over": 5.4,
+              "under": 1.13
+            },
+            "4.5": {
+              "over": 10.0,
+              "under": 1.03
+            }
+          },
+          "match_total_goals": {
+            "0.5": {
+              "over": 1.03,
+              "under": 11.5
+            },
+            "1.0": {
+              "over": 1.04,
+              "under": 10.5
+            },
+            "1.5": {
+              "over": 1.19,
+              "under": 4.5
+            },
+            "2.0": {
+              "over": 1.27,
+              "under": 3.7
+            },
+            "2.5": {
+              "over": 1.61,
+              "under": 2.3
+            },
+            "3.0": {
+              "over": 1.97,
+              "under": 1.81
+            },
+            "3.5": {
+              "over": 2.5,
+              "under": 1.52
+            },
+            "4.0": {
+              "over": 3.7,
+              "under": 1.27
+            },
+            "4.5": {
+              "over": 4.3,
+              "under": 1.21
+            },
+            "5.0": {
+              "over": 7.25,
+              "under": 1.08
+            },
+            "5.5": {
+              "over": 7.9,
+              "under": 1.07
+            }
+          }
+        },
+        "market_probabilities": {
+          "away_over_0_5": 0.779421138608051,
+          "away_over_1_5": 0.44601618961411993,
+          "away_win": 0.4958809409738514,
+          "btts_yes": 0.4867787010423018,
+          "double_chance_12": 0.74096022165513,
+          "double_chance_1x": 0.5041190590261485,
+          "double_chance_x2": 0.7549207193187213,
+          "draw": 0.2590397783448699,
+          "home_over_0_5": 0.6245387466801683,
+          "home_over_1_5": 0.25673690292806106,
+          "home_win": 0.24507928068127857,
+          "match_over_1_5": 0.7108712323209222,
+          "match_over_2_5": 0.4539018717007438
+        },
         "model_version": "venue-poisson-baseline-1",
         "odds": 2.1,
         "odds_status": "available",
@@ -2192,7 +4558,7 @@
         },
         "selection": "X2"
       },
-      "created_at": "2026-11-23T04:12:29.511757+00:00",
+      "created_at": "2026-11-23T04:17:06.129000+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -2200,7 +4566,7 @@
       "settlement_source": null
     },
     {
-      "id": "82c828a7f2044b92a9166442beb8bed3",
+      "id": "64c27897f8114ce5bdfdff75a2d77219",
       "fixture_id": "1802532",
       "kickoff": "2026-11-24T21:45:00+02:00",
       "home": "Sheffield United",
@@ -2229,6 +4595,119 @@
         "home_lambda": 1.1478,
         "kickoff": "2026-11-24T21:45:00+02:00",
         "market": "double_chance",
+        "market_odds": {
+          "1X2": {
+            "away": 2.65,
+            "draw": 3.6,
+            "home": 2.55
+          },
+          "away_team_goals": {
+            "0.5": {
+              "over": 1.25,
+              "under": 3.7
+            },
+            "1.5": {
+              "over": 2.15,
+              "under": 1.65
+            },
+            "2.5": {
+              "over": 4.6,
+              "under": 1.17
+            },
+            "3.5": {
+              "over": 9.6,
+              "under": 1.04
+            }
+          },
+          "btts": {
+            "no": 2.3,
+            "yes": 1.58
+          },
+          "double_chance": {
+            "12": 1.29,
+            "1X": 1.45,
+            "X2": 1.48
+          },
+          "home_team_goals": {
+            "0.5": {
+              "over": 1.24,
+              "under": 3.8
+            },
+            "1.5": {
+              "over": 2.1,
+              "under": 1.68
+            },
+            "2.5": {
+              "over": 4.4,
+              "under": 1.18
+            },
+            "3.5": {
+              "over": 9.3,
+              "under": 1.04
+            }
+          },
+          "match_total_goals": {
+            "0.5": {
+              "over": 1.04,
+              "under": 10.5
+            },
+            "1.0": {
+              "over": 1.05,
+              "under": 9.7
+            },
+            "1.5": {
+              "over": 1.22,
+              "under": 4.2
+            },
+            "2.0": {
+              "over": 1.32,
+              "under": 3.33
+            },
+            "2.5": {
+              "over": 1.69,
+              "under": 2.15
+            },
+            "3.0": {
+              "over": 2.15,
+              "under": 1.7
+            },
+            "3.5": {
+              "over": 2.65,
+              "under": 1.46
+            },
+            "4.0": {
+              "over": 4.1,
+              "under": 1.22
+            },
+            "4.5": {
+              "over": 4.8,
+              "under": 1.17
+            },
+            "5.0": {
+              "over": 8.1,
+              "under": 1.07
+            },
+            "5.5": {
+              "over": 8.7,
+              "under": 1.06
+            }
+          }
+        },
+        "market_probabilities": {
+          "away_over_0_5": 0.6259253864519494,
+          "away_over_1_5": 0.25809781895015116,
+          "away_win": 0.31030442584598733,
+          "btts_yes": 0.4272978940564264,
+          "double_chance_12": 0.704424318830879,
+          "double_chance_1x": 0.6896955741540127,
+          "double_chance_x2": 0.6058801070151084,
+          "draw": 0.2955756811691211,
+          "home_over_0_5": 0.682665862905097,
+          "home_over_1_5": 0.3184297403475673,
+          "home_win": 0.3941198929848917,
+          "match_over_1_5": 0.6283176247817714,
+          "match_over_2_5": 0.3587593351274124
+        },
         "model_version": "venue-poisson-baseline-1",
         "odds": 1.48,
         "odds_status": "available",
@@ -2244,7 +4723,7 @@
         },
         "selection": "X2"
       },
-      "created_at": "2026-11-23T04:11:58.357842+00:00",
+      "created_at": "2026-11-23T04:16:34.855548+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -2252,7 +4731,7 @@
       "settlement_source": null
     },
     {
-      "id": "867a7d7be71641fda693714d4562b49a",
+      "id": "85f7ebf09b494e7295ca8e9cd347b460",
       "fixture_id": "1802532",
       "kickoff": "2026-11-24T21:45:00+02:00",
       "home": "Sheffield United",
@@ -2281,6 +4760,119 @@
         "home_lambda": 1.1478,
         "kickoff": "2026-11-24T21:45:00+02:00",
         "market": "away_over_0_5",
+        "market_odds": {
+          "1X2": {
+            "away": 2.65,
+            "draw": 3.6,
+            "home": 2.55
+          },
+          "away_team_goals": {
+            "0.5": {
+              "over": 1.25,
+              "under": 3.7
+            },
+            "1.5": {
+              "over": 2.15,
+              "under": 1.65
+            },
+            "2.5": {
+              "over": 4.6,
+              "under": 1.17
+            },
+            "3.5": {
+              "over": 9.6,
+              "under": 1.04
+            }
+          },
+          "btts": {
+            "no": 2.3,
+            "yes": 1.58
+          },
+          "double_chance": {
+            "12": 1.29,
+            "1X": 1.45,
+            "X2": 1.48
+          },
+          "home_team_goals": {
+            "0.5": {
+              "over": 1.24,
+              "under": 3.8
+            },
+            "1.5": {
+              "over": 2.1,
+              "under": 1.68
+            },
+            "2.5": {
+              "over": 4.4,
+              "under": 1.18
+            },
+            "3.5": {
+              "over": 9.3,
+              "under": 1.04
+            }
+          },
+          "match_total_goals": {
+            "0.5": {
+              "over": 1.04,
+              "under": 10.5
+            },
+            "1.0": {
+              "over": 1.05,
+              "under": 9.7
+            },
+            "1.5": {
+              "over": 1.22,
+              "under": 4.2
+            },
+            "2.0": {
+              "over": 1.32,
+              "under": 3.33
+            },
+            "2.5": {
+              "over": 1.69,
+              "under": 2.15
+            },
+            "3.0": {
+              "over": 2.15,
+              "under": 1.7
+            },
+            "3.5": {
+              "over": 2.65,
+              "under": 1.46
+            },
+            "4.0": {
+              "over": 4.1,
+              "under": 1.22
+            },
+            "4.5": {
+              "over": 4.8,
+              "under": 1.17
+            },
+            "5.0": {
+              "over": 8.1,
+              "under": 1.07
+            },
+            "5.5": {
+              "over": 8.7,
+              "under": 1.06
+            }
+          }
+        },
+        "market_probabilities": {
+          "away_over_0_5": 0.6259253864519494,
+          "away_over_1_5": 0.25809781895015116,
+          "away_win": 0.31030442584598733,
+          "btts_yes": 0.4272978940564264,
+          "double_chance_12": 0.704424318830879,
+          "double_chance_1x": 0.6896955741540127,
+          "double_chance_x2": 0.6058801070151084,
+          "draw": 0.2955756811691211,
+          "home_over_0_5": 0.682665862905097,
+          "home_over_1_5": 0.3184297403475673,
+          "home_win": 0.3941198929848917,
+          "match_over_1_5": 0.6283176247817714,
+          "match_over_2_5": 0.3587593351274124
+        },
         "model_version": "venue-poisson-baseline-1",
         "odds": 1.25,
         "odds_status": "available",
@@ -2296,7 +4888,7 @@
         },
         "selection": "over"
       },
-      "created_at": "2026-11-23T04:11:58.356185+00:00",
+      "created_at": "2026-11-23T04:16:34.854282+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -2304,7 +4896,7 @@
       "settlement_source": null
     },
     {
-      "id": "4acc0dea783141b38a83bbaef43083a3",
+      "id": "12507fae7a4244baa286f9afdcd9a3fb",
       "fixture_id": "1802532",
       "kickoff": "2026-11-24T21:45:00+02:00",
       "home": "Sheffield United",
@@ -2333,6 +4925,119 @@
         "home_lambda": 1.1478,
         "kickoff": "2026-11-24T21:45:00+02:00",
         "market": "match_over_1_5",
+        "market_odds": {
+          "1X2": {
+            "away": 2.65,
+            "draw": 3.6,
+            "home": 2.55
+          },
+          "away_team_goals": {
+            "0.5": {
+              "over": 1.25,
+              "under": 3.7
+            },
+            "1.5": {
+              "over": 2.15,
+              "under": 1.65
+            },
+            "2.5": {
+              "over": 4.6,
+              "under": 1.17
+            },
+            "3.5": {
+              "over": 9.6,
+              "under": 1.04
+            }
+          },
+          "btts": {
+            "no": 2.3,
+            "yes": 1.58
+          },
+          "double_chance": {
+            "12": 1.29,
+            "1X": 1.45,
+            "X2": 1.48
+          },
+          "home_team_goals": {
+            "0.5": {
+              "over": 1.24,
+              "under": 3.8
+            },
+            "1.5": {
+              "over": 2.1,
+              "under": 1.68
+            },
+            "2.5": {
+              "over": 4.4,
+              "under": 1.18
+            },
+            "3.5": {
+              "over": 9.3,
+              "under": 1.04
+            }
+          },
+          "match_total_goals": {
+            "0.5": {
+              "over": 1.04,
+              "under": 10.5
+            },
+            "1.0": {
+              "over": 1.05,
+              "under": 9.7
+            },
+            "1.5": {
+              "over": 1.22,
+              "under": 4.2
+            },
+            "2.0": {
+              "over": 1.32,
+              "under": 3.33
+            },
+            "2.5": {
+              "over": 1.69,
+              "under": 2.15
+            },
+            "3.0": {
+              "over": 2.15,
+              "under": 1.7
+            },
+            "3.5": {
+              "over": 2.65,
+              "under": 1.46
+            },
+            "4.0": {
+              "over": 4.1,
+              "under": 1.22
+            },
+            "4.5": {
+              "over": 4.8,
+              "under": 1.17
+            },
+            "5.0": {
+              "over": 8.1,
+              "under": 1.07
+            },
+            "5.5": {
+              "over": 8.7,
+              "under": 1.06
+            }
+          }
+        },
+        "market_probabilities": {
+          "away_over_0_5": 0.6259253864519494,
+          "away_over_1_5": 0.25809781895015116,
+          "away_win": 0.31030442584598733,
+          "btts_yes": 0.4272978940564264,
+          "double_chance_12": 0.704424318830879,
+          "double_chance_1x": 0.6896955741540127,
+          "double_chance_x2": 0.6058801070151084,
+          "draw": 0.2955756811691211,
+          "home_over_0_5": 0.682665862905097,
+          "home_over_1_5": 0.3184297403475673,
+          "home_win": 0.3941198929848917,
+          "match_over_1_5": 0.6283176247817714,
+          "match_over_2_5": 0.3587593351274124
+        },
         "model_version": "venue-poisson-baseline-1",
         "odds": 1.22,
         "odds_status": "available",
@@ -2348,7 +5053,7 @@
         },
         "selection": "over"
       },
-      "created_at": "2026-11-23T04:11:58.354609+00:00",
+      "created_at": "2026-11-23T04:16:34.853061+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -2356,7 +5061,7 @@
       "settlement_source": null
     },
     {
-      "id": "9dda1178acc945aab271585effd2529e",
+      "id": "1047a43b4d2649f6a9c2fe2cc9b36072",
       "fixture_id": "1802526",
       "kickoff": "2026-11-24T21:45:00+02:00",
       "home": "Bristol City",
@@ -2385,6 +5090,119 @@
         "home_lambda": 0.7862,
         "kickoff": "2026-11-24T21:45:00+02:00",
         "market": "away_over_0_5",
+        "market_odds": {
+          "1X2": {
+            "away": 2.85,
+            "draw": 3.33,
+            "home": 2.5
+          },
+          "away_team_goals": {
+            "0.5": {
+              "over": 1.36,
+              "under": 3.0
+            },
+            "1.5": {
+              "over": 2.7,
+              "under": 1.44
+            },
+            "2.5": {
+              "over": 6.25,
+              "under": 1.1
+            },
+            "3.5": {
+              "over": 12.0,
+              "under": 1.01
+            }
+          },
+          "btts": {
+            "no": 1.93,
+            "yes": 1.82
+          },
+          "double_chance": {
+            "12": 1.32,
+            "1X": 1.4,
+            "X2": 1.49
+          },
+          "home_team_goals": {
+            "0.5": {
+              "over": 1.31,
+              "under": 3.25
+            },
+            "1.5": {
+              "over": 2.45,
+              "under": 1.51
+            },
+            "2.5": {
+              "over": 5.5,
+              "under": 1.13
+            },
+            "3.5": {
+              "over": 11.0,
+              "under": 1.02
+            }
+          },
+          "match_total_goals": {
+            "0.5": {
+              "over": 1.07,
+              "under": 8.2
+            },
+            "1.0": {
+              "over": 1.09,
+              "under": 7.0
+            },
+            "1.5": {
+              "over": 1.34,
+              "under": 3.2
+            },
+            "2.0": {
+              "over": 1.55,
+              "under": 2.4
+            },
+            "2.5": {
+              "over": 2.05,
+              "under": 1.74
+            },
+            "3.0": {
+              "over": 2.9,
+              "under": 1.39
+            },
+            "3.5": {
+              "over": 3.6,
+              "under": 1.28
+            },
+            "4.0": {
+              "over": 6.25,
+              "under": 1.11
+            },
+            "4.5": {
+              "over": 7.0,
+              "under": 1.09
+            },
+            "5.0": {
+              "over": 12.0,
+              "under": 1.03
+            },
+            "5.5": {
+              "over": 12.0,
+              "under": 1.02
+            }
+          }
+        },
+        "market_probabilities": {
+          "away_over_0_5": 0.6506915722780777,
+          "away_over_1_5": 0.2832889680001598,
+          "away_win": 0.41144273546392934,
+          "btts_yes": 0.3542542646655681,
+          "double_chance_12": 0.6794340590338608,
+          "double_chance_1x": 0.5885572645360705,
+          "double_chance_x2": 0.7320086764300684,
+          "draw": 0.320565940966139,
+          "home_over_0_5": 0.5444273135816413,
+          "home_over_1_5": 0.18625606751952772,
+          "home_win": 0.2679913235699315,
+          "match_over_1_5": 0.548373794949,
+          "match_over_2_5": 0.2795747256297062
+        },
         "model_version": "venue-poisson-baseline-1",
         "odds": 1.36,
         "odds_status": "available",
@@ -2400,7 +5218,7 @@
         },
         "selection": "over"
       },
-      "created_at": "2026-11-23T04:11:58.351210+00:00",
+      "created_at": "2026-11-23T04:16:34.851817+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -2408,7 +5226,7 @@
       "settlement_source": null
     },
     {
-      "id": "0b82ca2f57514f949a7a99e41861a895",
+      "id": "d935cc48c6e745aa853f039b7a40c5b7",
       "fixture_id": "1802526",
       "kickoff": "2026-11-24T21:45:00+02:00",
       "home": "Bristol City",
@@ -2437,6 +5255,119 @@
         "home_lambda": 0.7862,
         "kickoff": "2026-11-24T21:45:00+02:00",
         "market": "double_chance",
+        "market_odds": {
+          "1X2": {
+            "away": 2.85,
+            "draw": 3.33,
+            "home": 2.5
+          },
+          "away_team_goals": {
+            "0.5": {
+              "over": 1.36,
+              "under": 3.0
+            },
+            "1.5": {
+              "over": 2.7,
+              "under": 1.44
+            },
+            "2.5": {
+              "over": 6.25,
+              "under": 1.1
+            },
+            "3.5": {
+              "over": 12.0,
+              "under": 1.01
+            }
+          },
+          "btts": {
+            "no": 1.93,
+            "yes": 1.82
+          },
+          "double_chance": {
+            "12": 1.32,
+            "1X": 1.4,
+            "X2": 1.49
+          },
+          "home_team_goals": {
+            "0.5": {
+              "over": 1.31,
+              "under": 3.25
+            },
+            "1.5": {
+              "over": 2.45,
+              "under": 1.51
+            },
+            "2.5": {
+              "over": 5.5,
+              "under": 1.13
+            },
+            "3.5": {
+              "over": 11.0,
+              "under": 1.02
+            }
+          },
+          "match_total_goals": {
+            "0.5": {
+              "over": 1.07,
+              "under": 8.2
+            },
+            "1.0": {
+              "over": 1.09,
+              "under": 7.0
+            },
+            "1.5": {
+              "over": 1.34,
+              "under": 3.2
+            },
+            "2.0": {
+              "over": 1.55,
+              "under": 2.4
+            },
+            "2.5": {
+              "over": 2.05,
+              "under": 1.74
+            },
+            "3.0": {
+              "over": 2.9,
+              "under": 1.39
+            },
+            "3.5": {
+              "over": 3.6,
+              "under": 1.28
+            },
+            "4.0": {
+              "over": 6.25,
+              "under": 1.11
+            },
+            "4.5": {
+              "over": 7.0,
+              "under": 1.09
+            },
+            "5.0": {
+              "over": 12.0,
+              "under": 1.03
+            },
+            "5.5": {
+              "over": 12.0,
+              "under": 1.02
+            }
+          }
+        },
+        "market_probabilities": {
+          "away_over_0_5": 0.6506915722780777,
+          "away_over_1_5": 0.2832889680001598,
+          "away_win": 0.41144273546392934,
+          "btts_yes": 0.3542542646655681,
+          "double_chance_12": 0.6794340590338608,
+          "double_chance_1x": 0.5885572645360705,
+          "double_chance_x2": 0.7320086764300684,
+          "draw": 0.320565940966139,
+          "home_over_0_5": 0.5444273135816413,
+          "home_over_1_5": 0.18625606751952772,
+          "home_win": 0.2679913235699315,
+          "match_over_1_5": 0.548373794949,
+          "match_over_2_5": 0.2795747256297062
+        },
         "model_version": "venue-poisson-baseline-1",
         "odds": 1.32,
         "odds_status": "available",
@@ -2452,7 +5383,7 @@
         },
         "selection": "12"
       },
-      "created_at": "2026-11-23T04:11:58.346479+00:00",
+      "created_at": "2026-11-23T04:16:34.850430+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -2460,7 +5391,7 @@
       "settlement_source": null
     },
     {
-      "id": "7f347235418a4bcb8dae514dfdd0c9ab",
+      "id": "d649f88b49ee4043abd12420be7a6e38",
       "fixture_id": "1802532",
       "kickoff": "2026-11-24T21:45:00+02:00",
       "home": "Sheffield United",
@@ -2489,6 +5420,119 @@
         "home_lambda": 1.1478,
         "kickoff": "2026-11-24T21:45:00+02:00",
         "market": "home_over_0_5",
+        "market_odds": {
+          "1X2": {
+            "away": 2.65,
+            "draw": 3.6,
+            "home": 2.55
+          },
+          "away_team_goals": {
+            "0.5": {
+              "over": 1.25,
+              "under": 3.7
+            },
+            "1.5": {
+              "over": 2.15,
+              "under": 1.65
+            },
+            "2.5": {
+              "over": 4.6,
+              "under": 1.17
+            },
+            "3.5": {
+              "over": 9.6,
+              "under": 1.04
+            }
+          },
+          "btts": {
+            "no": 2.3,
+            "yes": 1.58
+          },
+          "double_chance": {
+            "12": 1.29,
+            "1X": 1.45,
+            "X2": 1.48
+          },
+          "home_team_goals": {
+            "0.5": {
+              "over": 1.24,
+              "under": 3.8
+            },
+            "1.5": {
+              "over": 2.1,
+              "under": 1.68
+            },
+            "2.5": {
+              "over": 4.4,
+              "under": 1.18
+            },
+            "3.5": {
+              "over": 9.3,
+              "under": 1.04
+            }
+          },
+          "match_total_goals": {
+            "0.5": {
+              "over": 1.04,
+              "under": 10.5
+            },
+            "1.0": {
+              "over": 1.05,
+              "under": 9.7
+            },
+            "1.5": {
+              "over": 1.22,
+              "under": 4.2
+            },
+            "2.0": {
+              "over": 1.32,
+              "under": 3.33
+            },
+            "2.5": {
+              "over": 1.69,
+              "under": 2.15
+            },
+            "3.0": {
+              "over": 2.15,
+              "under": 1.7
+            },
+            "3.5": {
+              "over": 2.65,
+              "under": 1.46
+            },
+            "4.0": {
+              "over": 4.1,
+              "under": 1.22
+            },
+            "4.5": {
+              "over": 4.8,
+              "under": 1.17
+            },
+            "5.0": {
+              "over": 8.1,
+              "under": 1.07
+            },
+            "5.5": {
+              "over": 8.7,
+              "under": 1.06
+            }
+          }
+        },
+        "market_probabilities": {
+          "away_over_0_5": 0.6259253864519494,
+          "away_over_1_5": 0.25809781895015116,
+          "away_win": 0.31030442584598733,
+          "btts_yes": 0.4272978940564264,
+          "double_chance_12": 0.704424318830879,
+          "double_chance_1x": 0.6896955741540127,
+          "double_chance_x2": 0.6058801070151084,
+          "draw": 0.2955756811691211,
+          "home_over_0_5": 0.682665862905097,
+          "home_over_1_5": 0.3184297403475673,
+          "home_win": 0.3941198929848917,
+          "match_over_1_5": 0.6283176247817714,
+          "match_over_2_5": 0.3587593351274124
+        },
         "model_version": "venue-poisson-baseline-1",
         "odds": 1.24,
         "odds_status": "available",
@@ -2504,7 +5548,7 @@
         },
         "selection": "over"
       },
-      "created_at": "2026-11-23T04:11:58.344795+00:00",
+      "created_at": "2026-11-23T04:16:34.841863+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -2512,7 +5556,7 @@
       "settlement_source": null
     },
     {
-      "id": "b0fdb71a331947a3b7a7e55586c255f9",
+      "id": "a77dcf159e0e4de9b4b59d400eb8000d",
       "fixture_id": "1802532",
       "kickoff": "2026-11-24T21:45:00+02:00",
       "home": "Sheffield United",
@@ -2541,6 +5585,119 @@
         "home_lambda": 1.1478,
         "kickoff": "2026-11-24T21:45:00+02:00",
         "market": "double_chance",
+        "market_odds": {
+          "1X2": {
+            "away": 2.65,
+            "draw": 3.6,
+            "home": 2.55
+          },
+          "away_team_goals": {
+            "0.5": {
+              "over": 1.25,
+              "under": 3.7
+            },
+            "1.5": {
+              "over": 2.15,
+              "under": 1.65
+            },
+            "2.5": {
+              "over": 4.6,
+              "under": 1.17
+            },
+            "3.5": {
+              "over": 9.6,
+              "under": 1.04
+            }
+          },
+          "btts": {
+            "no": 2.3,
+            "yes": 1.58
+          },
+          "double_chance": {
+            "12": 1.29,
+            "1X": 1.45,
+            "X2": 1.48
+          },
+          "home_team_goals": {
+            "0.5": {
+              "over": 1.24,
+              "under": 3.8
+            },
+            "1.5": {
+              "over": 2.1,
+              "under": 1.68
+            },
+            "2.5": {
+              "over": 4.4,
+              "under": 1.18
+            },
+            "3.5": {
+              "over": 9.3,
+              "under": 1.04
+            }
+          },
+          "match_total_goals": {
+            "0.5": {
+              "over": 1.04,
+              "under": 10.5
+            },
+            "1.0": {
+              "over": 1.05,
+              "under": 9.7
+            },
+            "1.5": {
+              "over": 1.22,
+              "under": 4.2
+            },
+            "2.0": {
+              "over": 1.32,
+              "under": 3.33
+            },
+            "2.5": {
+              "over": 1.69,
+              "under": 2.15
+            },
+            "3.0": {
+              "over": 2.15,
+              "under": 1.7
+            },
+            "3.5": {
+              "over": 2.65,
+              "under": 1.46
+            },
+            "4.0": {
+              "over": 4.1,
+              "under": 1.22
+            },
+            "4.5": {
+              "over": 4.8,
+              "under": 1.17
+            },
+            "5.0": {
+              "over": 8.1,
+              "under": 1.07
+            },
+            "5.5": {
+              "over": 8.7,
+              "under": 1.06
+            }
+          }
+        },
+        "market_probabilities": {
+          "away_over_0_5": 0.6259253864519494,
+          "away_over_1_5": 0.25809781895015116,
+          "away_win": 0.31030442584598733,
+          "btts_yes": 0.4272978940564264,
+          "double_chance_12": 0.704424318830879,
+          "double_chance_1x": 0.6896955741540127,
+          "double_chance_x2": 0.6058801070151084,
+          "draw": 0.2955756811691211,
+          "home_over_0_5": 0.682665862905097,
+          "home_over_1_5": 0.3184297403475673,
+          "home_win": 0.3941198929848917,
+          "match_over_1_5": 0.6283176247817714,
+          "match_over_2_5": 0.3587593351274124
+        },
         "model_version": "venue-poisson-baseline-1",
         "odds": 1.29,
         "odds_status": "available",
@@ -2556,7 +5713,7 @@
         },
         "selection": "12"
       },
-      "created_at": "2026-11-23T04:11:58.343118+00:00",
+      "created_at": "2026-11-23T04:16:34.825196+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -2564,7 +5721,7 @@
       "settlement_source": null
     },
     {
-      "id": "b8807b379d79472c9d51ea57f4213a0f",
+      "id": "273a157ff0d44176bdcb63e2689491fd",
       "fixture_id": "1802532",
       "kickoff": "2026-11-24T21:45:00+02:00",
       "home": "Sheffield United",
@@ -2593,6 +5750,119 @@
         "home_lambda": 1.1478,
         "kickoff": "2026-11-24T21:45:00+02:00",
         "market": "double_chance",
+        "market_odds": {
+          "1X2": {
+            "away": 2.65,
+            "draw": 3.6,
+            "home": 2.55
+          },
+          "away_team_goals": {
+            "0.5": {
+              "over": 1.25,
+              "under": 3.7
+            },
+            "1.5": {
+              "over": 2.15,
+              "under": 1.65
+            },
+            "2.5": {
+              "over": 4.6,
+              "under": 1.17
+            },
+            "3.5": {
+              "over": 9.6,
+              "under": 1.04
+            }
+          },
+          "btts": {
+            "no": 2.3,
+            "yes": 1.58
+          },
+          "double_chance": {
+            "12": 1.29,
+            "1X": 1.45,
+            "X2": 1.48
+          },
+          "home_team_goals": {
+            "0.5": {
+              "over": 1.24,
+              "under": 3.8
+            },
+            "1.5": {
+              "over": 2.1,
+              "under": 1.68
+            },
+            "2.5": {
+              "over": 4.4,
+              "under": 1.18
+            },
+            "3.5": {
+              "over": 9.3,
+              "under": 1.04
+            }
+          },
+          "match_total_goals": {
+            "0.5": {
+              "over": 1.04,
+              "under": 10.5
+            },
+            "1.0": {
+              "over": 1.05,
+              "under": 9.7
+            },
+            "1.5": {
+              "over": 1.22,
+              "under": 4.2
+            },
+            "2.0": {
+              "over": 1.32,
+              "under": 3.33
+            },
+            "2.5": {
+              "over": 1.69,
+              "under": 2.15
+            },
+            "3.0": {
+              "over": 2.15,
+              "under": 1.7
+            },
+            "3.5": {
+              "over": 2.65,
+              "under": 1.46
+            },
+            "4.0": {
+              "over": 4.1,
+              "under": 1.22
+            },
+            "4.5": {
+              "over": 4.8,
+              "under": 1.17
+            },
+            "5.0": {
+              "over": 8.1,
+              "under": 1.07
+            },
+            "5.5": {
+              "over": 8.7,
+              "under": 1.06
+            }
+          }
+        },
+        "market_probabilities": {
+          "away_over_0_5": 0.6259253864519494,
+          "away_over_1_5": 0.25809781895015116,
+          "away_win": 0.31030442584598733,
+          "btts_yes": 0.4272978940564264,
+          "double_chance_12": 0.704424318830879,
+          "double_chance_1x": 0.6896955741540127,
+          "double_chance_x2": 0.6058801070151084,
+          "draw": 0.2955756811691211,
+          "home_over_0_5": 0.682665862905097,
+          "home_over_1_5": 0.3184297403475673,
+          "home_win": 0.3941198929848917,
+          "match_over_1_5": 0.6283176247817714,
+          "match_over_2_5": 0.3587593351274124
+        },
         "model_version": "venue-poisson-baseline-1",
         "odds": 1.45,
         "odds_status": "available",
@@ -2608,7 +5878,7 @@
         },
         "selection": "1X"
       },
-      "created_at": "2026-11-23T04:11:58.341607+00:00",
+      "created_at": "2026-11-23T04:16:34.823898+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -2616,7 +5886,7 @@
       "settlement_source": null
     },
     {
-      "id": "00c054be29cc4a3884de633ca9102408",
+      "id": "e62bab47dcbd4478b45e340177dc530a",
       "fixture_id": "1802526",
       "kickoff": "2026-11-24T21:45:00+02:00",
       "home": "Bristol City",
@@ -2645,6 +5915,119 @@
         "home_lambda": 0.7862,
         "kickoff": "2026-11-24T21:45:00+02:00",
         "market": "double_chance",
+        "market_odds": {
+          "1X2": {
+            "away": 2.85,
+            "draw": 3.33,
+            "home": 2.5
+          },
+          "away_team_goals": {
+            "0.5": {
+              "over": 1.36,
+              "under": 3.0
+            },
+            "1.5": {
+              "over": 2.7,
+              "under": 1.44
+            },
+            "2.5": {
+              "over": 6.25,
+              "under": 1.1
+            },
+            "3.5": {
+              "over": 12.0,
+              "under": 1.01
+            }
+          },
+          "btts": {
+            "no": 1.93,
+            "yes": 1.82
+          },
+          "double_chance": {
+            "12": 1.32,
+            "1X": 1.4,
+            "X2": 1.49
+          },
+          "home_team_goals": {
+            "0.5": {
+              "over": 1.31,
+              "under": 3.25
+            },
+            "1.5": {
+              "over": 2.45,
+              "under": 1.51
+            },
+            "2.5": {
+              "over": 5.5,
+              "under": 1.13
+            },
+            "3.5": {
+              "over": 11.0,
+              "under": 1.02
+            }
+          },
+          "match_total_goals": {
+            "0.5": {
+              "over": 1.07,
+              "under": 8.2
+            },
+            "1.0": {
+              "over": 1.09,
+              "under": 7.0
+            },
+            "1.5": {
+              "over": 1.34,
+              "under": 3.2
+            },
+            "2.0": {
+              "over": 1.55,
+              "under": 2.4
+            },
+            "2.5": {
+              "over": 2.05,
+              "under": 1.74
+            },
+            "3.0": {
+              "over": 2.9,
+              "under": 1.39
+            },
+            "3.5": {
+              "over": 3.6,
+              "under": 1.28
+            },
+            "4.0": {
+              "over": 6.25,
+              "under": 1.11
+            },
+            "4.5": {
+              "over": 7.0,
+              "under": 1.09
+            },
+            "5.0": {
+              "over": 12.0,
+              "under": 1.03
+            },
+            "5.5": {
+              "over": 12.0,
+              "under": 1.02
+            }
+          }
+        },
+        "market_probabilities": {
+          "away_over_0_5": 0.6506915722780777,
+          "away_over_1_5": 0.2832889680001598,
+          "away_win": 0.41144273546392934,
+          "btts_yes": 0.3542542646655681,
+          "double_chance_12": 0.6794340590338608,
+          "double_chance_1x": 0.5885572645360705,
+          "double_chance_x2": 0.7320086764300684,
+          "draw": 0.320565940966139,
+          "home_over_0_5": 0.5444273135816413,
+          "home_over_1_5": 0.18625606751952772,
+          "home_win": 0.2679913235699315,
+          "match_over_1_5": 0.548373794949,
+          "match_over_2_5": 0.2795747256297062
+        },
         "model_version": "venue-poisson-baseline-1",
         "odds": 1.49,
         "odds_status": "available",
@@ -2660,7 +6043,7 @@
         },
         "selection": "X2"
       },
-      "created_at": "2026-11-23T04:11:58.339640+00:00",
+      "created_at": "2026-11-23T04:16:34.822564+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -2668,7 +6051,7 @@
       "settlement_source": null
     },
     {
-      "id": "6acc64b424c14b7d992e8594f3eb33a7",
+      "id": "b9c8b10d956847dc8d3fb80b72881255",
       "fixture_id": "1793635",
       "kickoff": "2026-11-23T22:00:00+02:00",
       "home": "Brentford",
@@ -2697,6 +6080,127 @@
         "home_lambda": 1.4289,
         "kickoff": "2026-11-23T22:00:00+02:00",
         "market": "match_over_1_5",
+        "market_odds": {
+          "1X2": {
+            "away": 3.1,
+            "draw": 3.6,
+            "home": 2.4
+          },
+          "away_team_goals": {
+            "0.5": {
+              "over": 1.33,
+              "under": 3.33
+            },
+            "1.5": {
+              "over": 2.55,
+              "under": 1.52
+            },
+            "2.5": {
+              "over": 6.0,
+              "under": 1.13
+            },
+            "3.5": {
+              "over": 13.5,
+              "under": 1.02
+            },
+            "4.5": {
+              "over": 19.5,
+              "under": null
+            }
+          },
+          "btts": {
+            "no": 2.2,
+            "yes": 1.68
+          },
+          "double_chance": {
+            "12": 1.32,
+            "1X": 1.38,
+            "X2": 1.58
+          },
+          "home_team_goals": {
+            "0.5": {
+              "over": 1.25,
+              "under": 4.0
+            },
+            "1.5": {
+              "over": 2.15,
+              "under": 1.71
+            },
+            "2.5": {
+              "over": 4.6,
+              "under": 1.2
+            },
+            "3.5": {
+              "over": 10.5,
+              "under": 1.05
+            },
+            "4.5": {
+              "over": 18.0,
+              "under": 1.01
+            }
+          },
+          "match_total_goals": {
+            "0.5": {
+              "over": 1.05,
+              "under": 11.0
+            },
+            "1.0": {
+              "over": 1.07,
+              "under": 9.6
+            },
+            "1.5": {
+              "over": 1.27,
+              "under": 4.0
+            },
+            "2.0": {
+              "over": 1.4,
+              "under": 3.1
+            },
+            "2.5": {
+              "over": 1.84,
+              "under": 2.0
+            },
+            "3.0": {
+              "over": 2.4,
+              "under": 1.6
+            },
+            "3.5": {
+              "over": 3.0,
+              "under": 1.41
+            },
+            "4.0": {
+              "over": 5.0,
+              "under": 1.19
+            },
+            "4.5": {
+              "over": 5.8,
+              "under": 1.15
+            },
+            "5.0": {
+              "over": 10.5,
+              "under": 1.06
+            },
+            "5.5": {
+              "over": 11.5,
+              "under": 1.05
+            }
+          }
+        },
+        "market_probabilities": {
+          "away_over_0_5": 0.47957005930702246,
+          "away_over_1_5": 0.13967726504043876,
+          "away_win": 0.17027395297765752,
+          "btts_yes": 0.3646783538819199,
+          "double_chance_12": 0.7288346655552675,
+          "double_chance_1x": 0.8297260470223429,
+          "double_chance_x2": 0.44143928742239036,
+          "draw": 0.27116533444473284,
+          "home_over_0_5": 0.7604276931067782,
+          "home_over_1_5": 0.4181028237870533,
+          "home_win": 0.5585607125776101,
+          "match_over_1_5": 0.6157343862752562,
+          "match_over_2_5": 0.3455063885161103
+        },
         "model_version": "venue-poisson-baseline-1",
         "odds": 1.27,
         "odds_status": "available",
@@ -2712,7 +6216,7 @@
         },
         "selection": "over"
       },
-      "created_at": "2026-11-23T04:11:49.815662+00:00",
+      "created_at": "2026-11-23T04:16:25.320731+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -2720,7 +6224,7 @@
       "settlement_source": null
     },
     {
-      "id": "0918704181ac451fa597c9913c19d2eb",
+      "id": "fa383101c46845e5b602c3962376bafe",
       "fixture_id": "1793635",
       "kickoff": "2026-11-23T22:00:00+02:00",
       "home": "Brentford",
@@ -2749,6 +6253,127 @@
         "home_lambda": 1.4289,
         "kickoff": "2026-11-23T22:00:00+02:00",
         "market": "double_chance",
+        "market_odds": {
+          "1X2": {
+            "away": 3.1,
+            "draw": 3.6,
+            "home": 2.4
+          },
+          "away_team_goals": {
+            "0.5": {
+              "over": 1.33,
+              "under": 3.33
+            },
+            "1.5": {
+              "over": 2.55,
+              "under": 1.52
+            },
+            "2.5": {
+              "over": 6.0,
+              "under": 1.13
+            },
+            "3.5": {
+              "over": 13.5,
+              "under": 1.02
+            },
+            "4.5": {
+              "over": 19.5,
+              "under": null
+            }
+          },
+          "btts": {
+            "no": 2.2,
+            "yes": 1.68
+          },
+          "double_chance": {
+            "12": 1.32,
+            "1X": 1.38,
+            "X2": 1.58
+          },
+          "home_team_goals": {
+            "0.5": {
+              "over": 1.25,
+              "under": 4.0
+            },
+            "1.5": {
+              "over": 2.15,
+              "under": 1.71
+            },
+            "2.5": {
+              "over": 4.6,
+              "under": 1.2
+            },
+            "3.5": {
+              "over": 10.5,
+              "under": 1.05
+            },
+            "4.5": {
+              "over": 18.0,
+              "under": 1.01
+            }
+          },
+          "match_total_goals": {
+            "0.5": {
+              "over": 1.05,
+              "under": 11.0
+            },
+            "1.0": {
+              "over": 1.07,
+              "under": 9.6
+            },
+            "1.5": {
+              "over": 1.27,
+              "under": 4.0
+            },
+            "2.0": {
+              "over": 1.4,
+              "under": 3.1
+            },
+            "2.5": {
+              "over": 1.84,
+              "under": 2.0
+            },
+            "3.0": {
+              "over": 2.4,
+              "under": 1.6
+            },
+            "3.5": {
+              "over": 3.0,
+              "under": 1.41
+            },
+            "4.0": {
+              "over": 5.0,
+              "under": 1.19
+            },
+            "4.5": {
+              "over": 5.8,
+              "under": 1.15
+            },
+            "5.0": {
+              "over": 10.5,
+              "under": 1.06
+            },
+            "5.5": {
+              "over": 11.5,
+              "under": 1.05
+            }
+          }
+        },
+        "market_probabilities": {
+          "away_over_0_5": 0.47957005930702246,
+          "away_over_1_5": 0.13967726504043876,
+          "away_win": 0.17027395297765752,
+          "btts_yes": 0.3646783538819199,
+          "double_chance_12": 0.7288346655552675,
+          "double_chance_1x": 0.8297260470223429,
+          "double_chance_x2": 0.44143928742239036,
+          "draw": 0.27116533444473284,
+          "home_over_0_5": 0.7604276931067782,
+          "home_over_1_5": 0.4181028237870533,
+          "home_win": 0.5585607125776101,
+          "match_over_1_5": 0.6157343862752562,
+          "match_over_2_5": 0.3455063885161103
+        },
         "model_version": "venue-poisson-baseline-1",
         "odds": 1.32,
         "odds_status": "available",
@@ -2764,7 +6389,7 @@
         },
         "selection": "12"
       },
-      "created_at": "2026-11-23T04:11:49.814080+00:00",
+      "created_at": "2026-11-23T04:16:25.319053+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -2772,7 +6397,7 @@
       "settlement_source": null
     },
     {
-      "id": "0dc59558fe58438d94e9c83cb78b3cfb",
+      "id": "f8f9d2a899c9405bb92db469b459e121",
       "fixture_id": "1793635",
       "kickoff": "2026-11-23T22:00:00+02:00",
       "home": "Brentford",
@@ -2801,6 +6426,127 @@
         "home_lambda": 1.4289,
         "kickoff": "2026-11-23T22:00:00+02:00",
         "market": "home_over_0_5",
+        "market_odds": {
+          "1X2": {
+            "away": 3.1,
+            "draw": 3.6,
+            "home": 2.4
+          },
+          "away_team_goals": {
+            "0.5": {
+              "over": 1.33,
+              "under": 3.33
+            },
+            "1.5": {
+              "over": 2.55,
+              "under": 1.52
+            },
+            "2.5": {
+              "over": 6.0,
+              "under": 1.13
+            },
+            "3.5": {
+              "over": 13.5,
+              "under": 1.02
+            },
+            "4.5": {
+              "over": 19.5,
+              "under": null
+            }
+          },
+          "btts": {
+            "no": 2.2,
+            "yes": 1.68
+          },
+          "double_chance": {
+            "12": 1.32,
+            "1X": 1.38,
+            "X2": 1.58
+          },
+          "home_team_goals": {
+            "0.5": {
+              "over": 1.25,
+              "under": 4.0
+            },
+            "1.5": {
+              "over": 2.15,
+              "under": 1.71
+            },
+            "2.5": {
+              "over": 4.6,
+              "under": 1.2
+            },
+            "3.5": {
+              "over": 10.5,
+              "under": 1.05
+            },
+            "4.5": {
+              "over": 18.0,
+              "under": 1.01
+            }
+          },
+          "match_total_goals": {
+            "0.5": {
+              "over": 1.05,
+              "under": 11.0
+            },
+            "1.0": {
+              "over": 1.07,
+              "under": 9.6
+            },
+            "1.5": {
+              "over": 1.27,
+              "under": 4.0
+            },
+            "2.0": {
+              "over": 1.4,
+              "under": 3.1
+            },
+            "2.5": {
+              "over": 1.84,
+              "under": 2.0
+            },
+            "3.0": {
+              "over": 2.4,
+              "under": 1.6
+            },
+            "3.5": {
+              "over": 3.0,
+              "under": 1.41
+            },
+            "4.0": {
+              "over": 5.0,
+              "under": 1.19
+            },
+            "4.5": {
+              "over": 5.8,
+              "under": 1.15
+            },
+            "5.0": {
+              "over": 10.5,
+              "under": 1.06
+            },
+            "5.5": {
+              "over": 11.5,
+              "under": 1.05
+            }
+          }
+        },
+        "market_probabilities": {
+          "away_over_0_5": 0.47957005930702246,
+          "away_over_1_5": 0.13967726504043876,
+          "away_win": 0.17027395297765752,
+          "btts_yes": 0.3646783538819199,
+          "double_chance_12": 0.7288346655552675,
+          "double_chance_1x": 0.8297260470223429,
+          "double_chance_x2": 0.44143928742239036,
+          "draw": 0.27116533444473284,
+          "home_over_0_5": 0.7604276931067782,
+          "home_over_1_5": 0.4181028237870533,
+          "home_win": 0.5585607125776101,
+          "match_over_1_5": 0.6157343862752562,
+          "match_over_2_5": 0.3455063885161103
+        },
         "model_version": "venue-poisson-baseline-1",
         "odds": 1.25,
         "odds_status": "available",
@@ -2816,7 +6562,7 @@
         },
         "selection": "over"
       },
-      "created_at": "2026-11-23T04:11:49.812561+00:00",
+      "created_at": "2026-11-23T04:16:25.317093+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -2824,7 +6570,7 @@
       "settlement_source": null
     },
     {
-      "id": "c3862832e42947dda40808fa0ce0e035",
+      "id": "56a202d627804cf9aeb110c43d515160",
       "fixture_id": "1793635",
       "kickoff": "2026-11-23T22:00:00+02:00",
       "home": "Brentford",
@@ -2853,6 +6599,127 @@
         "home_lambda": 1.4289,
         "kickoff": "2026-11-23T22:00:00+02:00",
         "market": "double_chance",
+        "market_odds": {
+          "1X2": {
+            "away": 3.1,
+            "draw": 3.6,
+            "home": 2.4
+          },
+          "away_team_goals": {
+            "0.5": {
+              "over": 1.33,
+              "under": 3.33
+            },
+            "1.5": {
+              "over": 2.55,
+              "under": 1.52
+            },
+            "2.5": {
+              "over": 6.0,
+              "under": 1.13
+            },
+            "3.5": {
+              "over": 13.5,
+              "under": 1.02
+            },
+            "4.5": {
+              "over": 19.5,
+              "under": null
+            }
+          },
+          "btts": {
+            "no": 2.2,
+            "yes": 1.68
+          },
+          "double_chance": {
+            "12": 1.32,
+            "1X": 1.38,
+            "X2": 1.58
+          },
+          "home_team_goals": {
+            "0.5": {
+              "over": 1.25,
+              "under": 4.0
+            },
+            "1.5": {
+              "over": 2.15,
+              "under": 1.71
+            },
+            "2.5": {
+              "over": 4.6,
+              "under": 1.2
+            },
+            "3.5": {
+              "over": 10.5,
+              "under": 1.05
+            },
+            "4.5": {
+              "over": 18.0,
+              "under": 1.01
+            }
+          },
+          "match_total_goals": {
+            "0.5": {
+              "over": 1.05,
+              "under": 11.0
+            },
+            "1.0": {
+              "over": 1.07,
+              "under": 9.6
+            },
+            "1.5": {
+              "over": 1.27,
+              "under": 4.0
+            },
+            "2.0": {
+              "over": 1.4,
+              "under": 3.1
+            },
+            "2.5": {
+              "over": 1.84,
+              "under": 2.0
+            },
+            "3.0": {
+              "over": 2.4,
+              "under": 1.6
+            },
+            "3.5": {
+              "over": 3.0,
+              "under": 1.41
+            },
+            "4.0": {
+              "over": 5.0,
+              "under": 1.19
+            },
+            "4.5": {
+              "over": 5.8,
+              "under": 1.15
+            },
+            "5.0": {
+              "over": 10.5,
+              "under": 1.06
+            },
+            "5.5": {
+              "over": 11.5,
+              "under": 1.05
+            }
+          }
+        },
+        "market_probabilities": {
+          "away_over_0_5": 0.47957005930702246,
+          "away_over_1_5": 0.13967726504043876,
+          "away_win": 0.17027395297765752,
+          "btts_yes": 0.3646783538819199,
+          "double_chance_12": 0.7288346655552675,
+          "double_chance_1x": 0.8297260470223429,
+          "double_chance_x2": 0.44143928742239036,
+          "draw": 0.27116533444473284,
+          "home_over_0_5": 0.7604276931067782,
+          "home_over_1_5": 0.4181028237870533,
+          "home_win": 0.5585607125776101,
+          "match_over_1_5": 0.6157343862752562,
+          "match_over_2_5": 0.3455063885161103
+        },
         "model_version": "venue-poisson-baseline-1",
         "odds": 1.38,
         "odds_status": "available",
@@ -2868,7 +6735,7 @@
         },
         "selection": "1X"
       },
-      "created_at": "2026-11-23T04:11:49.810485+00:00",
+      "created_at": "2026-11-23T04:16:25.315446+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -2876,7 +6743,7 @@
       "settlement_source": null
     },
     {
-      "id": "3fb6ac1779bd4f93bfc03574dc8e23ec",
+      "id": "90a1a15855f6482f9a528beed1b8cbb9",
       "fixture_id": "1836632",
       "kickoff": "2026-11-23T17:00:00+02:00",
       "home": "Asteras Tripolis",
@@ -2920,7 +6787,7 @@
         },
         "selection": "over"
       },
-      "created_at": "2026-11-23T04:11:14.917905+00:00",
+      "created_at": "2026-11-23T04:15:44.303821+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -2928,7 +6795,7 @@
       "settlement_source": null
     },
     {
-      "id": "a449961b76114d25b2f91dce32e43071",
+      "id": "b7ffc06289b94dcbaeaf218f4b3ad0db",
       "fixture_id": "1836632",
       "kickoff": "2026-11-23T17:00:00+02:00",
       "home": "Asteras Tripolis",
@@ -2972,7 +6839,7 @@
         },
         "selection": "over"
       },
-      "created_at": "2026-11-23T04:11:14.917002+00:00",
+      "created_at": "2026-11-23T04:15:44.302693+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -2980,7 +6847,7 @@
       "settlement_source": null
     },
     {
-      "id": "8012787315354936b60c3005e4e999df",
+      "id": "5abd28fe553040dba149d64756820f2b",
       "fixture_id": "1836632",
       "kickoff": "2026-11-23T17:00:00+02:00",
       "home": "Asteras Tripolis",
@@ -3024,7 +6891,7 @@
         },
         "selection": "1X"
       },
-      "created_at": "2026-11-23T04:11:14.916014+00:00",
+      "created_at": "2026-11-23T04:15:44.301635+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -3032,7 +6899,7 @@
       "settlement_source": null
     },
     {
-      "id": "70398ec79333472a9def110feb3d542f",
+      "id": "7adc47d8b1ee4dafbffe20e884d48bf3",
       "fixture_id": "1836632",
       "kickoff": "2026-11-23T17:00:00+02:00",
       "home": "Asteras Tripolis",
@@ -3076,7 +6943,7 @@
         },
         "selection": "12"
       },
-      "created_at": "2026-11-23T04:11:14.914892+00:00",
+      "created_at": "2026-11-23T04:15:44.300610+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -3084,7 +6951,7 @@
       "settlement_source": null
     },
     {
-      "id": "c5486d5254644bcc83f635a8f8cbf675",
+      "id": "e7855863d06d44ae89c76262bdafaf60",
       "fixture_id": "1836632",
       "kickoff": "2026-11-23T17:00:00+02:00",
       "home": "Asteras Tripolis",
@@ -3128,7 +6995,7 @@
         },
         "selection": "over"
       },
-      "created_at": "2026-11-23T04:11:14.913740+00:00",
+      "created_at": "2026-11-23T04:15:44.299538+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -3136,7 +7003,7 @@
       "settlement_source": null
     },
     {
-      "id": "957157d13f03435b82dcf28b4ae88848",
+      "id": "aebe765d2dd8479e8e176c578d643ae4",
       "fixture_id": "1810741",
       "kickoff": "2026-11-23T22:00:00+02:00",
       "home": "Levante",
@@ -3180,7 +7047,7 @@
         },
         "selection": "over"
       },
-      "created_at": "2026-11-23T04:10:11.188460+00:00",
+      "created_at": "2026-11-23T04:15:09.100812+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -3188,7 +7055,7 @@
       "settlement_source": null
     },
     {
-      "id": "a50849b63e9e469093a75bfa02ec1c2f",
+      "id": "0911bf401656499c9645b31f718c46b7",
       "fixture_id": "1810741",
       "kickoff": "2026-11-23T22:00:00+02:00",
       "home": "Levante",
@@ -3232,7 +7099,7 @@
         },
         "selection": "12"
       },
-      "created_at": "2026-11-23T04:10:11.187556+00:00",
+      "created_at": "2026-11-23T04:15:09.099844+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -3240,7 +7107,7 @@
       "settlement_source": null
     },
     {
-      "id": "ee6c28b1517f44738bfb2d8a5814a052",
+      "id": "fbe83a7294ca4f0c8e2094e00a5d52b2",
       "fixture_id": "1810741",
       "kickoff": "2026-11-23T22:00:00+02:00",
       "home": "Levante",
@@ -3284,7 +7151,7 @@
         },
         "selection": "over"
       },
-      "created_at": "2026-11-23T04:10:11.186513+00:00",
+      "created_at": "2026-11-23T04:15:09.098804+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -3292,7 +7159,7 @@
       "settlement_source": null
     },
     {
-      "id": "323abbe947554a758f558b7c21133037",
+      "id": "cce2f7013cdb46838c5c2962c1f7871c",
       "fixture_id": "1810741",
       "kickoff": "2026-11-23T22:00:00+02:00",
       "home": "Levante",
@@ -3336,7 +7203,7 @@
         },
         "selection": "yes"
       },
-      "created_at": "2026-11-23T04:10:11.185543+00:00",
+      "created_at": "2026-11-23T04:15:09.097855+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -3344,7 +7211,7 @@
       "settlement_source": null
     },
     {
-      "id": "ef29f0451a1643ff9eed459558fb76cb",
+      "id": "2b9c35773fe745d1b9fef1821c8109bb",
       "fixture_id": "1810741",
       "kickoff": "2026-11-23T22:00:00+02:00",
       "home": "Levante",
@@ -3388,7 +7255,7 @@
         },
         "selection": "X2"
       },
-      "created_at": "2026-11-23T04:10:11.184648+00:00",
+      "created_at": "2026-11-23T04:15:09.096686+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -3396,7 +7263,7 @@
       "settlement_source": null
     },
     {
-      "id": "76028c2b7c074bc69f9549fe5bc00be7",
+      "id": "bb2409dea7e848a58e56adbab5f37fc6",
       "fixture_id": "1810741",
       "kickoff": "2026-11-23T22:00:00+02:00",
       "home": "Levante",
@@ -3440,7 +7307,7 @@
         },
         "selection": "over"
       },
-      "created_at": "2026-11-23T04:10:11.183779+00:00",
+      "created_at": "2026-11-23T04:15:09.095679+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -3448,7 +7315,7 @@
       "settlement_source": null
     },
     {
-      "id": "fadadeb8cef24f658cd0252e54db6d18",
+      "id": "1a9b239a644745dd98a6ce1e59c1f9f3",
       "fixture_id": "1810741",
       "kickoff": "2026-11-23T22:00:00+02:00",
       "home": "Levante",
@@ -3492,7 +7359,7 @@
         },
         "selection": "over"
       },
-      "created_at": "2026-11-23T04:10:11.182638+00:00",
+      "created_at": "2026-11-23T04:15:09.094743+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -3500,7 +7367,7 @@
       "settlement_source": null
     },
     {
-      "id": "59cff1ed4cb94952aa1031520ddf700b",
+      "id": "57c3d0ba8917434592fbf51b768c2a56",
       "fixture_id": "1810741",
       "kickoff": "2026-11-23T22:00:00+02:00",
       "home": "Levante",
@@ -3544,7 +7411,7 @@
         },
         "selection": "over"
       },
-      "created_at": "2026-11-23T04:10:11.181588+00:00",
+      "created_at": "2026-11-23T04:15:09.093667+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -3552,7 +7419,7 @@
       "settlement_source": null
     },
     {
-      "id": "0ac6a94129b14f24b6ca27bc09b7fbe6",
+      "id": "b156f4ef881a4554b21cab65586a3cb9",
       "fixture_id": "1785426",
       "kickoff": "2026-11-23T21:45:00+02:00",
       "home": "Monza",
@@ -3596,7 +7463,7 @@
         },
         "selection": "over"
       },
-      "created_at": "2026-11-23T04:10:01.443971+00:00",
+      "created_at": "2026-11-23T04:15:03.877567+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -3604,7 +7471,7 @@
       "settlement_source": null
     },
     {
-      "id": "5940d3067d1540a0ae6f937059d87cad",
+      "id": "4df699ac716546a9b24e1972148a4602",
       "fixture_id": "1785426",
       "kickoff": "2026-11-23T21:45:00+02:00",
       "home": "Monza",
@@ -3648,7 +7515,7 @@
         },
         "selection": "1X"
       },
-      "created_at": "2026-11-23T04:10:01.442310+00:00",
+      "created_at": "2026-11-23T04:15:03.876621+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -3656,7 +7523,7 @@
       "settlement_source": null
     },
     {
-      "id": "ad8e86107abb4e0ea3470ecbca9f266d",
+      "id": "a94a3265c47e4ceab0de4cca97c482fc",
       "fixture_id": "1785426",
       "kickoff": "2026-11-23T21:45:00+02:00",
       "home": "Monza",
@@ -3700,7 +7567,7 @@
         },
         "selection": "over"
       },
-      "created_at": "2026-11-23T04:10:01.436712+00:00",
+      "created_at": "2026-11-23T04:15:03.875647+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -3708,7 +7575,7 @@
       "settlement_source": null
     },
     {
-      "id": "96c701d1c1cb4cc3b7e6b2754f9ee132",
+      "id": "8e439060f4df4724b7e623ac753efde5",
       "fixture_id": "1785426",
       "kickoff": "2026-11-23T21:45:00+02:00",
       "home": "Monza",
@@ -3752,7 +7619,7 @@
         },
         "selection": "yes"
       },
-      "created_at": "2026-11-23T04:10:01.435767+00:00",
+      "created_at": "2026-11-23T04:15:03.874618+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -3760,7 +7627,7 @@
       "settlement_source": null
     },
     {
-      "id": "3cf7048b0421418a95214b0d83ed0682",
+      "id": "b7e3c4d2cb5c42a794f73f1b8b96aa90",
       "fixture_id": "1785426",
       "kickoff": "2026-11-23T21:45:00+02:00",
       "home": "Monza",
@@ -3804,7 +7671,7 @@
         },
         "selection": "12"
       },
-      "created_at": "2026-11-23T04:10:01.434730+00:00",
+      "created_at": "2026-11-23T04:15:03.873116+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -3812,7 +7679,7 @@
       "settlement_source": null
     },
     {
-      "id": "ebb83745058649d7b4929cee0eb68bfb",
+      "id": "36fc852c301f409f9222c3a610a70611",
       "fixture_id": "1785426",
       "kickoff": "2026-11-23T21:45:00+02:00",
       "home": "Monza",
@@ -3856,7 +7723,7 @@
         },
         "selection": "over"
       },
-      "created_at": "2026-11-23T04:10:01.433695+00:00",
+      "created_at": "2026-11-23T04:15:03.872062+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -3864,7 +7731,7 @@
       "settlement_source": null
     },
     {
-      "id": "2db0729bd9dc473984ec35f091b648f8",
+      "id": "b6f0b3e5dd61404b94f2907cb95daf23",
       "fixture_id": "1785426",
       "kickoff": "2026-11-23T21:45:00+02:00",
       "home": "Monza",
@@ -3908,7 +7775,7 @@
         },
         "selection": "over"
       },
-      "created_at": "2026-11-23T04:10:01.432464+00:00",
+      "created_at": "2026-11-23T04:15:03.871076+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -3916,7 +7783,7 @@
       "settlement_source": null
     },
     {
-      "id": "51f0466fefba46a88379e3dae31d7d6e",
+      "id": "eb689d88cff14872905790dcaeb4c141",
       "fixture_id": "1785426",
       "kickoff": "2026-11-23T21:45:00+02:00",
       "home": "Monza",
@@ -3960,7 +7827,7 @@
         },
         "selection": "over"
       },
-      "created_at": "2026-11-23T04:10:01.431413+00:00",
+      "created_at": "2026-11-23T04:15:03.870005+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -3968,7 +7835,7 @@
       "settlement_source": null
     },
     {
-      "id": "8e152c55d7844a62b2cd56d20796911c",
+      "id": "f3fb3dd020f8435ba52ae34f9d785010",
       "fixture_id": "1785426",
       "kickoff": "2026-11-23T21:45:00+02:00",
       "home": "Monza",
@@ -4012,7 +7879,7 @@
         },
         "selection": "over"
       },
-      "created_at": "2026-11-23T04:10:01.430351+00:00",
+      "created_at": "2026-11-23T04:15:03.868740+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -4020,7 +7887,7 @@
       "settlement_source": null
     },
     {
-      "id": "cc2c033f35414bd288b833e2c110838b",
+      "id": "56fe7362fc4d4781b1fecb8b4d230c61",
       "fixture_id": "1834796",
       "kickoff": "2026-11-23T19:00:00+02:00",
       "home": "Bayern Munich W",
@@ -4064,7 +7931,7 @@
         },
         "selection": "yes"
       },
-      "created_at": "2026-11-23T04:09:54.296755+00:00",
+      "created_at": "2026-11-23T04:14:58.296547+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -4072,7 +7939,7 @@
       "settlement_source": null
     },
     {
-      "id": "eef5a19d9fd14a399f003493b6ee2362",
+      "id": "368879d71bf94320b1b1f4c9e3254622",
       "fixture_id": "1834796",
       "kickoff": "2026-11-23T19:00:00+02:00",
       "home": "Bayern Munich W",
@@ -4116,7 +7983,7 @@
         },
         "selection": "over"
       },
-      "created_at": "2026-11-23T04:09:54.295478+00:00",
+      "created_at": "2026-11-23T04:14:58.295298+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -4124,7 +7991,7 @@
       "settlement_source": null
     },
     {
-      "id": "d9d14bbbb1d34cb890374906fd078715",
+      "id": "980919f387a8411ca80d9cbe12b1c820",
       "fixture_id": "1834796",
       "kickoff": "2026-11-23T19:00:00+02:00",
       "home": "Bayern Munich W",
@@ -4168,7 +8035,7 @@
         },
         "selection": "home"
       },
-      "created_at": "2026-11-23T04:09:54.294523+00:00",
+      "created_at": "2026-11-23T04:14:58.294369+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -4176,7 +8043,7 @@
       "settlement_source": null
     },
     {
-      "id": "a324bfcd3b4e4bcca81fff4ee21aaa8e",
+      "id": "dd00dc41565141b2b0a1e990f9bc5f35",
       "fixture_id": "1834796",
       "kickoff": "2026-11-23T19:00:00+02:00",
       "home": "Bayern Munich W",
@@ -4220,7 +8087,7 @@
         },
         "selection": "12"
       },
-      "created_at": "2026-11-23T04:09:54.293524+00:00",
+      "created_at": "2026-11-23T04:14:58.293201+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -4228,7 +8095,7 @@
       "settlement_source": null
     },
     {
-      "id": "dfc4487ab8044e1e8754f03c93eed82c",
+      "id": "25ba4284e7bb4cd4b21949fab9417e15",
       "fixture_id": "1834796",
       "kickoff": "2026-11-23T19:00:00+02:00",
       "home": "Bayern Munich W",
@@ -4272,7 +8139,7 @@
         },
         "selection": "over"
       },
-      "created_at": "2026-11-23T04:09:54.292515+00:00",
+      "created_at": "2026-11-23T04:14:58.292043+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -4280,7 +8147,7 @@
       "settlement_source": null
     },
     {
-      "id": "14584042056d481e999e4e686ba75d47",
+      "id": "0a4dd89619944982abf827b4ca802e87",
       "fixture_id": "1834796",
       "kickoff": "2026-11-23T19:00:00+02:00",
       "home": "Bayern Munich W",
@@ -4324,7 +8191,7 @@
         },
         "selection": "1X"
       },
-      "created_at": "2026-11-23T04:09:54.291349+00:00",
+      "created_at": "2026-11-23T04:14:58.291081+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -4332,7 +8199,7 @@
       "settlement_source": null
     },
     {
-      "id": "d8de0a0d6b0447f58b96daa264678371",
+      "id": "11554f78d3444ebda2d8081870bc5aa5",
       "fixture_id": "1834796",
       "kickoff": "2026-11-23T19:00:00+02:00",
       "home": "Bayern Munich W",
@@ -4376,7 +8243,7 @@
         },
         "selection": "over"
       },
-      "created_at": "2026-11-23T04:09:54.290276+00:00",
+      "created_at": "2026-11-23T04:14:58.290145+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -4384,7 +8251,7 @@
       "settlement_source": null
     },
     {
-      "id": "4428f4a7fdc24334a312d2d068eaa186",
+      "id": "8395052338494f6a8869d1ec67c06897",
       "fixture_id": "1834796",
       "kickoff": "2026-11-23T19:00:00+02:00",
       "home": "Bayern Munich W",
@@ -4428,7 +8295,7 @@
         },
         "selection": "over"
       },
-      "created_at": "2026-11-23T04:09:54.289283+00:00",
+      "created_at": "2026-11-23T04:14:58.288786+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -4436,7 +8303,7 @@
       "settlement_source": null
     },
     {
-      "id": "9b7c471b241f42abaab2e324008633d5",
+      "id": "df816b32be0a4568990f52b3bc7ba92c",
       "fixture_id": "1834796",
       "kickoff": "2026-11-23T19:00:00+02:00",
       "home": "Bayern Munich W",
@@ -4480,7 +8347,7 @@
         },
         "selection": "over"
       },
-      "created_at": "2026-11-23T04:09:54.288127+00:00",
+      "created_at": "2026-11-23T04:14:58.287726+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -4488,7 +8355,7 @@
       "settlement_source": null
     },
     {
-      "id": "18d66c576e3141d6814af550b8b9d785",
+      "id": "2b2068004a9e42a6b17c09c2403ad79c",
       "fixture_id": "1792833",
       "kickoff": "2026-11-24T21:45:00+02:00",
       "home": "Hibernian",
@@ -4532,7 +8399,7 @@
         },
         "selection": "over"
       },
-      "created_at": "2026-11-23T04:09:43.853897+00:00",
+      "created_at": "2026-11-23T04:14:50.363386+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -4540,7 +8407,7 @@
       "settlement_source": null
     },
     {
-      "id": "28149e65ccf74216a3ec7af0fbbd084f",
+      "id": "5dae8b15d2cb4523b0626c770ba09a80",
       "fixture_id": "1792830",
       "kickoff": "2026-11-24T22:00:00+02:00",
       "home": "Rangers",
@@ -4584,7 +8451,7 @@
         },
         "selection": "over"
       },
-      "created_at": "2026-11-23T04:09:43.852173+00:00",
+      "created_at": "2026-11-23T04:14:50.362403+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -4592,7 +8459,7 @@
       "settlement_source": null
     },
     {
-      "id": "b4f27b4b1d9f454fb12c708714e30665",
+      "id": "e3563a7d08f64fa8a0f530c6c0c49eeb",
       "fixture_id": "1792833",
       "kickoff": "2026-11-24T21:45:00+02:00",
       "home": "Hibernian",
@@ -4636,7 +8503,7 @@
         },
         "selection": "over"
       },
-      "created_at": "2026-11-23T04:09:43.851273+00:00",
+      "created_at": "2026-11-23T04:14:50.361029+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -4644,7 +8511,7 @@
       "settlement_source": null
     },
     {
-      "id": "f79955d1db214ca8bc7ef737a6d3a67b",
+      "id": "8b32daf997634279b9a3e099c12c4398",
       "fixture_id": "1792830",
       "kickoff": "2026-11-24T22:00:00+02:00",
       "home": "Rangers",
@@ -4688,7 +8555,7 @@
         },
         "selection": "home"
       },
-      "created_at": "2026-11-23T04:09:43.850335+00:00",
+      "created_at": "2026-11-23T04:14:50.359961+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -4696,7 +8563,7 @@
       "settlement_source": null
     },
     {
-      "id": "054ced4e38124ea2a53d30fd6ba147a3",
+      "id": "79e0af9d1d8a485a93b3c59c71533661",
       "fixture_id": "1792833",
       "kickoff": "2026-11-24T21:45:00+02:00",
       "home": "Hibernian",
@@ -4740,7 +8607,7 @@
         },
         "selection": "12"
       },
-      "created_at": "2026-11-23T04:09:43.849230+00:00",
+      "created_at": "2026-11-23T04:14:50.358959+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -4748,7 +8615,7 @@
       "settlement_source": null
     },
     {
-      "id": "30a5a0354e1147db980a9ae18ac71514",
+      "id": "3d18d3027821476ab7505f33c332d8e5",
       "fixture_id": "1792830",
       "kickoff": "2026-11-24T22:00:00+02:00",
       "home": "Rangers",
@@ -4792,7 +8659,7 @@
         },
         "selection": "over"
       },
-      "created_at": "2026-11-23T04:09:43.848271+00:00",
+      "created_at": "2026-11-23T04:14:50.357679+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -4800,7 +8667,7 @@
       "settlement_source": null
     },
     {
-      "id": "39931c9f62e64b74a43b68cd90174534",
+      "id": "06e35e5679a8414582808c4abd6235d9",
       "fixture_id": "1792830",
       "kickoff": "2026-11-24T22:00:00+02:00",
       "home": "Rangers",
@@ -4844,7 +8711,7 @@
         },
         "selection": "12"
       },
-      "created_at": "2026-11-23T04:09:43.847287+00:00",
+      "created_at": "2026-11-23T04:14:50.356488+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -4852,7 +8719,7 @@
       "settlement_source": null
     },
     {
-      "id": "21025a4f949e4bcab1b481fc1ce2a58c",
+      "id": "85e0a6da81cb49ac98363dde616a9652",
       "fixture_id": "1792830",
       "kickoff": "2026-11-24T22:00:00+02:00",
       "home": "Rangers",
@@ -4896,7 +8763,7 @@
         },
         "selection": "1X"
       },
-      "created_at": "2026-11-23T04:09:43.846422+00:00",
+      "created_at": "2026-11-23T04:14:50.355475+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -4904,7 +8771,7 @@
       "settlement_source": null
     },
     {
-      "id": "2a08936dcee443a09ac99d365deb551a",
+      "id": "089a165957a642599aa96d99981b34a2",
       "fixture_id": "1792830",
       "kickoff": "2026-11-24T22:00:00+02:00",
       "home": "Rangers",
@@ -4948,7 +8815,7 @@
         },
         "selection": "over"
       },
-      "created_at": "2026-11-23T04:09:43.845259+00:00",
+      "created_at": "2026-11-23T04:14:50.354401+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -4956,7 +8823,7 @@
       "settlement_source": null
     },
     {
-      "id": "4cbc84042edc4bc3a26ffead03f3e69c",
+      "id": "32db8d32a639446695073bb85942436c",
       "fixture_id": "1792833",
       "kickoff": "2026-11-24T21:45:00+02:00",
       "home": "Hibernian",
@@ -5000,7 +8867,7 @@
         },
         "selection": "over"
       },
-      "created_at": "2026-11-23T04:09:43.844253+00:00",
+      "created_at": "2026-11-23T04:14:50.353402+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -5008,7 +8875,7 @@
       "settlement_source": null
     },
     {
-      "id": "1db8799a78d0457e862f6bbe5e969a39",
+      "id": "79da9186b41b4ba88b21afce35bcca16",
       "fixture_id": "1792833",
       "kickoff": "2026-11-24T21:45:00+02:00",
       "home": "Hibernian",
@@ -5052,7 +8919,7 @@
         },
         "selection": "X2"
       },
-      "created_at": "2026-11-23T04:09:43.843237+00:00",
+      "created_at": "2026-11-23T04:14:50.351980+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -5060,7 +8927,7 @@
       "settlement_source": null
     },
     {
-      "id": "cff4b5d4d52b4f6ab533d2336a9060b8",
+      "id": "3ad4b7f9e93f432dbb3775bbebf1698b",
       "fixture_id": "1802532",
       "kickoff": "2026-11-24T21:45:00+02:00",
       "home": "Sheffield United",
@@ -5104,7 +8971,7 @@
         },
         "selection": "X2"
       },
-      "created_at": "2026-11-23T04:09:13.316889+00:00",
+      "created_at": "2026-11-23T04:14:31.093363+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -5112,7 +8979,7 @@
       "settlement_source": null
     },
     {
-      "id": "21054b4951a847c2805cb1f488fc355a",
+      "id": "6ea498a563ed4d578f2a5af5b6b5ec70",
       "fixture_id": "1802532",
       "kickoff": "2026-11-24T21:45:00+02:00",
       "home": "Sheffield United",
@@ -5156,7 +9023,7 @@
         },
         "selection": "over"
       },
-      "created_at": "2026-11-23T04:09:13.315830+00:00",
+      "created_at": "2026-11-23T04:14:31.092468+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -5164,7 +9031,7 @@
       "settlement_source": null
     },
     {
-      "id": "ff157e409aab4d2bad77713968cc4f95",
+      "id": "b38407e39b624ccda826c59d3d8ac8da",
       "fixture_id": "1802532",
       "kickoff": "2026-11-24T21:45:00+02:00",
       "home": "Sheffield United",
@@ -5208,7 +9075,7 @@
         },
         "selection": "over"
       },
-      "created_at": "2026-11-23T04:09:13.314650+00:00",
+      "created_at": "2026-11-23T04:14:31.091471+00:00",
       "status": "PENDING",
       "settled_at": null,
       "final_home_goals": null,
@@ -5222,8 +9089,8 @@
     "newly_settled_predictions": 0,
     "errors": [],
     "summary": {
-      "predictions": 307,
-      "pending": 275,
+      "predictions": 417,
+      "pending": 385,
       "settled": 32,
       "wins": 26,
       "losses": 6,

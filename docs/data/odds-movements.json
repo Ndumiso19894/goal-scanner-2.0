@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "updated_at": null,
-  "minimum_drop_pct": 3,
+  "updated_at": "2026-11-23T04:18:39.194273+00:00",
+  "minimum_drop_pct": 3.0,
   "lookback_hours": 24,
   "count": 0,
   "movements": [],
-  "note": "No movements are reported until at least two genuine price snapshots are collected."
+  "note": "Only price changes observed in at least two snapshots are shown; odds movement is not a prediction."
 }
