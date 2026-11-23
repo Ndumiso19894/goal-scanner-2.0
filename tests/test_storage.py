@@ -44,3 +44,22 @@ def test_non_final_scores_do_not_settle_predictions(tmp_path):
     store.save_prediction(candidate)
     assert store.settle_fixture("ls-456", 1, 1, "HT") == 0
     assert store.results_summary()["pending"] == 1
+
+
+def test_dropping_odds_requires_two_snapshots_and_measures_price_fall(tmp_path):
+    store = Store(str(tmp_path / "odds.sqlite3"))
+    store.save_fixture({
+        "id": "fx-odds", "kickoff": "2026-12-01T18:00:00Z",
+        "home": "Home FC", "away": "Away FC", "competition": "Test League",
+    })
+    store.save_odds_snapshot("fx-odds", {"match_total_goals": {"2.5": {"over": 1.90}}},
+                              "2026-11-23T08:00:00+00:00")
+    assert store.list_dropping_odds() == []
+    store.save_odds_snapshot("fx-odds", {"match_total_goals": {"2.5": {"over": 1.80}}},
+                              "2026-11-23T08:15:00+00:00")
+    movements = store.list_dropping_odds()
+    assert len(movements) == 1
+    assert movements[0]["opening_odds"] == 1.9
+    assert movements[0]["current_odds"] == 1.8
+    assert movements[0]["drop_pct"] == 5.26
+    assert movements[0]["samples"] == 2
