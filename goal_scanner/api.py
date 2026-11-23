@@ -39,8 +39,8 @@ async def api_token_guard(request: Request, call_next):
 STORE = Store(os.getenv("GOAL_SCANNER_DB", "data/goal_scanner.sqlite3"))
 LOCAL_TZ = ZoneInfo("Africa/Johannesburg")
 SELECTABLE_MARKETS = {
-    "home_over_0_5", "away_over_0_5", "home_over_1_5", "away_over_1_5",
-    "match_over_1_5", "match_over_2_5", "match_winner", "double_chance", "btts_yes",
+    "team_corners_over", "match_corners_over", "match_bookings_over",
+    "team_bookings_over", "match_over_2_5", "match_winner", "btts_yes",
 }
 
 
