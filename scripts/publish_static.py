@@ -229,7 +229,11 @@ def main() -> None:
         market = str(candidate.get("market", ""))
         selection = str(candidate.get("selection", ""))
         market_key = f"match_winner_{selection}" if market == "match_winner" else market
-        if market_key not in api.SELECTABLE_MARKETS:
+        try:
+            has_sportybet_price = candidate.get("odds_status") == "available" and float(candidate.get("odds") or 0) > 1
+        except (TypeError, ValueError):
+            has_sportybet_price = False
+        if market_key not in api.SELECTABLE_MARKETS or not has_sportybet_price:
             continue
         key = (str(candidate.get("fixture_id", "")), market, selection)
         # list_predictions is newest-first, so the first record is the latest snapshot.
@@ -319,6 +323,14 @@ def main() -> None:
         "pre_match_stats_source": "Football-Data.co.uk; only completed matches before each fixture are included",
     })
     movements = api.STORE.list_dropping_odds(minimum_drop_pct=3.0, lookback_hours=24, limit=200)
+    allowed_movement_markets = {"1X2", "btts", "match_total_goals", "match_corners",
+                                "home_corners", "away_corners", "match_cards", "home_cards", "away_cards"}
+    movements = [item for item in movements
+                 if item.get("market") in allowed_movement_markets
+                 and (item.get("market") != "btts" or str(item.get("selection", "")).lower() == "yes")
+                 and (item.get("market") != "match_total_goals" or str(item.get("selection", "")).lower() == "2.5/over")
+                 and (item.get("market") == "1X2" or item.get("market") == "btts"
+                      or str(item.get("selection", "")).lower().endswith("/over"))]
     write_json("odds-movements.json", {
         "schema_version": 1, "updated_at": generated_at,
         "minimum_drop_pct": 3.0, "lookback_hours": 24,
@@ -328,7 +340,8 @@ def main() -> None:
     write_json("results.json", {
         "schema_version": 1, "updated_at": generated_at,
         "summary": api.STORE.results_summary(),
-        "recent": api.STORE.list_predictions(limit=100),
+        "recent": [row for row in api.STORE.list_predictions(limit=500)
+                   if row.get("odds") is not None and float(row.get("odds") or 0) > 1][:100],
         "settlement_refresh": settlement,
     })
 
