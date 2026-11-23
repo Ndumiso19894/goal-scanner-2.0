@@ -127,19 +127,20 @@ private fun GoalScannerApp(prefs: android.content.SharedPreferences) {
                 providers = "GitHub feed · " + feed.optInt("recommendation_count") + " selections"
                 scanSummary = "${feed.optString("status", "unknown")} · ${feed.optInt("fixture_count")} fixtures · ${feed.optInt("recommendation_count")} selections"
                 val picks = feed.optJSONArray("recommendations")
-                recommendations = if (picks == null) emptyList() else (0 until picks.length()).mapNotNull { picks.optJSONObject(it) }.filter { marketSelectionId(it) in MarketIds }
+                recommendations = if (picks == null) emptyList() else (0 until picks.length()).mapNotNull { picks.optJSONObject(it) }
+                    .filter { marketSelectionId(it) in MarketIds && it.optString("odds_status") == "available" && it.optDouble("odds",0.0) > 1.0 }
                 val fixtureFeed = apiRequest(apiUrl, "docs/data/fixtures.json?ts=$stamp")
                 val fixtureArray = fixtureFeed.optJSONArray("fixtures")
                 fixtureRows = if (fixtureArray == null) emptyList() else (0 until fixtureArray.length()).mapNotNull { fixtureArray.optJSONObject(it) }
                 fixtureSummary = "${fixtureRows.size} fixtures · updated " + fixtureFeed.optString("updated_at", "not run yet")
                 val oddsFeed = apiRequest(apiUrl, "docs/data/odds-movements.json?ts=$stamp")
                 val movementArray = oddsFeed.optJSONArray("movements")
-                oddsMovementRows = if (movementArray == null) emptyList() else (0 until movementArray.length()).mapNotNull { movementArray.optJSONObject(it) }
+                oddsMovementRows = if (movementArray == null) emptyList() else (0 until movementArray.length()).mapNotNull { movementArray.optJSONObject(it) }.filter { isApprovedSportyBetMovement(it) }
                 oddsMovementUpdated = "Updated " + oddsFeed.optString("updated_at", "not available")
                 val resultFeed = apiRequest(apiUrl, "docs/data/results.json?ts=$stamp")
                 resultSummary = resultFeed.optJSONObject("summary") ?: JSONObject()
                 val recent = resultFeed.optJSONArray("recent")
-                resultRows = if (recent == null) emptyList() else (0 until recent.length()).mapNotNull { recent.optJSONObject(it) }
+                resultRows = if (recent == null) emptyList() else (0 until recent.length()).mapNotNull { recent.optJSONObject(it) }.filter { it.optDouble("odds",0.0) > 1.0 }
             } catch (e: Exception) {
                 connection = "Feed unavailable"
                 message = e.message ?: "Could not load published Goal Scanner data."
@@ -627,6 +628,18 @@ private fun StatusPill(status:String) {
 private fun formatKickoff(value:String):String = runCatching {
     java.time.OffsetDateTime.parse(value).format(java.time.format.DateTimeFormatter.ofPattern("EEE d MMM · HH:mm"))
 }.getOrElse { value.replace("T"," ").take(16) }
+private fun isApprovedSportyBetMovement(item:JSONObject):Boolean {
+    val market=item.optString("market")
+    val selection=item.optString("selection").lowercase()
+    return when(market) {
+        "1X2" -> selection in setOf("home","draw","away")
+        "btts" -> selection=="yes"
+        "match_total_goals" -> selection=="2.5/over"
+        "match_corners","home_corners","away_corners","match_cards","home_cards","away_cards" -> selection.endsWith("/over")
+        else -> false
+    }
+}
+
 private fun marketSelectionId(item:JSONObject):String = if(item.optString("market")=="match_winner") "match_winner_${item.optString("selection")}" else item.optString("market")
 private fun marketTitle(item:JSONObject):String {
     val market=item.optString("market"); val selection=item.optString("selection")
