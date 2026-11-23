@@ -52,9 +52,9 @@ def test_extra_country_csv_uses_all_seasons_endpoint(monkeypatch):
 
     captured = {}
     payload = (
-        "Div,Date,Time,HomeTeam,AwayTeam,FTHG,FTAG,HC,AC,HY,AY\\n"
-        "BRA,15/03/25,18:00,Flamengo,Palmeiras,2,1,6,4,2,3\\n"
-        "BRA,22/03/25,20:00,Santos,Gremio,1,1,5,5,1,1\\n"
+        "Div,Date,Time,HomeTeam,AwayTeam,FTHG,FTAG,HC,AC,HY,AY\n"
+        "BRA,15/03/25,18:00,Flamengo,Palmeiras,2,1,6,4,2,3\n"
+        "BRA,22/03/25,20:00,Santos,Gremio,1,1,5,5,1,1\n"
     ).encode("utf-8")
 
     def fake_http(url, timeout=20, headers=None):
