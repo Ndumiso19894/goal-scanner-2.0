@@ -358,9 +358,9 @@ private fun TeamFormPanel(modifier:Modifier,name:String,stats:JSONObject?,venueL
             if(stats==null) Text("Historical stats unavailable",style=MaterialTheme.typography.bodySmall,color=Color(0xFF9EADB9))
             else {
                 FormStrip(stats.optString("form"))
-                Text("\${stats.optInt("wins")}W  \${stats.optInt("draws")}D  \${stats.optInt("losses")}L",
+                Text("${stats.optInt("wins")}W  ${stats.optInt("draws")}D  ${stats.optInt("losses")}L",
                     style=MaterialTheme.typography.labelSmall,color=Color(0xFFCDD6DC))
-                Text("\${stats.optInt("played")} matches in sample",style=MaterialTheme.typography.labelSmall,color=Color(0xFF8797A4))
+                Text("${stats.optInt("played")} matches in sample",style=MaterialTheme.typography.labelSmall,color=Color(0xFF8797A4))
             }
         }
     }
@@ -392,9 +392,9 @@ private fun PreMatchStats(stats:JSONObject?) {
             val total=(h+a).takeIf { it>0 } ?: 1.0
             Column(verticalArrangement=Arrangement.spacedBy(5.dp)) {
                 Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween) {
-                    Text(if(percent) "\${h.toInt()}%" else "%.2f".format(h),fontWeight=FontWeight.Bold,color=Color(0xFFF2F5F0))
+                    Text(if(percent) "${h.toInt()}%" else "%.2f".format(h),fontWeight=FontWeight.Bold,color=Color(0xFFF2F5F0))
                     Text(label,style=MaterialTheme.typography.labelSmall,color=Color(0xFF9EADB9))
-                    Text(if(percent) "\${a.toInt()}%" else "%.2f".format(a),fontWeight=FontWeight.Bold,color=Color(0xFFF2F5F0))
+                    Text(if(percent) "${a.toInt()}%" else "%.2f".format(a),fontWeight=FontWeight.Bold,color=Color(0xFFF2F5F0))
                 }
                 LinearProgressIndicator(progress={(h/total).toFloat().coerceIn(0f,1f)},
                     modifier=Modifier.fillMaxWidth().height(5.dp),color=Color(0xFFB7F36B),trackColor=Color(0xFF344452))
@@ -413,7 +413,7 @@ private fun PreMatchStats(stats:JSONObject?) {
         Card(shape=RoundedCornerShape(17.dp),colors=CardDefaults.cardColors(containerColor=Color(0xFF121D27)),
             border=androidx.compose.foundation.BorderStroke(1.dp,Color(0xFF2B3A46))) {
             Column(Modifier.fillMaxWidth().padding(14.dp),verticalArrangement=Arrangement.spacedBy(5.dp)) {
-                Text("\${h2h.optInt("played")} meetings  ·  \${h2h.optInt("home_wins")} home wins  ·  \${h2h.optInt("draws")} draws  ·  \${h2h.optInt("away_wins")} away wins",
+                Text("${h2h.optInt("played")} meetings  ·  ${h2h.optInt("home_wins")} home wins  ·  ${h2h.optInt("draws")} draws  ·  ${h2h.optInt("away_wins")} away wins",
                     color=Color(0xFFF2F5F0),fontWeight=FontWeight.Bold,style=MaterialTheme.typography.bodySmall)
                 val scores=h2h.optJSONArray("recent_scores")
                 if(scores!=null && scores.length()>0) Text("Recent scores: "+(0 until scores.length()).joinToString("  ·  ") { scores.optString(it) },
