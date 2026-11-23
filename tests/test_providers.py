@@ -44,3 +44,30 @@ def test_odds_matching_requires_both_teams_and_close_kickoff():
 def test_team_similarity_handles_empty_and_exact_names():
     assert team_similarity("Arsenal FC","Arsenal")==1.0
     assert team_similarity("","Arsenal")==0.0
+
+
+
+def test_extra_country_csv_uses_all_seasons_endpoint(monkeypatch):
+    from goal_scanner import providers
+
+    captured = {}
+    payload = (
+        "Div,Date,Time,HomeTeam,AwayTeam,FTHG,FTAG,HC,AC,HY,AY\\n"
+        "BRA,15/03/25,18:00,Flamengo,Palmeiras,2,1,6,4,2,3\\n"
+        "BRA,22/03/25,20:00,Santos,Gremio,1,1,5,5,1,1\\n"
+    ).encode("utf-8")
+
+    def fake_http(url, timeout=20, headers=None):
+        captured["url"] = url
+        return payload
+
+    monkeypatch.setattr(providers, "_http_bytes", fake_http)
+    rows = providers.FootballDataProvider().fetch_season("2627", "BRA")
+
+    assert captured["url"].endswith("/new/BRA.csv")
+    assert len(rows) == 2
+    assert rows[0]["home"] == "Flamengo"
+    assert rows[0]["away_goals"] == 1
+    assert rows[0]["season"] == "all"
+    assert rows[0]["division"] == "BRA"
+    assert rows[0]["statistics"]["HC"] == 6
