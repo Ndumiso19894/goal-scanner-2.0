@@ -186,6 +186,11 @@ def scanner_run(data: ScannerRunInput):
         odds_events = SportyBetProvider("za").fetch_upcoming(hours_ahead=data.hours_ahead)
         source_status["sportybet"] = {"status": "ok", "events": len(odds_events), "role": "odds_only"}
         odds_matches = match_fixtures_to_odds(upcoming, odds_events)
+        captured_at = datetime.now(timezone.utc).isoformat()
+        for fixture in upcoming:
+            event = odds_matches.get(str(fixture.get("id") or ""))
+            if event and isinstance(event.get("odds"), dict):
+                STORE.save_odds_snapshot(str(fixture.get("id") or ""), event["odds"], captured_at)
     except ProviderError as exc:
         odds_events, odds_matches = [], {}
         source_status["sportybet"] = {"status": "error", "error": str(exc), "role": "odds_only"}
@@ -271,4 +276,20 @@ def refresh_results():
         "status": "partial" if errors else "ok", "fixtures_checked": len(fixtures),
         "newly_settled_predictions": settled, "errors": errors,
         "summary": STORE.results_summary(),
+    }
+
+
+@app.get("/odds/dropping")
+def dropping_odds(minimum_drop_pct: float = 3.0, lookback_hours: int = 24, limit: int = 200):
+    """Expose recorded shortening prices; this is market movement, not a probability forecast."""
+    if not 0 < minimum_drop_pct <= 50:
+        raise HTTPException(status_code=422, detail="minimum_drop_pct must be between 0 and 50")
+    if not 1 <= lookback_hours <= 168:
+        raise HTTPException(status_code=422, detail="lookback_hours must be between 1 and 168")
+    return {
+        "status": "ok",
+        "minimum_drop_pct": minimum_drop_pct,
+        "lookback_hours": lookback_hours,
+        "count": len(STORE.list_dropping_odds(minimum_drop_pct, lookback_hours, limit)),
+        "movements": STORE.list_dropping_odds(minimum_drop_pct, lookback_hours, limit),
     }
