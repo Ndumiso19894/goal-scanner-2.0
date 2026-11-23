@@ -346,8 +346,8 @@ private fun FormStrip(form:String) {
     }
 }
 @Composable
-private fun TeamFormPanel(name:String,stats:JSONObject?,venueLabel:String) {
-    Card(modifier=Modifier.weight(1f),shape=RoundedCornerShape(18.dp),
+private fun TeamFormPanel(modifier:Modifier,name:String,stats:JSONObject?,venueLabel:String) {
+    Card(modifier=modifier,shape=RoundedCornerShape(18.dp),
         colors=CardDefaults.cardColors(containerColor=Color(0xFF121D27)),
         border=androidx.compose.foundation.BorderStroke(1.dp,Color(0xFF2B3A46))) {
         Column(Modifier.fillMaxWidth().padding(12.dp),verticalArrangement=Arrangement.spacedBy(8.dp)) {
@@ -374,8 +374,8 @@ private fun PreMatchStats(stats:JSONObject?) {
         return
     }
     Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.spacedBy(9.dp)) {
-        TeamFormPanel("Home team",home,"At home")
-        TeamFormPanel("Away team",away,"Away")
+        TeamFormPanel(Modifier.weight(1f),"Home team",home,"At home")
+        TeamFormPanel(Modifier.weight(1f),"Away team",away,"Away")
     }
     if(home!=null && away!=null) {
         Heading("Team comparison","Historical averages from the available venue-specific sample")
@@ -661,7 +661,7 @@ private fun FixtureDetailsScreen(
 private fun ScannerScreen(
     modifier:Modifier,view:String,onView:(String)->Unit,minimum:Float,onMinimum:(Float)->Unit,
     selected:Set<String>,onSelected:(Set<String>)->Unit,onSave:()->Unit,message:String,
-    apiUrl:String,season:String,division:String,recommendations:List<JSONObject>,scanSummary:String,
+    apiUrl:String,season:String,division:String,recommendations:List<JSONObject>,fixtures:List<JSONObject>,scanSummary:String,
     busy:Boolean,onRun:(String,String,String,Double?,Double?)->Unit,onSelect:(JSONObject)->Unit
 ) {
     var date by rememberSaveable { mutableStateOf("Today") }
