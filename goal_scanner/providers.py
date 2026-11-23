@@ -138,7 +138,7 @@ class FootballDataProvider:
     EXTRA_LEAGUE_CODES = {"ARG","AUT","BRA","CHN","DNK","FIN","IRL","JPN","MEX","NOR","POL","ROU","RUS","SWE","SWZ","USA"}
 
     def fetch_season(self, season: str, division: str) -> list[dict[str, Any]]:
-        if not re.fullmatch(r"\\d{4}",str(season)) or not re.fullmatch(r"[A-Z0-9]{2,4}",str(division)):
+        if not re.fullmatch(r"\d{4}",str(season)) or not re.fullmatch(r"[A-Z0-9]{2,4}",str(division)):
             raise ValueError("Use season code such as 2627 and division code such as E0")
         # Sixteen additional countries are published as one all-seasons CSV per
         # country. Load that archive so teams outside the main European feeds
