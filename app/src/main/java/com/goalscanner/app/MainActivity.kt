@@ -627,13 +627,17 @@ private fun FixtureDetailsScreen(
                     Text(fixture.optString("competition","Football").uppercase(),color=Color(0xFFB7F36B),
                         style=MaterialTheme.typography.labelSmall,letterSpacing=1.sp,fontWeight=FontWeight.Bold)
                     Row(Modifier.fillMaxWidth(),verticalAlignment=Alignment.CenterVertically) {
-                        Column(Modifier.weight(1f),horizontalAlignment=Alignment.CenterHorizontally) {
-                            Text(fixture.optString("home"),color=Color.White,style=MaterialTheme.typography.titleLarge,fontWeight=FontWeight.ExtraBold)
+                        Column(Modifier.weight(1f),horizontalAlignment=Alignment.CenterHorizontally,verticalArrangement=Arrangement.spacedBy(8.dp)) {
+                            TeamCrest(fixture.optString("home"),fixture.optString("home_crest_url"),70.dp)
+                            Text(fixture.optString("home"),color=Color.White,style=MaterialTheme.typography.titleMedium,fontWeight=FontWeight.ExtraBold,
+                                textAlign=androidx.compose.ui.text.style.TextAlign.Center)
                             Text("HOME",color=Color(0xFF91A0AC),style=MaterialTheme.typography.labelSmall)
                         }
                         Text("VS",color=Color(0xFFB7F36B),fontWeight=FontWeight.ExtraBold)
-                        Column(Modifier.weight(1f),horizontalAlignment=Alignment.CenterHorizontally) {
-                            Text(fixture.optString("away"),color=Color.White,style=MaterialTheme.typography.titleLarge,fontWeight=FontWeight.ExtraBold)
+                        Column(Modifier.weight(1f),horizontalAlignment=Alignment.CenterHorizontally,verticalArrangement=Arrangement.spacedBy(8.dp)) {
+                            TeamCrest(fixture.optString("away"),fixture.optString("away_crest_url"),70.dp)
+                            Text(fixture.optString("away"),color=Color.White,style=MaterialTheme.typography.titleMedium,fontWeight=FontWeight.ExtraBold,
+                                textAlign=androidx.compose.ui.text.style.TextAlign.Center)
                             Text("AWAY",color=Color(0xFF91A0AC),style=MaterialTheme.typography.labelSmall)
                         }
                     }
@@ -648,6 +652,7 @@ private fun FixtureDetailsScreen(
                         textAlign=androidx.compose.ui.text.style.TextAlign.Center)
                 }
             }
+            PreMatchStats(fixture.optJSONObject("pre_match_stats"))
             Heading("Model selections","${picks.size} published selections for this match")
             if(picks.isEmpty()) Notice("No qualifying selections published","This fixture did not meet the scanner's data and probability filters. That does not mean the match has no betting markets.")
             picks.forEach { pick ->
