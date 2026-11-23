@@ -12,8 +12,27 @@ android {
         applicationId = "com.goalscanner.app"
         minSdk = 24
         targetSdk = 35
-        versionCode = 3
-        versionName = "1.0.0"
+        versionCode = 4
+        versionName = "1.1.0"
+    }
+
+    signingConfigs {
+        create("release") {
+            val storePath = System.getenv("GOAL_SCANNER_KEYSTORE")
+            if (!storePath.isNullOrBlank()) {
+                storeFile = file(storePath)
+                storePassword = System.getenv("GOAL_SCANNER_STORE_PASSWORD")
+                keyAlias = System.getenv("GOAL_SCANNER_KEY_ALIAS")
+                keyPassword = System.getenv("GOAL_SCANNER_KEY_PASSWORD")
+            }
+        }
+    }
+
+    buildTypes {
+        getByName("release") {
+            signingConfig = signingConfigs.getByName("release")
+            isMinifyEnabled = false
+        }
     }
 
     buildFeatures { compose = true }
@@ -35,5 +54,7 @@ dependencies {
     implementation("androidx.compose.material3:material3:1.3.1")
     implementation("androidx.compose.material:material-icons-extended")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.7")
+    implementation("androidx.core:core-ktx:1.15.0")
+    implementation("androidx.work:work-runtime-ktx:2.10.0")
     debugImplementation("androidx.compose.ui:ui-tooling")
 }
