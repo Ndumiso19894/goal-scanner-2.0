@@ -40,8 +40,8 @@ import java.time.LocalDate
 private val Blue = Color(0xFF1976D2)
 private val Navy = Color(0xFF101C32)
 private const val DEFAULT_DATA_URL = "https://raw.githubusercontent.com/Ndumiso19894/goal-scanner-2.0/feature/android-goal-scanner-pro"
-private val MarketIds = listOf("home_over_0_5","away_over_0_5","home_over_1_5","away_over_1_5","match_over_1_5","match_over_2_5","match_winner","double_chance","btts_yes")
-private val MarketNames = listOf("Home team over 0.5 goals","Away team over 0.5 goals","Home team over 1.5 goals","Away team over 1.5 goals","Total over 1.5 goals","Total over 2.5 goals","Match winner (1X2)","Double chance","Both teams to score")
+private val MarketIds = listOf("team_corners_over","match_corners_over","match_bookings_over","team_bookings_over","match_over_2_5","btts_yes","match_winner_home","match_winner_draw","match_winner_away")
+private val MarketNames = listOf("Team corners over","Total match corners over","Match bookings over","Team bookings over","Total goals over 2.5","Both teams to score · Yes","1X2 · Home","1X2 · Draw","1X2 · Away")
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
