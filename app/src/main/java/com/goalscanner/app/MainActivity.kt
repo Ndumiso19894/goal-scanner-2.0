@@ -756,40 +756,14 @@ private fun FixturesScreen(
         Row(horizontalArrangement=Arrangement.spacedBy(6.dp)) { listOf("Time","Match A-Z","League A-Z").forEach { item -> FilterChip(selected=sort==item,onClick={sort=item},label={Text(item)}) } }
         if(message.isNotBlank()) Text(message,style=MaterialTheme.typography.bodySmall,color=MaterialTheme.colorScheme.primary)
         if(visible.isEmpty()) Notice("No matching fixtures","Try another search or status filter, or refresh the fixture feed.")
+        var currentDay = ""
         visible.forEach { fx ->
-            val status=fx.optString("status","NS").uppercase()
-            Card(Modifier.fillMaxWidth().clickable { onSelect(fx) },shape=RoundedCornerShape(19.dp),colors=CardDefaults.cardColors(containerColor=Color(0xFF111A23)),border=androidx.compose.foundation.BorderStroke(1.dp,Color(0xFF263541))) {
-                Column(Modifier.fillMaxWidth().padding(14.dp),verticalArrangement=Arrangement.spacedBy(10.dp)) {
-                    Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween,verticalAlignment=Alignment.CenterVertically) {
-                        Text(fx.optString("competition",fx.optString("country","Football")).uppercase(),modifier=Modifier.weight(1f),
-                            style=MaterialTheme.typography.labelSmall,color=Color(0xFF9EADB9),maxLines=1,letterSpacing=0.7.sp)
-                        StatusPill(status)
-                    }
-                    Row(Modifier.fillMaxWidth(),verticalAlignment=Alignment.CenterVertically,horizontalArrangement=Arrangement.SpaceEvenly) {
-                        Column(Modifier.weight(1f),horizontalAlignment=Alignment.CenterHorizontally,verticalArrangement=Arrangement.spacedBy(7.dp)) {
-                            TeamCrest(fx.optString("home"),fx.optString("home_crest_url"),52.dp)
-                            Text(fx.optString("home","Home"),fontWeight=FontWeight.Bold,style=MaterialTheme.typography.titleSmall,
-                                color=Color(0xFFF2F5F0),maxLines=2,textAlign=androidx.compose.ui.text.style.TextAlign.Center)
-                        }
-                        Column(horizontalAlignment=Alignment.CenterHorizontally,verticalArrangement=Arrangement.spacedBy(5.dp)) {
-                            Text("VS",style=MaterialTheme.typography.labelSmall,color=Color(0xFF8496A4),fontWeight=FontWeight.Bold)
-                            if(!fx.isNull("home_score")&&!fx.isNull("away_score"))
-                                Text("${fx.optInt("home_score")} : ${fx.optInt("away_score")}",style=MaterialTheme.typography.titleLarge,fontWeight=FontWeight.ExtraBold)
-                            else Text(formatKickoff(fx.optString("kickoff")).substringAfter("·").trim(),style=MaterialTheme.typography.titleSmall,
-                                fontWeight=FontWeight.ExtraBold,color=Color(0xFFB7F36B))
-                        }
-                        Column(Modifier.weight(1f),horizontalAlignment=Alignment.CenterHorizontally,verticalArrangement=Arrangement.spacedBy(7.dp)) {
-                            TeamCrest(fx.optString("away"),fx.optString("away_crest_url"),52.dp)
-                            Text(fx.optString("away","Away"),fontWeight=FontWeight.Bold,style=MaterialTheme.typography.titleSmall,
-                                color=Color(0xFFF2F5F0),maxLines=2,textAlign=androidx.compose.ui.text.style.TextAlign.Center)
-                        }
-                    }
-                    Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween,verticalAlignment=Alignment.CenterVertically) {
-                        Text(formatKickoff(fx.optString("kickoff")),style=MaterialTheme.typography.labelSmall,color=Color(0xFF9EADB9))
-                        Text("MATCH CENTRE  ›",style=MaterialTheme.typography.labelSmall,color=Color(0xFFB7F36B),fontWeight=FontWeight.Bold)
-                    }
-                }
+            val day=fx.optString("kickoff").take(10)
+            if(day!=currentDay) {
+                currentDay=day
+                Text(day,modifier=Modifier.padding(top=5.dp),color=Color(0xFF55D6C2),fontWeight=FontWeight.ExtraBold,style=MaterialTheme.typography.labelLarge,letterSpacing=0.8.sp)
             }
+            MatchdayFixtureCard(fx) { onSelect(fx) }
         }
     }
 }
