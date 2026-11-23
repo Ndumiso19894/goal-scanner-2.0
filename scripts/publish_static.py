@@ -145,6 +145,13 @@ def main() -> None:
         "schema_version": 1, "updated_at": generated_at,
         "count": len(fixture_rows), "fixtures": fixture_rows, "errors": fixture_errors,
     })
+    movements = api.STORE.list_dropping_odds(minimum_drop_pct=3.0, lookback_hours=24, limit=200)
+    write_json("odds-movements.json", {
+        "schema_version": 1, "updated_at": generated_at,
+        "minimum_drop_pct": 3.0, "lookback_hours": 24,
+        "count": len(movements), "movements": movements,
+        "note": "Only price changes observed in at least two snapshots are shown; odds movement is not a prediction."
+    })
     write_json("results.json", {
         "schema_version": 1, "updated_at": generated_at,
         "summary": api.STORE.results_summary(),
