@@ -33,8 +33,8 @@ android {
         getByName("release") {
             signingConfig = signingConfigs.getByName("release")
             // Sign with both schemes for broad Android installer compatibility.
-            isV1SigningEnabled = true
-            isV2SigningEnabled = true
+            enableV1Signing = true
+            enableV2Signing = true
             isMinifyEnabled = false
         }
     }
