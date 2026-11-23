@@ -196,19 +196,6 @@ private fun GoalScannerApp(prefs: android.content.SharedPreferences) {
                     scope.launch {
                         busy=true; message=""
                         try {
-                            val chosenDate=if(dateChoice=="Tomorrow") LocalDate.now().plusDays(1) else LocalDate.now()
-                            val hours=if(dateChoice=="7 days") 168 else 24
-                            val body=JSONObject().put("season",season.trim()).put("division",division.trim())
-                                .put("match_date",chosenDate.toString()).put("hours_ahead",hours)
-                                .put("minimum_probability",minimum/100.0)
-                                .put("mode",if(scannerView=="Recommended") "recommended" else "full")
-                            if(competitionQuery.isNotBlank()) body.put("competition_query",competitionQuery.trim())
-                            if(teamQuery.isNotBlank()) body.put("team_query",teamQuery.trim())
-                            val marketArray=org.json.JSONArray()
-                            markets.sorted().forEach { marketArray.put(it) }
-                            body.put("markets",marketArray)
-                            if(minOdds!=null) body.put("min_odds",minOdds)
-                            if(maxOdds!=null) body.put("max_odds",maxOdds)
                             val response=apiRequest(apiUrl,"docs/data/latest.json?ts=" + System.currentTimeMillis())
                             val array=response.optJSONArray("recommendations")
                             val allRows=if(array==null) emptyList() else (0 until array.length()).mapNotNull { i -> array.optJSONObject(i) }
@@ -412,7 +399,7 @@ private fun ScannerScreen(
         Button(onClick={onRun(date,competition,team,minOdds.toDoubleOrNull(),maxOdds.toDoubleOrNull())},
             enabled=!busy&&apiUrl.isNotBlank()&&season.isNotBlank()&&division.isNotBlank()&&selected.isNotEmpty(),
             modifier=Modifier.fillMaxWidth()) {
-            Text(if(busy) "Scanning fixtures…" else "Run scanner")
+            Text(if(busy) "Loading latest scan…" else "Load latest published scan")
         }
         OutlinedButton(onClick=onSave,modifier=Modifier.fillMaxWidth()) { Text("Save scanner preferences") }
         Text(scanSummary,style=MaterialTheme.typography.bodySmall,color=MaterialTheme.colorScheme.primary)
