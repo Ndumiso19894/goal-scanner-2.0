@@ -10,6 +10,12 @@ from typing import Any
 
 from .snapshots import PredictionSnapshot
 
+SUPPORTED_MARKETS = {
+    "match_over_2_5", "btts_yes", "match_winner",
+    "team_corners_over", "match_corners_over",
+    "team_bookings_over", "match_bookings_over",
+}
+
 
 def _outcome(market: str, selection: str, home: int, away: int,
             line: float | None = None, statistics: dict[str, Any] | None = None) -> bool | None:
@@ -228,15 +234,18 @@ class Store:
 
     def list_predictions(self, limit: int = 100, status: str | None = None) -> list[dict[str, Any]]:
         limit = max(1, min(int(limit), 500))
+        placeholders = ",".join("?" for _ in SUPPORTED_MARKETS)
+        allowed = tuple(sorted(SUPPORTED_MARKETS))
         with self.connect() as db:
             if status:
                 rows = db.execute(
-                    "SELECT * FROM predictions WHERE status=? ORDER BY created_at DESC LIMIT ?",
-                    (status.upper(), limit)
+                    f"SELECT * FROM predictions WHERE status=? AND market IN ({placeholders}) ORDER BY created_at DESC LIMIT ?",
+                    (status.upper(), *allowed, limit)
                 ).fetchall()
             else:
                 rows = db.execute(
-                    "SELECT * FROM predictions ORDER BY created_at DESC LIMIT ?", (limit,)
+                    f"SELECT * FROM predictions WHERE market IN ({placeholders}) ORDER BY created_at DESC LIMIT ?",
+                    (*allowed, limit)
                 ).fetchall()
         result = []
         for row in rows:
@@ -247,7 +256,11 @@ class Store:
 
     def results_summary(self) -> dict[str, Any]:
         with self.connect() as db:
-            rows = db.execute("SELECT * FROM predictions ORDER BY created_at").fetchall()
+            placeholders = ",".join("?" for _ in SUPPORTED_MARKETS)
+            rows = db.execute(
+                f"SELECT * FROM predictions WHERE market IN ({placeholders}) ORDER BY created_at",
+                tuple(sorted(SUPPORTED_MARKETS))
+            ).fetchall()
         settled = [row for row in rows if row["status"] in {"WON", "LOST"}]
         wins = sum(row["status"] == "WON" for row in settled)
         losses = len(settled) - wins
