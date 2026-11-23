@@ -235,6 +235,8 @@ def main() -> None:
                     "away": item.away, "competition": item.competition, "country": item.country,
                     "status": item.status, "home_score": item.home_score,
                     "away_score": item.away_score, "source": item.source,
+                    "home_team_id": item.home_team_id, "away_team_id": item.away_team_id,
+                    "home_badge_path": item.home_badge_path, "away_badge_path": item.away_badge_path,
                 })
         except ProviderError as exc:
             fixture_errors.append(str(exc))
