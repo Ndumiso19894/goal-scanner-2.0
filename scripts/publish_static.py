@@ -417,7 +417,9 @@ def main() -> None:
         try: squads_by_division[division] = squad_provider.fetch_division_squads(division)
         except (ProviderError, ValueError): squads_by_division[division] = []
     league_tables = [{"division": division, "competition": competition,
-                      "table": _league_table(history_by_division.get(division, []), today),
+                      "table": _league_table(
+                          history_by_division.get(division, [])
+                          if division not in FootballDataProvider.EXTRA_LEAGUE_CODES else [], today),
                       "source": "Football-Data.co.uk"} for division, competition in LEAGUES]
     crest_downloads = _download_club_crests(fixture_rows)
     divisions_by_competition = {competition: division for division, competition in LEAGUES}
@@ -447,13 +449,15 @@ def main() -> None:
             "away": _team_pre_match_stats(history, away_name, kickoff, "away"),
             "head_to_head": _head_to_head(history, home_name, away_name, kickoff),
             "context": {"home_rest_days": _rest_days(history, home_name, kickoff), "away_rest_days": _rest_days(history, away_name, kickoff), "home_squad": TransfermarktProvider.match_team(home_name, squad_pool), "away_squad": TransfermarktProvider.match_team(away_name, squad_pool), "league_performance_baseline": _league_context(history, kickoff)},
-            "source": "Football-Data.co.uk (up to three seasons) and Transfermarkt", "history_seasons": 3, "available": bool(history),
+            "source": "Football-Data.co.uk (up to three seasons for main leagues; full available archive for extra countries) and Transfermarkt",
+            "history_seasons": None if division in FootballDataProvider.EXTRA_LEAGUE_CODES else 3,
+            "available": bool(history),
         }
 
     generated_at = datetime.now(timezone.utc).isoformat()
     sources = {
         "livescore_and_odds": "Collected during each league scan; bookmaker odds are comparison-only.",
-        "historical_results": "Football-Data.co.uk completed results, filtered to matches before each fixture.",
+        "historical_results": "Football-Data.co.uk completed results from 22 main competitions plus 16 extra-country archives, filtered to matches before each fixture.",
         "league_runs": league_status,
     }
     write_json("latest.json", {
@@ -468,7 +472,9 @@ def main() -> None:
         "notes": [
             "Probabilities are uncalibrated historical-rate estimates, not guaranteed outcomes.",
             "Bookmaker odds are attached after model probabilities and are not model inputs.",
-            "Only fixtures with sufficient prior home/away history are eligible.",
+            "Fixture discovery is broader than prediction eligibility; matches remain visible when historical coverage is limited.",
+            "Historical feeds include 22 main competitions and 16 additional country archives; missing statistics are not fabricated.",
+            "League tables are published only where a current-season split is reliable.",
         ],
     })
     write_json("league-tables.json", {
