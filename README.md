@@ -1,40 +1,53 @@
-# Goal Scanner 2.0
+# Goal Scanner Pro
 
-Independent, evidence-led football analysis engine. It does not modify, import or depend on the legacy scanner.
+Independent, evidence-led football analysis engine with an Android application.
 
-## Included in this initial implementation
-- Restricted market registry and explicit exclusion of Under markets, match Over 1.5, team Over 0.5/1.5 and BTTS No.
-- Transparent independent-Poisson baseline for match Over 2.5, BTTS Yes and 1X2.
-- Evidence records with source URL, publication/retrieval timestamps, verification and confidence.
-- Quality gate excluding rumours and unknown claims from confirmed evidence.
-- Odds margin removal, expected value and APPROVED / REJECTED / INSUFFICIENT_DATA decisions.
-- Accumulator safety gate (2–3 legs; joint dependence must be reviewed).
-- Hashed prediction snapshots at T-24h, team-news and official-lineup stages.
-- Chronological backtest checks, Brier score, log loss and flat-stake ROI.
-- CLI, optional FastAPI endpoint, tests and GitHub Actions CI.
+## How the app receives data
 
-## Install
-```bash
-python -m venv .venv
-. .venv/bin/activate
-pip install -e ".[dev,api]"
-pytest -q
-goal-scanner --home-lambda 1.55 --away-lambda 1.10
-uvicorn goal_scanner.api:app --reload
-```
-Windows PowerShell: `.venv\\Scripts\\Activate.ps1`.
+Goal Scanner Pro uses a **GitHub-only static data feed**. It does not require a separately hosted API server, database service or paid hosting account.
 
-## Allowed markets
-Match Over 2.5; BTTS Yes; home/draw/away; team corners Over; match total corners Over; match bookings Over; team bookings Over. All Under markets, match Over 1.5, team Over 0.5/1.5 and BTTS No are excluded.
+GitHub Actions runs the scanner, refreshes verified scores and publishes three public JSON snapshots:
 
-## Important limitations
-The goal model is a transparent independent-Poisson baseline, not yet a trained league/team model or a validated betting edge. The corner and booking market identifiers are reserved, but their market-specific calibrated models and event-data adapters are not implemented yet. Do not treat the generic count helper as validated corner/card predictions. Contextual features must not affect probabilities until chronological out-of-sample validation and ablation demonstrate improvement.
+- `docs/data/latest.json` — upcoming selections and their analysis.
+- `docs/data/fixtures.json` — upcoming fixtures.
+- `docs/data/results.json` — prediction history and settled performance.
 
-No free data provider is guaranteed to supply all injuries, suspensions, player stats, referees, odds and event data for every competition. Show coverage and freshness; missing or stale data blocks or downgrades decisions. No forced bets. Accumulators target combined odds 2.00–3.00, usually two legs, maximum three; never multiply correlated same-fixture probabilities as independent. No staking rule is claimed optimal.
+The Android app downloads these files directly from this repository. The publisher is configured for a four-hour schedule and can also run after changes to the scanner branch or by manual workflow dispatch. Scheduled GitHub Actions workflows become active after this workflow is merged into the repository's default branch. Until then, the existing published snapshot can be read, but automatic scheduled refresh is not yet active.
 
-This is decision-support software, not a guarantee of profit. **NO BET is a valid result.**
+The repository and published JSON are public. Do not put private information, credentials or API tokens in the feeds.
 
+## Android app
+
+The native Kotlin + Jetpack Compose app includes Home, Fixtures, Scanner, Analysis, Results and Settings screens, with adaptive light/dark styling. It reads the GitHub JSON feed; the Scanner screen filters the latest published scan on the device. It does not launch a new remote scan on demand.
+
+Build locally with Android Studio or run the **Android APK** GitHub Actions workflow. The debug APK is uploaded as a workflow artifact.
+
+## Scanner and markets
+
+The fixture-level scanner estimates home and away expected goals from completed Football-Data.co.uk results using venue splits and a shrinkage baseline. It supports:
+
+- Home team Over 0.5 and Over 1.5 goals
+- Away team Over 0.5 and Over 1.5 goals
+- Match Over 1.5 and Over 2.5 goals
+- Match winner, double chance and BTTS Yes
+
+The initial minimum estimated probability is 60%. Recommended mode ranks a shortlist using estimated probability, sample quality and available price value. Full mode publishes qualifying selections from the supported competitions.
+
+The initial fixture model is an **uncalibrated historical-rate baseline**, not a validated betting edge. It requires at least four prior home matches for the home team, four prior away matches for the away team and twelve prior completed league matches. Same-day and future results are excluded. Insufficient samples produce no recommendation. Probabilities are not guarantees.
+
+Bookmaker prices from SportyBet are attached after probability calculation and are not model inputs. Missing odds remain missing.
 
 ## Data providers
 
-The four Mr2Odds sources have read-only adapters in goal_scanner/providers.py. See docs/data-sources.md for usage, provenance, freshness and modelling boundaries. No API keys are required by the currently configured public endpoints. SportyBet odds are strictly for price/value comparison; Transfermarkt squad metrics are context-only.
+- LiveScore: fixtures, scores, incidents and available match statistics.
+- Football-Data.co.uk: historical results and available team-level data.
+- SportyBet ZA: odds for comparison only.
+- Transfermarkt: squad context only, excluded from probability calculation.
+
+These are unofficial public feeds and may change, be rate-limited or become unavailable. Missing data remains missing; the scanner does not fabricate lineups, injuries, xG or odds.
+
+## Evaluation
+
+Predictions are stored as timestamped snapshots in the GitHub Actions cache and published as public results data. Settlement uses recognised full-time statuses and final scores from LiveScore. Track accuracy, Brier score and ROI only where the required outcomes and recorded odds exist. Overlapping markets may be correlated.
+
+This is decision-support software, not a guarantee of profit. **NO BET is a valid result.**

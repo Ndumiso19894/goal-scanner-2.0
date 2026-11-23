@@ -2,13 +2,15 @@ name: Android APK
 
 on:
   push:
-    branches: [main]
+    branches: [main, feature/android-goal-scanner-pro]
     paths:
       - "app/**"
       - "*.gradle.kts"
       - "gradle.properties"
       - "settings.gradle.kts"
       - ".github/workflows/android-apk.yml"
+  pull_request:
+    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -54,7 +56,7 @@ jobs:
       - name: Upload installable APK
         uses: actions/upload-artifact@v4
         with:
-          name: goal-scanner-2.0-debug-apk
+          name: goal-scanner-pro-debug-apk
           path: app/build/outputs/apk/debug/app-debug.apk
           if-no-files-found: error
           retention-days: 14
