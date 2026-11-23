@@ -47,13 +47,12 @@ jobs:
         env:
           KEYSTORE_BASE64: ${{ secrets.GOAL_SCANNER_KEYSTORE_BASE64 }}
           STORE_PASSWORD: ${{ secrets.GOAL_SCANNER_STORE_PASSWORD }}
-          KEY_ALIAS: ${{ secrets.GOAL_SCANNER_KEY_ALIAS }}
+          KEY_ALIAS: goalscanner
           KEY_PASSWORD: ${{ secrets.GOAL_SCANNER_KEY_PASSWORD }}
         run: |
           set -euo pipefail
           test -n "$KEYSTORE_BASE64"
           test -n "$STORE_PASSWORD"
-          test -n "$KEY_ALIAS"
           test -n "$KEY_PASSWORD"
           echo "$KEYSTORE_BASE64" | base64 --decode > "$RUNNER_TEMP/goal-scanner-release.jks"
           echo "GOAL_SCANNER_KEYSTORE=$RUNNER_TEMP/goal-scanner-release.jks" >> "$GITHUB_ENV"
