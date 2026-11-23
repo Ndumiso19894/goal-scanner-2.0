@@ -140,7 +140,9 @@ def build_fixture_candidates(fixture,historical_rows,odds_event,selected_markets
         if selection_key not in selected_markets and item["market"] not in selected_markets: continue
         if item["estimated_probability"]<min_probability: continue
         price=item["odds"]
-        if min_odds is not None and (price is None or price<min_odds): continue
+        # Never publish a model selection unless SportyBet prices this exact side and line.
+        if price is None or item.get("odds_status") != "available": continue
+        if min_odds is not None and price<min_odds: continue
         if max_odds is not None and (price is None or price>max_odds): continue
         ev=item["expected_value"]; value=min(1.,max(0.,(ev+.10)/.30)) if ev is not None else .5
         rank=.55*item["estimated_probability"]+.30*estimate["data_quality"]+.15*value
