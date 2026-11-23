@@ -474,6 +474,38 @@ private fun FormStrip(form:String) {
     }
 }
 @Composable
+private fun RecentGoalsGraph(recent: org.json.JSONArray?) {
+    if(recent==null || recent.length()==0) return
+    val values=(0 until minOf(5,recent.length())).mapNotNull { i ->
+        val score=(recent.optJSONObject(i)?.optString("score") ?: "").split("-")
+        val gf=score.getOrNull(0)?.trim()?.toFloatOrNull(); val ga=score.getOrNull(1)?.trim()?.toFloatOrNull()
+        if(gf==null||ga==null) null else gf to ga
+    }
+    if(values.isEmpty()) return
+    Column(verticalArrangement=Arrangement.spacedBy(5.dp)) {
+        Text("GOALS FOR / AGAINST · LAST ${values.size}",color=Color(0xFF8296A7),style=MaterialTheme.typography.labelSmall,fontWeight=FontWeight.Bold,letterSpacing=.7.sp)
+        Canvas(Modifier.fillMaxWidth().height(76.dp)) {
+            val maxGoals=(values.maxOf { maxOf(it.first,it.second) }).coerceAtLeast(1f)
+            val group=size.width/values.size
+            val base=size.height-5.dp.toPx()
+            val available=size.height-14.dp.toPx()
+            values.forEachIndexed { index,pair ->
+                val bar=group*.22f
+                val gap=group*.08f
+                val x=group*index+group*.24f
+                val homeH=available*(pair.first/maxGoals)
+                val awayH=available*(pair.second/maxGoals)
+                drawRect(Color(0xFFB7F36B),Offset(x,base-homeH),androidx.compose.ui.geometry.Size(bar,homeH))
+                drawRect(Color(0xFF55D6C2),Offset(x+bar+gap,base-awayH),androidx.compose.ui.geometry.Size(bar,awayH))
+            }
+        }
+        Row(horizontalArrangement=Arrangement.spacedBy(13.dp)) {
+            Row(verticalAlignment=Alignment.CenterVertically,horizontalArrangement=Arrangement.spacedBy(5.dp)) { Box(Modifier.size(7.dp).background(Color(0xFFB7F36B),RoundedCornerShape(2.dp))); Text("Scored",color=Color(0xFF8296A7),style=MaterialTheme.typography.labelSmall) }
+            Row(verticalAlignment=Alignment.CenterVertically,horizontalArrangement=Arrangement.spacedBy(5.dp)) { Box(Modifier.size(7.dp).background(Color(0xFF55D6C2),RoundedCornerShape(2.dp))); Text("Conceded",color=Color(0xFF8296A7),style=MaterialTheme.typography.labelSmall) }
+        }
+    }
+}
+@Composable
 private fun TeamFormPanel(modifier:Modifier,name:String,stats:JSONObject?,venueLabel:String) {
     Card(modifier=modifier,shape=RoundedCornerShape(18.dp),
         colors=CardDefaults.cardColors(containerColor=Color(0xFF121D27)),
@@ -493,6 +525,7 @@ private fun TeamFormPanel(modifier:Modifier,name:String,stats:JSONObject?,venueL
                 val shots=stats.optDouble("shots_avg",-1.0); val target=stats.optDouble("shots_on_target_avg",-1.0); val xg=stats.optDouble("xg_avg",-1.0)
                 if(shots>=0 || target>=0 || xg>=0) Text(listOfNotNull(if(shots>=0) "Shots %.1f".format(shots) else null,if(target>=0) "On target %.1f".format(target) else null,if(xg>=0) "xG %.2f".format(xg) else null).joinToString("  · "),style=MaterialTheme.typography.labelSmall,color=Color(0xFFB7F36B))
                 val recent=stats.optJSONArray("recent_matches")
+                RecentGoalsGraph(recent)
                 if(recent!=null && recent.length()>0) {
                     HorizontalDivider(color=Color(0xFF30414E))
                     Text("RECENT HOME/AWAY MATCHES",style=MaterialTheme.typography.labelSmall,color=Color(0xFF8FA0AD),fontWeight=FontWeight.Bold)
