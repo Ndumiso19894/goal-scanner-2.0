@@ -41,7 +41,7 @@ private val Blue = Color(0xFF1976D2)
 private val Navy = Color(0xFF101C32)
 private const val DEFAULT_DATA_URL = "https://raw.githubusercontent.com/Ndumiso19894/goal-scanner-2.0/main"
 private val MarketIds = listOf("team_corners_over","match_corners_over","match_bookings_over","team_bookings_over","match_over_2_5","btts_yes","match_winner_home","match_winner_draw","match_winner_away")
-private val MarketNames = listOf("Team corners over","Total match corners over","Match bookings over","Team bookings over","Total goals over 2.5","Both teams to score · Yes","1X2 · Home","1X2 · Draw","1X2 · Away")
+private val MarketNames = listOf("Team corners · Over 4.5+","Total corners · Over 8.5+","Match bookings · Over 3.5+","Team bookings · Over 1.5+","Total goals · Over 2.5","Both teams to score · Yes","1X2 · Home","1X2 · Draw","1X2 · Away")
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -212,7 +212,7 @@ private fun GoalScannerApp(prefs: android.content.SharedPreferences) {
                                 val teamOk=teamQuery.isBlank() || (item.optString("home")+" "+item.optString("away")).contains(teamQuery,true)
                                 val odds=if(item.isNull("odds")) null else item.optDouble("odds")
                                 val oddsOk=(minOdds==null || (odds!=null && odds>=minOdds)) && (maxOdds==null || (odds!=null && odds<=maxOdds))
-                                dateOk && competitionOk && teamOk && oddsOk && item.optDouble("estimated_probability")>=minimum/100.0 && item.optString("market") in markets
+                                dateOk && competitionOk && teamOk && oddsOk && item.optDouble("estimated_probability")>=minimum/100.0 && marketSelectionId(item) in markets
                             }.let { if(scannerView=="Recommended") it.take(10) else it }
                             scanSummary="${response.optString("status","unknown")} · ${response.optInt("fixture_count")} fixtures · ${allRows.size} published selections · updated ${response.optString("updated_at","unknown")}"
                             message=if(recommendations.isEmpty()) "No published selections match these filters. The next scheduled scan will refresh the feed." else "Latest published selections loaded. Select a match to inspect its summary."
@@ -337,7 +337,7 @@ private fun FixturesScreen(
     onSelect:(JSONObject)->Unit,onCollect:()->Unit
 ) {
     var query by rememberSaveable { mutableStateOf("") }
-    var filter by rememberSaveable { mutableStateOf("All") }
+    var filter by rememberSaveable { mutableStateOf("Upcoming") }
     val visible=fixtures.filter { fx ->
         val text=(fx.optString("home")+" "+fx.optString("away")+" "+fx.optString("competition")).lowercase()
         val status=fx.optString("status","NS").uppercase()
@@ -410,6 +410,7 @@ private fun StatusPill(status:String) {
 private fun formatKickoff(value:String):String = runCatching {
     java.time.OffsetDateTime.parse(value).format(java.time.format.DateTimeFormatter.ofPattern("EEE d MMM · HH:mm"))
 }.getOrElse { value.replace("T"," ").take(16) }
+private fun marketSelectionId(item:JSONObject):String = if(item.optString("market")=="match_winner") "match_winner_${item.optString("selection")}" else item.optString("market")
 private fun marketTitle(item:JSONObject):String {
     val market=item.optString("market"); val selection=item.optString("selection")
     val line=if(item.isNull("line")) "" else item.optString("line")
@@ -542,8 +543,7 @@ private fun ScannerScreen(
                 Card(Modifier.fillMaxWidth().clickable { onSelect(item) },shape=RoundedCornerShape(16.dp)) {
                     Column(Modifier.padding(14.dp),verticalArrangement=Arrangement.spacedBy(5.dp)) {
                         Text("${item.optString("home")} vs ${item.optString("away")}",fontWeight=FontWeight.Bold)
-                        Text("${item.optString("market").replace("_"," ").uppercase()} · ${item.optString("selection").uppercase()}",
-                            style=MaterialTheme.typography.labelMedium,color=MaterialTheme.colorScheme.primary)
+                        Text(marketTitle(item),style=MaterialTheme.typography.labelMedium,color=MaterialTheme.colorScheme.primary)
                         Row(horizontalArrangement=Arrangement.spacedBy(12.dp)) {
                             Text("Estimate ${(item.optDouble("estimated_probability")*100).toInt()}%",fontWeight=FontWeight.Bold)
                             Text(if(item.isNull("odds")) "Odds unavailable" else "Odds ${item.optDouble("odds")}",
