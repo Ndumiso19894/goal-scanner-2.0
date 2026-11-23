@@ -59,7 +59,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add docs/data/latest.json docs/data/fixtures.json docs/data/results.json docs/data/odds-movements.json
+          git add docs/data/latest.json docs/data/fixtures.json docs/data/results.json docs/data/odds-movements.json docs/assets/crests/
           if git diff --cached --quiet; then
             echo "Published feeds have not changed."
           else
@@ -68,7 +68,7 @@ jobs:
             git fetch origin main
             git reset --hard origin/main
             cp "$RUNNER_TEMP/goal-scanner-feeds/"*.json docs/data/
-            git add docs/data/latest.json docs/data/fixtures.json docs/data/results.json docs/data/odds-movements.json
+            git add docs/data/latest.json docs/data/fixtures.json docs/data/results.json docs/data/odds-movements.json docs/assets/crests/
             git commit -m "chore: refresh Goal Scanner public data"
             git push origin HEAD:main
           fi
