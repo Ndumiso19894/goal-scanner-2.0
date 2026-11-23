@@ -140,9 +140,11 @@ private fun GoalScannerApp(prefs: android.content.SharedPreferences) {
                 val fixtureFeed = apiRequest(apiUrl, "docs/data/fixtures.json?ts=$stamp")
                 val fixtureArray = fixtureFeed.optJSONArray("fixtures")
                 fixtureRows = if (fixtureArray == null) emptyList() else (0 until fixtureArray.length()).mapNotNull { fixtureArray.optJSONObject(it) }
-                val leagueFeed = apiRequest(apiUrl, "docs/data/league-tables.json?ts=$stamp")
-                val leagueArray = leagueFeed.optJSONArray("leagues")
-                leagueRows = if (leagueArray == null) emptyList() else (0 until leagueArray.length()).mapNotNull { leagueArray.optJSONObject(it) }
+                try {
+                    val leagueFeed = apiRequest(apiUrl, "docs/data/league-tables.json?ts=$stamp")
+                    val leagueArray = leagueFeed.optJSONArray("leagues")
+                    leagueRows = if (leagueArray == null) emptyList() else (0 until leagueArray.length()).mapNotNull { leagueArray.optJSONObject(it) }
+                } catch (_: Exception) { leagueRows = emptyList() }
                 fixtureSummary = "${fixtureRows.size} fixtures · updated " + fixtureFeed.optString("updated_at", "not run yet")
                 val oddsFeed = apiRequest(apiUrl, "docs/data/odds-movements.json?ts=$stamp")
                 val movementArray = oddsFeed.optJSONArray("movements")
