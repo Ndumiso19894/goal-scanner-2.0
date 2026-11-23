@@ -349,6 +349,19 @@ def main() -> None:
             history_by_competition[competition] = FootballDataProvider().fetch_season(season, division)
         except (ProviderError, ValueError):
             history_by_competition[competition] = []
+    # Use prior seasons for team form and H2H; league tables remain current-season only.
+    context_history_by_competition = {name: list(rows) for name, rows in history_by_competition.items()}
+    season_start = today.year if today.month >= 7 else today.year - 1
+    prior_seasons = [f"{(season_start - offset) % 100:02d}{(season_start - offset + 1) % 100:02d}" for offset in (1, 2)]
+    active_competitions = {COMPETITION_ALIASES.get(x.get("competition", ""), x.get("competition", "")) for x in fixture_rows}
+    for division, competition in LEAGUES:
+        if competition not in active_competitions:
+            continue
+        for prior_season in prior_seasons:
+            try:
+                context_history_by_competition[competition].extend(FootballDataProvider().fetch_season(prior_season, division))
+            except (ProviderError, ValueError):
+                continue
     crest_downloads = _download_club_crests(fixture_rows)
     divisions_by_competition = {competition: division for division, competition in LEAGUES}
     squads_by_competition = {}
@@ -367,7 +380,7 @@ def main() -> None:
             f"https://raw.githubusercontent.com/Ndumiso19894/goal-scanner-2.0/main/docs/assets/crests/{fixture['away_team_id']}.png"
             if fixture.get("away_team_id") else None)
         canonical_competition = COMPETITION_ALIASES.get(fixture.get("competition", ""), fixture.get("competition", ""))
-        history = history_by_competition.get(canonical_competition, [])
+        history = context_history_by_competition.get(canonical_competition, [])
         home_name, away_name, kickoff = fixture.get("home", ""), fixture.get("away", ""), fixture.get("kickoff", "")
         squad_pool = squads_by_competition.get(canonical_competition, [])
         fixture["pre_match_stats"] = {
@@ -375,7 +388,7 @@ def main() -> None:
             "away": _team_pre_match_stats(history, away_name, kickoff, "away"),
             "head_to_head": _head_to_head(history, home_name, away_name, kickoff),
             "context": {"home_rest_days": _rest_days(history, home_name, kickoff), "away_rest_days": _rest_days(history, away_name, kickoff), "home_squad": TransfermarktProvider.match_team(home_name, squad_pool), "away_squad": TransfermarktProvider.match_team(away_name, squad_pool), "league_performance_baseline": _league_context(history, kickoff)},
-            "source": "Football-Data.co.uk and Transfermarkt", "available": bool(history),
+            "source": "Football-Data.co.uk (up to three seasons) and Transfermarkt", "history_seasons": 3, "available": bool(history),
         }
 
     generated_at = datetime.now(timezone.utc).isoformat()
