@@ -1,9 +1,55 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-23T04:21:33.475817+00:00",
+  "updated_at": "2026-11-23T04:54:33.600883+00:00",
   "minimum_drop_pct": 3.0,
   "lookback_hours": 24,
-  "count": 0,
-  "movements": [],
+  "count": 3,
+  "movements": [
+    {
+      "fixture_id": "1793635",
+      "home": "Brentford",
+      "away": "Everton",
+      "kickoff": "2026-11-23T22:00:00+02:00",
+      "competition": "Premier League",
+      "market": "match_total_goals",
+      "selection": "5.5/over",
+      "opening_odds": 11.5,
+      "current_odds": 11.0,
+      "drop_pct": 4.35,
+      "first_seen": "2026-11-23T04:43:19.477336+00:00",
+      "last_seen": "2026-11-23T04:51:51.273181+00:00",
+      "samples": 4
+    },
+    {
+      "fixture_id": "1811151",
+      "home": "AD Ceuta FC",
+      "away": "Almeria",
+      "kickoff": "2026-11-23T21:30:00+02:00",
+      "competition": "LaLiga 2",
+      "market": "away_team_goals",
+      "selection": "3.5/over",
+      "opening_odds": 7.2,
+      "current_odds": 6.9,
+      "drop_pct": 4.17,
+      "first_seen": "2026-11-23T04:44:15.649139+00:00",
+      "last_seen": "2026-11-23T04:53:15.748439+00:00",
+      "samples": 4
+    },
+    {
+      "fixture_id": "1811151",
+      "home": "AD Ceuta FC",
+      "away": "Almeria",
+      "kickoff": "2026-11-23T21:30:00+02:00",
+      "competition": "LaLiga 2",
+      "market": "home_team_goals",
+      "selection": "0.5/under",
+      "opening_odds": 3.1,
+      "current_odds": 3.0,
+      "drop_pct": 3.23,
+      "first_seen": "2026-11-23T04:44:15.649139+00:00",
+      "last_seen": "2026-11-23T04:53:15.748439+00:00",
+      "samples": 4
+    }
+  ],
   "note": "Only price changes observed in at least two snapshots are shown; odds movement is not a prediction."
 }
