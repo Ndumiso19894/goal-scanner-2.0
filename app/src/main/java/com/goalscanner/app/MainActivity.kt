@@ -87,7 +87,7 @@ private data class NavItem(val label: String, val icon: ImageVector)
 private fun GoalScannerApp(prefs: android.content.SharedPreferences) {
     var tab by rememberSaveable { mutableStateOf("Home") }
     var settings by rememberSaveable { mutableStateOf(false) }
-    var apiUrl by rememberSaveable { mutableStateOf((prefs.getString("api_url",DEFAULT_DATA_URL) ?: DEFAULT_DATA_URL).ifBlank { DEFAULT_DATA_URL }) }
+    var apiUrl by rememberSaveable { mutableStateOf((prefs.getString("api_url",DEFAULT_DATA_URL) ?: DEFAULT_DATA_URL).replace("feature/android-goal-scanner-pro","main").ifBlank { DEFAULT_DATA_URL }) }
     var apiToken by rememberSaveable { mutableStateOf(prefs.getString("api_token","") ?: "") }
     var season by rememberSaveable { mutableStateOf((prefs.getString("season","2627") ?: "2627").ifBlank { "2627" }) }
     var division by rememberSaveable { mutableStateOf((prefs.getString("division","E0") ?: "E0").ifBlank { "E0" }) }
