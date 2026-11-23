@@ -432,8 +432,8 @@ private fun marketTitle(item:JSONObject):String {
     return when(market) {
         "team_corners_over" -> "${selection.replaceFirstChar { it.uppercase() }} team corners · Over ${line.ifBlank { "line unavailable" }}"
         "match_corners_over" -> "Total match corners · Over ${line.ifBlank { "line unavailable" }}"
-        "match_bookings_over" -> "Total match bookings · Over ${line.ifBlank { "line unavailable" }}"
-        "team_bookings_over" -> "${selection.replaceFirstChar { it.uppercase() }} team bookings · Over ${line.ifBlank { "line unavailable" }}"
+        "match_bookings_over" -> "Total match bookings (yellow + red) · Over ${line.ifBlank { "line unavailable" }}"
+        "team_bookings_over" -> "${selection.replaceFirstChar { it.uppercase() }} team bookings (yellow + red) · Over ${line.ifBlank { "line unavailable" }}"
         "match_over_2_5" -> "Total goals · Over 2.5"
         "btts_yes" -> "Both teams to score · Yes"
         "match_winner" -> "1X2 · ${selection.replaceFirstChar { it.uppercase() }}"
