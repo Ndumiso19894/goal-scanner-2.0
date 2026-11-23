@@ -183,6 +183,8 @@ def build_fixture_candidates(
             "kickoff": kickoff, "home": home, "away": away,
             "competition": fixture.get("competition") or "",
             "home_lambda": estimate["home_lambda"], "away_lambda": estimate["away_lambda"],
+            "market_probabilities": probabilities,
+            "market_odds": prices,
             "data_quality": estimate["data_quality"],
             "sample": {
                 "home_home_matches": estimate["home_home_matches"],
