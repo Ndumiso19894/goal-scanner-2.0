@@ -555,17 +555,28 @@ private fun FixturesScreen(
                             style=MaterialTheme.typography.labelSmall,color=Color(0xFF9EADB9),maxLines=1,letterSpacing=0.7.sp)
                         StatusPill(status)
                     }
-                    Row(Modifier.fillMaxWidth(),verticalAlignment=Alignment.CenterVertically) {
-                        Column(Modifier.weight(1f),verticalArrangement=Arrangement.spacedBy(3.dp)) {
-                            Text(fx.optString("home","Home"),fontWeight=FontWeight.Bold,style=MaterialTheme.typography.titleMedium,color=Color(0xFFF2F5F0))
-                            Text(fx.optString("away","Away"),fontWeight=FontWeight.Bold,style=MaterialTheme.typography.titleMedium,color=Color(0xFFF2F5F0))
+                    Row(Modifier.fillMaxWidth(),verticalAlignment=Alignment.CenterVertically,horizontalArrangement=Arrangement.SpaceEvenly) {
+                        Column(Modifier.weight(1f),horizontalAlignment=Alignment.CenterHorizontally,verticalArrangement=Arrangement.spacedBy(7.dp)) {
+                            TeamCrest(fx.optString("home"),fx.optString("home_crest_url"),52.dp)
+                            Text(fx.optString("home","Home"),fontWeight=FontWeight.Bold,style=MaterialTheme.typography.titleSmall,
+                                color=Color(0xFFF2F5F0),maxLines=2,textAlign=androidx.compose.ui.text.style.TextAlign.Center)
                         }
-                        Column(horizontalAlignment=Alignment.End,verticalArrangement=Arrangement.spacedBy(4.dp)) {
+                        Column(horizontalAlignment=Alignment.CenterHorizontally,verticalArrangement=Arrangement.spacedBy(5.dp)) {
+                            Text("VS",style=MaterialTheme.typography.labelSmall,color=Color(0xFF8496A4),fontWeight=FontWeight.Bold)
                             if(!fx.isNull("home_score")&&!fx.isNull("away_score"))
-                                Text("${fx.optInt("home_score")} - ${fx.optInt("away_score")}",style=MaterialTheme.typography.titleLarge,fontWeight=FontWeight.ExtraBold)
-                            else Text(formatKickoff(fx.optString("kickoff")),style=MaterialTheme.typography.labelMedium,fontWeight=FontWeight.SemiBold)
-                            Text("OPEN MATCH  ›",style=MaterialTheme.typography.labelSmall,color=Color(0xFFB7F36B),fontWeight=FontWeight.Bold)
+                                Text("${fx.optInt("home_score")} : ${fx.optInt("away_score")}",style=MaterialTheme.typography.titleLarge,fontWeight=FontWeight.ExtraBold)
+                            else Text(formatKickoff(fx.optString("kickoff")).substringAfter("·").trim(),style=MaterialTheme.typography.titleSmall,
+                                fontWeight=FontWeight.ExtraBold,color=Color(0xFFB7F36B))
                         }
+                        Column(Modifier.weight(1f),horizontalAlignment=Alignment.CenterHorizontally,verticalArrangement=Arrangement.spacedBy(7.dp)) {
+                            TeamCrest(fx.optString("away"),fx.optString("away_crest_url"),52.dp)
+                            Text(fx.optString("away","Away"),fontWeight=FontWeight.Bold,style=MaterialTheme.typography.titleSmall,
+                                color=Color(0xFFF2F5F0),maxLines=2,textAlign=androidx.compose.ui.text.style.TextAlign.Center)
+                        }
+                    }
+                    Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween,verticalAlignment=Alignment.CenterVertically) {
+                        Text(formatKickoff(fx.optString("kickoff")),style=MaterialTheme.typography.labelSmall,color=Color(0xFF9EADB9))
+                        Text("MATCH CENTRE  ›",style=MaterialTheme.typography.labelSmall,color=Color(0xFFB7F36B),fontWeight=FontWeight.Bold)
                     }
                 }
             }
