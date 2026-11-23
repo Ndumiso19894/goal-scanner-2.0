@@ -181,7 +181,7 @@ class FootballDataProvider:
 
 class SportyBetProvider:
     """SportyBet ZA public web-app odds feed. Odds are pricing data, not model inputs."""
-    LIST_MARKETS="1,10,18,29,19,20"
+    LIST_MARKETS="1,10,18,29,19,20,166,900300,900301,139,900304,900305"
     def __init__(self,country_code: str | None=None,timeout: int=TIMEOUT_SECONDS):
         self.country_code=(country_code or os.getenv("SPORTY_CC","za")).lower()
         if not re.fullmatch(r"[a-z]{2}",self.country_code): raise ValueError("Country code must be two letters")
