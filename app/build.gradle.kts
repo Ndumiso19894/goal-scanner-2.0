@@ -1,3 +1,4 @@
+// Updating the app version triggers a signed release build.
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
