@@ -150,7 +150,7 @@ def _download_club_crests(fixtures: list[dict]) -> int:
                 request = Request(image_url, headers={"User-Agent": "Mozilla/5.0", "Accept": "image/*"})
                 with urlopen(request, timeout=12) as response:
                     data = response.read(500_001)
-                if len(data) > 100 and len(data) <= 500_000 and data.startswith(b"\\x89PNG"):
+                if len(data) > 100 and len(data) <= 500_000 and (data.startswith(bytes((137, 80, 78, 71))) or data.startswith(bytes((255, 216, 255))) or data[:4] == b"RIFF"):
                     target.write_bytes(data)
                     downloaded += 1
             except Exception:
