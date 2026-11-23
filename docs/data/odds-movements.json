@@ -1,10 +1,85 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-23T04:59:27.668977+00:00",
+  "updated_at": "2026-11-23T05:37:22.783661+00:00",
   "minimum_drop_pct": 3.0,
   "lookback_hours": 24,
-  "count": 3,
+  "count": 9,
   "movements": [
+    {
+      "fixture_id": "1834796",
+      "home": "Bayern Munich W",
+      "away": "Hoffenheim W",
+      "kickoff": "2026-11-23T19:00:00+02:00",
+      "competition": "Frauen-Bundesliga",
+      "market": "1X2",
+      "selection": "draw",
+      "opening_odds": 12.0,
+      "current_odds": 10.5,
+      "drop_pct": 12.5,
+      "first_seen": "2026-11-23T04:43:57.126455+00:00",
+      "last_seen": "2026-11-23T05:35:42.622583+00:00",
+      "samples": 7
+    },
+    {
+      "fixture_id": "1857559",
+      "home": "Wadi Degla FC",
+      "away": "Al-Ittihad Alexandria",
+      "kickoff": "2026-11-23T17:00:00+02:00",
+      "competition": "Premier League",
+      "market": "home_team_goals",
+      "selection": "2.5/over",
+      "opening_odds": 7.0,
+      "current_odds": 6.5,
+      "drop_pct": 7.14,
+      "first_seen": "2026-11-23T04:43:19.477336+00:00",
+      "last_seen": "2026-11-23T05:34:32.935673+00:00",
+      "samples": 7
+    },
+    {
+      "fixture_id": "1857559",
+      "home": "Wadi Degla FC",
+      "away": "Al-Ittihad Alexandria",
+      "kickoff": "2026-11-23T17:00:00+02:00",
+      "competition": "Premier League",
+      "market": "home_team_goals",
+      "selection": "1.5/over",
+      "opening_odds": 3.0,
+      "current_odds": 2.8,
+      "drop_pct": 6.67,
+      "first_seen": "2026-11-23T04:43:19.477336+00:00",
+      "last_seen": "2026-11-23T05:34:32.935673+00:00",
+      "samples": 7
+    },
+    {
+      "fixture_id": "1857559",
+      "home": "Wadi Degla FC",
+      "away": "Al-Ittihad Alexandria",
+      "kickoff": "2026-11-23T17:00:00+02:00",
+      "competition": "Premier League",
+      "market": "away_team_goals",
+      "selection": "0.5/under",
+      "opening_odds": 2.35,
+      "current_odds": 2.2,
+      "drop_pct": 6.38,
+      "first_seen": "2026-11-23T04:43:19.477336+00:00",
+      "last_seen": "2026-11-23T05:34:32.935673+00:00",
+      "samples": 7
+    },
+    {
+      "fixture_id": "1857559",
+      "home": "Wadi Degla FC",
+      "away": "Al-Ittihad Alexandria",
+      "kickoff": "2026-11-23T17:00:00+02:00",
+      "competition": "Premier League",
+      "market": "1X2",
+      "selection": "home",
+      "opening_odds": 2.5,
+      "current_odds": 2.35,
+      "drop_pct": 6.0,
+      "first_seen": "2026-11-23T04:43:19.477336+00:00",
+      "last_seen": "2026-11-23T05:34:32.935673+00:00",
+      "samples": 7
+    },
     {
       "fixture_id": "1793635",
       "home": "Brentford",
@@ -17,8 +92,23 @@
       "current_odds": 11.0,
       "drop_pct": 4.35,
       "first_seen": "2026-11-23T04:43:19.477336+00:00",
-      "last_seen": "2026-11-23T04:57:32.560325+00:00",
-      "samples": 6
+      "last_seen": "2026-11-23T05:34:32.935673+00:00",
+      "samples": 7
+    },
+    {
+      "fixture_id": "1857559",
+      "home": "Wadi Degla FC",
+      "away": "Al-Ittihad Alexandria",
+      "kickoff": "2026-11-23T17:00:00+02:00",
+      "competition": "Premier League",
+      "market": "home_team_goals",
+      "selection": "3.5/over",
+      "opening_odds": 11.5,
+      "current_odds": 11.0,
+      "drop_pct": 4.35,
+      "first_seen": "2026-11-23T04:43:19.477336+00:00",
+      "last_seen": "2026-11-23T05:34:32.935673+00:00",
+      "samples": 7
     },
     {
       "fixture_id": "1811151",
@@ -32,8 +122,8 @@
       "current_odds": 6.9,
       "drop_pct": 4.17,
       "first_seen": "2026-11-23T04:44:15.649139+00:00",
-      "last_seen": "2026-11-23T04:58:34.904088+00:00",
-      "samples": 6
+      "last_seen": "2026-11-23T05:36:04.544172+00:00",
+      "samples": 7
     },
     {
       "fixture_id": "1811151",
@@ -47,8 +137,8 @@
       "current_odds": 3.0,
       "drop_pct": 3.23,
       "first_seen": "2026-11-23T04:44:15.649139+00:00",
-      "last_seen": "2026-11-23T04:58:34.904088+00:00",
-      "samples": 6
+      "last_seen": "2026-11-23T05:36:04.544172+00:00",
+      "samples": 7
     }
   ],
   "note": "Only price changes observed in at least two snapshots are shown; odds movement is not a prediction."
