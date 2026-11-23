@@ -25,6 +25,7 @@ class ReleaseUpdateWorker(context: Context, params: WorkerParameters) : Worker(c
             }
             val payload = try {
                 val code = connection.responseCode
+                if (code == 404) return Result.success()
                 if (code !in 200..299) throw IllegalStateException("Release check HTTP $code")
                 connection.inputStream.bufferedReader().use { it.readText() }
             } finally { connection.disconnect() }
