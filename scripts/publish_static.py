@@ -197,6 +197,29 @@ def _league_table(rows: list[dict], as_of: date) -> list[dict]:
         item["position"] = position
     return result
 
+def _rest_days(rows: list[dict], team: str, kickoff: str) -> int | None:
+    target = _parse_time(kickoff)
+    if target is None: return None
+    previous = []
+    for row in rows:
+        if row.get("home_goals") is None or row.get("away_goals") is None: continue
+        stamp = _parse_time(row.get("kickoff") or row.get("date"))
+        if stamp is None or stamp >= target: continue
+        if max(team_similarity(team, row.get("home", "")), team_similarity(team, row.get("away", ""))) >= .88: previous.append(stamp)
+    return (target.date() - max(previous).date()).days if previous else None
+
+def _league_context(rows: list[dict], kickoff: str) -> dict:
+    target = _parse_time(kickoff)
+    eligible = []
+    for row in rows:
+        stamp = _parse_time(row.get("kickoff") or row.get("date"))
+        if stamp is None or target is None or stamp >= target or row.get("home_goals") is None: continue
+        eligible.append(row)
+    def avg(key: str):
+        values = [float((r.get("statistics") or {}).get(key)) for r in eligible if (r.get("statistics") or {}).get(key) is not None]
+        return round(sum(values) / len(values), 2) if values else None
+    return {"matches_sampled": len(eligible), "home_shots_avg": avg("HS"), "away_shots_avg": avg("AS"), "home_shots_on_target_avg": avg("HST"), "away_shots_on_target_avg": avg("AST"), "home_xg_avg": avg("HxG"), "away_xg_avg": avg("AxG"), "source": "Football-Data.co.uk"}
+
 def _download_club_crests(fixtures: list[dict]) -> int:
     """Save LiveScore team crests in the repository so the app can reuse cached assets."""
     folder = Path("docs/assets/crests")
@@ -327,6 +350,14 @@ def main() -> None:
         except (ProviderError, ValueError):
             history_by_competition[competition] = []
     crest_downloads = _download_club_crests(fixture_rows)
+    divisions_by_competition = {competition: division for division, competition in LEAGUES}
+    squads_by_competition = {}
+    squad_provider = TransfermarktProvider()
+    for competition in sorted({COMPETITION_ALIASES.get(x.get("competition", ""), x.get("competition", "")) for x in fixture_rows}):
+        division = divisions_by_competition.get(competition)
+        if division:
+            try: squads_by_competition[competition] = squad_provider.fetch_division_squads(division)
+            except (ProviderError, ValueError): squads_by_competition[competition] = []
     league_tables = [{"division": division, "competition": competition, "table": _league_table(history_by_competition.get(competition, []), today), "source": "Football-Data.co.uk"} for division, competition in LEAGUES]
     for fixture in fixture_rows:
         fixture["home_crest_url"] = (
@@ -337,12 +368,14 @@ def main() -> None:
             if fixture.get("away_team_id") else None)
         canonical_competition = COMPETITION_ALIASES.get(fixture.get("competition", ""), fixture.get("competition", ""))
         history = history_by_competition.get(canonical_competition, [])
+        home_name, away_name, kickoff = fixture.get("home", ""), fixture.get("away", ""), fixture.get("kickoff", "")
+        squad_pool = squads_by_competition.get(canonical_competition, [])
         fixture["pre_match_stats"] = {
-            "home": _team_pre_match_stats(history, fixture.get("home", ""), fixture.get("kickoff", ""), "home"),
-            "away": _team_pre_match_stats(history, fixture.get("away", ""), fixture.get("kickoff", ""), "away"),
-            "head_to_head": _head_to_head(history, fixture.get("home", ""), fixture.get("away", ""), fixture.get("kickoff", "")),
-            "source": "Football-Data.co.uk",
-            "available": bool(history),
+            "home": _team_pre_match_stats(history, home_name, kickoff, "home"),
+            "away": _team_pre_match_stats(history, away_name, kickoff, "away"),
+            "head_to_head": _head_to_head(history, home_name, away_name, kickoff),
+            "context": {"home_rest_days": _rest_days(history, home_name, kickoff), "away_rest_days": _rest_days(history, away_name, kickoff), "home_squad": TransfermarktProvider.match_team(home_name, squad_pool), "away_squad": TransfermarktProvider.match_team(away_name, squad_pool), "league_performance_baseline": _league_context(history, kickoff)},
+            "source": "Football-Data.co.uk and Transfermarkt", "available": bool(history),
         }
 
     generated_at = datetime.now(timezone.utc).isoformat()
