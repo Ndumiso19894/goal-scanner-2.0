@@ -478,6 +478,21 @@ private fun TeamFormPanel(modifier:Modifier,name:String,stats:JSONObject?,venueL
                 Text("${stats.optInt("wins")}W  ${stats.optInt("draws")}D  ${stats.optInt("losses")}L",
                     style=MaterialTheme.typography.labelSmall,color=Color(0xFFCDD6DC))
                 Text("${stats.optInt("played")} matches in sample",style=MaterialTheme.typography.labelSmall,color=Color(0xFF8797A4))
+                val shots=stats.optDouble("shots_avg",-1.0); val target=stats.optDouble("shots_on_target_avg",-1.0); val xg=stats.optDouble("xg_avg",-1.0)
+                if(shots>=0 || target>=0 || xg>=0) Text(listOfNotNull(if(shots>=0) "Shots %.1f".format(shots) else null,if(target>=0) "On target %.1f".format(target) else null,if(xg>=0) "xG %.2f".format(xg) else null).joinToString("  · "),style=MaterialTheme.typography.labelSmall,color=Color(0xFFB7F36B))
+                val recent=stats.optJSONArray("recent_matches")
+                if(recent!=null && recent.length()>0) {
+                    HorizontalDivider(color=Color(0xFF30414E))
+                    Text("RECENT HOME/AWAY MATCHES",style=MaterialTheme.typography.labelSmall,color=Color(0xFF8FA0AD),fontWeight=FontWeight.Bold)
+                    (0 until minOf(5,recent.length())).forEach { i ->
+                        val match=recent.optJSONObject(i) ?: JSONObject()
+                        Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween,verticalAlignment=Alignment.CenterVertically) {
+                            Column(Modifier.weight(1f)) { Text("${match.optString("date")}  ${match.optString("venue")}",style=MaterialTheme.typography.labelSmall,color=Color(0xFF8495A2)); Text(match.optString("opponent"),style=MaterialTheme.typography.bodySmall,color=Color.White,maxLines=1) }
+                            Text(match.optString("score"),color=Color.White,fontWeight=FontWeight.Bold)
+                            Text(match.optString("result"),modifier=Modifier.padding(start=8.dp),color=when(match.optString("result")){"W"->Color(0xFF67C58B);"D"->Color(0xFF9EADB9);else->Color(0xFFE18A83)},fontWeight=FontWeight.ExtraBold)
+                        }
+                    }
+                }
             }
         }
     }
@@ -533,8 +548,32 @@ private fun PreMatchStats(stats:JSONObject?) {
                 Text("${h2h.optInt("played")} meetings  ·  ${h2h.optInt("home_wins")} home wins  ·  ${h2h.optInt("draws")} draws  ·  ${h2h.optInt("away_wins")} away wins",
                     color=Color(0xFFF2F5F0),fontWeight=FontWeight.Bold,style=MaterialTheme.typography.bodySmall)
                 val scores=h2h.optJSONArray("recent_scores")
-                if(scores!=null && scores.length()>0) Text("Recent scores: "+(0 until scores.length()).joinToString("  ·  ") { scores.optString(it) },
-                    color=Color(0xFF9EADB9),style=MaterialTheme.typography.labelSmall)
+                val meetings=h2h.optJSONArray("recent_meetings")
+                if(meetings!=null && meetings.length()>0) {
+                    HorizontalDivider(color=Color(0xFF30414E))
+                    Text("PREVIOUS MEETINGS",color=Color(0xFF9EADB9),style=MaterialTheme.typography.labelSmall,fontWeight=FontWeight.Bold)
+                    (0 until minOf(10,meetings.length())).forEach { i ->
+                        val match=meetings.optJSONObject(i) ?: JSONObject()
+                        Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween) { Text(match.optString("date"),color=Color(0xFF8495A2),style=MaterialTheme.typography.labelSmall); Text(match.optString("score"),color=Color.White,fontWeight=FontWeight.Bold) }
+                    }
+                } else if(scores!=null && scores.length()>0) Text("Recent scores: "+(0 until scores.length()).joinToString("  ·  ") { scores.optString(it) }, color=Color(0xFF9EADB9),style=MaterialTheme.typography.labelSmall)
+            }
+        }
+    }
+    val context=stats?.optJSONObject("context")
+    if(context!=null) {
+        Heading("Beyond the scoreline","Schedule and squad context from separate public data sources")
+        Card(colors=CardDefaults.cardColors(containerColor=Color(0xFF121F29)),border=androidx.compose.foundation.BorderStroke(1.dp,Color(0xFF2B3D49))) {
+            Column(Modifier.fillMaxWidth().padding(14.dp),verticalArrangement=Arrangement.spacedBy(9.dp)) {
+                val homeRest=context.optInt("home_rest_days",-1); val awayRest=context.optInt("away_rest_days",-1)
+                Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.spacedBy(8.dp)) { Box(Modifier.weight(1f)) { Metric("Home rest",if(homeRest>=0) "$homeRest days" else "—","Since last recorded match") }; Box(Modifier.weight(1f)) { Metric("Away rest",if(awayRest>=0) "$awayRest days" else "—","Since last recorded match") } }
+                listOf("Home squad" to context.optJSONObject("home_squad"),"Away squad" to context.optJSONObject("away_squad")).forEach { (label,squad) -> if(squad!=null) {
+                    val value=squad.optDouble("market_value_eur",-1.0)
+                    Text("$label · ${squad.optString("name")}",color=Color.White,fontWeight=FontWeight.Bold)
+                    Text(listOfNotNull(if(squad.optDouble("average_age",-1.0)>=0) "Average age %.1f".format(squad.optDouble("average_age")) else null,if(squad.optInt("squad_size")>0) "${squad.optInt("squad_size")} players" else null,if(value>=0) "Market value €%.1fm".format(value/1000000.0) else null).joinToString("  · ").ifBlank { "Squad profile unavailable" },color=Color(0xFF9EADB9),style=MaterialTheme.typography.bodySmall)
+                } }
+                val baseline=context.optJSONObject("league_performance_baseline")
+                if(baseline!=null) { Heading("League environment","Historical baseline · ${baseline.optInt("matches_sampled")} matches"); Text(listOfNotNull(if(baseline.optDouble("home_shots_avg",-1.0)>=0) "Home shots %.1f".format(baseline.optDouble("home_shots_avg")) else null,if(baseline.optDouble("away_shots_avg",-1.0)>=0) "Away shots %.1f".format(baseline.optDouble("away_shots_avg")) else null,if(baseline.optDouble("home_xg_avg",-1.0)>=0) "Home xG %.2f".format(baseline.optDouble("home_xg_avg")) else null,if(baseline.optDouble("away_xg_avg",-1.0)>=0) "Away xG %.2f".format(baseline.optDouble("away_xg_avg")) else null).joinToString("  · "),color=Color(0xFF9EADB9),style=MaterialTheme.typography.bodySmall) }
             }
         }
     }
