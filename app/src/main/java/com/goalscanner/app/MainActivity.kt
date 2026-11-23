@@ -698,6 +698,7 @@ private fun FixturesScreen(
 ) {
     var query by rememberSaveable { mutableStateOf("") }
     var filter by rememberSaveable { mutableStateOf("Upcoming") }
+    var sort by rememberSaveable { mutableStateOf("Time") }
     val visible=fixtures.filter { fx ->
         val text=(fx.optString("home")+" "+fx.optString("away")+" "+fx.optString("competition")).lowercase()
         val status=fx.optString("status","NS").uppercase()
@@ -709,7 +710,7 @@ private fun FixturesScreen(
             else -> true
         }
         queryOk && statusOk
-    }.sortedBy { it.optString("kickoff") }
+    }.let { rows -> when(sort) { "Match A-Z" -> rows.sortedBy { it.optString("home") + " " + it.optString("away") }; "League A-Z" -> rows.sortedBy { it.optString("competition") }; else -> rows.sortedBy { it.optString("kickoff") } } }
     ScreenColumn(modifier) {
         Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween,verticalAlignment=Alignment.CenterVertically) {
             Column(Modifier.weight(1f)) {
@@ -730,6 +731,7 @@ private fun FixturesScreen(
                 FilterChip(selected=filter==item,onClick={filter=item},label={Text(item)})
             }
         }
+        Row(horizontalArrangement=Arrangement.spacedBy(6.dp)) { listOf("Time","Match A-Z","League A-Z").forEach { item -> FilterChip(selected=sort==item,onClick={sort=item},label={Text(item)}) } }
         if(message.isNotBlank()) Text(message,style=MaterialTheme.typography.bodySmall,color=MaterialTheme.colorScheme.primary)
         if(visible.isEmpty()) Notice("No matching fixtures","Try another search or status filter, or refresh the fixture feed.")
         visible.forEach { fx ->
@@ -883,6 +885,8 @@ private fun ScannerScreen(
     var team by rememberSaveable { mutableStateOf("") }
     var minOdds by rememberSaveable { mutableStateOf("") }
     var maxOdds by rememberSaveable { mutableStateOf("") }
+    var sort by rememberSaveable { mutableStateOf("Kick-off") }
+    val sortedRecommendations = when(sort) { "Probability" -> recommendations.sortedByDescending { it.optDouble("estimated_probability") }; "Odds" -> recommendations.sortedByDescending { it.optDouble("odds") }; "Match A-Z" -> recommendations.sortedBy { it.optString("home") + " " + it.optString("away") }; "League" -> recommendations.sortedBy { it.optString("competition") }; else -> recommendations.sortedBy { it.optString("kickoff") } }
     ScreenColumn(modifier) {
         Heading("Goal Scanner","Balanced recommendations and detailed statistical search.")
         Row(Modifier.fillMaxWidth().background(MaterialTheme.colorScheme.surfaceVariant,RoundedCornerShape(14.dp)).padding(4.dp)) {
@@ -946,7 +950,8 @@ private fun ScannerScreen(
         if(recommendations.isNotEmpty()) {
             Heading(if(view=="Recommended") "Balanced shortlist" else "All qualifying selections",
                 "${recommendations.size} recorded candidates · tap one for match analysis")
-            recommendations.forEach { item ->
+            Row(horizontalArrangement=Arrangement.spacedBy(6.dp)) { listOf("Kick-off","Probability","Odds","League","Match A-Z").forEach { value -> FilterChip(selected=sort==value,onClick={sort=value},label={Text(value)}) } }
+            sortedRecommendations.forEach { item ->
                 val estimate=(item.optDouble("estimated_probability")*100).toInt()
                 Card(Modifier.fillMaxWidth().clickable { onSelect(item) },shape=RoundedCornerShape(20.dp),
                     colors=CardDefaults.cardColors(containerColor=Color(0xFF111A23)),
