@@ -1,13 +1,24 @@
 package com.goalscanner.app
 
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import org.json.JSONObject
+
+private val OddsBg = Color(0xFF080D13)
+private val OddsPanel = Color(0xFF111A23)
+private val OddsAccent = Color(0xFFB7F36B)
+private val OddsMuted = Color(0xFF9EADB9)
 
 @Composable
 fun DroppingOddsScreen(
@@ -17,54 +28,76 @@ fun DroppingOddsScreen(
     onRefresh: () -> Unit
 ) {
     Column(
-        modifier.fillMaxSize().padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(12.dp)
+        modifier.fillMaxSize().background(OddsBg).verticalScroll(rememberScrollState())
+            .padding(horizontal=17.dp,vertical=18.dp),
+        verticalArrangement=Arrangement.spacedBy(16.dp)
     ) {
-        Text("Dropping Odds", style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold)
-        Text("Bookmaker prices that have shortened across recorded snapshots.", style = MaterialTheme.typography.bodyMedium)
-        Card(shape = RoundedCornerShape(16.dp)) {
-            Column(Modifier.fillMaxWidth().padding(14.dp), verticalArrangement = Arrangement.spacedBy(5.dp)) {
-                Text("24-hour market watch · 3% minimum drop", fontWeight = FontWeight.SemiBold)
-                Text(updatedAt, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                Text("A shorter price is market movement, not proof that a result is more likely.", style = MaterialTheme.typography.bodySmall)
+        Column(verticalArrangement=Arrangement.spacedBy(4.dp)) {
+            Text("MARKET WATCH",style=MaterialTheme.typography.labelSmall,color=OddsAccent,
+                fontWeight=FontWeight.Bold,letterSpacing=1.4.sp)
+            Text("Dropping odds",style=MaterialTheme.typography.headlineMedium,color=Color(0xFFF2F5F0),
+                fontWeight=FontWeight.ExtraBold)
+            Text("Track bookmaker prices that have shortened across recorded snapshots.",
+                style=MaterialTheme.typography.bodySmall,color=OddsMuted)
+        }
+        Card(shape=RoundedCornerShape(23.dp),colors=CardDefaults.cardColors(containerColor=Color(0xFF18252D)),
+            border=BorderStroke(1.dp,Color(0xFF30434A))) {
+            Column(Modifier.fillMaxWidth().padding(17.dp),verticalArrangement=Arrangement.spacedBy(9.dp)) {
+                Text("24-HOUR PRICE TRACKER",style=MaterialTheme.typography.labelSmall,color=OddsAccent,
+                    fontWeight=FontWeight.Bold,letterSpacing=1.sp)
+                Text("3% minimum recorded drop",style=MaterialTheme.typography.titleLarge,color=Color.White,
+                    fontWeight=FontWeight.Bold)
+                Text(updatedAt,style=MaterialTheme.typography.bodySmall,color=OddsMuted)
+                Text("A shorter price shows market movement. It does not prove that a result is more likely.",
+                    style=MaterialTheme.typography.bodySmall,color=Color(0xFFBCC7CE),lineHeight=18.sp)
             }
         }
-        Button(onClick = onRefresh, modifier = Modifier.fillMaxWidth()) { Text("Refresh odds movements") }
+        Button(onClick=onRefresh,modifier=Modifier.fillMaxWidth(),shape=RoundedCornerShape(14.dp),
+            colors=ButtonDefaults.buttonColors(containerColor=OddsAccent,contentColor=Color(0xFF17220A))) {
+            Text("REFRESH PRICE MOVEMENTS",fontWeight=FontWeight.ExtraBold,letterSpacing=0.4.sp)
+        }
         if (movements.isEmpty()) {
-            Card(shape = RoundedCornerShape(16.dp)) {
-                Column(Modifier.fillMaxWidth().padding(18.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                    Text("No confirmed drops yet", fontWeight = FontWeight.Bold)
-                    Text("The system needs at least two recorded prices for the same selection. New snapshots are collected on the scheduled refresh.", style = MaterialTheme.typography.bodySmall)
+            Card(shape=RoundedCornerShape(20.dp),colors=CardDefaults.cardColors(containerColor=OddsPanel),
+                border=BorderStroke(1.dp,Color(0xFF263541))) {
+                Column(Modifier.fillMaxWidth().padding(19.dp),verticalArrangement=Arrangement.spacedBy(7.dp)) {
+                    Text("No confirmed drops yet",fontWeight=FontWeight.Bold,color=Color(0xFFF2F5F0),
+                        style=MaterialTheme.typography.titleMedium)
+                    Text("A movement appears only after at least two prices have been recorded for the same selection. New snapshots are collected automatically.",
+                        style=MaterialTheme.typography.bodySmall,color=OddsMuted,lineHeight=18.sp)
                 }
             }
         } else {
-            Text("${movements.size} price movements detected", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+            Text("${movements.size} PRICE MOVEMENTS DETECTED",style=MaterialTheme.typography.labelLarge,
+                color=OddsAccent,fontWeight=FontWeight.Bold,letterSpacing=0.7.sp)
             movements.forEach { item ->
-                Card(shape = RoundedCornerShape(16.dp)) {
-                    Column(Modifier.fillMaxWidth().padding(14.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                        Text("${item.optString("home")} vs ${item.optString("away")}", fontWeight = FontWeight.Bold)
-                        Text("${item.optString("competition")} · ${oddsMovementTitle(item)}",
-                            style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                        Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-                            Column {
-                                Text("Was", style = MaterialTheme.typography.labelSmall)
-                                Text(String.format("%.2f", item.optDouble("opening_odds")), fontWeight = FontWeight.SemiBold)
-                            }
-                            Column {
-                                Text("Now", style = MaterialTheme.typography.labelSmall)
-                                Text(String.format("%.2f", item.optDouble("current_odds")), fontWeight = FontWeight.SemiBold)
-                            }
-                            Column {
-                                Text("Drop", style = MaterialTheme.typography.labelSmall)
-                                Text(String.format("%.1f%%", item.optDouble("drop_pct")), color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold)
-                            }
+                Card(shape=RoundedCornerShape(20.dp),colors=CardDefaults.cardColors(containerColor=OddsPanel),
+                    border=BorderStroke(1.dp,Color(0xFF263541))) {
+                    Column(Modifier.fillMaxWidth().padding(15.dp),verticalArrangement=Arrangement.spacedBy(10.dp)) {
+                        Text("${item.optString("home")}  vs  ${item.optString("away")}",
+                            fontWeight=FontWeight.ExtraBold,color=Color(0xFFF2F5F0),
+                            style=MaterialTheme.typography.titleMedium)
+                        Text("${item.optString("competition")}  ·  ${oddsMovementTitle(item)}",
+                            style=MaterialTheme.typography.bodySmall,color=OddsMuted,lineHeight=18.sp)
+                        HorizontalDivider(color=Color(0xFF293742))
+                        Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween) {
+                            PriceValue("OPENING",String.format("%.2f",item.optDouble("opening_odds")))
+                            PriceValue("CURRENT",String.format("%.2f",item.optDouble("current_odds")))
+                            PriceValue("PRICE DROP",String.format("%.1f%%",item.optDouble("drop_pct")),OddsAccent)
                         }
-                        Text("${item.optInt("samples")} snapshots · last seen ${item.optString("last_seen")}",
-                            style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                        Text("${item.optInt("samples")} recorded snapshots  ·  last seen ${item.optString("last_seen")}",
+                            style=MaterialTheme.typography.labelSmall,color=OddsMuted)
                     }
                 }
             }
         }
+    }
+}
+
+@Composable
+private fun PriceValue(label:String,value:String,valueColor:Color=Color(0xFFF2F5F0)) {
+    Column(verticalArrangement=Arrangement.spacedBy(4.dp)) {
+        Text(label,style=MaterialTheme.typography.labelSmall,color=OddsMuted,letterSpacing=0.5.sp)
+        Text(value,style=MaterialTheme.typography.titleLarge,fontWeight=FontWeight.ExtraBold,color=valueColor)
     }
 }
 
