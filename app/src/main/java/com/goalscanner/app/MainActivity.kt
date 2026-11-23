@@ -348,43 +348,97 @@ private fun FinalPicksScreen(modifier: Modifier, recommendations: List<JSONObjec
     var sort by rememberSaveable { mutableStateOf("Kick-off") }
     var showAll by rememberSaveable { mutableStateOf(false) }
     val today = LocalDate.now()
-    val eligible = recommendations.filter { item -> marketSelectionId(item) in MarketIds && item.optString("odds_status") == "available" && item.optDouble("odds",0.0) > 1.0 }
-    val todays = eligible.filter { runCatching { LocalDate.parse(it.optString("kickoff").take(10)) == today }.getOrDefault(false) }
-    val source = if (showAll) eligible else todays
-    val sorted = when(sort) { "Probability" -> source.sortedByDescending { it.optDouble("estimated_probability") }; "Odds" -> source.sortedByDescending { it.optDouble("odds") }; "League" -> source.sortedBy { it.optString("competition") }; "Match A-Z" -> source.sortedBy { it.optString("home") + " " + it.optString("away") }; else -> source.sortedBy { it.optString("kickoff") } }
+    val eligible = recommendations.filter { item ->
+        marketSelectionId(item) in MarketIds && item.optString("odds_status") == "available" && item.optDouble("odds",0.0) > 1.0
+    }
+    // One strongest qualifying market per fixture. The backend rank score is preferred;
+    // the same transparent ranking formula is used only when older feeds lack that field.
+    val onePerMatch = eligible.groupBy {
+        it.optString("fixture_id").ifBlank { "${it.optString("home")}| ${it.optString("away")}| ${it.optString("kickoff")}" }
+    }.values.mapNotNull { candidates ->
+        candidates.maxByOrNull { item ->
+            item.optDouble("rank_score",
+                .55 * item.optDouble("estimated_probability") +
+                .30 * item.optDouble("data_quality") +
+                .15 * (((item.optDouble("expected_value", -0.10) + .10) / .30).coerceIn(0.0,1.0)))
+        }
+    }
+    val todays = onePerMatch.filter { runCatching { LocalDate.parse(it.optString("kickoff").take(10)) == today }.getOrDefault(false) }
+    val source = if (showAll) onePerMatch else todays
+    val sorted = when(sort) {
+        "Probability" -> source.sortedByDescending { it.optDouble("estimated_probability") }
+        "Odds" -> source.sortedByDescending { it.optDouble("odds") }
+        "League" -> source.sortedBy { it.optString("competition") }
+        "Match A-Z" -> source.sortedBy { it.optString("home") + " " + it.optString("away") }
+        else -> source.sortedBy { it.optString("kickoff") }
+    }
     ScreenColumn(modifier) {
-        Heading("Final picks of the day", "A clean shortlist of approved markets with an actual SportyBet price. Prices and estimates are displayed separately.")
+        Heading("Final picks of the day", "One match, one strongest qualifying market. Each fixture appears once, with the model estimate and bookmaker price kept separate.")
         Row(horizontalArrangement=Arrangement.spacedBy(8.dp)) {
             FilterChip(selected=!showAll,onClick={showAll=false},label={Text("Today (${todays.size})")})
-            FilterChip(selected=showAll,onClick={showAll=true},label={Text("All upcoming (${eligible.size})")})
+            FilterChip(selected=showAll,onClick={showAll=true},label={Text("All upcoming (${onePerMatch.size})")})
         }
-        Row(horizontalArrangement=Arrangement.spacedBy(6.dp)) { listOf("Kick-off","Probability","Odds","League","Match A-Z").forEach { value -> FilterChip(selected=sort==value,onClick={sort=value},label={Text(value)}) } }
-        Card(shape=RoundedCornerShape(24.dp),colors=CardDefaults.cardColors(containerColor=Color.Transparent),border=androidx.compose.foundation.BorderStroke(1.dp,Color(0xFF36516A))) {
-            Row(Modifier.fillMaxWidth().background(Brush.linearGradient(listOf(Color(0xFF183A43),Color(0xFF17283A))),RoundedCornerShape(24.dp)).padding(18.dp),horizontalArrangement=Arrangement.SpaceBetween,verticalAlignment=Alignment.CenterVertically) {
-                Column(verticalArrangement=Arrangement.spacedBy(3.dp)) { Text("VERIFIED SPORTYBET PRICES",color=Color(0xFF9CB3C2),style=MaterialTheme.typography.labelSmall,fontWeight=FontWeight.Bold,letterSpacing=.8.sp); Text(sorted.size.toString(),color=Color(0xFFB7F36B),style=MaterialTheme.typography.displaySmall,fontWeight=FontWeight.ExtraBold); Text(if(showAll) "Upcoming selections" else "Today's shortlist",color=Color(0xFFB8C9D5),style=MaterialTheme.typography.bodySmall) }
-                Column(horizontalAlignment=Alignment.End,verticalArrangement=Arrangement.spacedBy(5.dp)) { Text(today.toString(),color=Color.White,fontWeight=FontWeight.Bold); Surface(shape=RoundedCornerShape(50),color=Color(0xFF1B443A)) { Text("PRICE CHECKED",Modifier.padding(horizontal=10.dp,vertical=7.dp),color=Color(0xFF83E0B7),fontWeight=FontWeight.ExtraBold,style=MaterialTheme.typography.labelSmall) } }
+        Row(horizontalArrangement=Arrangement.spacedBy(6.dp)) {
+            listOf("Kick-off","Probability","Odds","League","Match A-Z").forEach { value ->
+                FilterChip(selected=sort==value,onClick={sort=value},label={Text(value)})
             }
         }
-        if(sorted.isEmpty()) Notice("No priced picks for this view", "Only exact markets and lines with a live SportyBet price above 1.00 are shown. Try All upcoming or check after the next data refresh.")
+        Card(shape=RoundedCornerShape(24.dp),colors=CardDefaults.cardColors(containerColor=Color.Transparent),border=androidx.compose.foundation.BorderStroke(1.dp,Color(0xFF36516A))) {
+            Row(Modifier.fillMaxWidth().background(Brush.linearGradient(listOf(Color(0xFF183A43),Color(0xFF17283A))),RoundedCornerShape(24.dp)).padding(18.dp),horizontalArrangement=Arrangement.SpaceBetween,verticalAlignment=Alignment.CenterVertically) {
+                Column(verticalArrangement=Arrangement.spacedBy(3.dp)) {
+                    Text("ONE PICK PER MATCH",color=Color(0xFF9CB3C2),style=MaterialTheme.typography.labelSmall,fontWeight=FontWeight.Bold,letterSpacing=.8.sp)
+                    Text(sorted.size.toString(),color=Color(0xFFB7F36B),style=MaterialTheme.typography.displaySmall,fontWeight=FontWeight.ExtraBold)
+                    Text(if(showAll) "Upcoming matches" else "Today's shortlist",color=Color(0xFFB8C9D5),style=MaterialTheme.typography.bodySmall)
+                }
+                Column(horizontalAlignment=Alignment.End,verticalArrangement=Arrangement.spacedBy(5.dp)) {
+                    Text(today.toString(),color=Color.White,fontWeight=FontWeight.Bold)
+                    Surface(shape=RoundedCornerShape(50),color=Color(0xFF1B443A)) {
+                        Text("PRICE CHECKED",Modifier.padding(horizontal=10.dp,vertical=7.dp),color=Color(0xFF83E0B7),fontWeight=FontWeight.ExtraBold,style=MaterialTheme.typography.labelSmall)
+                    }
+                }
+            }
+        }
+        if(sorted.isEmpty()) Notice("No priced picks for this view", "Only qualifying markets with an actual SportyBet price above 1.00 are shown. Try All upcoming or check after the next data refresh.")
         sorted.forEach { item ->
             val fixture=fixtures.firstOrNull { it.optString("id")==item.optString("fixture_id") }
             Card(Modifier.fillMaxWidth().clickable { onSelect(item) },shape=RoundedCornerShape(22.dp),colors=CardDefaults.cardColors(containerColor=Color(0xFF111E2C)),border=androidx.compose.foundation.BorderStroke(1.dp,Color(0xFF2D4356))) {
                 Column(Modifier.fillMaxWidth().padding(15.dp),verticalArrangement=Arrangement.spacedBy(9.dp)) {
-                    Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween,verticalAlignment=Alignment.CenterVertically) { Text(item.optString("competition").uppercase(),color=Color(0xFF91A2B3),style=MaterialTheme.typography.labelSmall,fontWeight=FontWeight.Bold,letterSpacing=.7.sp); Surface(shape=RoundedCornerShape(50),color=Color(0xFF193A37)) { Text(formatKickoff(item.optString("kickoff")),Modifier.padding(horizontal=9.dp,vertical=5.dp),color=Color(0xFF76DCCB),style=MaterialTheme.typography.labelSmall,fontWeight=FontWeight.Bold) } }
-                    Row(Modifier.fillMaxWidth(),verticalAlignment=Alignment.CenterVertically) { TeamCrest(item.optString("home"),fixture?.optString("home_crest_url").orEmpty(),38.dp); Text(item.optString("home"),Modifier.weight(1f).padding(horizontal=7.dp),color=Color.White,fontWeight=FontWeight.Bold,maxLines=2); Text("VS",color=Color(0xFF8193A0),style=MaterialTheme.typography.labelSmall); Text(item.optString("away"),Modifier.weight(1f).padding(horizontal=7.dp),color=Color.White,fontWeight=FontWeight.Bold,maxLines=2,textAlign=androidx.compose.ui.text.style.TextAlign.End); TeamCrest(item.optString("away"),fixture?.optString("away_crest_url").orEmpty(),38.dp) }
-                    Surface(shape=RoundedCornerShape(12.dp),color=Color(0xFF1A2B3B)) { Column(Modifier.fillMaxWidth().padding(11.dp),verticalArrangement=Arrangement.spacedBy(4.dp)) { Text("SELECTED MARKET",color=Color(0xFF7F95A7),style=MaterialTheme.typography.labelSmall,fontWeight=FontWeight.Bold,letterSpacing=.8.sp); Text(marketTitle(item),color=Color.White,fontWeight=FontWeight.ExtraBold,style=MaterialTheme.typography.titleSmall) } }
                     Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween,verticalAlignment=Alignment.CenterVertically) {
-                        Column(verticalArrangement=Arrangement.spacedBy(2.dp)) { Text("MODEL ESTIMATE",color=Color(0xFF91A2B3),style=MaterialTheme.typography.labelSmall,fontWeight=FontWeight.Bold); Text("${(item.optDouble("estimated_probability")*100).toInt()}%",color=Color(0xFFB7F36B),fontWeight=FontWeight.ExtraBold,style=MaterialTheme.typography.headlineMedium) }
-                        Column(horizontalAlignment=Alignment.End,verticalArrangement=Arrangement.spacedBy(2.dp)) { Text("SPORTYBET PRICE",color=Color(0xFF91A2B3),style=MaterialTheme.typography.labelSmall,fontWeight=FontWeight.Bold); Text(String.format("%.2f",item.optDouble("odds")),color=Color.White,fontWeight=FontWeight.ExtraBold,style=MaterialTheme.typography.headlineMedium) }
+                        Text(item.optString("competition").uppercase(),color=Color(0xFF91A2B3),style=MaterialTheme.typography.labelSmall,fontWeight=FontWeight.Bold,letterSpacing=.7.sp)
+                        Surface(shape=RoundedCornerShape(50),color=Color(0xFF193A37)) {
+                            Text(formatKickoff(item.optString("kickoff")),Modifier.padding(horizontal=9.dp,vertical=5.dp),color=Color(0xFF76DCCB),style=MaterialTheme.typography.labelSmall,fontWeight=FontWeight.Bold)
+                        }
                     }
-                    LinearProgressIndicator(progress={(item.optDouble("estimated_probability")).toFloat().coerceIn(0f,1f)},modifier=Modifier.fillMaxWidth().height(5.dp),color=Color(0xFFB7F36B),trackColor=Color(0xFF344452))
+                    Row(Modifier.fillMaxWidth(),verticalAlignment=Alignment.CenterVertically) {
+                        TeamCrest(item.optString("home"),fixture?.optString("home_crest_url").orEmpty(),38.dp)
+                        Text(item.optString("home"),Modifier.weight(1f).padding(horizontal=7.dp),color=Color.White,fontWeight=FontWeight.Bold,maxLines=2)
+                        Text("VS",color=Color(0xFF8193A0),style=MaterialTheme.typography.labelSmall)
+                        Text(item.optString("away"),Modifier.weight(1f).padding(horizontal=7.dp),color=Color.White,fontWeight=FontWeight.Bold,maxLines=2,textAlign=androidx.compose.ui.text.style.TextAlign.End)
+                        TeamCrest(item.optString("away"),fixture?.optString("away_crest_url").orEmpty(),38.dp)
+                    }
+                    Surface(shape=RoundedCornerShape(12.dp),color=Color(0xFF1A2B3B)) {
+                        Column(Modifier.fillMaxWidth().padding(11.dp),verticalArrangement=Arrangement.spacedBy(4.dp)) {
+                            Text("THE SELECTED MARKET",color=Color(0xFF7F95A7),style=MaterialTheme.typography.labelSmall,fontWeight=FontWeight.Bold,letterSpacing=.8.sp)
+                            Text(marketTitle(item),color=Color.White,fontWeight=FontWeight.ExtraBold,style=MaterialTheme.typography.titleSmall)
+                        }
+                    }
+                    Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween,verticalAlignment=Alignment.CenterVertically) {
+                        Column(verticalArrangement=Arrangement.spacedBy(2.dp)) {
+                            Text("MODEL ESTIMATE",color=Color(0xFF91A2B3),style=MaterialTheme.typography.labelSmall,fontWeight=FontWeight.Bold)
+                            Text("${(item.optDouble("estimated_probability")*100).toInt()}%",color=Color(0xFFB7F36B),fontWeight=FontWeight.ExtraBold,style=MaterialTheme.typography.headlineMedium)
+                        }
+                        Column(horizontalAlignment=Alignment.End,verticalArrangement=Arrangement.spacedBy(2.dp)) {
+                            Text("SPORTYBET PRICE",color=Color(0xFF91A2B3),style=MaterialTheme.typography.labelSmall,fontWeight=FontWeight.Bold)
+                            Text(String.format("%.2f",item.optDouble("odds")),color=Color.White,fontWeight=FontWeight.ExtraBold,style=MaterialTheme.typography.headlineMedium)
+                        }
+                    }
+                    LinearProgressIndicator(progress={item.optDouble("estimated_probability").toFloat().coerceIn(0f,1f)},modifier=Modifier.fillMaxWidth().height(5.dp),color=Color(0xFFB7F36B),trackColor=Color(0xFF344452))
                     Text("OPEN FULL ANALYSIS  ›",color=Color(0xFFB7F36B),fontWeight=FontWeight.Bold,style=MaterialTheme.typography.labelSmall)
                 }
             }
         }
     }
 }
-
 @Composable
 private fun LeagueTablesScreen(modifier: Modifier, leagues: List<JSONObject>) {
     var query by rememberSaveable { mutableStateOf("") }
@@ -700,8 +754,10 @@ private fun HomeScreen(modifier:Modifier,connection:String,providers:String,fixt
     fixtureRows:List<JSONObject>,onScanner:()->Unit,onFixtures:()->Unit,onPicks:()->Unit,onSelect:(JSONObject)->Unit) {
     var sort by rememberSaveable { mutableStateOf("Kick-off") }
     val upcoming=fixtureRows.filter { it.optString("status","NS").uppercase() in listOf("NS","TBD","SCHEDULED","") }
-        .let { rows -> if(sort=="Match A-Z") rows.sortedBy { it.optString("home")+it.optString("away") } else rows.sortedBy { it.optString("kickoff") } }.take(4)
+        .let { rows -> if(sort=="Match A-Z") rows.sortedBy { it.optString("home")+it.optString("away") } else rows.sortedBy { it.optString("kickoff") } }.take(6)
     val competitions=fixtureRows.map { it.optString("competition") }.filter { it.isNotBlank() }.distinct().size
+    val withHistory=fixtureRows.count { fx -> val stats=fx.optJSONObject("pre_match_stats"); stats?.optJSONObject("home")!=null || stats?.optJSONObject("away")!=null }
+    val withoutHistory=(fixtureRows.size-withHistory).coerceAtLeast(0)
     ScreenColumn(modifier) {
         Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween,verticalAlignment=Alignment.CenterVertically) {
             Column(verticalArrangement=Arrangement.spacedBy(3.dp)) {
@@ -736,6 +792,19 @@ private fun HomeScreen(modifier:Modifier,connection:String,providers:String,fixt
             Box(Modifier.weight(1f)) { Metric("Fixtures",fixtures.substringBefore(" ").takeIf { it.toIntOrNull()!=null } ?: fixtureRows.size.toString(),"In the current feed") }
             Box(Modifier.weight(1f)) { Metric("Leagues",competitions.toString(),"Competitions covered") }
             Box(Modifier.weight(1f)) { Metric("Feed",if(connection.startsWith("Connected")) "Ready" else "Wait","${providers.take(22)}") }
+        }
+        Card(shape=RoundedCornerShape(18.dp),colors=CardDefaults.cardColors(containerColor=Color(0xFF111D2B)),border=androidx.compose.foundation.BorderStroke(1.dp,Color(0xFF26384A))) {
+            Column(Modifier.fillMaxWidth().padding(14.dp),verticalArrangement=Arrangement.spacedBy(8.dp)) {
+                Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween,verticalAlignment=Alignment.CenterVertically) {
+                    Text("FIXTURE DATA COVERAGE",color=Color(0xFF55D6C2),style=MaterialTheme.typography.labelSmall,fontWeight=FontWeight.ExtraBold,letterSpacing=.8.sp)
+                    Text("${fixtureRows.size} discovered",color=Color(0xFFB7F36B),style=MaterialTheme.typography.labelSmall,fontWeight=FontWeight.Bold)
+                }
+                Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.spacedBy(8.dp)) {
+                    Box(Modifier.weight(1f)) { Metric("History available",withHistory.toString(),"Has team history") }
+                    Box(Modifier.weight(1f)) { Metric("Needs more data",withoutHistory.toString(),"Still visible in fixtures") }
+                }
+                Text("Fixture discovery is separate from prediction eligibility. Matches with limited history remain visible; unsupported markets are not guessed.",color=Color(0xFF91A2B3),style=MaterialTheme.typography.bodySmall,lineHeight=17.sp)
+            }
         }
         Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween,verticalAlignment=Alignment.CenterVertically) {
             Heading("Next on the pitch","Select a fixture to open its match centre")
@@ -904,25 +973,58 @@ private fun FixtureDetailsScreen(
         if(fixture==null) Notice("No fixture selected","Return to the fixtures list and select a match.")
         else {
             val picks=recommendations.filter { it.optString("fixture_id")==fixture.optString("id") }
+            val bestPick=picks.maxByOrNull { item ->
+                item.optDouble("rank_score",
+                    .55 * item.optDouble("estimated_probability") +
+                    .30 * item.optDouble("data_quality") +
+                    .15 * (((item.optDouble("expected_value",-0.10)+.10)/.30).coerceIn(0.0,1.0)))
+            }
             PremiumMatchHeader(fixture)
-            PreMatchStats(fixture.optJSONObject("pre_match_stats"))
-            Heading("Model selections","${picks.size} published selections for this match")
-            if(picks.isEmpty()) Notice("No qualifying selections published","This fixture did not meet the scanner's data and probability filters. That does not mean the match has no betting markets.")
-            picks.forEach { pick ->
-                Card(Modifier.fillMaxWidth().clickable { onSelect(pick) },shape=RoundedCornerShape(18.dp),
-                    colors=CardDefaults.cardColors(containerColor=Color(0xFF111E2C)),
-                    border=androidx.compose.foundation.BorderStroke(1.dp,Color(0xFF2D4356))) {
-                    Row(Modifier.fillMaxWidth().padding(15.dp),verticalAlignment=Alignment.CenterVertically) {
-                        Column(Modifier.weight(1f),verticalArrangement=Arrangement.spacedBy(7.dp)) {
-                            Text(marketTitle(pick),fontWeight=FontWeight.Bold,color=Color(0xFFF2F5F0))
-                            Text("MODEL ESTIMATE  ${(pick.optDouble("estimated_probability")*100).toInt()}%  ·  ${if(pick.isNull("odds")) "ODDS UNAVAILABLE" else "ODDS "+String.format("%.2f",pick.optDouble("odds"))}",
-                                style=MaterialTheme.typography.labelSmall,color=Color(0xFFB7F36B))
-                        }
-                        Text("VIEW  ›",style=MaterialTheme.typography.labelSmall,color=Color(0xFFB7F36B),fontWeight=FontWeight.Bold)
+            val kickoff=fixture.optString("kickoff")
+            val venue=fixture.optString("venue")
+            val referee=fixture.optString("referee")
+            val details=listOfNotNull(
+                venue.takeIf { it.isNotBlank() && it!="null" }?.let { "VENUE  ·  $it" },
+                referee.takeIf { it.isNotBlank() && it!="null" }?.let { "REFEREE  ·  $it" },
+                fixture.optString("round").takeIf { it.isNotBlank() && it!="null" }?.let { "ROUND  ·  $it" }
+            )
+            if(details.isNotEmpty()) {
+                Card(shape=RoundedCornerShape(17.dp),colors=CardDefaults.cardColors(containerColor=Color(0xFF111D2B)),border=androidx.compose.foundation.BorderStroke(1.dp,Color(0xFF26384A))) {
+                    Column(Modifier.fillMaxWidth().padding(13.dp),verticalArrangement=Arrangement.spacedBy(6.dp)) {
+                        details.forEach { Text(it,color=Color(0xFFB9C8D3),style=MaterialTheme.typography.labelSmall,fontWeight=FontWeight.Bold) }
                     }
                 }
             }
-            Notice("About the data","Only markets with sufficient historical information appear here. A missing estimate is not treated as zero, and bookmaker odds do not determine the model probability.")
+            if(bestPick!=null) {
+                Heading("Top market for this match","One strongest qualifying selection · ranked using probability, data quality and available price value")
+                Card(Modifier.fillMaxWidth().clickable { onSelect(bestPick) },shape=RoundedCornerShape(20.dp),colors=CardDefaults.cardColors(containerColor=Color(0xFF142B35)),border=androidx.compose.foundation.BorderStroke(1.dp,Color(0xFF47746D))) {
+                    Column(Modifier.fillMaxWidth().padding(16.dp),verticalArrangement=Arrangement.spacedBy(10.dp)) {
+                        Text("SINGLE MATCH RECOMMENDATION",color=Color(0xFF73D9C7),style=MaterialTheme.typography.labelSmall,fontWeight=FontWeight.ExtraBold,letterSpacing=.8.sp)
+                        Text(marketTitle(bestPick),color=Color.White,style=MaterialTheme.typography.titleLarge,fontWeight=FontWeight.ExtraBold)
+                        Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween) {
+                            Column { Text("MODEL PROBABILITY",color=Color(0xFF9BB0BD),style=MaterialTheme.typography.labelSmall); Text("${(bestPick.optDouble("estimated_probability")*100).toInt()}%",color=Color(0xFFB7F36B),style=MaterialTheme.typography.headlineMedium,fontWeight=FontWeight.ExtraBold) }
+                            Column(horizontalAlignment=Alignment.End) { Text("SPORTYBET ODDS",color=Color(0xFF9BB0BD),style=MaterialTheme.typography.labelSmall); Text(String.format("%.2f",bestPick.optDouble("odds")),color=Color.White,style=MaterialTheme.typography.headlineMedium,fontWeight=FontWeight.ExtraBold) }
+                        }
+                        Text("Expected value: ${if(bestPick.isNull("expected_value")) "Unavailable" else String.format("%+.1f%%",bestPick.optDouble("expected_value")*100)}  ·  Data quality: ${(bestPick.optDouble("data_quality")*100).toInt()}%",color=Color(0xFFB9C8D3),style=MaterialTheme.typography.bodySmall)
+                        Text("VIEW MARKET DETAILS  ›",color=Color(0xFFB7F36B),fontWeight=FontWeight.Bold,style=MaterialTheme.typography.labelSmall)
+                    }
+                }
+                val sample=bestPick.optJSONObject("sample")
+                if(sample!=null) {
+                    Heading("Model evidence","Historical sample used before kick-off")
+                    Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.spacedBy(8.dp)) {
+                        Box(Modifier.weight(1f)) { Metric("Home at home",sample.optInt("home_home_matches").toString(),"Prior matches") }
+                        Box(Modifier.weight(1f)) { Metric("Away away",sample.optInt("away_away_matches").toString(),"Prior matches") }
+                    }
+                    Text("Expected goals: home ${String.format("%.2f",bestPick.optDouble("home_lambda"))}  ·  away ${String.format("%.2f",bestPick.optDouble("away_lambda"))}",color=Color(0xFFB7C6D0),style=MaterialTheme.typography.bodySmall)
+                    Text("History cutoff: ${bestPick.optString("history_cutoff","Not supplied")}  ·  Model: ${bestPick.optString("model_version","Not supplied")}",color=Color(0xFF8296A5),style=MaterialTheme.typography.labelSmall)
+                }
+            } else {
+                Heading("Prediction status","No single market passed the current evidence and price requirements")
+                Notice("No qualifying selection published","This fixture remains available for analysis. The scanner will not invent a probability or force a market when the historical sample, model threshold or exact SportyBet price is missing.")
+            }
+            PreMatchStats(fixture.optJSONObject("pre_match_stats"))
+            Notice("How to read this match","Historical form, head-to-head and team statistics describe previous matches only. The model estimate is an uncalibrated baseline, not a guarantee. Missing fields are shown as unavailable rather than guessed.")
         }
     }
 }
