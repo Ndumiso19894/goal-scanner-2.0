@@ -77,7 +77,7 @@ private fun oddsMovementTitle(item:JSONObject):String {
         "home_corners","home_cards","home_team_goals" -> "Home team"
         "away_corners","away_cards","away_team_goals" -> "Away team"
         "match_corners" -> "Total match corners"
-        "match_cards" -> "Total match bookings"
+        "match_cards" -> "Total match bookings (yellow + red)"
         "match_total_goals" -> "Total goals"
         "1X2" -> "1X2"
         "btts" -> "Both teams to score"
