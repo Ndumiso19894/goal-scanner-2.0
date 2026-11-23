@@ -60,12 +60,12 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add docs/data/latest.json docs/data/fixtures.json docs/data/results.json docs/data/odds-movements.json docs/assets/crests/
+          git add docs/data/latest.json docs/data/fixtures.json docs/data/results.json docs/data/odds-movements.json docs/data/league-tables.json docs/assets/crests/
           if git diff --cached --quiet; then
             echo "Published feeds have not changed."
           else
             mkdir -p "$RUNNER_TEMP/goal-scanner-feeds"
-            cp docs/data/latest.json docs/data/fixtures.json docs/data/results.json docs/data/odds-movements.json "$RUNNER_TEMP/goal-scanner-feeds/"
+            cp docs/data/latest.json docs/data/fixtures.json docs/data/results.json docs/data/odds-movements.json docs/data/league-tables.json "$RUNNER_TEMP/goal-scanner-feeds/"
             mkdir -p "$RUNNER_TEMP/goal-scanner-feeds/assets/crests"
             cp -a docs/assets/crests/. "$RUNNER_TEMP/goal-scanner-feeds/assets/crests/" 2>/dev/null || true
             git fetch origin main
