@@ -25,6 +25,7 @@ import androidx.compose.material.icons.filled.TrendingDown
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.saveable.rememberSaveableStateHolder
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -266,7 +267,7 @@ private fun GoalScannerApp(prefs: android.content.SharedPreferences) {
                                 val teamOk=teamQuery.isBlank() || (item.optString("home")+" "+item.optString("away")).contains(teamQuery,true)
                                 val odds=if(item.isNull("odds")) null else item.optDouble("odds")
                                 val oddsOk=(minOdds==null || (odds!=null && odds>=minOdds)) && (maxOdds==null || (odds!=null && odds<=maxOdds))
-                                dateOk && competitionOk && teamOk && oddsOk && item.optDouble("estimated_probability")>=minimum/100.0 && marketSelectionId(item) in markets
+                                dateOk && competitionOk && teamOk && oddsOk && odds!=null && odds>1.0 && item.optString("odds_status")=="available" && item.optDouble("estimated_probability")>=minimum/100.0 && marketSelectionId(item) in markets
                             }.let { if(scannerView=="Recommended") it.take(10) else it }
                             scanSummary="${response.optString("status","unknown")} · ${response.optInt("fixture_count")} fixtures · ${allRows.size} published selections · updated ${response.optString("updated_at","unknown")}"
                             message=if(recommendations.isEmpty()) "No published selections match these filters. The next scheduled scan will refresh the feed." else "Latest published selections loaded. Select a match to inspect its summary."
@@ -283,7 +284,7 @@ private fun GoalScannerApp(prefs: android.content.SharedPreferences) {
             "Picks" -> FinalPicksScreen(Modifier.padding(padding),recommendations,fixtureRows,
                 onSelect={ candidate -> selectedRecommendation=candidate; navigate("Analysis") })
             "League Tables" -> LeagueTablesScreen(Modifier.padding(padding),leagueRows)
-            "More" -> MoreScreen(Modifier.padding(padding),navigate)
+            "More" -> MoreScreen(Modifier.padding(padding),::navigate)
             "Odds" -> DroppingOddsScreen(Modifier.padding(padding),oddsMovementRows,oddsMovementUpdated) {
                 scope.launch {
                     busy=true
