@@ -17,6 +17,7 @@ import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.QueryStats
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.SportsSoccer
+import androidx.compose.material.icons.filled.TrendingDown
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -89,6 +90,8 @@ private fun GoalScannerApp(prefs: android.content.SharedPreferences) {
     var selectedRecommendation by remember { mutableStateOf<JSONObject?>(null) }
     var resultSummary by remember { mutableStateOf(JSONObject()) }
     var resultRows by remember { mutableStateOf(emptyList<JSONObject>()) }
+    var oddsMovementRows by remember { mutableStateOf(emptyList<JSONObject>()) }
+    var oddsMovementUpdated by rememberSaveable { mutableStateOf("Waiting for first odds snapshots") }
     val scope = rememberCoroutineScope()
 
     LaunchedEffect(apiUrl) {
@@ -107,6 +110,10 @@ private fun GoalScannerApp(prefs: android.content.SharedPreferences) {
                     fixtureArray.optJSONObject(i)?.let { fx -> "${fx.optString("home")} vs ${fx.optString("away")} · ${fx.optString("kickoff")}" }
                 }
                 fixtureSummary = "${fixtureRows.size} fixtures · updated " + fixtureFeed.optString("updated_at", "not run yet")
+                val oddsFeed = apiRequest(apiUrl, "docs/data/odds-movements.json?ts=$stamp")
+                val movementArray = oddsFeed.optJSONArray("movements")
+                oddsMovementRows = if (movementArray == null) emptyList() else (0 until movementArray.length()).mapNotNull { movementArray.optJSONObject(it) }
+                oddsMovementUpdated = "Updated " + oddsFeed.optString("updated_at", "not available")
                 val resultFeed = apiRequest(apiUrl, "docs/data/results.json?ts=$stamp")
                 resultSummary = resultFeed.optJSONObject("summary") ?: JSONObject()
                 val recent = resultFeed.optJSONArray("recent")
@@ -133,7 +140,7 @@ private fun GoalScannerApp(prefs: android.content.SharedPreferences) {
             if (!settings) NavigationBar {
                 listOf(NavItem("Home",Icons.Default.Home),NavItem("Fixtures",Icons.Default.CalendarMonth),
                     NavItem("Scanner",Icons.Default.SportsSoccer),NavItem("Analysis",Icons.Default.Analytics),
-                    NavItem("Results",Icons.Default.QueryStats)).forEach { item ->
+                    NavItem("Results",Icons.Default.QueryStats),NavItem("Odds Drop",Icons.Default.TrendingDown)).forEach { item ->
                     NavigationBarItem(selected=tab==item.label,onClick={tab=item.label},
                         icon={Icon(item.icon,item.label)},label={Text(item.label,fontSize=10.sp)})
                 }
@@ -221,6 +228,18 @@ private fun GoalScannerApp(prefs: android.content.SharedPreferences) {
                 },
                 onSelect={candidate -> selectedRecommendation=candidate; tab="Analysis"})
             "Analysis" -> AnalysisScreen(Modifier.padding(padding),selectedRecommendation)
+            "Odds Drop" -> DroppingOddsScreen(Modifier.padding(padding),oddsMovementRows,oddsMovementUpdated) {
+                scope.launch {
+                    busy=true
+                    try {
+                        val feed=apiRequest(apiUrl,"docs/data/odds-movements.json?ts=" + System.currentTimeMillis())
+                        val array=feed.optJSONArray("movements")
+                        oddsMovementRows=if(array==null) emptyList() else (0 until array.length()).mapNotNull { array.optJSONObject(it) }
+                        oddsMovementUpdated="Updated "+feed.optString("updated_at","not available")
+                    } catch(e:Exception) { message=e.message ?: "Could not refresh odds movement data." }
+                    finally { busy=false }
+                }
+            }
             else -> ResultsScreen(Modifier.padding(padding),resultSummary,resultRows,busy) {
                 scope.launch {
                     busy=true
