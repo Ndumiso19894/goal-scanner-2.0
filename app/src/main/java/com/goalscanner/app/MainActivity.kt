@@ -809,6 +809,51 @@ private fun marketTitle(item:JSONObject):String {
     }
 }
 @Composable
+private fun PremiumMatchHeader(fixture: JSONObject) {
+    val home=fixture.optString("home"); val away=fixture.optString("away")
+    Card(shape=RoundedCornerShape(28.dp),colors=CardDefaults.cardColors(containerColor=Color.Transparent),
+        border=androidx.compose.foundation.BorderStroke(1.dp,Color(0xFF36516A))) {
+        Box(Modifier.fillMaxWidth().background(Brush.linearGradient(listOf(Color(0xFF193D48),Color(0xFF172A3D),Color(0xFF142033))),RoundedCornerShape(28.dp)).padding(18.dp)) {
+            Canvas(Modifier.size(175.dp).align(Alignment.Center)) {
+                val c=Color.White.copy(alpha=.055f)
+                drawCircle(c,radius=size.minDimension*.46f,style=androidx.compose.ui.graphics.drawscope.Stroke(width=2.dp.toPx()))
+                drawCircle(c,radius=size.minDimension*.24f,style=androidx.compose.ui.graphics.drawscope.Stroke(width=2.dp.toPx()))
+                drawLine(c,Offset(size.width*.5f,0f),Offset(size.width*.5f,size.height),2.dp.toPx())
+            }
+            Column(Modifier.fillMaxWidth(),verticalArrangement=Arrangement.spacedBy(17.dp)) {
+                Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween,verticalAlignment=Alignment.CenterVertically) {
+                    Column(Modifier.weight(1f),verticalArrangement=Arrangement.spacedBy(3.dp)) {
+                        Text(fixture.optString("competition","Football").uppercase(),color=Color(0xFFB7F36B),fontWeight=FontWeight.ExtraBold,style=MaterialTheme.typography.labelSmall,letterSpacing=1.sp)
+                        Text(fixture.optString("country"),color=Color(0xFF91A2B3),style=MaterialTheme.typography.labelSmall)
+                    }
+                    StatusPill(fixture.optString("status","NS").uppercase())
+                }
+                Row(Modifier.fillMaxWidth(),verticalAlignment=Alignment.CenterVertically) {
+                    Column(Modifier.weight(1f),horizontalAlignment=Alignment.CenterHorizontally,verticalArrangement=Arrangement.spacedBy(9.dp)) {
+                        TeamCrest(home,fixture.optString("home_crest_url"),76.dp)
+                        Text(home,color=Color.White,style=MaterialTheme.typography.titleMedium,fontWeight=FontWeight.ExtraBold,textAlign=androidx.compose.ui.text.style.TextAlign.Center,maxLines=2)
+                        Text("HOME",color=Color(0xFF91A2B3),style=MaterialTheme.typography.labelSmall,fontWeight=FontWeight.Bold,letterSpacing=1.sp)
+                    }
+                    Column(horizontalAlignment=Alignment.CenterHorizontally,verticalArrangement=Arrangement.spacedBy(5.dp)) {
+                        Text(if(!fixture.isNull("home_score")&&!fixture.isNull("away_score")) "${fixture.optInt("home_score")} : ${fixture.optInt("away_score")}" else "VS",color=Color.White,fontWeight=FontWeight.ExtraBold,style=MaterialTheme.typography.headlineMedium)
+                        Text(if(fixture.optString("status").uppercase() in listOf("FT","AET","PEN","FINISHED")) "FULL TIME" else "KICK-OFF",color=Color(0xFF55D6C2),style=MaterialTheme.typography.labelSmall,fontWeight=FontWeight.Bold,letterSpacing=.8.sp)
+                    }
+                    Column(Modifier.weight(1f),horizontalAlignment=Alignment.CenterHorizontally,verticalArrangement=Arrangement.spacedBy(9.dp)) {
+                        TeamCrest(away,fixture.optString("away_crest_url"),76.dp)
+                        Text(away,color=Color.White,style=MaterialTheme.typography.titleMedium,fontWeight=FontWeight.ExtraBold,textAlign=androidx.compose.ui.text.style.TextAlign.Center,maxLines=2)
+                        Text("AWAY",color=Color(0xFF91A2B3),style=MaterialTheme.typography.labelSmall,fontWeight=FontWeight.Bold,letterSpacing=1.sp)
+                    }
+                }
+                HorizontalDivider(color=Color.White.copy(alpha=.12f))
+                Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween,verticalAlignment=Alignment.CenterVertically) {
+                    Text(formatKickoff(fixture.optString("kickoff")),color=Color(0xFFD1DEE9),style=MaterialTheme.typography.labelMedium,fontWeight=FontWeight.SemiBold)
+                    Text("MATCH CENTRE",color=Color(0xFFB7F36B),style=MaterialTheme.typography.labelSmall,fontWeight=FontWeight.ExtraBold,letterSpacing=1.sp)
+                }
+            }
+        }
+    }
+}
+@Composable
 private fun FixtureDetailsScreen(
     modifier:Modifier,fixture:JSONObject?,recommendations:List<JSONObject>,onBack:()->Unit,onSelect:(JSONObject)->Unit
 ) {
@@ -817,37 +862,7 @@ private fun FixtureDetailsScreen(
         if(fixture==null) Notice("No fixture selected","Return to the fixtures list and select a match.")
         else {
             val picks=recommendations.filter { it.optString("fixture_id")==fixture.optString("id") }
-            Card(colors=CardDefaults.cardColors(containerColor=Color(0xFF18252D)),shape=RoundedCornerShape(25.dp),
-                border=androidx.compose.foundation.BorderStroke(1.dp,Color(0xFF30434A))) {
-                Column(Modifier.fillMaxWidth().padding(20.dp),verticalArrangement=Arrangement.spacedBy(12.dp)) {
-                    Text(fixture.optString("competition","Football").uppercase(),color=Color(0xFFB7F36B),
-                        style=MaterialTheme.typography.labelSmall,letterSpacing=1.sp,fontWeight=FontWeight.Bold)
-                    Row(Modifier.fillMaxWidth(),verticalAlignment=Alignment.CenterVertically) {
-                        Column(Modifier.weight(1f),horizontalAlignment=Alignment.CenterHorizontally,verticalArrangement=Arrangement.spacedBy(8.dp)) {
-                            TeamCrest(fixture.optString("home"),fixture.optString("home_crest_url"),70.dp)
-                            Text(fixture.optString("home"),color=Color.White,style=MaterialTheme.typography.titleMedium,fontWeight=FontWeight.ExtraBold,
-                                textAlign=androidx.compose.ui.text.style.TextAlign.Center)
-                            Text("HOME",color=Color(0xFF91A0AC),style=MaterialTheme.typography.labelSmall)
-                        }
-                        Text("VS",color=Color(0xFFB7F36B),fontWeight=FontWeight.ExtraBold)
-                        Column(Modifier.weight(1f),horizontalAlignment=Alignment.CenterHorizontally,verticalArrangement=Arrangement.spacedBy(8.dp)) {
-                            TeamCrest(fixture.optString("away"),fixture.optString("away_crest_url"),70.dp)
-                            Text(fixture.optString("away"),color=Color.White,style=MaterialTheme.typography.titleMedium,fontWeight=FontWeight.ExtraBold,
-                                textAlign=androidx.compose.ui.text.style.TextAlign.Center)
-                            Text("AWAY",color=Color(0xFF91A0AC),style=MaterialTheme.typography.labelSmall)
-                        }
-                    }
-                    if(!fixture.isNull("home_score")&&!fixture.isNull("away_score"))
-                        Text("${fixture.optInt("home_score")}  -  ${fixture.optInt("away_score")}",modifier=Modifier.fillMaxWidth(),
-                            color=Color.White,style=MaterialTheme.typography.displaySmall,fontWeight=FontWeight.ExtraBold,
-                            textAlign=androidx.compose.ui.text.style.TextAlign.Center)
-                    else Text(formatKickoff(fixture.optString("kickoff")),modifier=Modifier.fillMaxWidth(),
-                        color=Color(0xFFD1DEEF),textAlign=androidx.compose.ui.text.style.TextAlign.Center)
-                    Text("${fixture.optString("country")}  ·  ${fixture.optString("status","NS")}",modifier=Modifier.fillMaxWidth(),
-                        color=Color(0xFF9EADB9),style=MaterialTheme.typography.bodySmall,
-                        textAlign=androidx.compose.ui.text.style.TextAlign.Center)
-                }
-            }
+            PremiumMatchHeader(fixture)
             PreMatchStats(fixture.optJSONObject("pre_match_stats"))
             Heading("Model selections","${picks.size} published selections for this match")
             if(picks.isEmpty()) Notice("No qualifying selections published","This fixture did not meet the scanner's data and probability filters. That does not mean the match has no betting markets.")
