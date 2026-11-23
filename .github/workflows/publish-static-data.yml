@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
-      - name: Check out scanner branch
+      - name: Check out main branch
         uses: actions/checkout@v4
         with:
           ref: main
@@ -63,8 +63,12 @@ jobs:
           if git diff --cached --quiet; then
             echo "Published feeds have not changed."
           else
-            git commit -m "chore: refresh Goal Scanner public data"
+            mkdir -p "$RUNNER_TEMP/goal-scanner-feeds"
+            cp docs/data/latest.json docs/data/fixtures.json docs/data/results.json docs/data/odds-movements.json "$RUNNER_TEMP/goal-scanner-feeds/"
             git fetch origin main
-            git rebase origin/feature/android-goal-scanner-pro
+            git reset --hard origin/main
+            cp "$RUNNER_TEMP/goal-scanner-feeds/"*.json docs/data/
+            git add docs/data/latest.json docs/data/fixtures.json docs/data/results.json docs/data/odds-movements.json
+            git commit -m "chore: refresh Goal Scanner public data"
             git push origin HEAD:main
           fi
