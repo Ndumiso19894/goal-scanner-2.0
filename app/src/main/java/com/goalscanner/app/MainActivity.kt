@@ -235,7 +235,7 @@ private fun GoalScannerApp(prefs: android.content.SharedPreferences) {
                 minimum,{minimum=it},markets,{markets=it},{
                     prefs.edit().putFloat("minimum",minimum).putStringSet("markets",markets).apply()
                     message="Scanner preferences saved."
-                },message,apiUrl,season,division,recommendations,scanSummary,busy,
+                },message,apiUrl,season,division,recommendations,fixtureRows,scanSummary,busy,
                 onRun={dateChoice,competitionQuery,teamQuery,minOdds,maxOdds ->
                     scope.launch {
                         busy=true; message=""
@@ -267,7 +267,8 @@ private fun GoalScannerApp(prefs: android.content.SharedPreferences) {
             "Match" -> FixtureDetailsScreen(Modifier.padding(padding),selectedFixture,recommendations,
                 onBack={tab="Fixtures"},onSelect={ candidate -> selectedRecommendation=candidate; tab="Analysis" })
             "Analysis" -> AnalysisScreen(Modifier.padding(padding),selectedRecommendation,
-                recommendations.filter { it.optString("fixture_id")==selectedRecommendation?.optString("fixture_id") })
+                recommendations.filter { it.optString("fixture_id")==selectedRecommendation?.optString("fixture_id") },
+                fixtureRows.firstOrNull { it.optString("id")==selectedRecommendation?.optString("fixture_id") })
             "Odds" -> DroppingOddsScreen(Modifier.padding(padding),oddsMovementRows,oddsMovementUpdated) {
                 scope.launch {
                     busy=true
@@ -762,8 +763,17 @@ private fun ScannerScreen(
                                     style=MaterialTheme.typography.labelSmall,color=Color(0xFFB7F36B),fontWeight=FontWeight.Bold)
                             }
                         }
-                        Text("${item.optString("home")}  vs  ${item.optString("away")}",
-                            style=MaterialTheme.typography.titleMedium,color=Color(0xFFF2F5F0),fontWeight=FontWeight.ExtraBold)
+                        val fixture=fixtures.firstOrNull { it.optString("id")==item.optString("fixture_id") }
+                        Row(Modifier.fillMaxWidth(),verticalAlignment=Alignment.CenterVertically) {
+                            TeamCrest(item.optString("home"),fixture?.optString("home_crest_url").orEmpty(),42.dp)
+                            Text(item.optString("home"),Modifier.weight(1f).padding(horizontal=8.dp),
+                                style=MaterialTheme.typography.titleSmall,color=Color(0xFFF2F5F0),fontWeight=FontWeight.Bold,maxLines=2)
+                            Text("VS",style=MaterialTheme.typography.labelSmall,color=Color(0xFF8294A2))
+                            Text(item.optString("away"),Modifier.weight(1f).padding(horizontal=8.dp),
+                                style=MaterialTheme.typography.titleSmall,color=Color(0xFFF2F5F0),fontWeight=FontWeight.Bold,
+                                textAlign=androidx.compose.ui.text.style.TextAlign.End,maxLines=2)
+                            TeamCrest(item.optString("away"),fixture?.optString("away_crest_url").orEmpty(),42.dp)
+                        }
                         Text(formatKickoff(item.optString("kickoff")),style=MaterialTheme.typography.labelSmall,color=Color(0xFF9EADB9))
                         Surface(color=Color(0xFF1B2931),shape=RoundedCornerShape(12.dp)) {
                             Column(Modifier.fillMaxWidth().padding(11.dp),verticalArrangement=Arrangement.spacedBy(4.dp)) {
