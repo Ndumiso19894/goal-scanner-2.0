@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-23T05:42:54.490497+00:00",
+  "updated_at": "2026-11-23T05:56:51.074246+00:00",
   "season": "2627",
   "status": "ok",
   "recommendation_count": 34,
@@ -212,7 +212,7 @@
         "home_home_matches": 6
       },
       "selection": "over",
-      "prediction_id": "560aee95eec649e6ae457ea63004c57f",
+      "prediction_id": "8aa255dec60442f6b1855f3861688593",
       "status": "PENDING"
     },
     {
@@ -280,7 +280,7 @@
         "home_home_matches": 5
       },
       "selection": "over",
-      "prediction_id": "b4d8feba693a4389acfaba55d7bac001",
+      "prediction_id": "c12c98277f32414bac11d9d6b80b62ed",
       "status": "PENDING"
     },
     {
@@ -334,8 +334,8 @@
             "under": 1.68
           },
           "3.5": {
-            "over": 3.6,
-            "under": 1.26
+            "over": 3.75,
+            "under": 1.25
           },
           "4.5": {
             "over": 6.5,
@@ -397,8 +397,8 @@
         },
         "home_cards": {
           "0.5": {
-            "over": 1.12,
-            "under": 5.75
+            "over": 1.13,
+            "under": 5.5
           },
           "1.5": {
             "over": 1.65,
@@ -585,7 +585,7 @@
         "home_home_matches": 5
       },
       "selection": "over",
-      "prediction_id": "2bf23338bd2e4362874fc8904a58b924",
+      "prediction_id": "3ad9d89763eb47c798203e4749a2df80",
       "status": "PENDING"
     },
     {
@@ -794,7 +794,7 @@
         "home_home_matches": 6
       },
       "selection": "home",
-      "prediction_id": "4f0b0bad6d314f49bfe0ff4c2d472428",
+      "prediction_id": "1e7eca7c2793482caa8b4277b45db0e9",
       "status": "PENDING"
     },
     {
@@ -862,7 +862,7 @@
         "home_home_matches": 5
       },
       "selection": "home",
-      "prediction_id": "3403832c9f5545d7bbdf824afa897d4b",
+      "prediction_id": "fc17a0475ae34bf2afee4452285e2228",
       "status": "PENDING"
     },
     {
@@ -1113,7 +1113,7 @@
         "home_home_matches": 8
       },
       "selection": "home",
-      "prediction_id": "6e63a6cafb484c17971405967f72bfba",
+      "prediction_id": "4c347ec6f60b4aabaf22507a2d357b17",
       "status": "PENDING"
     },
     {
@@ -1167,8 +1167,8 @@
             "under": 1.68
           },
           "3.5": {
-            "over": 3.6,
-            "under": 1.26
+            "over": 3.75,
+            "under": 1.25
           },
           "4.5": {
             "over": 6.5,
@@ -1230,8 +1230,8 @@
         },
         "home_cards": {
           "0.5": {
-            "over": 1.12,
-            "under": 5.75
+            "over": 1.13,
+            "under": 5.5
           },
           "1.5": {
             "over": 1.65,
@@ -1418,7 +1418,7 @@
         "home_home_matches": 5
       },
       "selection": "yes",
-      "prediction_id": "a3e8ebd9d8154e9c8997ae44437f976e",
+      "prediction_id": "8750953b3e594361af4f5dd8d7d7e92a",
       "status": "PENDING"
     },
     {
@@ -1669,7 +1669,7 @@
         "home_home_matches": 8
       },
       "selection": "home",
-      "prediction_id": "b47af1cf8e714ceba4486768a4ed6497",
+      "prediction_id": "e53f6c8dfca642c7ab352004115e6994",
       "status": "PENDING"
     },
     {
@@ -1778,7 +1778,7 @@
         "home_home_matches": 4
       },
       "selection": "over",
-      "prediction_id": "022138ac9c034fdda112e787d728aede",
+      "prediction_id": "bc8866da1c6546329736f215094d7ed2",
       "status": "PENDING"
     },
     {
@@ -1846,7 +1846,7 @@
         "home_home_matches": 5
       },
       "selection": "over",
-      "prediction_id": "813804ded2c6466f90389bf9e2273e1b",
+      "prediction_id": "c574bb7a43f04443a5cf2b630afa54d1",
       "status": "PENDING"
     },
     {
@@ -1955,7 +1955,7 @@
         "home_home_matches": 4
       },
       "selection": "home",
-      "prediction_id": "b38f9308dd7045cca06c53bc3aa01298",
+      "prediction_id": "109e1e06d97542359ad840f2f37c8da1",
       "status": "PENDING"
     },
     {
@@ -2064,7 +2064,7 @@
         "home_home_matches": 4
       },
       "selection": "over",
-      "prediction_id": "9382b7f1e7254d70b16cda547c9d63e6",
+      "prediction_id": "02c88ebdab9c42f798f311f6d8a0b616",
       "status": "PENDING"
     },
     {
@@ -2273,7 +2273,7 @@
         "home_home_matches": 6
       },
       "selection": "away",
-      "prediction_id": "457744a04e5746f5a812b78b96747d1a",
+      "prediction_id": "960fea3862844d02b2992b867d069afc",
       "status": "PENDING"
     },
     {
@@ -2578,7 +2578,7 @@
         "home_home_matches": 5
       },
       "selection": "home",
-      "prediction_id": "4ef245a1e9cc44ebbab19375db688bb1",
+      "prediction_id": "9efcd441c3de4d0e80bed92f7337d052",
       "status": "PENDING"
     },
     {
@@ -2646,7 +2646,7 @@
         "home_home_matches": 5
       },
       "selection": "yes",
-      "prediction_id": "44b30446694742cc907ac4e518dc6601",
+      "prediction_id": "989f47e9d26f4db4919171d8f8f2c344",
       "status": "PENDING"
     },
     {
@@ -2897,7 +2897,7 @@
         "home_home_matches": 8
       },
       "selection": "over",
-      "prediction_id": "3f0b24218b6d4637b0cead39650a3cbb",
+      "prediction_id": "630adee82347480aa37299bece2ab7a1",
       "status": "PENDING"
     },
     {
@@ -2965,7 +2965,7 @@
         "home_home_matches": 6
       },
       "selection": "home",
-      "prediction_id": "ec491976ae7c4c048ca5e58069969168",
+      "prediction_id": "1e6fedd7e30d4f828d0628ae96f125ad",
       "status": "PENDING"
     },
     {
@@ -3270,7 +3270,7 @@
         "home_home_matches": 5
       },
       "selection": "over",
-      "prediction_id": "a2f88fcc4bcf432e84be423986f267a4",
+      "prediction_id": "10b1e054b9404353950f25d058e9fc84",
       "status": "PENDING"
     },
     {
@@ -3338,7 +3338,7 @@
         "home_home_matches": 6
       },
       "selection": "over",
-      "prediction_id": "27d0d67b87c44ea3bc0bf487dd39df37",
+      "prediction_id": "2c60c619b164498e990bb54ac3c5194c",
       "status": "PENDING"
     },
     {
@@ -3547,7 +3547,7 @@
         "home_home_matches": 6
       },
       "selection": "away",
-      "prediction_id": "0262a82bdc004723ad5cd097cf4a4e7f",
+      "prediction_id": "70684261c3144693b91f8b0940ab3a63",
       "status": "PENDING"
     },
     {
@@ -3615,7 +3615,7 @@
         "home_home_matches": 6
       },
       "selection": "over",
-      "prediction_id": "c43efa03f20b4b13b9c6f13c826eeee3",
+      "prediction_id": "4503b8bcf80b4a31bacd73b0c9d2c068",
       "status": "PENDING"
     },
     {
@@ -3866,7 +3866,7 @@
         "home_home_matches": 7
       },
       "selection": "away",
-      "prediction_id": "21b78df137a340888103d9e79f37ccf2",
+      "prediction_id": "58ea5e35f462491aba6842b869b1aa38",
       "status": "PENDING"
     },
     {
@@ -3920,8 +3920,8 @@
             "under": 1.68
           },
           "3.5": {
-            "over": 3.6,
-            "under": 1.26
+            "over": 3.75,
+            "under": 1.25
           },
           "4.5": {
             "over": 6.5,
@@ -3983,8 +3983,8 @@
         },
         "home_cards": {
           "0.5": {
-            "over": 1.12,
-            "under": 5.75
+            "over": 1.13,
+            "under": 5.5
           },
           "1.5": {
             "over": 1.65,
@@ -4171,7 +4171,7 @@
         "home_home_matches": 5
       },
       "selection": "away",
-      "prediction_id": "9b94bc46acfd40e99a68f968248442d8",
+      "prediction_id": "e448f316fcb246e9b1b2231e660a569f",
       "status": "PENDING"
     },
     {
@@ -4280,7 +4280,7 @@
         "home_home_matches": 4
       },
       "selection": "home",
-      "prediction_id": "342b595902394548b443d6fd80a67a47",
+      "prediction_id": "63804a5fb69249ecb019ef328c62262c",
       "status": "PENDING"
     },
     {
@@ -4348,7 +4348,7 @@
         "home_home_matches": 5
       },
       "selection": "home",
-      "prediction_id": "e48010b3e2fe4c23aeb3ce151c0c5504",
+      "prediction_id": "3d0c9be0ed66403782e5d02110473785",
       "status": "PENDING"
     },
     {
@@ -4416,7 +4416,7 @@
         "home_home_matches": 5
       },
       "selection": "over",
-      "prediction_id": "3dca193ef70841fdb439c041b57d0d59",
+      "prediction_id": "2696d83c7a1f4974bde3e3e02a1123b3",
       "status": "PENDING"
     },
     {
@@ -4484,7 +4484,7 @@
         "home_home_matches": 5
       },
       "selection": "home",
-      "prediction_id": "bb85f4be3e9d4fd3910e2f7156b8c359",
+      "prediction_id": "1303d8db990b4fde8a3a41d1278ae31d",
       "status": "PENDING"
     },
     {
@@ -4552,7 +4552,7 @@
         "home_home_matches": 5
       },
       "selection": "away",
-      "prediction_id": "e65d9315acf2470490f2a2fbe8194b0f",
+      "prediction_id": "a5a952c8f3f34d099e6530661cdff9e8",
       "status": "PENDING"
     },
     {
@@ -4620,7 +4620,7 @@
         "home_home_matches": 5
       },
       "selection": "away",
-      "prediction_id": "95ffe8603ab14d18907446e80f43b94d",
+      "prediction_id": "a4bae1a5c5cb406da21f30e2a07698c9",
       "status": "PENDING"
     },
     {
@@ -4688,7 +4688,7 @@
         "home_home_matches": 6
       },
       "selection": "away",
-      "prediction_id": "cb055deb71dc46bc8690ec946e61f9ad",
+      "prediction_id": "7d5958a8a6e4464ebce7c728e7a3124b",
       "status": "PENDING"
     },
     {
@@ -4756,7 +4756,7 @@
         "home_home_matches": 5
       },
       "selection": "away",
-      "prediction_id": "1bee8c74470542a9900f4a16fb3e6bfe",
+      "prediction_id": "b2feefb1dd0d402b9f15664f0927dcfc",
       "status": "PENDING"
     },
     {
@@ -4865,7 +4865,7 @@
         "home_home_matches": 4
       },
       "selection": "yes",
-      "prediction_id": "e1c98c200dfc401d99080beb022fa3b6",
+      "prediction_id": "0c052fc84ab84509ac05d5c9c2b3542c",
       "status": "PENDING"
     },
     {
@@ -5170,7 +5170,7 @@
         "home_home_matches": 5
       },
       "selection": "over",
-      "prediction_id": "a9fc64af01c04f588cd797e1d2219bf2",
+      "prediction_id": "67ed1470b92c41bfa9da108ecf227582",
       "status": "PENDING"
     },
     {
@@ -5224,8 +5224,8 @@
             "under": 1.68
           },
           "3.5": {
-            "over": 3.6,
-            "under": 1.26
+            "over": 3.75,
+            "under": 1.25
           },
           "4.5": {
             "over": 6.5,
@@ -5287,8 +5287,8 @@
         },
         "home_cards": {
           "0.5": {
-            "over": 1.12,
-            "under": 5.75
+            "over": 1.13,
+            "under": 5.5
           },
           "1.5": {
             "over": 1.65,
@@ -5475,7 +5475,7 @@
         "home_home_matches": 5
       },
       "selection": "over",
-      "prediction_id": "e202632351b9439cb4873c787260153e",
+      "prediction_id": "6f34f99e93024f008dbd723ea270b074",
       "status": "PENDING"
     }
   ],
