@@ -187,7 +187,7 @@ private fun GoalScannerApp(prefs: android.content.SharedPreferences) {
                 containerColor=Color(0xFF111A23),contentColor=Color(0xFFF2F5F0),tonalElevation=0.dp
             ) {
                 listOf(NavItem("Home",Icons.Default.Home),NavItem("Fixtures",Icons.Default.CalendarMonth),
-                    NavItem("Picks",Icons.Default.Star),NavItem("Scanner",Icons.Default.SportsSoccer),
+                    NavItem("Picks",Icons.Default.QueryStats),NavItem("Scanner",Icons.Default.SportsSoccer),
                     NavItem("More",Icons.Default.Analytics)).forEach { item ->
                     NavigationBarItem(
                         selected=tab==item.label,onClick={backStack=listOf(item.label)},
