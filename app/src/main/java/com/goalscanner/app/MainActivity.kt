@@ -140,7 +140,7 @@ private fun GoalScannerApp(prefs: android.content.SharedPreferences) {
             if (!settings) NavigationBar {
                 listOf(NavItem("Home",Icons.Default.Home),NavItem("Fixtures",Icons.Default.CalendarMonth),
                     NavItem("Scanner",Icons.Default.SportsSoccer),NavItem("Analysis",Icons.Default.Analytics),
-                    NavItem("Results",Icons.Default.QueryStats),NavItem("Odds Drop",Icons.Default.TrendingDown)).forEach { item ->
+                    NavItem("Results",Icons.Default.QueryStats),NavItem("Odds",Icons.Default.TrendingDown)).forEach { item ->
                     NavigationBarItem(selected=tab==item.label,onClick={tab=item.label},
                         icon={Icon(item.icon,item.label)},label={Text(item.label,fontSize=10.sp)})
                 }
@@ -228,7 +228,7 @@ private fun GoalScannerApp(prefs: android.content.SharedPreferences) {
                 },
                 onSelect={candidate -> selectedRecommendation=candidate; tab="Analysis"})
             "Analysis" -> AnalysisScreen(Modifier.padding(padding),selectedRecommendation)
-            "Odds Drop" -> DroppingOddsScreen(Modifier.padding(padding),oddsMovementRows,oddsMovementUpdated) {
+            "Odds" -> DroppingOddsScreen(Modifier.padding(padding),oddsMovementRows,oddsMovementUpdated) {
                 scope.launch {
                     busy=true
                     try {
