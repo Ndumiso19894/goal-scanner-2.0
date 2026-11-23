@@ -27,7 +27,25 @@ LEAGUES = [
     ("P1", "Liga Portugal"),
     ("T1", "Süper Lig"),
     ("G1", "Super League"),
+    ("EC", "National League"),
+    ("D2", "2. Bundesliga"),
+    ("I2", "Serie B"),
+    ("SP2", "LaLiga 2"),
+    ("F2", "Ligue 2"),
+    ("N2", "Eerste Divisie"),
+    ("B2", "Challenger Pro League"),
+    ("P2", "Liga Portugal 2"),
 ]
+COMPETITION_ALIASES = {"League 1": "League One", "League 2": "League Two"}
+COMPETITION_COUNTRIES = {
+    "Premier League": "England", "Championship": "England", "League One": "England",
+    "League Two": "England", "National League": "England", "Premiership": "Scotland",
+    "Bundesliga": "Germany", "2. Bundesliga": "Germany", "Serie A": "Italy", "Serie B": "Italy",
+    "LaLiga": "Spain", "LaLiga 2": "Spain", "Ligue 1": "France", "Ligue 2": "France",
+    "Eredivisie": "Netherlands", "Eerste Divisie": "Netherlands", "Pro League": "Belgium",
+    "Challenger Pro League": "Belgium", "Liga Portugal": "Portugal", "Liga Portugal 2": "Portugal",
+    "Süper Lig": "Turkey", "Super League": "Greece",
+}
 MARKETS = sorted(api.SELECTABLE_MARKETS)
 OUTPUT = Path("docs/data")
 OUTPUT.mkdir(parents=True, exist_ok=True)
@@ -240,6 +258,11 @@ def main() -> None:
                 })
         except ProviderError as exc:
             fixture_errors.append(str(exc))
+    fixture_rows = [
+        item for item in fixture_rows
+        if COMPETITION_COUNTRIES.get(COMPETITION_ALIASES.get(item.get("competition", ""), item.get("competition", "")), "").casefold()
+        == str(item.get("country") or "").casefold()
+    ]
     fixture_rows.sort(key=lambda item: item.get("kickoff") or "")
 
     # Enrich fixtures with team crests and historical pre-match data where a
@@ -258,7 +281,8 @@ def main() -> None:
         fixture["away_crest_url"] = (
             f"https://raw.githubusercontent.com/Ndumiso19894/goal-scanner-2.0/main/docs/assets/crests/{fixture['away_team_id']}.png"
             if fixture.get("away_team_id") else None)
-        history = history_by_competition.get(fixture.get("competition", ""), [])
+        canonical_competition = COMPETITION_ALIASES.get(fixture.get("competition", ""), fixture.get("competition", ""))
+        history = history_by_competition.get(canonical_competition, [])
         fixture["pre_match_stats"] = {
             "home": _team_pre_match_stats(history, fixture.get("home", ""), fixture.get("kickoff", ""), "home"),
             "away": _team_pre_match_stats(history, fixture.get("away", ""), fixture.get("kickoff", ""), "away"),
