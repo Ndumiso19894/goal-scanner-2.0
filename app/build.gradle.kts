@@ -13,8 +13,8 @@ android {
         applicationId = "com.goalscanner.app"
         minSdk = 24
         targetSdk = 35
-        versionCode = 10
-        versionName = "1.6.0"
+        versionCode = 11
+        versionName = "1.6.1"
     }
 
     signingConfigs {
@@ -32,6 +32,9 @@ android {
     buildTypes {
         getByName("release") {
             signingConfig = signingConfigs.getByName("release")
+            // Sign with both schemes for broad Android installer compatibility.
+            isV1SigningEnabled = true
+            isV2SigningEnabled = true
             isMinifyEnabled = false
         }
     }
