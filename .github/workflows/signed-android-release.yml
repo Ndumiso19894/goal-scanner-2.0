@@ -9,8 +9,8 @@ on:
     inputs:
       release_tag:
         description: 'Release version tag'
-        required: true
-        default: 'v1.2.0'
+        required: false
+        default: ''
 
 permissions:
   contents: write
@@ -21,6 +21,14 @@ jobs:
     steps:
       - name: Check out source
         uses: actions/checkout@v4
+
+      - name: Read app version
+        id: app_version
+        shell: bash
+        run: |
+          VERSION=$(sed -n 's/.*versionName = "\([^"]*\)".*/\1/p' app/build.gradle.kts | head -n1)
+          test -n "$VERSION"
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
 
       - name: Set up Java
         uses: actions/setup-java@v4
@@ -76,8 +84,8 @@ jobs:
       - name: Publish release APK
         uses: softprops/action-gh-release@v2
         with:
-          name: Goal Scanner Pro ${{ inputs.release_tag || 'v1.2.0' }}
-          tag_name: ${{ inputs.release_tag || 'v1.2.0' }}
+          name: Goal Scanner Pro ${{ inputs.release_tag || format('v{0}', steps.app_version.outputs.version) }}
+          tag_name: ${{ inputs.release_tag || format('v{0}', steps.app_version.outputs.version) }}
           target_commitish: main
           generate_release_notes: true
           files: app/build/outputs/apk/release/app-release.apk
