@@ -675,7 +675,11 @@ private fun ResultsScreen(
                 Card {
                     Column(Modifier.padding(13.dp),verticalArrangement=Arrangement.spacedBy(4.dp)) {
                         Text("${item.optString("home")} vs ${item.optString("away")}",fontWeight=FontWeight.Bold)
-                        Text("${item.optString("market").replace("_"," ").uppercase()} · ${item.optString("selection").uppercase()}")
+                        val detail=item.optJSONObject("payload") ?: JSONObject().apply {
+                            put("market",item.optString("market"))
+                            put("selection",item.optString("selection"))
+                        }
+                        Text(marketTitle(detail),fontWeight=FontWeight.SemiBold)
                         Text("${(item.optDouble("probability")*100).toInt()}% estimate · ${if(item.isNull("odds")) "odds unavailable" else "odds "+item.optDouble("odds")}")
                         Text("${item.optString("status")} ${if(item.isNull("final_home_goals")) "" else "· score ${item.optInt("final_home_goals")}-${item.optInt("final_away_goals")}"}",
                             color=MaterialTheme.colorScheme.primary,fontWeight=FontWeight.SemiBold)
