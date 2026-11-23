@@ -169,7 +169,7 @@ private fun GoalScannerApp(prefs: android.content.SharedPreferences) {
     }
 
     Scaffold(
-        containerColor=Color(0xFF080D13),
+        containerColor=Color(0xFF070C14),
         topBar = {
             TopAppBar(
                 colors=TopAppBarDefaults.topAppBarColors(
@@ -177,10 +177,12 @@ private fun GoalScannerApp(prefs: android.content.SharedPreferences) {
                     titleContentColor=Color(0xFFF2F5F0),
                     actionIconContentColor=Color(0xFFF2F5F0)
                 ),
-                title = { Column(verticalArrangement=Arrangement.spacedBy(1.dp)) {
-                    Text("GOAL SCANNER",fontWeight=FontWeight.ExtraBold,fontSize=18.sp,letterSpacing=1.1.sp)
-                    Text("PRO  ·  FOOTBALL INTELLIGENCE",style=MaterialTheme.typography.labelSmall,
-                        color=Color(0xFF9EADB9),letterSpacing=1.05.sp)
+                title = { Row(verticalAlignment=Alignment.CenterVertically,horizontalArrangement=Arrangement.spacedBy(10.dp)) {
+                    Box(Modifier.size(37.dp).background(Brush.linearGradient(listOf(Color(0xFFB7F36B),Color(0xFF55D6C2))),RoundedCornerShape(12.dp)),contentAlignment=Alignment.Center) { Text("GS",color=Color(0xFF0A1720),fontWeight=FontWeight.Black,style=MaterialTheme.typography.titleSmall) }
+                    Column(verticalArrangement=Arrangement.spacedBy(1.dp)) {
+                        Text("GOAL SCANNER",fontWeight=FontWeight.ExtraBold,fontSize=17.sp,letterSpacing=1.05.sp)
+                        Text("PRO  /  MATCH INTELLIGENCE",style=MaterialTheme.typography.labelSmall,color=Color(0xFF91A2B3),letterSpacing=.85.sp)
+                    }
                 } },
                 actions = {
                     IconButton(onClick={settings=!settings}) {
@@ -191,7 +193,7 @@ private fun GoalScannerApp(prefs: android.content.SharedPreferences) {
         },
         bottomBar = {
             if (!settings && tab!="Match") NavigationBar(
-                containerColor=Color(0xFF111A23),contentColor=Color(0xFFF2F5F0),tonalElevation=0.dp
+                containerColor=Color(0xFF0D1723),contentColor=Color(0xFFF4F7FA),tonalElevation=0.dp
             ) {
                 listOf(NavItem("Home",Icons.Default.Home),NavItem("Fixtures",Icons.Default.CalendarMonth),
                     NavItem("Picks",Icons.Default.QueryStats),NavItem("Scanner",Icons.Default.SportsSoccer),
@@ -202,7 +204,7 @@ private fun GoalScannerApp(prefs: android.content.SharedPreferences) {
                         label={Text(item.label,fontSize=10.sp,fontWeight=if(tab==item.label) FontWeight.Bold else FontWeight.Normal)},
                         colors=NavigationBarItemDefaults.colors(
                             selectedIconColor=Color(0xFFB7F36B),selectedTextColor=Color(0xFFB7F36B),
-                            indicatorColor=Color(0xFF293B21),unselectedIconColor=Color(0xFF8493A0),
+                            indicatorColor=Color(0xFF1B3A38),unselectedIconColor=Color(0xFF7F93A5),
                             unselectedTextColor=Color(0xFF8493A0)
                         )
                     )
