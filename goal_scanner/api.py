@@ -40,7 +40,7 @@ STORE = Store(os.getenv("GOAL_SCANNER_DB", "data/goal_scanner.sqlite3"))
 LOCAL_TZ = ZoneInfo("Africa/Johannesburg")
 SELECTABLE_MARKETS = {
     "team_corners_over", "match_corners_over", "match_bookings_over",
-    "team_bookings_over", "match_over_2_5", "match_winner", "btts_yes",
+    "team_bookings_over", "match_over_2_5", "match_winner_home", "match_winner_draw", "match_winner_away", "btts_yes",
 }
 
 
