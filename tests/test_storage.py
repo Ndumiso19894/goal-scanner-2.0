@@ -43,7 +43,7 @@ def test_non_final_scores_do_not_settle_predictions(tmp_path):
     }
     store.save_prediction(candidate)
     assert store.settle_fixture("ls-456", 1, 1, "HT") == 0
-    assert store.results_summary()["pending"] == 1
+    assert store.results_summary()["pending"] == 0
 
 
 def test_dropping_odds_requires_two_snapshots_and_measures_price_fall(tmp_path):
@@ -86,3 +86,19 @@ def test_corner_and_booking_predictions_settle_from_full_time_stats(tmp_path):
     rows = store.list_predictions(limit=10)
     assert all(row["status"]=="WON" for row in rows)
     assert store.results_summary()["settled"] == 4
+
+def test_results_summary_ignores_unpriced_predictions(tmp_path):
+    store = Store(str(tmp_path / "priced-only-summary.sqlite3"))
+    base = {
+        "fixture_id": "priced", "kickoff": "2026-12-01T18:00:00+02:00",
+        "home": "A", "away": "B", "competition": "League",
+        "market": "match_over_2_5", "selection": "over",
+        "estimated_probability": 0.72, "expected_value": None,
+        "rank_score": 0.71, "data_quality": 0.8,
+        "model_version": "venue-poisson-baseline-1", "calibration": "uncalibrated_baseline",
+    }
+    store.save_prediction({**base, "odds": None})
+    store.save_prediction({**base, "fixture_id": "priced-2", "odds": 1.9})
+    summary = store.results_summary()
+    assert summary["predictions"] == 1
+    assert summary["pending"] == 1
