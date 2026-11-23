@@ -13,8 +13,8 @@ android {
         applicationId = "com.goalscanner.app"
         minSdk = 24
         targetSdk = 35
-        versionCode = 5
-        versionName = "1.2.0"
+        versionCode = 6
+        versionName = "1.3.0"
     }
 
     signingConfigs {
@@ -57,5 +57,6 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.7")
     implementation("androidx.core:core-ktx:1.15.0")
     implementation("androidx.work:work-runtime-ktx:2.10.0")
+    implementation("io.coil-kt:coil-compose:2.7.0")
     debugImplementation("androidx.compose.ui:ui-tooling")
 }
