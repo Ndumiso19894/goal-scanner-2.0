@@ -135,14 +135,27 @@ class FootballDataProvider:
     """Football-Data.co.uk historical results and current fixture CSV feeds."""
     BASE = "https://www.football-data.co.uk"
     def __init__(self, timeout: int = TIMEOUT_SECONDS): self.timeout = timeout
+    EXTRA_LEAGUE_CODES = {"ARG","AUT","BRA","CHN","DNK","FIN","IRL","JPN","MEX","NOR","POL","ROU","RUS","SWE","SWZ","USA"}
+
     def fetch_season(self, season: str, division: str) -> list[dict[str, Any]]:
-        if not re.fullmatch(r"\d{4}",str(season)) or not re.fullmatch(r"[A-Z0-9]{2,4}",str(division)):
+        if not re.fullmatch(r"\\d{4}",str(season)) or not re.fullmatch(r"[A-Z0-9]{2,4}",str(division)):
             raise ValueError("Use season code such as 2627 and division code such as E0")
-        raw = _http_bytes(f"{self.BASE}/mmz4281/{season}/{division}.csv", self.timeout)
+        # Sixteen additional countries are published as one all-seasons CSV per
+        # country. Load that archive so teams outside the main European feeds
+        # can still build a historical sample before kick-off.
+        url = (f"{self.BASE}/new/{division}.csv" if division in self.EXTRA_LEAGUE_CODES
+               else f"{self.BASE}/mmz4281/{season}/{division}.csv")
+        raw = _http_bytes(url, self.timeout)
         try: text = raw.decode("utf-8-sig")
         except UnicodeDecodeError: text = raw.decode("cp1252")
-        return [item for row in csv.DictReader(io.StringIO(text))
-                if (item := self._normalise_row(row, season, division))]
+        rows = []
+        for row in csv.DictReader(io.StringIO(text)):
+            row_season = str(row.get("Season") or ("all" if division in self.EXTRA_LEAGUE_CODES else season)).strip()
+            item = self._normalise_row(row, row_season, division)
+            if item:
+                rows.append(item)
+        return rows
+
     @staticmethod
     def _normalise_row(row: dict[str,str], season: str, division: str) -> dict[str,Any] | None:
         raw_date = (row.get("Date") or "").strip()
