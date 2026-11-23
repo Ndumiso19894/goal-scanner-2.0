@@ -499,10 +499,11 @@ private fun AnalysisScreen(modifier:Modifier,candidate:JSONObject?) {
                     HorizontalDivider(Modifier.padding(vertical=8.dp))
                     MarketIds.forEachIndexed { index, market ->
                         val p=when(market) {
-                            "match_winner" -> marketProbabilities.optDouble(when(candidate.optString("selection")) {
-                                "home" -> "home_win"; "draw" -> "draw"; else -> "away_win"
-                            },Double.NaN)
-                            "double_chance" -> Double.NaN
+                            "match_winner_home" -> marketProbabilities.optDouble("home_win",Double.NaN)
+                            "match_winner_draw" -> marketProbabilities.optDouble("draw",Double.NaN)
+                            "match_winner_away" -> marketProbabilities.optDouble("away_win",Double.NaN)
+                            "team_corners_over" -> marketProbabilities.optDouble("team_corners_over_home",Double.NaN)
+                            "team_bookings_over" -> marketProbabilities.optDouble("team_bookings_over_home",Double.NaN)
                             else -> marketProbabilities.optDouble(market,Double.NaN)
                         }
                         val price=when(market) {
@@ -512,7 +513,9 @@ private fun AnalysisScreen(modifier:Modifier,candidate:JSONObject?) {
                             "away_over_1_5" -> odds.optJSONObject("away_team_goals")?.optJSONObject("1.5")?.optDouble("over",Double.NaN) ?: Double.NaN
                             "match_over_1_5" -> odds.optJSONObject("match_total_goals")?.optJSONObject("1.5")?.optDouble("over",Double.NaN) ?: Double.NaN
                             "match_over_2_5" -> odds.optJSONObject("match_total_goals")?.optJSONObject("2.5")?.optDouble("over",Double.NaN) ?: Double.NaN\n                            "team_corners_over" -> odds.optJSONObject(if(candidate.optString("selection")=="away") "away_corners" else "home_corners")?.optJSONObject(candidate.optString("line","4.5"))?.optDouble("over",Double.NaN) ?: Double.NaN\n                            "match_corners_over" -> odds.optJSONObject("match_corners")?.optJSONObject(candidate.optString("line","8.5"))?.optDouble("over",Double.NaN) ?: Double.NaN\n                            "match_bookings_over" -> odds.optJSONObject("match_cards")?.optJSONObject(candidate.optString("line","3.5"))?.optDouble("over",Double.NaN) ?: Double.NaN\n                            "team_bookings_over" -> odds.optJSONObject(if(candidate.optString("selection")=="away") "away_cards" else "home_cards")?.optJSONObject(candidate.optString("line","1.5"))?.optDouble("over",Double.NaN) ?: Double.NaN
-                            "match_winner" -> odds.optJSONObject("1X2")?.optDouble(candidate.optString("selection"),Double.NaN) ?: Double.NaN
+                            "match_winner_home" -> odds.optJSONObject("1X2")?.optDouble("home",Double.NaN) ?: Double.NaN
+                            "match_winner_draw" -> odds.optJSONObject("1X2")?.optDouble("draw",Double.NaN) ?: Double.NaN
+                            "match_winner_away" -> odds.optJSONObject("1X2")?.optDouble("away",Double.NaN) ?: Double.NaN
                             "double_chance" -> odds.optJSONObject("double_chance")?.optDouble(candidate.optString("selection"),Double.NaN) ?: Double.NaN
                             "btts_yes" -> odds.optJSONObject("btts")?.optDouble("yes",Double.NaN) ?: Double.NaN
                             else -> Double.NaN
