@@ -402,18 +402,25 @@ private fun LeagueTablesScreen(modifier: Modifier, leagues: List<JSONObject>) {
             if(table==null || table.length()==0) Notice("Standings not yet available", "No completed results have been published for this league.")
             else {
                 val rows=(0 until table.length()).mapNotNull { table.optJSONObject(it) }.let { list -> if(sort=="Team") list.sortedBy { it.optString("team") } else list.sortedBy { it.optInt("position") } }
+                Row(Modifier.fillMaxWidth().background(Color(0xFF172638),RoundedCornerShape(10.dp)).padding(horizontal=10.dp,vertical=9.dp),verticalAlignment=Alignment.CenterVertically) {
+                    Text("POS",Modifier.width(32.dp),color=Color(0xFF8297A9),style=MaterialTheme.typography.labelSmall,fontWeight=FontWeight.Bold)
+                    Text("CLUB",Modifier.weight(1f),color=Color(0xFF8297A9),style=MaterialTheme.typography.labelSmall,fontWeight=FontWeight.Bold)
+                    Text("P",Modifier.width(28.dp),color=Color(0xFF8297A9),style=MaterialTheme.typography.labelSmall,textAlign=androidx.compose.ui.text.style.TextAlign.Center)
+                    Text("GD",Modifier.width(35.dp),color=Color(0xFF8297A9),style=MaterialTheme.typography.labelSmall,textAlign=androidx.compose.ui.text.style.TextAlign.Center)
+                    Text("PTS",Modifier.width(34.dp),color=Color(0xFFB7F36B),style=MaterialTheme.typography.labelSmall,fontWeight=FontWeight.Bold,textAlign=androidx.compose.ui.text.style.TextAlign.End)
+                }
                 rows.forEach { team ->
                     var expanded by remember(team.optString("team")) { mutableStateOf(false) }
                     Card(Modifier.fillMaxWidth().clickable { expanded=!expanded },colors=CardDefaults.cardColors(containerColor=Color(0xFF121F29)),border=androidx.compose.foundation.BorderStroke(1.dp,Color(0xFF2B3D49))) {
                         Column(Modifier.fillMaxWidth().padding(12.dp),verticalArrangement=Arrangement.spacedBy(7.dp)) {
                             Row(Modifier.fillMaxWidth(),verticalAlignment=Alignment.CenterVertically) {
-                                Text(team.optInt("position").toString(),Modifier.width(25.dp),color=Color(0xFFB7F36B),fontWeight=FontWeight.ExtraBold)
-                                Text(team.optString("team"),Modifier.weight(1f),color=Color.White,fontWeight=FontWeight.Bold,maxLines=1)
+                                Surface(shape=RoundedCornerShape(8.dp),color=if(team.optInt("position")<=4) Color(0xFF1C443B) else Color(0xFF1B2A39)) { Text(team.optInt("position").toString(),Modifier.width(28.dp).padding(vertical=5.dp),color=if(team.optInt("position")<=4) Color(0xFF8BE0B5) else Color(0xFF9FB0BF),fontWeight=FontWeight.ExtraBold,textAlign=androidx.compose.ui.text.style.TextAlign.Center) }
+                                Text(team.optString("team"),Modifier.weight(1f).padding(start=7.dp),color=Color.White,fontWeight=FontWeight.Bold,maxLines=1)
                                 Text(team.optInt("played").toString(),Modifier.width(28.dp),color=Color(0xFF9EADB9),textAlign=androidx.compose.ui.text.style.TextAlign.Center)
                                 Text(team.optInt("gd").toString(),Modifier.width(35.dp),color=Color(0xFF9EADB9),textAlign=androidx.compose.ui.text.style.TextAlign.Center)
                                 Text(team.optInt("points").toString(),Modifier.width(34.dp),color=Color(0xFFB7F36B),fontWeight=FontWeight.ExtraBold,textAlign=androidx.compose.ui.text.style.TextAlign.End)
                             }
-                            Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween) { Text("Pld",color=Color(0xFF718391),style=MaterialTheme.typography.labelSmall); Text("GD",color=Color(0xFF718391),style=MaterialTheme.typography.labelSmall); Text("Pts",color=Color(0xFF718391),style=MaterialTheme.typography.labelSmall); Text("FORM  ${team.optString("form")}",color=Color(0xFFB7F36B),style=MaterialTheme.typography.labelSmall,fontWeight=FontWeight.Bold) }
+                            Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween,verticalAlignment=Alignment.CenterVertically) { Text("FORM",color=Color(0xFF71899B),style=MaterialTheme.typography.labelSmall,fontWeight=FontWeight.Bold); FormStrip(team.optString("form")); Text("HOME / AWAY  ${if(expanded) "−" else "+"}",color=Color(0xFF55D6C2),style=MaterialTheme.typography.labelSmall,fontWeight=FontWeight.Bold) }
                             if(expanded) {
                                 listOf("Home" to team.optJSONObject("home"),"Away" to team.optJSONObject("away")).forEach { (label,split) -> if(split!=null) Text("$label: ${split.optInt("played")} played · ${split.optInt("won")}W ${split.optInt("drawn")}D ${split.optInt("lost")}L · ${split.optInt("gf")}:${split.optInt("ga")} · ${split.optInt("points")} pts",color=Color(0xFF9EADB9),style=MaterialTheme.typography.bodySmall) }
                             }
