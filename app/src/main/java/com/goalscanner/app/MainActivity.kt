@@ -28,6 +28,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.unit.Dp
+import coil.compose.AsyncImage
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
@@ -315,6 +318,111 @@ private suspend fun apiRequest(baseUrl:String,path:String,method:String="GET",bo
             if(response.isBlank()) JSONObject() else JSONObject(response)
         } finally { conn.disconnect() }
     }
+
+@Composable
+private fun TeamCrest(name:String,url:String,size:Dp=54.dp) {
+    val initials=name.trim().split(Regex("\\s+")).filter { it.isNotBlank() }.take(2)
+        .joinToString("") { it.first().uppercase() }.ifBlank { "FC" }
+    Surface(modifier=Modifier.size(size),shape=RoundedCornerShape(18.dp),
+        color=Color(0xFF1B2732),border=androidx.compose.foundation.BorderStroke(1.dp,Color(0xFF344452))) {
+        Box(contentAlignment=Alignment.Center) {
+            Text(initials,color=Color(0xFFB7F36B),fontWeight=FontWeight.ExtraBold,style=MaterialTheme.typography.titleMedium)
+            if(url.isNotBlank()) AsyncImage(model=url,contentDescription="$name crest",
+                modifier=Modifier.fillMaxSize().padding(5.dp),contentScale=ContentScale.Fit)
+        }
+    }
+}
+@Composable
+private fun FormStrip(form:String) {
+    Row(horizontalArrangement=Arrangement.spacedBy(5.dp)) {
+        if(form.isBlank()) Text("No form data",style=MaterialTheme.typography.labelSmall,color=Color(0xFF9EADB9))
+        form.takeLast(5).forEach { result ->
+            val tint=when(result) { 'W' -> Color(0xFF3D8B5C); 'D' -> Color(0xFF657482); else -> Color(0xFFB65353) }
+            Surface(shape=RoundedCornerShape(7.dp),color=tint) {
+                Text(result.toString(),modifier=Modifier.padding(horizontal=8.dp,vertical=5.dp),
+                    color=Color.White,fontWeight=FontWeight.ExtraBold,style=MaterialTheme.typography.labelSmall)
+            }
+        }
+    }
+}
+@Composable
+private fun TeamFormPanel(name:String,stats:JSONObject?,venueLabel:String) {
+    Card(modifier=Modifier.weight(1f),shape=RoundedCornerShape(18.dp),
+        colors=CardDefaults.cardColors(containerColor=Color(0xFF121D27)),
+        border=androidx.compose.foundation.BorderStroke(1.dp,Color(0xFF2B3A46))) {
+        Column(Modifier.fillMaxWidth().padding(12.dp),verticalArrangement=Arrangement.spacedBy(8.dp)) {
+            Text(name,fontWeight=FontWeight.Bold,color=Color(0xFFF2F5F0),maxLines=2,
+                style=MaterialTheme.typography.titleSmall)
+            Text(venueLabel.uppercase(),style=MaterialTheme.typography.labelSmall,color=Color(0xFF8FA0AD))
+            if(stats==null) Text("Historical stats unavailable",style=MaterialTheme.typography.bodySmall,color=Color(0xFF9EADB9))
+            else {
+                FormStrip(stats.optString("form"))
+                Text("\${stats.optInt("wins")}W  \${stats.optInt("draws")}D  \${stats.optInt("losses")}L",
+                    style=MaterialTheme.typography.labelSmall,color=Color(0xFFCDD6DC))
+                Text("\${stats.optInt("played")} matches in sample",style=MaterialTheme.typography.labelSmall,color=Color(0xFF8797A4))
+            }
+        }
+    }
+}
+@Composable
+private fun PreMatchStats(stats:JSONObject?) {
+    Heading("Pre-match intelligence","Historical results before kick-off · venue-specific form")
+    val home=stats?.optJSONObject("home")
+    val away=stats?.optJSONObject("away")
+    if(home==null && away==null) {
+        Notice("Pre-match data unavailable","No matching historical sample is published for this competition. Missing statistics are left blank rather than estimated.")
+        return
+    }
+    Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.spacedBy(9.dp)) {
+        TeamFormPanel("Home team",home,"At home")
+        TeamFormPanel("Away team",away,"Away")
+    }
+    if(home!=null && away!=null) {
+        Heading("Team comparison","Historical averages from the available venue-specific sample")
+        val comparisons=listOf(
+            Triple("Goals scored / match",home.optDouble("goals_for_avg"),away.optDouble("goals_for_avg")),
+            Triple("Goals conceded / match",home.optDouble("goals_against_avg"),away.optDouble("goals_against_avg")),
+            Triple("BTTS rate",home.optDouble("btts_pct"),away.optDouble("btts_pct")),
+            Triple("Over 2.5 rate",home.optDouble("over_2_5_pct"),away.optDouble("over_2_5_pct")),
+            Triple("Clean sheets",home.optDouble("clean_sheet_pct"),away.optDouble("clean_sheet_pct"))
+        )
+        comparisons.forEach { (label,h,a) ->
+            val percent=label.contains("rate") || label=="Clean sheets"
+            val total=(h+a).takeIf { it>0 } ?: 1.0
+            Column(verticalArrangement=Arrangement.spacedBy(5.dp)) {
+                Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween) {
+                    Text(if(percent) "\${h.toInt()}%" else "%.2f".format(h),fontWeight=FontWeight.Bold,color=Color(0xFFF2F5F0))
+                    Text(label,style=MaterialTheme.typography.labelSmall,color=Color(0xFF9EADB9))
+                    Text(if(percent) "\${a.toInt()}%" else "%.2f".format(a),fontWeight=FontWeight.Bold,color=Color(0xFFF2F5F0))
+                }
+                LinearProgressIndicator(progress={(h/total).toFloat().coerceIn(0f,1f)},
+                    modifier=Modifier.fillMaxWidth().height(5.dp),color=Color(0xFFB7F36B),trackColor=Color(0xFF344452))
+            }
+        }
+        val hc=home.optDouble("corners_avg",-1.0); val ac=away.optDouble("corners_avg",-1.0)
+        val hb=home.optDouble("bookings_avg",-1.0); val ab=away.optDouble("bookings_avg",-1.0)
+        Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.spacedBy(8.dp)) {
+            if(hc>=0 && ac>=0) Box(Modifier.weight(1f)) { Metric("Corners / match","%.1f / %.1f".format(hc,ac),"Home / away samples") }
+            if(hb>=0 && ab>=0) Box(Modifier.weight(1f)) { Metric("Bookings / match","%.1f / %.1f".format(hb,ab),"Home / away samples") }
+        }
+    }
+    val h2h=stats?.optJSONObject("head_to_head")
+    if(h2h!=null) {
+        Heading("Head-to-head","Previous meetings before this fixture")
+        Card(shape=RoundedCornerShape(17.dp),colors=CardDefaults.cardColors(containerColor=Color(0xFF121D27)),
+            border=androidx.compose.foundation.BorderStroke(1.dp,Color(0xFF2B3A46))) {
+            Column(Modifier.fillMaxWidth().padding(14.dp),verticalArrangement=Arrangement.spacedBy(5.dp)) {
+                Text("\${h2h.optInt("played")} meetings  ·  \${h2h.optInt("home_wins")} home wins  ·  \${h2h.optInt("draws")} draws  ·  \${h2h.optInt("away_wins")} away wins",
+                    color=Color(0xFFF2F5F0),fontWeight=FontWeight.Bold,style=MaterialTheme.typography.bodySmall)
+                val scores=h2h.optJSONArray("recent_scores")
+                if(scores!=null && scores.length()>0) Text("Recent scores: "+(0 until scores.length()).joinToString("  ·  ") { scores.optString(it) },
+                    color=Color(0xFF9EADB9),style=MaterialTheme.typography.labelSmall)
+            }
+        }
+    }
+    Text("Source: Football-Data.co.uk. Sample counts vary by competition; only completed matches before kick-off are included.",
+        style=MaterialTheme.typography.labelSmall,color=Color(0xFF7F909D))
+}
 
 @Composable
 private fun ScreenColumn(modifier:Modifier=Modifier,content:@Composable ColumnScope.()->Unit) {
