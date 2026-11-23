@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "updated_at": "2026-11-23T06:00:14.826909+00:00",
+  "updated_at": "2026-11-23T06:02:54.368281+00:00",
   "count": 404,
   "fixtures": [
     {
@@ -12880,6 +12880,6 @@
     }
   ],
   "errors": [],
-  "club_crests_downloaded_this_run": 758,
+  "club_crests_downloaded_this_run": 0,
   "pre_match_stats_source": "Football-Data.co.uk; only completed matches before each fixture are included"
 }

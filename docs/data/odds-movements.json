@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-23T06:00:14.826909+00:00",
+  "updated_at": "2026-11-23T06:02:54.368281+00:00",
   "minimum_drop_pct": 3.0,
   "lookback_hours": 24,
-  "count": 15,
+  "count": 18,
   "movements": [
     {
       "fixture_id": "1834796",
@@ -17,8 +17,8 @@
       "current_odds": 10.5,
       "drop_pct": 12.5,
       "first_seen": "2026-11-23T04:43:57.126455+00:00",
-      "last_seen": "2026-11-23T05:58:02.437191+00:00",
-      "samples": 11
+      "last_seen": "2026-11-23T06:01:31.750627+00:00",
+      "samples": 12
     },
     {
       "fixture_id": "1857559",
@@ -29,11 +29,11 @@
       "market": "home_team_goals",
       "selection": "2.5/over",
       "opening_odds": 7.0,
-      "current_odds": 6.5,
-      "drop_pct": 7.14,
+      "current_odds": 6.3,
+      "drop_pct": 10.0,
       "first_seen": "2026-11-23T04:43:19.477336+00:00",
-      "last_seen": "2026-11-23T05:57:21.468523+00:00",
-      "samples": 11
+      "last_seen": "2026-11-23T06:00:46.861062+00:00",
+      "samples": 12
     },
     {
       "fixture_id": "1857559",
@@ -44,26 +44,11 @@
       "market": "home_team_goals",
       "selection": "1.5/over",
       "opening_odds": 3.0,
-      "current_odds": 2.8,
-      "drop_pct": 6.67,
+      "current_odds": 2.75,
+      "drop_pct": 8.33,
       "first_seen": "2026-11-23T04:43:19.477336+00:00",
-      "last_seen": "2026-11-23T05:57:21.468523+00:00",
-      "samples": 11
-    },
-    {
-      "fixture_id": "1857559",
-      "home": "Wadi Degla FC",
-      "away": "Al-Ittihad Alexandria",
-      "kickoff": "2026-11-23T17:00:00+02:00",
-      "competition": "Premier League",
-      "market": "away_team_goals",
-      "selection": "0.5/under",
-      "opening_odds": 2.35,
-      "current_odds": 2.2,
-      "drop_pct": 6.38,
-      "first_seen": "2026-11-23T04:43:19.477336+00:00",
-      "last_seen": "2026-11-23T05:57:21.468523+00:00",
-      "samples": 11
+      "last_seen": "2026-11-23T06:00:46.861062+00:00",
+      "samples": 12
     },
     {
       "fixture_id": "1857559",
@@ -77,8 +62,8 @@
       "current_odds": 2.35,
       "drop_pct": 6.0,
       "first_seen": "2026-11-23T04:43:19.477336+00:00",
-      "last_seen": "2026-11-23T05:57:21.468523+00:00",
-      "samples": 11
+      "last_seen": "2026-11-23T06:00:46.861062+00:00",
+      "samples": 12
     },
     {
       "fixture_id": "1825702",
@@ -92,8 +77,8 @@
       "current_odds": 5.4,
       "drop_pct": 5.26,
       "first_seen": "2026-11-23T04:43:19.477336+00:00",
-      "last_seen": "2026-11-23T05:57:21.468523+00:00",
-      "samples": 11
+      "last_seen": "2026-11-23T06:00:46.861062+00:00",
+      "samples": 12
     },
     {
       "fixture_id": "1825702",
@@ -107,8 +92,8 @@
       "current_odds": 2.0,
       "drop_pct": 4.76,
       "first_seen": "2026-11-23T04:43:19.477336+00:00",
-      "last_seen": "2026-11-23T05:57:21.468523+00:00",
-      "samples": 11
+      "last_seen": "2026-11-23T06:00:46.861062+00:00",
+      "samples": 12
     },
     {
       "fixture_id": "1825702",
@@ -122,8 +107,8 @@
       "current_odds": 10.0,
       "drop_pct": 4.76,
       "first_seen": "2026-11-23T04:43:19.477336+00:00",
-      "last_seen": "2026-11-23T05:57:21.468523+00:00",
-      "samples": 11
+      "last_seen": "2026-11-23T06:00:46.861062+00:00",
+      "samples": 12
     },
     {
       "fixture_id": "1793635",
@@ -137,8 +122,8 @@
       "current_odds": 11.0,
       "drop_pct": 4.35,
       "first_seen": "2026-11-23T04:43:19.477336+00:00",
-      "last_seen": "2026-11-23T05:57:21.468523+00:00",
-      "samples": 11
+      "last_seen": "2026-11-23T06:00:46.861062+00:00",
+      "samples": 12
     },
     {
       "fixture_id": "1810741",
@@ -152,8 +137,8 @@
       "current_odds": 5.5,
       "drop_pct": 4.35,
       "first_seen": "2026-11-23T04:44:15.649139+00:00",
-      "last_seen": "2026-11-23T05:58:20.487547+00:00",
-      "samples": 11
+      "last_seen": "2026-11-23T06:01:45.566161+00:00",
+      "samples": 12
     },
     {
       "fixture_id": "1857559",
@@ -167,8 +152,38 @@
       "current_odds": 11.0,
       "drop_pct": 4.35,
       "first_seen": "2026-11-23T04:43:19.477336+00:00",
-      "last_seen": "2026-11-23T05:57:21.468523+00:00",
-      "samples": 11
+      "last_seen": "2026-11-23T06:00:46.861062+00:00",
+      "samples": 12
+    },
+    {
+      "fixture_id": "1857559",
+      "home": "Wadi Degla FC",
+      "away": "Al-Ittihad Alexandria",
+      "kickoff": "2026-11-23T17:00:00+02:00",
+      "competition": "Premier League",
+      "market": "match_total_goals",
+      "selection": "3.0/over",
+      "opening_odds": 4.6,
+      "current_odds": 4.4,
+      "drop_pct": 4.35,
+      "first_seen": "2026-11-23T04:43:19.477336+00:00",
+      "last_seen": "2026-11-23T06:00:46.861062+00:00",
+      "samples": 12
+    },
+    {
+      "fixture_id": "1857559",
+      "home": "Wadi Degla FC",
+      "away": "Al-Ittihad Alexandria",
+      "kickoff": "2026-11-23T17:00:00+02:00",
+      "competition": "Premier League",
+      "market": "away_team_goals",
+      "selection": "0.5/under",
+      "opening_odds": 2.35,
+      "current_odds": 2.25,
+      "drop_pct": 4.26,
+      "first_seen": "2026-11-23T04:43:19.477336+00:00",
+      "last_seen": "2026-11-23T06:00:46.861062+00:00",
+      "samples": 12
     },
     {
       "fixture_id": "1811151",
@@ -182,8 +197,8 @@
       "current_odds": 6.9,
       "drop_pct": 4.17,
       "first_seen": "2026-11-23T04:44:15.649139+00:00",
-      "last_seen": "2026-11-23T05:58:20.487547+00:00",
-      "samples": 11
+      "last_seen": "2026-11-23T06:01:45.566161+00:00",
+      "samples": 12
     },
     {
       "fixture_id": "1825702",
@@ -197,8 +212,38 @@
       "current_odds": 2.45,
       "drop_pct": 3.92,
       "first_seen": "2026-11-23T04:43:19.477336+00:00",
-      "last_seen": "2026-11-23T05:57:21.468523+00:00",
-      "samples": 11
+      "last_seen": "2026-11-23T06:00:46.861062+00:00",
+      "samples": 12
+    },
+    {
+      "fixture_id": "1857559",
+      "home": "Wadi Degla FC",
+      "away": "Al-Ittihad Alexandria",
+      "kickoff": "2026-11-23T17:00:00+02:00",
+      "competition": "Premier League",
+      "market": "match_total_goals",
+      "selection": "3.5/over",
+      "opening_odds": 5.4,
+      "current_odds": 5.2,
+      "drop_pct": 3.7,
+      "first_seen": "2026-11-23T04:43:19.477336+00:00",
+      "last_seen": "2026-11-23T06:00:46.861062+00:00",
+      "samples": 12
+    },
+    {
+      "fixture_id": "1857559",
+      "home": "Wadi Degla FC",
+      "away": "Al-Ittihad Alexandria",
+      "kickoff": "2026-11-23T17:00:00+02:00",
+      "competition": "Premier League",
+      "market": "home_team_goals",
+      "selection": "0.5/over",
+      "opening_odds": 1.43,
+      "current_odds": 1.38,
+      "drop_pct": 3.5,
+      "first_seen": "2026-11-23T04:43:19.477336+00:00",
+      "last_seen": "2026-11-23T06:00:46.861062+00:00",
+      "samples": 12
     },
     {
       "fixture_id": "1825702",
@@ -212,8 +257,8 @@
       "current_odds": 4.25,
       "drop_pct": 3.41,
       "first_seen": "2026-11-23T04:43:19.477336+00:00",
-      "last_seen": "2026-11-23T05:57:21.468523+00:00",
-      "samples": 11
+      "last_seen": "2026-11-23T06:00:46.861062+00:00",
+      "samples": 12
     },
     {
       "fixture_id": "1811151",
@@ -227,8 +272,8 @@
       "current_odds": 3.0,
       "drop_pct": 3.23,
       "first_seen": "2026-11-23T04:44:15.649139+00:00",
-      "last_seen": "2026-11-23T05:58:20.487547+00:00",
-      "samples": 11
+      "last_seen": "2026-11-23T06:01:45.566161+00:00",
+      "samples": 12
     }
   ],
   "note": "Only price changes observed in at least two snapshots are shown; odds movement is not a prediction."
