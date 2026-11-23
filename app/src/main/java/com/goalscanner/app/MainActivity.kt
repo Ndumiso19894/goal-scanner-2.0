@@ -119,7 +119,7 @@ private fun GoalScannerApp(prefs: android.content.SharedPreferences) {
                 providers = "GitHub feed · " + feed.optInt("recommendation_count") + " selections"
                 scanSummary = "${feed.optString("status", "unknown")} · ${feed.optInt("fixture_count")} fixtures · ${feed.optInt("recommendation_count")} selections"
                 val picks = feed.optJSONArray("recommendations")
-                recommendations = if (picks == null) emptyList() else (0 until picks.length()).mapNotNull { picks.optJSONObject(it) }
+                recommendations = if (picks == null) emptyList() else (0 until picks.length()).mapNotNull { picks.optJSONObject(it) }.filter { marketSelectionId(it) in MarketIds }
                 val fixtureFeed = apiRequest(apiUrl, "docs/data/fixtures.json?ts=$stamp")
                 val fixtureArray = fixtureFeed.optJSONArray("fixtures")
                 fixtureRows = if (fixtureArray == null) emptyList() else (0 until fixtureArray.length()).mapNotNull { fixtureArray.optJSONObject(it) }
