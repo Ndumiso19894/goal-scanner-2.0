@@ -35,6 +35,23 @@ LEAGUES = [
     ("N2", "Eerste Divisie"),
     ("B2", "Challenger Pro League"),
     ("P2", "Liga Portugal 2"),
+    # Football-Data all-seasons CSV archives (16 additional countries).
+    ("ARG", "Primera Division"),
+    ("AUT", "Bundesliga"),
+    ("BRA", "Serie A"),
+    ("CHN", "Super League"),
+    ("DNK", "Superliga"),
+    ("FIN", "Veikkausliiga"),
+    ("IRL", "Premier Division"),
+    ("JPN", "J1 League"),
+    ("MEX", "Liga MX"),
+    ("NOR", "Eliteserien"),
+    ("POL", "Ekstraklasa"),
+    ("ROU", "Liga I"),
+    ("RUS", "Premier League"),
+    ("SWE", "Allsvenskan"),
+    ("SWZ", "Super League"),
+    ("USA", "Major League Soccer"),
 ]
 COMPETITION_ALIASES = {"League 1": "League One", "League 2": "League Two"}
 COMPETITION_COUNTRIES = {
@@ -45,6 +62,11 @@ COMPETITION_COUNTRIES = {
     "Eredivisie": "Netherlands", "Eerste Divisie": "Netherlands", "Pro League": "Belgium",
     "Challenger Pro League": "Belgium", "Liga Portugal": "Portugal", "Liga Portugal 2": "Portugal",
     "Süper Lig": "Turkey", "Super League": "Greece",
+    "Primera Division": "Argentina", "Superliga": "Denmark",
+    "Veikkausliiga": "Finland", "Premier Division": "Ireland",
+    "J1 League": "Japan", "Liga MX": "Mexico", "Eliteserien": "Norway",
+    "Ekstraklasa": "Poland", "Liga I": "Romania", "Allsvenskan": "Sweden",
+    "Major League Soccer": "USA",
 }
 MARKETS = sorted(api.SELECTABLE_MARKETS)
 OUTPUT = Path("docs/data")
