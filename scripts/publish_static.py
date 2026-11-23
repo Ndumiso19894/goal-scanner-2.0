@@ -86,7 +86,7 @@ def _team_pre_match_stats(rows: list[dict], team: str, kickoff: str, venue: str)
         "played": n, "wins": sum(x["result"] == "W" for x in matches),
         "draws": sum(x["result"] == "D" for x in matches),
         "losses": sum(x["result"] == "L" for x in matches),
-        "form": "".join(x["result"] for x in recent),
+        "form": "".join(x["result"] for x in reversed(recent)),
         "goals_for_avg": round(sum(x["gf"] for x in matches) / n, 2),
         "goals_against_avg": round(sum(x["ga"] for x in matches) / n, 2),
         "btts_pct": round(100 * sum(x["gf"] > 0 and x["ga"] > 0 for x in matches) / n),
