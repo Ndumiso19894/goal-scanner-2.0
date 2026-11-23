@@ -131,7 +131,11 @@ def build_fixture_candidates(fixture,historical_rows,odds_event,selected_markets
     if estimate["status"]!="ok": return {"status":"insufficient_data","fixture":fixture,"reason":estimate["reason"]}
     probabilities={k.value:v for k,v in goal_market_probabilities(estimate["home_lambda"],estimate["away_lambda"]).items()}
     prices=(odds_event or {}).get("odds") or {}; candidates=[]
-    for item in market_selections(probabilities,prices,estimate.get("count_expectations")):
+    selections=market_selections(probabilities,prices,estimate.get("count_expectations"))
+    all_market_probabilities=dict(probabilities)
+    for selection_item in selections:
+        all_market_probabilities[f"{selection_item['market']}_{selection_item['selection']}"]=selection_item["estimated_probability"]
+    for item in selections:
         selection_key = f"match_winner_{item['selection']}" if item["market"] == "match_winner" else item["market"]
         if selection_key not in selected_markets and item["market"] not in selected_markets: continue
         if item["estimated_probability"]<min_probability: continue
@@ -144,7 +148,7 @@ def build_fixture_candidates(fixture,historical_rows,odds_event,selected_markets
             "fixture_id":str(fixture.get("id") or fixture.get("source_id") or ""),"kickoff":kickoff,
             "home":home,"away":away,"competition":fixture.get("competition") or "",
             "home_lambda":estimate["home_lambda"],"away_lambda":estimate["away_lambda"],
-            "market_probabilities":probabilities,"market_odds":prices,
+            "market_probabilities":all_market_probabilities,"market_odds":prices,
             "count_expectations":estimate.get("count_expectations",{}),"data_quality":estimate["data_quality"],
             "sample":{"home_home_matches":estimate["home_home_matches"],"away_away_matches":estimate["away_away_matches"],
                       "historical_matches":estimate["historical_matches"]},
