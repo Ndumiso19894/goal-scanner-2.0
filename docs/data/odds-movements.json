@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-23T07:32:41.708196+00:00",
+  "updated_at": "2026-11-23T07:39:08.596978+00:00",
   "minimum_drop_pct": 3.0,
   "lookback_hours": 24,
   "count": 9,
@@ -17,8 +17,8 @@
       "current_odds": 10.5,
       "drop_pct": 12.5,
       "first_seen": "2026-11-23T04:43:57.126455+00:00",
-      "last_seen": "2026-11-23T07:27:48.013417+00:00",
-      "samples": 18
+      "last_seen": "2026-11-23T07:34:29.960325+00:00",
+      "samples": 19
     },
     {
       "fixture_id": "1810741",
@@ -32,8 +32,8 @@
       "current_odds": 10.0,
       "drop_pct": 9.09,
       "first_seen": "2026-11-23T04:44:15.649139+00:00",
-      "last_seen": "2026-11-23T07:28:18.044609+00:00",
-      "samples": 18
+      "last_seen": "2026-11-23T07:34:54.973739+00:00",
+      "samples": 19
     },
     {
       "fixture_id": "1854230",
@@ -47,8 +47,8 @@
       "current_odds": 2.1,
       "drop_pct": 8.7,
       "first_seen": "2026-11-23T04:44:24.984892+00:00",
-      "last_seen": "2026-11-23T07:28:28.043806+00:00",
-      "samples": 18
+      "last_seen": "2026-11-23T07:35:06.401143+00:00",
+      "samples": 19
     },
     {
       "fixture_id": "1857559",
@@ -62,8 +62,8 @@
       "current_odds": 2.35,
       "drop_pct": 6.0,
       "first_seen": "2026-11-23T04:43:19.477336+00:00",
-      "last_seen": "2026-11-23T07:26:26.883315+00:00",
-      "samples": 18
+      "last_seen": "2026-11-23T07:33:19.401404+00:00",
+      "samples": 19
     },
     {
       "fixture_id": "1857559",
@@ -77,8 +77,8 @@
       "current_odds": 2.6,
       "drop_pct": 5.45,
       "first_seen": "2026-11-23T04:43:19.477336+00:00",
-      "last_seen": "2026-11-23T07:26:26.883315+00:00",
-      "samples": 18
+      "last_seen": "2026-11-23T07:33:19.401404+00:00",
+      "samples": 19
     },
     {
       "fixture_id": "1810741",
@@ -92,8 +92,8 @@
       "current_odds": 2.85,
       "drop_pct": 5.0,
       "first_seen": "2026-11-23T04:44:15.649139+00:00",
-      "last_seen": "2026-11-23T07:28:18.044609+00:00",
-      "samples": 18
+      "last_seen": "2026-11-23T07:34:54.973739+00:00",
+      "samples": 19
     },
     {
       "fixture_id": "1825702",
@@ -107,8 +107,8 @@
       "current_odds": 2.0,
       "drop_pct": 4.76,
       "first_seen": "2026-11-23T04:43:19.477336+00:00",
-      "last_seen": "2026-11-23T07:26:26.883315+00:00",
-      "samples": 18
+      "last_seen": "2026-11-23T07:33:19.401404+00:00",
+      "samples": 19
     },
     {
       "fixture_id": "1811151",
@@ -122,8 +122,8 @@
       "current_odds": 1.87,
       "drop_pct": 4.59,
       "first_seen": "2026-11-23T04:44:15.649139+00:00",
-      "last_seen": "2026-11-23T07:30:18.976736+00:00",
-      "samples": 24
+      "last_seen": "2026-11-23T07:36:55.067550+00:00",
+      "samples": 26
     },
     {
       "fixture_id": "1810741",
@@ -137,8 +137,8 @@
       "current_odds": 5.5,
       "drop_pct": 4.35,
       "first_seen": "2026-11-23T04:44:15.649139+00:00",
-      "last_seen": "2026-11-23T07:28:18.044609+00:00",
-      "samples": 18
+      "last_seen": "2026-11-23T07:34:54.973739+00:00",
+      "samples": 19
     }
   ],
   "note": "Only price changes observed in at least two snapshots are shown; odds movement is not a prediction."
