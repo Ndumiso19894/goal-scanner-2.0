@@ -89,6 +89,69 @@ class Store:
                 (snapshot.fixture_id, snapshot.stage.value, snapshot.captured_at.isoformat(),
                  json.dumps(snapshot.payload, sort_keys=True, default=str), snapshot.digest))
 
+    def save_odds_snapshot(self, fixture_id: str, odds: dict[str, Any], captured_at: str | None = None) -> int:
+        """Persist each available decimal price as an immutable time-series sample."""
+        if not fixture_id or not isinstance(odds, dict):
+            return 0
+        timestamp = captured_at or datetime.now(timezone.utc).isoformat()
+        rows = []
+        def walk(value: Any, path: list[str]) -> None:
+            if isinstance(value, dict):
+                for key, child in value.items():
+                    walk(child, path + [str(key)])
+            elif isinstance(value, (int, float)) and not isinstance(value, bool) and value > 1:
+                market = path[0] if path else "unknown"
+                selection = "/".join(path[1:]) or "price"
+                rows.append((str(fixture_id), market, selection, float(value), timestamp))
+        walk(odds, [])
+        if rows:
+            with self.connect() as db:
+                db.executemany(
+                    "INSERT INTO odds(fixture_id,market,selection,decimal_odds,captured_at) VALUES(?,?,?,?,?)",
+                    rows,
+                )
+        return len(rows)
+
+    def list_dropping_odds(self, minimum_drop_pct: float = 3.0, lookback_hours: int = 24,
+                           limit: int = 200) -> list[dict[str, Any]]:
+        """Return genuine price shortenings with at least two observations."""
+        from datetime import timedelta
+        cutoff = (datetime.now(timezone.utc) - timedelta(hours=max(1, lookback_hours))).isoformat()
+        with self.connect() as db:
+            rows = db.execute("""
+                SELECT o.fixture_id,o.market,o.selection,o.decimal_odds,o.captured_at,
+                       f.kickoff,f.home,f.away,f.competition
+                FROM odds o LEFT JOIN fixtures f ON f.id=o.fixture_id
+                WHERE o.captured_at >= ?
+                ORDER BY o.fixture_id,o.market,o.selection,o.captured_at
+            """, (cutoff,)).fetchall()
+        groups: dict[tuple[str, str, str], list[Any]] = {}
+        for row in rows:
+            key = (row["fixture_id"], row["market"], row["selection"])
+            groups.setdefault(key, []).append(row)
+        movements = []
+        for samples in groups.values():
+            if len(samples) < 2:
+                continue
+            first, latest = samples[0], samples[-1]
+            opening, current = float(first["decimal_odds"]), float(latest["decimal_odds"])
+            if opening <= current:
+                continue
+            drop = (opening - current) / opening * 100.0
+            if drop < minimum_drop_pct:
+                continue
+            movements.append({
+                "fixture_id": latest["fixture_id"], "home": latest["home"] or "",
+                "away": latest["away"] or "", "kickoff": latest["kickoff"] or "",
+                "competition": latest["competition"] or "", "market": latest["market"],
+                "selection": latest["selection"], "opening_odds": round(opening, 3),
+                "current_odds": round(current, 3), "drop_pct": round(drop, 2),
+                "first_seen": first["captured_at"], "last_seen": latest["captured_at"],
+                "samples": len(samples),
+            })
+        movements.sort(key=lambda item: (item["drop_pct"], item["samples"]), reverse=True)
+        return movements[:max(1, min(int(limit), 500))]
+
     def save_prediction(self, candidate: dict[str, Any]) -> str:
         prediction_id = uuid.uuid4().hex
         created_at = datetime.now(timezone.utc).isoformat()
