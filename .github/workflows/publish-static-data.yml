@@ -65,9 +65,13 @@ jobs:
           else
             mkdir -p "$RUNNER_TEMP/goal-scanner-feeds"
             cp docs/data/latest.json docs/data/fixtures.json docs/data/results.json docs/data/odds-movements.json "$RUNNER_TEMP/goal-scanner-feeds/"
+            mkdir -p "$RUNNER_TEMP/goal-scanner-feeds/assets/crests"
+            cp -a docs/assets/crests/. "$RUNNER_TEMP/goal-scanner-feeds/assets/crests/" 2>/dev/null || true
             git fetch origin main
             git reset --hard origin/main
             cp "$RUNNER_TEMP/goal-scanner-feeds/"*.json docs/data/
+            mkdir -p docs/assets/crests
+            cp -a "$RUNNER_TEMP/goal-scanner-feeds/assets/crests/." docs/assets/crests/
             git add docs/data/latest.json docs/data/fixtures.json docs/data/results.json docs/data/odds-movements.json docs/assets/crests/
             git commit -m "chore: refresh Goal Scanner public data"
             git push origin HEAD:main
