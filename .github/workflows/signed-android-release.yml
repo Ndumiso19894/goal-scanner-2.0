@@ -2,14 +2,15 @@ name: Signed Android Release
 
 on:
   push:
-    tags:
-      - "v*"
+    branches: [main]
+    paths:
+      - "app/build.gradle.kts"
   workflow_dispatch:
     inputs:
       release_tag:
         description: 'Release version tag'
         required: true
-        default: 'v1.1.0'
+        default: 'v1.2.0'
 
 permissions:
   contents: write
@@ -75,8 +76,8 @@ jobs:
       - name: Publish release APK
         uses: softprops/action-gh-release@v2
         with:
-          name: Goal Scanner Pro ${{ inputs.release_tag || github.ref_name }}
-          tag_name: ${{ inputs.release_tag || github.ref_name }}
+          name: Goal Scanner Pro ${{ inputs.release_tag || 'v1.2.0' }}
+          tag_name: ${{ inputs.release_tag || 'v1.2.0' }}
           target_commitish: main
           generate_release_notes: true
           files: app/build/outputs/apk/release/app-release.apk
