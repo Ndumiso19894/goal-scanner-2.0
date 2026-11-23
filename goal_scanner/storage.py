@@ -228,7 +228,8 @@ class Store:
             fixture_id = str(fixture.get("source_id") or fixture.get("id") or "")
             total += self.settle_fixture(
                 fixture_id, int(fixture["home_score"]), int(fixture["away_score"]),
-                str(fixture.get("status") or ""), str(fixture.get("source") or "livescore")
+                str(fixture.get("status") or ""), str(fixture.get("source") or "livescore"),
+                fixture.get("statistics")
             )
         return total
 
