@@ -54,8 +54,8 @@ def test_scanner_api_saves_a_real_fixture_prediction(monkeypatch, tmp_path):
 
     request = api.ScannerRunInput(
         match_date=date(2026, 11, 23), season="2627", division="E0",
-        hours_ahead=24, minimum_probability=0.60,
-        markets=["home_over_0_5"], mode="recommended",
+        hours_ahead=24, minimum_probability=0.50,
+        markets=["match_over_2_5"], mode="recommended",
     )
     response = api.scanner_run(request)
     assert response["recommendation_count"] == 1
