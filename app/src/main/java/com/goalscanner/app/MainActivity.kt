@@ -214,7 +214,7 @@ private fun GoalScannerApp(prefs: android.content.SharedPreferences) {
                 onBack={settings=false}
             )
         } else when(tab) {
-            "Home" -> HomeScreen(Modifier.padding(padding),connection,providers,fixtureSummary,
+            "Home" -> HomeScreen(Modifier.padding(padding),connection,providers,fixtureSummary,fixtureRows,
                 {tab="Scanner"},{tab="Fixtures"})
             "Fixtures" -> FixturesScreen(Modifier.padding(padding),fixtureSummary,
                 fixtureRows,busy,message,onSelect={ fixture -> selectedFixture=fixture; tab="Match" }) {
@@ -450,7 +450,10 @@ private fun Metric(title:String,value:String,detail:String) {
     }
 }
 @Composable
-private fun HomeScreen(modifier:Modifier,connection:String,providers:String,fixtures:String,onScanner:()->Unit,onFixtures:()->Unit) {
+private fun HomeScreen(modifier:Modifier,connection:String,providers:String,fixtures:String,
+    fixtureRows:List<JSONObject>,onScanner:()->Unit,onFixtures:()->Unit) {
+    val upcoming=fixtureRows.filter { it.optString("status","NS").uppercase() in listOf("NS","TBD","SCHEDULED","") }
+        .sortedBy { it.optString("kickoff") }.take(3)
     ScreenColumn(modifier) {
         Column(verticalArrangement=Arrangement.spacedBy(3.dp)) {
             Text("MATCHDAY INTELLIGENCE",style=MaterialTheme.typography.labelSmall,color=Color(0xFFB7F36B),
@@ -470,6 +473,32 @@ private fun HomeScreen(modifier:Modifier,connection:String,providers:String,fixt
                 Button(onClick=onScanner,modifier=Modifier.fillMaxWidth(),shape=RoundedCornerShape(14.dp),
                     colors=ButtonDefaults.buttonColors(containerColor=Color(0xFFB7F36B),contentColor=Color(0xFF17220A))) {
                     Text("OPEN MATCH SCANNER",fontWeight=FontWeight.ExtraBold,letterSpacing=0.6.sp)
+                }
+            }
+        }
+        Heading("Next kick-offs","Tap to open the full match centre")
+        if(upcoming.isEmpty()) Notice("No upcoming fixtures published","The next scheduled data refresh will update this list.")
+        upcoming.forEach { fx ->
+            Card(Modifier.fillMaxWidth().clickable { onFixtures() },shape=RoundedCornerShape(20.dp),
+                colors=CardDefaults.cardColors(containerColor=Color(0xFF111A23)),
+                border=androidx.compose.foundation.BorderStroke(1.dp,Color(0xFF293944))) {
+                Column(Modifier.fillMaxWidth().padding(13.dp),verticalArrangement=Arrangement.spacedBy(10.dp)) {
+                    Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween,verticalAlignment=Alignment.CenterVertically) {
+                        Text(fx.optString("competition","Football").uppercase(),style=MaterialTheme.typography.labelSmall,
+                            color=Color(0xFF9EADB9),maxLines=1,modifier=Modifier.weight(1f))
+                        Text(formatKickoff(fx.optString("kickoff")),style=MaterialTheme.typography.labelSmall,
+                            color=Color(0xFFB7F36B),fontWeight=FontWeight.Bold)
+                    }
+                    Row(Modifier.fillMaxWidth(),verticalAlignment=Alignment.CenterVertically) {
+                        TeamCrest(fx.optString("home"),fx.optString("home_crest_url"),38.dp)
+                        Text(fx.optString("home"),Modifier.weight(1f).padding(horizontal=7.dp),maxLines=2,
+                            style=MaterialTheme.typography.titleSmall,color=Color(0xFFF2F5F0),fontWeight=FontWeight.Bold)
+                        Text("VS",style=MaterialTheme.typography.labelSmall,color=Color(0xFF8496A4))
+                        Text(fx.optString("away"),Modifier.weight(1f).padding(horizontal=7.dp),maxLines=2,
+                            style=MaterialTheme.typography.titleSmall,color=Color(0xFFF2F5F0),fontWeight=FontWeight.Bold,
+                            textAlign=androidx.compose.ui.text.style.TextAlign.End)
+                        TeamCrest(fx.optString("away"),fx.optString("away_crest_url"),38.dp)
+                    }
                 }
             }
         }
