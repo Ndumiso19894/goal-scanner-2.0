@@ -43,7 +43,7 @@ fun DroppingOddsScreen(
                 Card(shape = RoundedCornerShape(16.dp)) {
                     Column(Modifier.fillMaxWidth().padding(14.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
                         Text("${item.optString("home")} vs ${item.optString("away")}", fontWeight = FontWeight.Bold)
-                        Text("${item.optString("competition")} · ${item.optString("market").replace("_", " ")} · ${item.optString("selection").replace("/", " ")}",
+                        Text("${item.optString("competition")} · ${oddsMovementTitle(item)}",
                             style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                         Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
                             Column {
@@ -66,4 +66,29 @@ fun DroppingOddsScreen(
             }
         }
     }
+}
+
+private fun oddsMovementTitle(item:JSONObject):String {
+    val market=item.optString("market")
+    val parts=item.optString("selection").split("/")
+    val line=parts.firstOrNull()?.takeIf { it.toDoubleOrNull()!=null }
+    val outcome=parts.getOrNull(1)?.lowercase()
+    val side=when(market) {
+        "home_corners","home_cards","home_team_goals" -> "Home team"
+        "away_corners","away_cards","away_team_goals" -> "Away team"
+        "match_corners" -> "Total match corners"
+        "match_cards" -> "Total match bookings"
+        "match_total_goals" -> "Total goals"
+        "1X2" -> "1X2"
+        "btts" -> "Both teams to score"
+        else -> market.replace("_"," ").replaceFirstChar { it.uppercase() }
+    }
+    val selection=when {
+        market=="1X2" -> parts.firstOrNull()?.replaceFirstChar { it.uppercase() } ?: ""
+        market=="btts" -> parts.firstOrNull()?.replaceFirstChar { it.uppercase() } ?: ""
+        outcome=="over" -> "Over " + (line ?: "line unavailable")
+        outcome=="under" -> "Under " + (line ?: "line unavailable")
+        else -> parts.joinToString(" ")
+    }
+    return listOf(side,selection).filter { it.isNotBlank() }.joinToString(" · ")
 }
