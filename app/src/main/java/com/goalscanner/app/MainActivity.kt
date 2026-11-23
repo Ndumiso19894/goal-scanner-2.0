@@ -558,102 +558,79 @@ private fun ScannerScreen(
     }
 }
 @Composable
-private fun AnalysisScreen(modifier:Modifier,candidate:JSONObject?) {
+private fun AnalysisScreen(modifier:Modifier,candidate:JSONObject?,related:List<JSONObject>) {
     ScreenColumn(modifier) {
-        Heading("Match analysis","A match summary with supporting market evidence.")
-        if(candidate==null) {
-            Notice("No match selected","Choose a recommendation from the Scanner to view its match summary.")
-        } else {
-            val home=candidate.optString("home")
-            val away=candidate.optString("away")
+        Heading("Match analysis","A clear match summary with the exact market line behind every estimate.")
+        if(candidate==null) Notice("No match selected","Open a match from Fixtures or Scanner to see its analysis.")
+        else {
+            val home=candidate.optString("home"); val away=candidate.optString("away")
             val probability=(candidate.optDouble("estimated_probability")*100).toInt()
-            val marketProbabilities=candidate.optJSONObject("market_probabilities") ?: JSONObject()
-            val odds=candidate.optJSONObject("market_odds") ?: JSONObject()
             Card(colors=CardDefaults.cardColors(containerColor=Navy),shape=RoundedCornerShape(22.dp)) {
-                Column(Modifier.fillMaxWidth().padding(18.dp),verticalArrangement=Arrangement.spacedBy(10.dp)) {
-                    Text(candidate.optString("competition","Competition unavailable").uppercase(),
-                        color=Color(0xFFB8D2F2),style=MaterialTheme.typography.labelSmall,letterSpacing=1.sp)
-                    Text(home,style=MaterialTheme.typography.titleLarge,color=Color.White,fontWeight=FontWeight.Bold)
+                Column(Modifier.fillMaxWidth().padding(20.dp),verticalArrangement=Arrangement.spacedBy(9.dp)) {
+                    Text(candidate.optString("competition","Competition unavailable").uppercase(),color=Color(0xFFB8D2F2),style=MaterialTheme.typography.labelSmall,letterSpacing=1.sp)
+                    Text(home,style=MaterialTheme.typography.headlineSmall,color=Color.White,fontWeight=FontWeight.Bold)
                     Text("VS",style=MaterialTheme.typography.labelSmall,color=Color(0xFF9CB7D9))
-                    Text(away,style=MaterialTheme.typography.titleLarge,color=Color.White,fontWeight=FontWeight.Bold)
-                    Text(candidate.optString("kickoff"),color=Color(0xFFD1DEEF),style=MaterialTheme.typography.bodySmall)
+                    Text(away,style=MaterialTheme.typography.headlineSmall,color=Color.White,fontWeight=FontWeight.Bold)
+                    Text(formatKickoff(candidate.optString("kickoff")),color=Color(0xFFD1DEEF),style=MaterialTheme.typography.bodySmall)
                     HorizontalDivider(color=Color(0xFF405573))
-                    Text("TOP SELECTION",color=Color(0xFFB8D2F2),style=MaterialTheme.typography.labelSmall)
-                    Text(candidate.optString("market").replace("_"," ").uppercase()+" · "+candidate.optString("selection").uppercase(),
-                        color=Color.White,fontWeight=FontWeight.Bold)
-                    Row(verticalAlignment=Alignment.Bottom,horizontalArrangement=Arrangement.spacedBy(12.dp)) {
+                    Text("SELECTED MARKET",color=Color(0xFFB8D2F2),style=MaterialTheme.typography.labelSmall)
+                    Text(marketTitle(candidate),color=Color.White,fontWeight=FontWeight.Bold,style=MaterialTheme.typography.titleMedium)
+                    Row(verticalAlignment=Alignment.Bottom,horizontalArrangement=Arrangement.spacedBy(10.dp)) {
                         Text("$probability%",style=MaterialTheme.typography.displaySmall,color=Color.White,fontWeight=FontWeight.ExtraBold)
-                        Text("estimated probability",color=Color(0xFFD1DEEF),modifier=Modifier.padding(bottom=7.dp))
+                        Text("model estimate",color=Color(0xFFD1DEEF),modifier=Modifier.padding(bottom=7.dp))
                     }
-                    Text(if(candidate.isNull("odds")) "Bookmaker price unavailable" else "Current bookmaker price: "+String.format("%.2f",candidate.optDouble("odds")),
+                    Text(if(candidate.isNull("odds")) "Bookmaker price unavailable" else "Bookmaker odds: "+String.format("%.2f",candidate.optDouble("odds")),
                         color=Color(0xFFD1DEEF))
                 }
             }
-            Heading("Team comparison","Expected goals from historical home/away results")
-            Row(horizontalArrangement=Arrangement.spacedBy(9.dp)) {
-                Box(Modifier.weight(1f)) { Metric(home,"%.2f".format(candidate.optDouble("home_lambda")),"Expected goals · home") }
-                Box(Modifier.weight(1f)) { Metric(away,"%.2f".format(candidate.optDouble("away_lambda")),"Expected goals · away") }
-            }
             val sample=candidate.optJSONObject("sample") ?: JSONObject()
+            Heading("Historical sample","Matches used before this fixture's kickoff")
             Row(horizontalArrangement=Arrangement.spacedBy(9.dp)) {
-                Box(Modifier.weight(1f)) { Metric("Home sample",sample.optInt("home_home_matches").toString(),"Previous home matches") }
-                Box(Modifier.weight(1f)) { Metric("Away sample",sample.optInt("away_away_matches").toString(),"Previous away matches") }
+                Box(Modifier.weight(1f)) { Metric("Home at home",sample.optInt("home_home_matches").toString(),"Previous matches") }
+                Box(Modifier.weight(1f)) { Metric("Away away",sample.optInt("away_away_matches").toString(),"Previous matches") }
             }
-            Heading("Original nine markets","Model estimates and available bookmaker prices")
-            Card(shape=RoundedCornerShape(16.dp)) {
-                Column(Modifier.fillMaxWidth().padding(12.dp),verticalArrangement=Arrangement.spacedBy(0.dp)) {
-                    Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween) {
-                        Text("MARKET",style=MaterialTheme.typography.labelSmall,fontWeight=FontWeight.Bold)
-                        Text("MODEL",style=MaterialTheme.typography.labelSmall,fontWeight=FontWeight.Bold)
-                        Text("ODDS",style=MaterialTheme.typography.labelSmall,fontWeight=FontWeight.Bold)
+            val counts=candidate.optJSONObject("count_expectations") ?: JSONObject()
+            val corners=counts.optJSONObject("corners")
+            val cards=counts.optJSONObject("bookings")
+            if(corners!=null || cards!=null) {
+                Heading("Expected match counts","Historical averages after venue and league adjustment")
+                if(corners!=null) {
+                    Row(horizontalArrangement=Arrangement.spacedBy(9.dp)) {
+                        Box(Modifier.weight(1f)) { Metric("Home corners","%.1f".format(corners.optDouble("home_lambda")),"Expected count") }
+                        Box(Modifier.weight(1f)) { Metric("Away corners","%.1f".format(corners.optDouble("away_lambda")),"Expected count") }
                     }
-                    HorizontalDivider(Modifier.padding(vertical=8.dp))
-                    MarketIds.forEachIndexed { index, market ->
-                        val p=when(market) {
-                            "match_winner_home" -> marketProbabilities.optDouble("home_win",Double.NaN)
-                            "match_winner_draw" -> marketProbabilities.optDouble("draw",Double.NaN)
-                            "match_winner_away" -> marketProbabilities.optDouble("away_win",Double.NaN)
-                            "team_corners_over" -> marketProbabilities.optDouble("team_corners_over_"+if(candidate.optString("market")=="team_corners_over") candidate.optString("selection") else "home",Double.NaN)
-                            "match_corners_over" -> marketProbabilities.optDouble("match_corners_over_over",Double.NaN)
-                            "match_bookings_over" -> marketProbabilities.optDouble("match_bookings_over_over",Double.NaN)
-                            "team_bookings_over" -> marketProbabilities.optDouble("team_bookings_over_"+if(candidate.optString("market")=="team_bookings_over") candidate.optString("selection") else "home",Double.NaN)
-                            else -> marketProbabilities.optDouble(market,Double.NaN)
-                        }
-                        val price=when(market) {
-                            "home_over_0_5" -> odds.optJSONObject("home_team_goals")?.optJSONObject("0.5")?.optDouble("over",Double.NaN) ?: Double.NaN
-                            "away_over_0_5" -> odds.optJSONObject("away_team_goals")?.optJSONObject("0.5")?.optDouble("over",Double.NaN) ?: Double.NaN
-                            "home_over_1_5" -> odds.optJSONObject("home_team_goals")?.optJSONObject("1.5")?.optDouble("over",Double.NaN) ?: Double.NaN
-                            "away_over_1_5" -> odds.optJSONObject("away_team_goals")?.optJSONObject("1.5")?.optDouble("over",Double.NaN) ?: Double.NaN
-                            "match_over_1_5" -> odds.optJSONObject("match_total_goals")?.optJSONObject("1.5")?.optDouble("over",Double.NaN) ?: Double.NaN
-                            "match_over_2_5" -> odds.optJSONObject("match_total_goals")?.optJSONObject("2.5")?.optDouble("over",Double.NaN) ?: Double.NaN
-                            "team_corners_over" -> odds.optJSONObject(if(candidate.optString("selection")=="away") "away_corners" else "home_corners")?.optJSONObject(candidate.optString("line","4.5"))?.optDouble("over",Double.NaN) ?: Double.NaN
-                            "match_corners_over" -> odds.optJSONObject("match_corners")?.optJSONObject(candidate.optString("line","8.5"))?.optDouble("over",Double.NaN) ?: Double.NaN
-                            "match_bookings_over" -> odds.optJSONObject("match_cards")?.optJSONObject(candidate.optString("line","3.5"))?.optDouble("over",Double.NaN) ?: Double.NaN
-                            "team_bookings_over" -> odds.optJSONObject(if(candidate.optString("selection")=="away") "away_cards" else "home_cards")?.optJSONObject(candidate.optString("line","1.5"))?.optDouble("over",Double.NaN) ?: Double.NaN
-                            "match_winner_home" -> odds.optJSONObject("1X2")?.optDouble("home",Double.NaN) ?: Double.NaN
-                            "match_winner_draw" -> odds.optJSONObject("1X2")?.optDouble("draw",Double.NaN) ?: Double.NaN
-                            "match_winner_away" -> odds.optJSONObject("1X2")?.optDouble("away",Double.NaN) ?: Double.NaN
-                            "double_chance" -> odds.optJSONObject("double_chance")?.optDouble(candidate.optString("selection"),Double.NaN) ?: Double.NaN
-                            "btts_yes" -> odds.optJSONObject("btts")?.optDouble("yes",Double.NaN) ?: Double.NaN
-                            else -> Double.NaN
-                        }
-                        Row(Modifier.fillMaxWidth().padding(vertical=7.dp),horizontalArrangement=Arrangement.SpaceBetween,
-                            verticalAlignment=Alignment.CenterVertically) {
-                            Text(MarketNames[index],modifier=Modifier.weight(1.8f),style=MaterialTheme.typography.bodySmall)
-                            Text(if(p.isNaN()) "—" else "${(p*100).toInt()}%",modifier=Modifier.weight(.55f),style=MaterialTheme.typography.bodySmall,fontWeight=FontWeight.SemiBold)
-                            Text(if(price.isNaN()||price<=1) "—" else String.format("%.2f",price),modifier=Modifier.weight(.55f),style=MaterialTheme.typography.bodySmall)
-                        }
-                        if(index<MarketIds.lastIndex) HorizontalDivider(color=MaterialTheme.colorScheme.surfaceVariant)
+                }
+                if(cards!=null) {
+                    Row(horizontalArrangement=Arrangement.spacedBy(9.dp)) {
+                        Box(Modifier.weight(1f)) { Metric("Home bookings","%.1f".format(cards.optDouble("home_lambda")),"Expected count") }
+                        Box(Modifier.weight(1f)) { Metric("Away bookings","%.1f".format(cards.optDouble("away_lambda")),"Expected count") }
                     }
                 }
             }
-            Heading("Why this estimate")
-            (candidate.optJSONArray("reasons")?.let { arr -> (0 until arr.length()).map { arr.optString(it) } } ?: emptyList()).forEach {
-                Card { Text(it,Modifier.fillMaxWidth().padding(14.dp)) }
+            val marketRows=related.distinctBy { it.optString("market")+"|"+it.optString("selection")+"|"+it.optString("line") }
+            Heading("Markets for this match","Each Over selection shows its actual threshold")
+            if(marketRows.isEmpty()) Notice("No additional market estimates","Only the selected recommendation is available in this published snapshot.")
+            marketRows.forEach { item ->
+                val isSelected=item.optString("prediction_id")==candidate.optString("prediction_id")
+                Card(shape=RoundedCornerShape(16.dp),colors=CardDefaults.cardColors(
+                    containerColor=if(isSelected) MaterialTheme.colorScheme.secondaryContainer else MaterialTheme.colorScheme.surface
+                )) {
+                    Row(Modifier.fillMaxWidth().padding(14.dp),verticalAlignment=Alignment.CenterVertically) {
+                        Column(Modifier.weight(1f),verticalArrangement=Arrangement.spacedBy(5.dp)) {
+                            Text(marketTitle(item),fontWeight=FontWeight.Bold)
+                            Text("Probability ${(item.optDouble("estimated_probability")*100).toInt()}%  ·  ${if(item.isNull("odds")) "Odds unavailable" else "Odds "+String.format("%.2f",item.optDouble("odds"))}",
+                                style=MaterialTheme.typography.bodySmall,color=MaterialTheme.colorScheme.onSurfaceVariant)
+                            if(!item.isNull("expected_value")) Text("Model price value: ${String.format("%+.1f%%",item.optDouble("expected_value")*100)}",
+                                style=MaterialTheme.typography.labelSmall,color=MaterialTheme.colorScheme.primary)
+                        }
+                        if(isSelected) Text("SELECTED",style=MaterialTheme.typography.labelSmall,color=MaterialTheme.colorScheme.primary,fontWeight=FontWeight.Bold)
+                    }
+                }
             }
-            Text("Data quality: ${(candidate.optDouble("data_quality")*100).toInt()}% · model ${candidate.optString("model_version")}",
+            Heading("Model notes")
+            Text("Data quality ${(candidate.optDouble("data_quality")*100).toInt()}% · ${candidate.optString("model_version")}",
                 style=MaterialTheme.typography.bodySmall,color=MaterialTheme.colorScheme.onSurfaceVariant)
-            Notice("Model limitations","This is an uncalibrated historical-rate baseline. It does not yet use verified lineups, player availability or live xG in its probability calculation. Bookmaker prices are shown separately and do not determine model probabilities.")
+            Notice("Important limitation","These are uncalibrated historical-rate estimates, not proven betting edges. Corner and booking markets are shown only when sufficient historical statistics exist. Bookmaker prices are displayed separately and do not determine model probabilities.")
         }
     }
 }
