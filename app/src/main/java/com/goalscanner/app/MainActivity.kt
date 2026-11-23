@@ -1104,6 +1104,8 @@ private fun ResultsScreen(
 ) {
     val settled=summary.optInt("settled",0)
     val accuracy=if(summary.isNull("accuracy")) "—" else "${(summary.optDouble("accuracy")*100).toInt()}%"
+    var sort by rememberSaveable { mutableStateOf("Newest") }
+    val sortedRows=when(sort) { "Match A-Z" -> rows.sortedBy { it.optString("home") + " " + it.optString("away") }; "League" -> rows.sortedBy { it.optString("competition") }; "Odds" -> rows.sortedByDescending { it.optDouble("odds") }; else -> rows.sortedByDescending { it.optString("kickoff") } }
     ScreenColumn(modifier) {
         Heading("Results & performance","Recorded scanner predictions, settled only against verified full-time scores.")
         Row(horizontalArrangement=Arrangement.spacedBy(9.dp)) {
@@ -1120,7 +1122,8 @@ private fun ResultsScreen(
         if(rows.isEmpty()) Notice("No prediction history yet","Run the scanner to save prediction snapshots. Final scores are matched to the original fixture IDs.")
         else {
             Heading("Prediction history","${rows.size} recent records")
-            rows.forEach { item ->
+            Row(horizontalArrangement=Arrangement.spacedBy(6.dp)) { listOf("Newest","Match A-Z","League","Odds").forEach { value -> FilterChip(selected=sort==value,onClick={sort=value},label={Text(value)}) } }
+            sortedRows.forEach { item ->
                 Card(shape=RoundedCornerShape(18.dp),colors=CardDefaults.cardColors(containerColor=Color(0xFF111A23)),
                     border=androidx.compose.foundation.BorderStroke(1.dp,Color(0xFF263541))) {
                     Column(Modifier.padding(14.dp),verticalArrangement=Arrangement.spacedBy(6.dp)) {
