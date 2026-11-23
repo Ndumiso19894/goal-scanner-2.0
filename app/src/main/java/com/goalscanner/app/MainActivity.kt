@@ -185,7 +185,7 @@ private fun GoalScannerApp(prefs: android.content.SharedPreferences) {
                 }
             }
         }
-    ) { padding ->    ) { padding ->
+    ) { padding ->
         if (settings) {
             SettingsScreen(Modifier.padding(padding),apiUrl,{apiUrl=it},apiToken,{apiToken=it},season,{season=it},division,{division=it},
                 connection,providers,busy,message,
